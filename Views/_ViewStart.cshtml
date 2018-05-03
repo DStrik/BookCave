@@ -2,9 +2,9 @@
     var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
     string cLayout = "";
     
-    if (controller == "webmaster")
+    if (controller == "manage")
     {
-        cLayout = "~/Views/Shared/_WebmasterLayout.cshtml";
+        cLayout = "~/Views/Shared/_ManageLayout.cshtml";
     }
     else
     {
