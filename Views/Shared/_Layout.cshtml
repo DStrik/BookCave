@@ -51,42 +51,57 @@
                     <a class="dropdown-item" href="#"> Sci-fi</a>
                 </div>
             </li>
+        </ul>
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
 
           <!-- Search form -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-search"></i></a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    
                   <div class="md-form active-pink-2 nav-search">
                     <input class="form-control" type="text" placeholder="Search" aria-label="Search">
                   </div>
-
                 </div>
             </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank">Free tutorials</a>
-          </li>
-        </ul>
+            <!-- Wishlist -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-heart"></i></a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Book1</a>
+                    <a class="dropdown-item" href="#">Book2</a>
+                    <a class="dropdown-item" href="#">Book3</a>
+                    <a class="dropdown-item" href="#">Book4</a>
+                </div>
+            </li>
 
-        <!-- Right -->
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <a href="https://www.facebook.com/mdbootstrap" class="nav-link" target="_blank">
-              <i class="fa fa-facebook"></i>
-            </a>
+          <!-- Shopping Basket -->
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-shopping-basket"></i>></a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <p><strong>Basket</strong></p> <br>
+                    <p>Loop of items</p>
+                    <p>Loop of items</p>
+                    <p>Loop of items</p>
+                </div>
+            </li>
+
+          <!-- Account stuff -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-user"></i></a>
+            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <p><strong>Name</strong></p> <br>
+                <p>Login stuff</p>
+            </div>
           </li>
-          <li class="nav-item">
-            <a href="https://twitter.com/MDBootstrap" class="nav-link" target="_blank">
-              <i class="fa fa-twitter"></i>
-            </a>
+
+          <li class="nav-item dropdown">
+            <button id="font-down" class="btn btn-outline-primary waves-effect btn-font-size">A-</button>
+            <button id="font-up" class="btn-font-size btn-floating btn-sm blue-gradient">A+</button>
+            <a class="btn-floating btn-sm blue-gradient"><i class="fa fa-star"></i></a>
           </li>
-          <li class="nav-item">
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded"
-              target="_blank">
-              <i class="fa fa-github mr-2"></i>MDB GitHub
-            </a>
-          </li>
+            
         </ul>
 
       </div>
@@ -94,7 +109,6 @@
     </div>
   </nav>
   <!-- Navbar -->
-
     @RenderBody()
 
 

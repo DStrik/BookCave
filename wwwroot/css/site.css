@@ -56,3 +56,9 @@ header,
     background-color: rgba(0,0,0,0);
     border: none;
 }
+
+.btn-font-size {
+    padding: 0.7px;
+    font-size: 0.75em;
+    border-radius: 12px;
+}
