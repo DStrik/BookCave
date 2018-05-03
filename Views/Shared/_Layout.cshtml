@@ -20,7 +20,9 @@
 
       <!-- Brand -->
       <a class="navbar-brand" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">
-        <strong>MDB</strong>
+        <div class="imgcontainer" >
+          <img src="~/images/logo.png" alt="Book Cave logo">
+        </div>
       </a>
 
       <!-- Collapse -->
@@ -35,16 +37,33 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" asp-controller="Home" asp-action="Index">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">About MDB</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://mdbootstrap.com/getting-started/" target="_blank">Free download</a>
-          </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Adventure</a>
+                    <a class="dropdown-item" href="#">More stuff</a>
+                    <a class="dropdown-item" href="#"> Sci-fi</a>
+                </div>
+            </li>
+
+          <!-- Search form -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-search"></i></a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    
+                  <div class="md-form active-pink-2 nav-search">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                  </div>
+
+                </div>
+            </li>
+
           <li class="nav-item">
             <a class="nav-link" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank">Free tutorials</a>
           </li>
