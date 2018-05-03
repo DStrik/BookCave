@@ -15,11 +15,13 @@ namespace BookCave.Models.ViewModels
         public int PbPublishingYear { get; set; }
         public string PbFont { get; set; }
         public int PbPageCount { get; set; }
+        public int PbQuantity { get; set; }
         public double PbPrice { get; set; }
         public int HcIsbn { get; set; }
         public int HcPublishingYear { get; set; }
         public string HcFont { get; set; }
         public int HcPageCount { get; set; }
+        public int HcQuantity { get; set; }
         public double HcPrice { get; set; }
         public int AbIsbn { get; set; }
         public int AbPublishingYear { get; set; }
