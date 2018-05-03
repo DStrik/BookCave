@@ -11,12 +11,12 @@ namespace BookCave.Repositories
 
         }
 
-        public void ChangePaymentInformation(PaymentInputModel pinfo, int UserId)
+        public void ChangePaymentInformation(PaymentInputModel PInfo, int UserId)
         {
 
         }
 
-        public void ChangeShippingBillingInformation(ShippingBillingInputModel sbinfo, int UserId)
+        public void ChangeShippingBillingInformation(ShippingInputModel ShippingInput, BillingInputModel BillingInput, int UserId)
         {
 
         }
