@@ -29,9 +29,13 @@ namespace BookCave.Controllers
         {
 
         }
-        public void ChangeShippingBillingInformation(ShippingBillingInputModel ShipBillInfo)
+        public void ChangeShippingBillingInformation(ShippingInputModel ShipBillInfo)
         {
 
+        }
+        public void ChangeBillingInformation(BillingInputModel BillInfo)
+        {
+            
         }
         public void ChangePaymenrInformation(PaymentInputModel PaymentInfo)
         {
