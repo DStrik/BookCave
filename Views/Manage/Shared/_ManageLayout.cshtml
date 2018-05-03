@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewBag.PageTitle</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/mdb/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/mdb/css/mdb.min.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+
+
+</head>
+<body class="grey lighten-3">
+    <!--Main Navigation-->
+    <header>
+        @await Html.PartialAsync("_header.cshtml")
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main>
+        @RenderBody()
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+        @await Html.PartialAsync("_footer.cshtml")
+    </footer>
+    <!--Footer--> 
+              
+    <script type="text/javascript" src="~/lib/mdb/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="~/lib/mdb/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/lib/mdb/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/lib/mdb/js/mdb.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+    <script type="text/javascript" src="~/js/dashboard.js"></script>
+
+</body>
+</html>
