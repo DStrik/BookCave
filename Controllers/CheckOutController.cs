@@ -9,7 +9,7 @@ namespace BookCave.Controllers
         {
             return View();
         }
-        public IActionResult Index(ShippingBillingInputModel ShippingBillign, PaymentInputModel Payment)
+        public IActionResult Index(ShippingInputModel Shipping, BillingInputModel Billing, PaymentInputModel Payment)
         {
             return View();
         }
