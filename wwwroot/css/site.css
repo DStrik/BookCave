@@ -58,7 +58,6 @@ header,
 }
 
 .btn-font-size {
-    padding: 0.7px;
+    padding: 2px;
     font-size: 0.75em;
-    border-radius: 12px;
 }
