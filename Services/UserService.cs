@@ -38,6 +38,17 @@ namespace BookCave.Services
         {
 
         }
-        
+        public void ChangeShippingInfo(ShippingInputModel ShipInfo)
+        {
+
+        }
+        public void ChangeBillingInfo(BillingInputModel BillInfo)
+        {
+
+        }
+        public void ChangePaymentInfo(PaymentInputModel PayInfo)
+        {
+            
+        }
     }
 }

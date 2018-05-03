@@ -1,6 +1,6 @@
 namespace BookCave.Models.InputModels
 {
-    public class ShippingBillingInputModel
+    public class ShippingInputModel
     {
         public string ShippingFirstName { get; set; }
         public string ShippingLastName { get; set; }
