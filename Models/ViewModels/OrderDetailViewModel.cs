@@ -7,5 +7,6 @@ namespace BookCave.Models.ViewModels
         public int Id { get; set; }
         public List<BookViewModel> Books { get; set; }
         public ShippingBillingViewModel ShippingBillingInfo { get; set; }
+        public PaymentViewModel PaymentInfo { get; set; }
     }
 }
