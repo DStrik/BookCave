@@ -30,3 +30,29 @@ header,
             background: #929FBA!important;
         }
     }
+
+.navbar img {
+    width: 10%;
+    height: auto;
+}
+
+.navbar-nav {
+    margin-left: -70%;
+}
+
+.nav-search {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+}
+
+.fa-search {
+    color: white;
+}
+
+.btn-sea {
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
