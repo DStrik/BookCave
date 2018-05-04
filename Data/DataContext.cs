@@ -11,7 +11,7 @@ namespace BookCave.Data
         public DbSet<BookAuthorConnection> BookAuthorConnections { get; set; }
         public DbSet<BookDescription> BookDescriptions { get; set; }
         public DbSet<BookReview> BookReviews { get; set; }
-        public DbSet<CartItem> CartItes { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         public DbSet<EBook> EBooks { get; set; }
         public DbSet<FavBook> FavBooks { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -26,8 +26,6 @@ namespace BookCave.Data
         public DbSet<ShippingBilling> ShippingBillingInfo { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<User> Users { get; set; }
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder

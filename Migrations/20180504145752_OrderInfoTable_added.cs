@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BookCave.Migrations
 {
-    public partial class PaperBacksTable_added : Migration
+    public partial class OrderInfoTable_added : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -11,8 +11,8 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180504125721_CartItemsTable_added")]
-    partial class CartItemsTable_added
+    [Migration("20180504150001_OrderInfoTable2_added")]
+    partial class OrderInfoTable2_added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -215,22 +215,6 @@ namespace BookCave.Migrations
                     b.ToTable("OrderBooksConnection");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.OrderInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("OrderId");
-
-                    b.Property<int?>("ShippingBillingInformationId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ShippingBillingInformationId");
-
-                    b.ToTable("OrderInfo");
-                });
-
             modelBuilder.Entity("BookCave.Data.EntityModels.PaperBack", b =>
                 {
                     b.Property<int>("Id")
@@ -367,51 +351,6 @@ namespace BookCave.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("BookCave.Models.ViewModels.ShippingBillingViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("BillingCity");
-
-                    b.Property<string>("BillingCountry");
-
-                    b.Property<string>("BillingFirstName");
-
-                    b.Property<int>("BillingHouseNumber");
-
-                    b.Property<string>("BillingLastName");
-
-                    b.Property<string>("BillingStreetName");
-
-                    b.Property<string>("BillingZipCode");
-
-                    b.Property<string>("ShippingCity");
-
-                    b.Property<string>("ShippingCountry");
-
-                    b.Property<string>("ShippingFirstName");
-
-                    b.Property<int>("ShippingHouseNumber");
-
-                    b.Property<string>("ShippingLastName");
-
-                    b.Property<string>("ShippingStreetName");
-
-                    b.Property<string>("ShippingZipCode");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ShippingBillingViewModel");
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.OrderInfo", b =>
-                {
-                    b.HasOne("BookCave.Models.ViewModels.ShippingBillingViewModel", "ShippingBillingInformation")
-                        .WithMany()
-                        .HasForeignKey("ShippingBillingInformationId");
                 });
 #pragma warning restore 612, 618
         }
