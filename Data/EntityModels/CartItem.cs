@@ -2,9 +2,11 @@ using System.Collections.Generic;
 
 namespace BookCave.Data.EntityModels
 {
-    public class Cart
+    public class CartItem
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
-        public List<int> Books { get; set; }
+        public int BookId { get; set; }
+        
     }
 }

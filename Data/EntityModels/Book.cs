@@ -8,6 +8,5 @@ namespace BookCave.Data.EntityModels
         public string Title { get; set; }
         public int GenreId { get; set; }
         public int PublisherId { get; set; }
-        public List<int> AuthorId { get; set; }
     }
 }

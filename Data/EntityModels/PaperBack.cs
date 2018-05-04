@@ -2,7 +2,7 @@ namespace BookCave.Data.EntityModels
 {
     public class PaperBack
     {
-        public int PbId { get; set; }
+        public int Id { get; set; }
         public int BookId { get; set; }
         public int Isbn { get; set; }
         public int PublishingYear { get; set; }
