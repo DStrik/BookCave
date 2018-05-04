@@ -1,0 +1,136 @@
+ <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar rgba-black-strong">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="#">
+        <div class="imgcontainer" >
+          <img src="~/images/logo.png" alt="Book Cave logo">
+        </div>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" asp-controller="Home" asp-action="Index">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+            <!-- Dropdown -->
+
+            <li class="nav-item dropdown mega-dropdown">
+                <a class="nav-link dropdown-toggle text-uppercase no-caret" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                <div class="dropdown-menu mega-menu v-2 row z-depth-1 special-color " aria-labelledby="navbarDropdownMenuLink1">
+                    <div class="row mx-md-4 mx-1 wow fadeIn">
+                        <div class="col-md-6 col-xl-3 sub-menu my-xl-5 mt-5 mb-4">
+                            <h6 class="sub-title text-uppercase font-weight-bold white-text">Action</h6>
+                            <ul class="caret-style pl-0">
+                                <li class=""><a class="menu-item mb-0" href="">Lorem ipsum dolor sit amet</a></li>
+                                <li class=""><a class="menu-item" href="">Consectetur adipiscing elit</a></li>
+                                <li class=""><a class="menu-item" href="">Sed do eiusmod tempor incididunt</a></li>
+                                <li class=""><a class="menu-item" href="">Ut labore et dolore magna</a></li>
+                                <li class=""><a class="menu-item" href="">Ut enim ad minim veniam</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-xl-3 sub-menu my-xl-5 mt-md-5 mt-4 mb-4">
+                            <h6 class="sub-title text-uppercase font-weight-bold white-text">Adventure</h6>
+                            <ul class="caret-style pl-0">
+                                <li class=""><a class="menu-item" href="">Quis nostrud exercitation</a></li>
+                                <li class=""><a class="menu-item" href="">Duis aute irure dolor in</a></li>
+                                <li class=""><a class="menu-item" href="">Laboris nisi ut aliquip ex ea commodo consequat</a></li>
+                                <li class=""><a class="menu-item" href="">Reprehenderit in voluptate</a></li>
+                                <li class=""><a class="menu-item" href="">Esse cillum dolore eu fugiat nulla pariatur</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-xl-3 sub-menu my-xl-5 mt-4 mb-4">
+                            <h6 class="sub-title text-uppercase font-weight-bold white-text">Sci-Fy</h6>
+                            <ul class="caret-style pl-0">
+                                <li class=""><a class="menu-item" href="">Excepteur sint occaecat</a></li>
+                                <li class=""><a class="menu-item" href="">Sunt in culpa qui officia</a></li>
+                                <li class=""><a class="menu-item" href="">Sed ut perspiciatis unde omnis iste natus error</a></li>
+                                <li class=""><a class="menu-item" href="">Mollit anim id est laborum</a></li>
+                                <li class=""><a class="menu-item" href="">Accusantium doloremque laudantium</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-xl-3 sub-menu my-xl-5 mt-4 mb-5">
+                            <h6 class="sub-title text-uppercase font-weight-bold white-text">Top books</h6>
+                            <ul class="caret-style pl-0">
+                                <li class=""><a class="menu-item" href="">Totam rem aperiam eaque</a></li>
+                                <li class=""><a class="menu-item" href="">Beatae vitae dicta sun</a></li>
+                                <li class=""><a class="menu-item" href="">Quae ab illo inventore veritatis et quasi architecto</a></li>
+                                <li class=""><a class="menu-item" href="">Nemo enim ipsam voluptatem</a></li>
+                                <li class=""><a class="menu-item" href="">Neque porro quisquam est</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+
+          <!-- Search form -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-search"></i></a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                  <div class="md-form active-pink-2 nav-search">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                  </div>
+                </div>
+            </li>
+
+            <!-- Wishlist -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-heart"></i></a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Book1</a>
+                    <a class="dropdown-item" href="#">Book2</a>
+                    <a class="dropdown-item" href="#">Book3</a>
+                    <a class="dropdown-item" href="#">Book4</a>
+                </div>
+            </li>
+
+          <!-- Shopping Basket -->
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-shopping-basket"></i>></a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <p><strong>Basket</strong></p> <br>
+                    <p>Loop of items</p>
+                    <p>Loop of items</p>
+                    <p>Loop of items</p>
+                </div>
+            </li>
+
+          <!-- Account stuff -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-user"></i></a>
+            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <p><strong>Name</strong></p> <br>
+                <p>Login stuff</p>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <button type="button" class="btn blue-gradient btn-rounded">A -</button>
+                <button type="button" class="btn blue-gradient btn-rounded">A+</button>
+            </div>
+          </li>
+            
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->

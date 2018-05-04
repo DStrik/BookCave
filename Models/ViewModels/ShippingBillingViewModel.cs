@@ -2,6 +2,7 @@ namespace BookCave.Models.ViewModels
 {
     public class ShippingBillingViewModel
     {
+        public int Id { get; set; }
         public string ShippingFirstName { get; set; }
         public string ShippingLastName { get; set; }
         public string ShippingStreetName { get; set; }

@@ -3,9 +3,10 @@ using BookCave.Models.ViewModels;
 
 namespace BookCave.Data.EntityModels
 {
-    public class OrderBooks
+    public class OrderBooksConnection
     {
+        public int Id { get; set; }
         public int OrderId { get; set; }
-        public List<BookViewModel> Books { get; set; }
+        public int BookId { get; set; }
     }
 }
