@@ -84,10 +84,33 @@ namespace BookCave.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             ViewBag.PageTitle = "Login to site management";
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(EmployeeLoginInputModel model) 
+        {
+            if (!ModelState.IsValid) { return View(); }
+
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Manager");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Manager");
         }
 
         public IActionResult Error()
