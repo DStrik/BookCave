@@ -5,10 +5,13 @@ namespace BookCave.Controllers
 {
     public class UserController : Controller
     {
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+
+        [HttpPost]
         public IActionResult Login(string Name, string Password)
         {
             return View();
