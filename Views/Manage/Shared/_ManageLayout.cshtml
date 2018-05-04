@@ -13,25 +13,24 @@
 
 
 </head>
-<body class="grey lighten-3">
-    <!--Main Navigation-->
+<body class="indigo-skin fixed-sn">
+
+
     <header>
         @await Html.PartialAsync("_header.cshtml")
     </header>
-    <!--Main Navigation-->
 
-    <!--Main layout-->
     <main>
         @RenderBody()
     </main>
-    <!--Main layout-->
 
-    <!--Footer-->
-    <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+
+    <footer>
         @await Html.PartialAsync("_footer.cshtml")
     </footer>
-    <!--Footer--> 
-              
+
+
+             
     <script type="text/javascript" src="~/lib/mdb/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="~/lib/mdb/js/popper.min.js"></script>
     <script type="text/javascript" src="~/lib/mdb/js/bootstrap.min.js"></script>

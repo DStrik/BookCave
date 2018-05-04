@@ -12,12 +12,50 @@ namespace BookCave.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.PageTitle = "Dashboard home";
             return View();
         }
 
-        public IActionResult Dashboard()
+        public IActionResult AddBook() 
         {
-            ViewBag.PageTitle = "Dashboard home";
+            return View();
+        }
+
+        public IActionResult ViewBooks() 
+        {
+            return View();
+        }
+
+        public IActionResult Orders() 
+        {
+            return View();
+        }
+
+        public IActionResult Stock() 
+        {
+            return View();
+        }
+
+        public IActionResult AddEmployee() 
+        {
+            return View();
+        }                
+
+        public IActionResult ManageEmployees() 
+        {
+            return View();
+        }
+
+
+
+        public IActionResult ChangePassword() 
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            ViewBag.PageTitle = "Login to site management";
             return View();
         }
 
