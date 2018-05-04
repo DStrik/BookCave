@@ -1,54 +1,16 @@
-<!-- Default form register -->
+@model BookCave.Models.InputModels.BookInputModel
+<div class="row">
+    <h1>Add book</h1>
+</div>
 
 <div class="row">
-    <div class="col-sm-4 offset-sm-4">
-<form>
-    <p class="h3 text-center mb-4">Add new book</p>
+    <form action="" class="form-inline">
 
-    <!-- Default input name -->
-    <label for="defaultFormRegisterNameEx" class="grey-text">Book Title</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-    
-        <label for="defaultFormRegisterNameEx" class="grey-text">Author</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-    
+        <div class="md-form form-group">
+            <label asp-for="Title">Title</label>
+            <input type="text" id="Title" class="form-control" asp-for="Title">
+        </div>
 
-
-        <label for="defaultFormRegisterNameEx" class="grey-text">ISBN</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-    
-
-        <label for="defaultFormRegisterNameEx" class="grey-text">Genre</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-
-
-    <label for="defaultFormRegisterNameEx" class="grey-text">Publisher</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-
-
-        <label for="defaultFormRegisterNameEx" class="grey-text">Language</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-    
-
-        <label for="defaultFormRegisterNameEx" class="grey-text">Publishing year</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-    
-        <label for="defaultFormRegisterNameEx" class="grey-text">Page count</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-    
-
-
-        <label for="defaultFormRegisterNameEx" class="grey-text">Book font</label>
-    <input type="text" id="defaultFormRegisterNameEx" class="form-control">
-    
-    <br>
-
-    
-
-    <div class="text-center mt-4">
-        <button class="btn btn-unique" type="submit">Add book!</button>
-    </div>
-</form>
+        
+    </form>
 </div>
-</div>
-<!-- Default form register -->
