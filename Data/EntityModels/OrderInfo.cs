@@ -5,6 +5,6 @@ namespace BookCave.Data.EntityModels
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
-        public ShippingBillingViewModel ShippingBillingInformation { get; set; }
+        public ShippingBilling ShippingBillingInformation { get; set; }
     }
 }
