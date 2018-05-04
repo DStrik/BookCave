@@ -42,11 +42,11 @@ namespace BookCave.Services
         {
 
         }
-        public void AddNewEmp(EmployeeInputModel emp)
+        public void AddNewEmp(EmployeeRegisterInputModel emp)
         {
             
         }
-        public EmployeeInputModel GetEmployeeInput(int EmpId)
+        public EmployeeRegisterInputModel GetEmployeeInput(int EmpId)
         {
             return null;
         }

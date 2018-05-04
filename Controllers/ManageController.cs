@@ -5,11 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
+using BookCave.Models.InputModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookCave.Controllers
 {
     public class ManageController : Controller
     {
+
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public ManageController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager) 
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+        }
         public IActionResult Index()
         {
             ViewBag.PageTitle = "Dashboard home";
@@ -36,10 +47,30 @@ namespace BookCave.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult AddEmployee() 
         {
             return View();
-        }                
+        }     
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEmployee(EmployeeRegisterInputModel model) 
+        {
+            if (!ModelState.IsValid) { return View(); }
+
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded) 
+            {
+                // New employee successfully created and admin gets prompted
+                return RedirectToAction("Index", "Manage");
+            }
+
+            return View();
+        }                   
 
         public IActionResult ManageEmployees() 
         {
