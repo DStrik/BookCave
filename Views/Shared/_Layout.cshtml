@@ -10,115 +10,22 @@
     <link rel="stylesheet" href="~/lib/mdb/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/mdb/css/mdb.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/layout.css" />
 
 </head>
 <body>
 
-    <!-- Navbar -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar rgba-black-strong">
-    <div class="container">
+  @await Html.PartialAsync("_header.cshtml")
+  @RenderBody()
+  @await Html.PartialAsync("_footer.cshtml")
+   
 
-      <!-- Brand -->
-      <a class="navbar-brand" href="#">
-        <div class="imgcontainer" >
-          <img src="~/images/logo.png" alt="Book Cave logo">
-        </div>
-      </a>
-
-      <!-- Collapse -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Links -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <!-- Left -->
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" asp-controller="Home" asp-action="Index">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-            <!-- Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Adventure</a>
-                    <a class="dropdown-item" href="#">More stuff</a>
-                    <a class="dropdown-item" href="#"> Sci-fi</a>
-                </div>
-            </li>
-        </ul>
-        <!-- Right -->
-        <ul class="navbar-nav nav-flex-icons">
-
-          <!-- Search form -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-search"></i></a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                  <div class="md-form active-pink-2 nav-search">
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                  </div>
-                </div>
-            </li>
-
-            <!-- Wishlist -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-heart"></i></a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Book1</a>
-                    <a class="dropdown-item" href="#">Book2</a>
-                    <a class="dropdown-item" href="#">Book3</a>
-                    <a class="dropdown-item" href="#">Book4</a>
-                </div>
-            </li>
-
-          <!-- Shopping Basket -->
-          <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-shopping-basket"></i>></a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <p><strong>Basket</strong></p> <br>
-                    <p>Loop of items</p>
-                    <p>Loop of items</p>
-                    <p>Loop of items</p>
-                </div>
-            </li>
-
-          <!-- Account stuff -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-user"></i></a>
-            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                <p><strong>Name</strong></p> <br>
-                <p>Login stuff</p>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                <button type="button" class="btn blue-gradient btn-rounded">A -</button>
-                <button type="button" class="btn blue-gradient btn-rounded">A+</button>
-            </div>
-          </li>
-            
-        </ul>
-
-      </div>
-
-    </div>
-  </nav>
-  <!-- Navbar -->
-    @RenderBody()
-
-
-    <script type="text/javascript" src="~/lib/mdb/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="~/lib/mdb/js/popper.min.js"></script>
-    <script type="text/javascript" src="~/lib/mdb/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/lib/mdb/js/mdb.min.js"></script>
-    <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
-    
-    @RenderSection("Scripts", required: false)
+  <script type="text/javascript" src="~/lib/mdb/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="~/lib/mdb/js/popper.min.js"></script>
+  <script type="text/javascript" src="~/lib/mdb/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="~/lib/mdb/js/mdb.min.js"></script>
+  <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+  
+  @RenderSection("Scripts", required: false)
 </body>
 </html>
