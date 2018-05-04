@@ -4,12 +4,11 @@
   </a>
 
 
-
   <!-- Sidebar navigation -->
   <div id="slide-out" class="side-nav fixed sn-bg-2">
       <ul class="custom-scrollbar list-unstyled">
           
-          <li class="text-center mt-4 mb-5 p-5" ><a href="#" class="pl-0" ><img  class="img-fluid" src="~/images/logo.png" alt="book cave logo"></a></li>
+          <li class="text-center mt-4 mb-5 p-5" ><a asp-action="index" class="pl-0" ><img class="img-fluid" src="~/images/logo.png" alt="book cave logo"></a></li>
           
           <li class="mt-5">
             <ul class="collapsible collapsible-accordion">
@@ -23,8 +22,8 @@
                         </ul>
                     </div>
                 </li>
-                <li><a asp-controller="manage" asp-action="orders" class="collapsible-header waves-effect "><i class="fa fa-bar-chart"></i>Orders</a></li>
-                <li><a asp-controller="manage" asp-action="stock" class="collapsible-header waves-effect"><i class="fa fa-stack-overflow"></i> Stock</a></li>
+                <li><a asp-controller="manage" asp-action="orders" class="collapsible-header waves-effect @ViewBag.Active"><i class="fa fa-bar-chart"></i>Orders</a></li>
+                <li><a asp-controller="manage" asp-action="stock" class="collapsible-header waves-effect @ViewBag.Active"><i class="fa fa-stack-overflow"></i> Stock</a></li>
             </ul>
         </li>
 
