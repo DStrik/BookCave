@@ -5,7 +5,7 @@
         <div class="col-5 mx-auto">
             <!-- Sign Up-->
             <section class="form-dark wow fadeIn">
-                <form asp-action="post" asp-controller="User">
+                <form asp-action="SignUp" asp-controller="User" method="POST">
                     <!-- Form -->
                     <div class="card card-image" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/pricing-table7.jpg'); width: 28rem;">
                         <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="md-form">
-                                <input type="text" id="Password" class="form-control white-text" asp-for="Password">
+                                <input type="password" id="Password" class="form-control white-text" asp-for="Password">
                                 <label asp-for="Password">Password</label>
                             </div>
 
