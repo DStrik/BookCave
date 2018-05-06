@@ -8,6 +8,7 @@ namespace BookCave.Models.ViewModels
         public List<AuthorViewModel> Author { get; set; }
         public PublisherViewModel Publisher { get; set; }
         public List<GenreViewModel> Genre { get; set; }
+        public int PublishingYear { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
         public string Type { get; set; }

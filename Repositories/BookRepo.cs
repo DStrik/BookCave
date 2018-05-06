@@ -5,6 +5,7 @@ using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using System.Linq;
 using System.Collections;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookCave.Repositories
 {
@@ -22,10 +23,22 @@ namespace BookCave.Repositories
             _db.SaveChanges();
             return book.Id;
         }
+
+        public void ModBook(Book book)
+        {
+            _db.Update(book);
+            _db.SaveChanges();
+        }
         
         public void AddBookDetails(BookDetails details)
         {
             _db.Add(details);
+            _db.SaveChanges();
+        }
+
+        public void ModBookDetails(BookDetails details)
+        {
+            _db.Update(details);
             _db.SaveChanges();
         }
 
@@ -35,9 +48,21 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
+        public void ModBookGenreConnection(BookGenreConnection connection)
+        {
+            _db.Update(connection);
+            _db.SaveChanges();
+        }
+
         public void AddBookAuthorConnection(BookAuthorConnection connection)
         {
             _db.Add(connection);
+            _db.SaveChanges();
+        }
+
+        public void ModBookAuthorConnection(BookAuthorConnection connection)
+        {
+            _db.Update(connection);
             _db.SaveChanges();
         }
         public void AddAuthor(Author author)
@@ -185,6 +210,7 @@ namespace BookCave.Repositories
                 Title = book.Title,
                 Author = authors,
                 Publisher = publisher,
+                PublishingYear = book.PublishingYear,
                 Genre = genres,
                 Description = details.Description,
                 Price = book.Price,
@@ -219,11 +245,6 @@ namespace BookCave.Repositories
         {
             
             return false;
-        }
-
-        public void UpdateBook(BookInputModel book)
-        {
-
         }
 
         public void DeleteBook(int BookId)
@@ -422,6 +443,50 @@ namespace BookCave.Repositories
                 }       
             }
             return requestedBooks;
+        }
+
+        public BookModifyViewModel GetBookModify(int bookId)
+        {
+            var book = (from b in _db.Books
+                        where b.Id == bookId
+                        select b).SingleOrDefault();
+
+            var authors = (from bac in _db.BookAuthorConnections
+                            where bac.BookId == bookId
+                            join a in _db.Authors on bac.AuthorId equals a.Id
+                            select a.Id).ToList(); 
+                
+            var genres = (from bgc in _db.BookGenreConnections
+                          where bgc.BookId == bookId
+                          join g in _db.Genres on bgc.GenreId equals g.Id
+                          select g.Id).ToList();
+            
+            var publisher = (from p in _db.Publishers
+                             where p.Id == book.PublisherId
+                             select p.Id).SingleOrDefault();
+            
+            var details = (from d in _db.BookDetails
+                           where d.BookId == bookId
+                           select d).SingleOrDefault();
+
+            var bookDetails = new BookModifyViewModel
+            {
+                BookId = book.Id,
+                Title = book.Title,
+                Isbn = book.Isbn,
+                Author = authors,
+                PublisherId = publisher,
+                Genre = genres,
+                Description = details.Description,
+                Price = book.Price,
+                Type = book.Type,
+                Font = details.Font,
+                PublishingYear = book.PublishingYear,
+                PageCount = details.PageCount,
+                Length = details.Length
+            };
+
+            return bookDetails;
         }
     }
 }

@@ -30,9 +30,50 @@ namespace BookCave.Services
         {
             return null;
         }
-        public void ModifyBook(BookInputModel book)
+        public void ModifyBook(BookModifyInputModel book)
         {
+            var bookEntity = new Book
+            {
+                Id = book.BookId,
+                Title = book.Title,
+                Isbn = book.Isbn,
+                PublishingYear = book.PublishingYear,
+                Type = book.Type,
+                Price = book.Price,
+                PublisherId = book.PublisherId
+            };
+            
+            var details = new BookDetails
+            {
+                BookId = book.BookId,
+                Description = book.Description,
+                Font = book.Font,
+                PageCount = book.PageCount,
+                Length = book.Length
+            };
 
+            repo.ModBookDetails(details);
+
+            foreach(var id in book.Author)
+            {
+                var AuthorConnection = new BookAuthorConnection
+                {
+                    BookId = book.BookId,
+                    AuthorId = id
+                };
+
+                repo.ModBookAuthorConnection(AuthorConnection);
+            }
+
+            foreach(var id in book.Genre)
+            {
+                var GenreConnection = new BookGenreConnection
+                {
+                    BookId = book.BookId,
+                    GenreId = id
+                };
+                repo.ModBookGenreConnection(GenreConnection);
+            }
         }
         public void AddBook(BookInputModel book)
         {   
