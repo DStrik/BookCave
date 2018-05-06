@@ -1,16 +1,258 @@
 @model BookCave.Models.InputModels.BookInputModel
-<div class="row">
-    <h1>Add book</h1>
-</div>
 
-<div class="row">
-    <form action="" class="form-inline">
+<div class="col-lg-7 col-md-12 offset-lg-2 wow fadeInDown mb-5">
+    <div class="card card-cascade wider">
+      <div class="view gradient-card-header blue-gradient p-3">
+        <h4 class="h2 mb-0">Add book</h4>
+      </div>
+      <div class="card-body ">
+        
+        <form>
+            <div class="form-group row d-flex">
+                <p class="label col-md-4 pt-2">Title</p>
+                <div class="col-md-8">
+                    <input class="form-control pt-0" id="Title" type="text">
+                </div>
+            </div>
 
-        <div class="md-form form-group">
-            <label asp-for="Title">Title</label>
-            <input type="text" id="Title" class="form-control" asp-for="Title">
-        </div>
+            <div class="form-group row d-flex">
+                <p class="label col-md-4 pt-2">Author</p>
+                <div class="col-md-8">
+                    <input class="form-control pt-0" id="Title" type="text">
+                </div>
+            </div>
+
+            <div class="form-group row d-flex">
+                <p class="label col-md-4 pt-2">Genre</p>
+                <div class="col-md-8">
+                    <select class="mdb-select colorful-select dropdown-primary" multiple>
+                        <option value="" disabled selected>Choose book genre(s)</option>
+                        <option value="1">Fantasy</option>
+                        <option value="2">Horror</option>
+                        <option value="1">Non-fiction</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row d-flex">
+                <p class="label col-md-4 pt-2">Publisher</p>
+                <div class="col-md-8">
+                    <input class="form-control pt-0" id="Title" type="text">
+                </div>
+            </div>
+
+            <div class="form-group row d-flex">
+                <p class="label col-md-4 pt-2">Description</p>
+                <div class="col-md-8">
+                    <div class="form-group shadow-textarea">
+                        <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write description here..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row d-flex">
+                <p class="label col-md-4 pt-2">Cover Image</p>
+
+                <div class="file-field col-md-8">
+                    <a class="btn-floating purple-gradient mt-0 float-left">
+                        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                        <input type="file" accept="image/*">
+                    </a>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate form-control pt-0" type="text" placeholder="Upload image" disabled >
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-check mb-3" id="showPaperback">
+                <input type="checkbox" class="filled-in form-check-input" id="includePaperback">
+                <label class="form-check-label" for="includePaperback">Paperback</label>
+            </div>
+
+
+            <div id="paperback" class="collapse">
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">ISBN</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Publishing Year</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+                
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Font</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>                                
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Page count</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Price</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-check mb-3" id="showHardcover">
+                <input type="checkbox" class="filled-in form-check-input" id="includeHardcover">
+                <label class="form-check-label" for="includeHardcover">Hardcover</label>
+            </div>
+
+            <div id="hardcover" class="collapse">
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">ISBN</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Publishing Year</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+                
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Font</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>                                
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Page count</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Price</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-check mb-3" id="showEbook">
+                <input type="checkbox" class="filled-in form-check-input" id="includeEbook">
+                <label class="form-check-label" for="includeEbook">E-book</label>
+            </div>
+
+            <div id="ebook" class="collapse">
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">ISBN</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Publishing Year</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+                
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Page count</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Price</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-check mb-3" id="showAudioBook">
+                <input type="checkbox" class="filled-in form-check-input" id="includeAudioBook">
+                <label class="form-check-label" for="includeAudioBook">Audio book</label>
+            </div>
+
+            <div id="audioBook" class="collapse">
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">ISBN</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Publishing Year</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>    
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Audio length</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Price</p>
+                    <div class="col-md-8">
+                        <input class="form-control pt-0" id="Title" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+
+
+
+
+
+
+
+
+
 
         
-    </form>
-</div>
+
+
+        
+            
+        
+
+          <div class="text-right">
+            <button class="btn btn-danger waves-light">Cancel</button>
+            <button class="btn success-color-dark waves-light">Add book</button>
+          </div>
+          
+        </form>
+        
+      </div>
+    </div>
+  </div>
