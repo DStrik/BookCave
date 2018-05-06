@@ -8,6 +8,7 @@ using BookCave.Models;
 using BookCave.Models.InputModels;
 using Microsoft.AspNetCore.Identity;
 using BookCave.Data;
+using BookCave.Services;
 
 namespace BookCave.Controllers
 {
@@ -36,7 +37,9 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult RefreshAuthors()
         {
-            return View();
+            BookService b = new BookService();
+            var allAuthors = b.GetAllAuthors();
+            return Json(allAuthors);
         }
 
         public IActionResult RefreshGenres()
@@ -50,7 +53,7 @@ namespace BookCave.Controllers
         }
 
         public IActionResult ViewBooks() 
-        {
+        { 
             return View();
         }
 

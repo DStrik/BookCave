@@ -35,19 +35,14 @@
 
             <div class="form-group row d-flex">
                 <p class="label col-md-4 pt-2">Author <a asp-controller="manage" asp-action="addauthor" target="_blank" class="btn btn-outline-info waves-effect btn-sm px-2">New author</a></p>
-                <div class="col-md-6">
+                <div class="col-md-6" id="author-list">
                     <select class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
                         <option value="" disabled selected>Select Author...</option>
-                        <option value="1">Fantasy</option>
-                        <option value="2">Horror</option>
-                        <option value="3">Adventure</option>
-                        <option value="3">Fiction</option>
-                        <option value="3">Non-fiction</option>
                     </select>
                     <button class="btn-save btn btn-primary btn-sm">Save</button>          
                 </div>
                 <div class="col-md-2">
-                <a class="btn btn-outline-info waves-effect btn-sm ">Refresh</a>
+                <a class="btn btn-outline-info waves-effect btn-sm" id="refresh-authors">Refresh</a>
                 </div>
             </div>
 
