@@ -9,6 +9,7 @@ namespace BookCave.Data
         public DbSet<BookDetails> BookDetails { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<BookAuthorConnection> BookAuthorConnections { get; set; }
+        public DbSet<BookGenreConnection> BookGenreConnections { get; set; }
         public DbSet<BookReview> BookReviews { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Genre> Genres { get; set; }
