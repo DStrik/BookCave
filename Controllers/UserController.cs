@@ -22,7 +22,7 @@ namespace BookCave.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult SignUp(SignUpInputModel user)
+        public IActionResult SignUp(UserSignUpInputModel user)
         {
             return View();
         }

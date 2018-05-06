@@ -1,6 +1,6 @@
 namespace BookCave.Models.InputModels
 {
-    public class SignUpInputModel
+    public class UserSignUpInputModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
