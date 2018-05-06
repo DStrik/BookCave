@@ -11,9 +11,10 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180506111444_removingTables")]
+    partial class removingTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,28 +33,6 @@ namespace BookCave.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("GenreId");
-
-                    b.Property<int>("Isbn");
-
-                    b.Property<int>("PublisherId");
-
-                    b.Property<int>("PublishingYear");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("Type");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Books");
-                });
-
             modelBuilder.Entity("BookCave.Data.EntityModels.BookAuthorConnection", b =>
                 {
                     b.Property<int>("Id")
@@ -66,26 +45,6 @@ namespace BookCave.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BookAuthorConnections");
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.BookDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BookId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Font");
-
-                    b.Property<int>("Length");
-
-                    b.Property<int>("PageCount");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BookDetails");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.BookReview", b =>
@@ -116,20 +75,6 @@ namespace BookCave.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CartItems");
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.FavBook", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BookId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FavBooks");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.Genre", b =>

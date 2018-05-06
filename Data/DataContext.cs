@@ -5,22 +5,18 @@ namespace BookCave.Data
 {
     public class DataContext : DbContext
     {
-        public DbSet<AudioBook> AudioBooks { get; set; }
-        public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<BookDetails> BookDetails { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public DbSet<BookAuthorConnection> BookAuthorConnections { get; set; }
-        public DbSet<BookDescription> BookDescriptions { get; set; }
         public DbSet<BookReview> BookReviews { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<EBook> EBooks { get; set; }
-        public DbSet<FavBook> FavBooks { get; set; }
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<HardCover> HardCovers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderBooksConnection> OrderBooksConnection { get; set; }
         public DbSet<OrderInfo> OrderInfo { get; set; }
-        public DbSet<PaperBack> PaperBacks { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<FavBook> FavBooks { get; set; }
         public DbSet<ProfileImage> ProfileImages { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<ShippingBilling> ShippingBillingInfo { get; set; }
