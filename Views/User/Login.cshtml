@@ -6,7 +6,7 @@
             <!-- Sign In-->
             <section class="form-dark wow fadeIn">
                 <!-- Form -->
-                <form action="post">
+                <form asp-controller="User" asp-action="Login">
                     <div class="card card-image" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/pricing-table7.jpg'); width: 28rem;">
                         <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
 
@@ -25,8 +25,8 @@
                                 <input type="password" id="Password" class="form-control white-text" asp-for="Password">
                                 <label asp-for="Password">Password</label>
                                 <div class="form-check my-4">
-                                <input class="form-check-input" type="checkbox" value="1" id="RememberMe" asp-for="RememberMe">
-                                <label class="form-check-label white-text" asp-for="RememberMe">Remember me</label>
+                                    <input class="form-check-input" type="checkbox" value="true" id="RememberMe" asp-for="RememberMe">
+                                    <label class="form-check-label white-text" asp-for="RememberMe">Remember me</label>
                                 </div>
                             </div>
 

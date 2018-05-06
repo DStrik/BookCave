@@ -12,11 +12,17 @@ namespace BookCave.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string Name, string Password)
+        public IActionResult Login(UserLoginInputModel user)
         {
             return View();
         }
-        public IActionResult SignUp(UserInputModel User)
+        [HttpGet]
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SignUp(SignUpInputModel user)
         {
             return View();
         }
