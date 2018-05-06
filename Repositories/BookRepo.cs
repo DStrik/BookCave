@@ -134,6 +134,68 @@ namespace BookCave.Repositories
             return publishers;
         }
 
+        public BookDetailViewModel GetBookDetails(int BookId)
+        {
+            var book = (from b in _db.Books
+                        where b.Id == BookId
+                        select b).SingleOrDefault();
+
+            var authors = (from bac in _db.BookAuthorConnections
+                            where bac.BookId == BookId
+                            join a in _db.Authors on bac.AuthorId equals a.Id
+                            select new AuthorViewModel
+                            {
+                                Id = a.Id,
+                                Name = a.Name
+                            }).ToList(); 
+                
+            var genres = (from bgc in _db.BookGenreConnections
+                          where bgc.BookId == BookId
+                          join g in _db.Genres on bgc.GenreId equals g.Id
+                          select new GenreViewModel
+                          {
+                                Id = g.Id,
+                                Name = g.Name
+                          }).ToList();
+            
+            var publisher = (from p in _db.Publishers
+                             where p.Id == book.PublisherId
+                             select new PublisherViewModel
+                             {
+                                 Id = p.Id,
+                                 Name = p.Name
+                             }).SingleOrDefault();
+            
+            var details = (from d in _db.BookDetails
+                           where d.BookId == BookId
+                           select d).SingleOrDefault();
+
+            var reviews = (from r in _db.BookReviews
+                           where r.BookId == BookId
+                           select new ReviewViewModel
+                           {
+                               Grade = r.Grade,
+                               Review = r.Review
+                           }).ToList();
+            
+            var bookDetails = new BookDetailViewModel
+            {
+                Title = book.Title,
+                Author = authors,
+                Publisher = publisher,
+                Genre = genres,
+                Description = details.Description,
+                Price = book.Price,
+                Type = book.Type,
+                Font = details.Font,
+                PageCount = details.PageCount,
+                Length = details.Length,
+                Review = reviews,
+            };
+
+            return bookDetails;
+        }
+
         public bool ContainsIsbn(int isbn)
         {
 
@@ -164,28 +226,108 @@ namespace BookCave.Repositories
 
         public void DeleteBook(int BookId)
         {
+            var book = new Book { Id = BookId };
+            _db.Books.Attach(book);
+            _db.Books.Remove(book);
             
+            var bookDetails = new BookDetails { Id = BookId};
+            _db.BookDetails.Attach(bookDetails);
+            _db.BookDetails.Remove(bookDetails);
+
+            var genreConnection = (from bgc in _db.BookGenreConnections
+                                   where bgc.BookId == BookId
+                                   select bgc).ToList();
+            
+            foreach(var g in genreConnection)
+            {
+                _db.BookGenreConnections.Remove(g);
+            }
+
+            var authorConnection = (from bac in _db.BookAuthorConnections
+                                    where bac.BookId == BookId
+                                    select bac).ToList();
+            
+            foreach(var a in authorConnection)
+            {
+                _db.BookAuthorConnections.Remove(a);
+            }
+
+            var reviews = (from r in _db.BookReviews
+                           where r.BookId == BookId
+                           select r).ToList();
+            
+            foreach(var r in reviews)
+            {
+                _db.BookReviews.Remove(r);
+            }
+
+            _db.SaveChanges();
         }
 
         public List<BookViewModel> GetTop10()
         {
+
+
             return new List<BookViewModel>();
         }
 
         public List<BookViewModel> GetNewReleases()
         {
-            return new List<BookViewModel>();
+            var newReleases = (from b in _db.Books
+                               orderby b.PublishingYear ascending
+                               select b).Take(20);
+            
+            var books = new List<BookViewModel>();
+            foreach(var b in newReleases)
+            {
+                var authors = (from bac in _db.BookAuthorConnections
+                            where bac.BookId == b.Id
+                            join a in _db.Authors on bac.AuthorId equals a.Id
+                            select new AuthorViewModel
+                            {
+                                Id = a.Id,
+                                Name = a.Name
+                            }).ToList(); 
+                
+                var genres = (from bgc in _db.BookGenreConnections
+                              where bgc.BookId == b.Id
+                              join g in _db.Genres on bgc.GenreId equals g.Id
+                              select new GenreViewModel
+                              {
+                                  Id = g.Id,
+                                  Name = g.Name
+                              }).ToList();
+
+                var book = new BookViewModel
+                {
+                    Title = b.Title,
+                    Isbn = b.Isbn,
+                    Type = b.Type,
+                    PublishingYear = b.PublishingYear,
+                    Price = b.Price,
+                    Author = authors,
+                    Genre = genres
+                };
+
+                books.Add(book);
+            }
+
+            return books; 
         }
 
-        public BookDetailViewModel GetBookDetails(int BookId)
+        
+        /*public List<BookViewModel> Results(BookInputModel search)
         {
-            return new BookDetailViewModel();
-        }
+            var books =  (from b in _db.Books
+                          where b.Title.Contains(search.Title)
+                          where b.Isbn == search.Isbn || b.Isbn == 0
+            
 
-        public List<BookViewModel> Results(BookInputModel Search)
-        {
-            return new List<BookViewModel>();
-        }
+
+
+
+                          
+        }*/
 
         public List<BookViewModel> GetBooksInCart(List<int> Ids)
         {
