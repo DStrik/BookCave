@@ -40,8 +40,8 @@ namespace BookCave
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromHours(3);
 
-                options.LoginPath = "/Manage/Login";
-                options.AccessDeniedPath = "/Manage/AccessDenied";
+                options.LoginPath = "/User/Login";
+                options.AccessDeniedPath = "/User/AccessDenied";
                 options.SlidingExpiration = true;
             });
 
