@@ -23,6 +23,7 @@ namespace BookCave.Data
         public DbSet<ShippingBilling> ShippingBillingInfo { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<CoverImage> CoverImages { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder

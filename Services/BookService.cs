@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
@@ -75,7 +76,7 @@ namespace BookCave.Services
                 repo.ModBookGenreConnection(GenreConnection);
             }
         }
-        public void AddBook(BookInputModel book)
+        public async void AddBook(BookInputModel book)
         {   
             var bookEntity = new Book
             {
@@ -120,6 +121,16 @@ namespace BookCave.Services
                 };
                 repo.AddBookGenreConnection(GenreConnection);
             }
+
+            var memoryStream = new MemoryStream();
+            await book.CoverImage.CopyToAsync(memoryStream);
+            var img = new CoverImage
+            {
+                BookId = bookId,
+                Img = memoryStream.ToArray()
+
+            };
+            repo.AddImage(img);
         }
 
         public void AddAuthor(AuthorInputModel author)
