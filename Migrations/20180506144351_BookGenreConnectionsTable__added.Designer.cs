@@ -11,9 +11,10 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180506144351_BookGenreConnectionsTable__added")]
+    partial class BookGenreConnectionsTable__added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +100,7 @@ namespace BookCave.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BookGenreConnections");
+                    b.ToTable("BookGereConnections");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.BookReview", b =>
