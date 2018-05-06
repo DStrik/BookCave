@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Models.InputModels;
 using Microsoft.AspNetCore.Identity;
+using BookCave.Data;
 
 namespace BookCave.Controllers
 {
@@ -32,7 +33,38 @@ namespace BookCave.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult RefreshAuthors()
+        {
+            return View();
+        }
+
+        public IActionResult RefreshGenres()
+        {
+            return View();
+        }
+
+        public IActionResult RefreshPublishers()
+        {
+            return View();
+        }
+
         public IActionResult ViewBooks() 
+        {
+            return View();
+        }
+
+        public IActionResult AddAuthor() 
+        {
+            return View();
+        }
+
+        public IActionResult AddPublisher() 
+        {
+            return View();
+        }
+
+        public IActionResult AddGenre()
         {
             return View();
         }

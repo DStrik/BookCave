@@ -15,9 +15,20 @@
                 <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-book"></i> Books<i class="fa fa-angle-down rotate-icon"></i></a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a asp-controller="manage" asp-action="addbook" class="waves-effect">Add books</a>
+                            <li>
+                                <a asp-controller="manage" asp-action="addbook" class="waves-effect">Add books</a>
                             </li>
-                            <li><a asp-controller="manage" asp-action="viewbooks" class="waves-effect">View books</a>
+                            <li>
+                                <a asp-controller="manage" asp-action="viewbooks" class="waves-effect">View books</a>
+                            </li>
+                            <li class="border-top-nav">
+                                <a asp-controller="manage" asp-action="addauthor" class="waves-effect">Add author</a>
+                            </li>
+                            <li>
+                                <a asp-controller="manage" asp-action="addpublisher" class="waves-effect">Add publisher</a>
+                            </li>
+                            <li>
+                                <a asp-controller="manage" asp-action="addgenre" class="waves-effect">Add genre</a>
                             </li>
                         </ul>
                     </div>
