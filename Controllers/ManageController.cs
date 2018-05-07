@@ -72,7 +72,7 @@ namespace BookCave.Controllers
 
         public IActionResult GetAllBooks()
         {
-            var allBooks = _bookService.GetAllBooks();
+            var allBooks = _bookService.GetBookList();
             return Json(allBooks);
         }
 

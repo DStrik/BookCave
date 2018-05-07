@@ -1,14 +1,22 @@
 using System.Collections.Generic;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
+using BookCave.Repositories;
 
 namespace BookCave.Services
 {
     public class SearchService
     {
-        public List<BookViewModel> Results(BookInputModel book)
+        private BookRepo _bookRepo;
+
+        public SearchService()
         {
-            return null;
+            _bookRepo = new BookRepo();
+        }
+        
+        public List<BookViewModel> GetSearchResults(BookInputModel search)
+        {
+            return _bookRepo.GetSearchResults(search);
         }
     }
 }
