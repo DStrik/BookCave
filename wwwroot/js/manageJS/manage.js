@@ -1,2 +1,2 @@
 // SideNav Button Initialization
-$(".button-collapse").sideNav();
+$('.button-collapse').sideNav();

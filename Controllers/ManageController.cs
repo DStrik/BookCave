@@ -70,7 +70,8 @@ namespace BookCave.Controllers
             return View();
         }
 
-        public IActionResult GetAllBooks()
+        [HttpGet]
+        public IActionResult GetBookList()
         {
             var allBooks = _bookService.GetBookList();
             return Json(allBooks);
@@ -153,7 +154,6 @@ namespace BookCave.Controllers
         {
             return View();
         }
-
 
 
         public IActionResult ChangePassword() 
