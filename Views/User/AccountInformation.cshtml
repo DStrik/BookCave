@@ -13,15 +13,19 @@
                 </div>
 
                 <!-- Avatar -->
-                <div class="avatar mx-auto white"><img src="~/images/default_pic.jpg" class="rounded-circle" alt="Johnny boy default pic">
+                <div class="avatar mx-auto white">
+                    <div class="view overlay">
+                        <img src="~/images/default_pic.jpg" class="rounded-circle" alt="Johnny boy default pic">
+                        <div class="mask flex-center rgba-white-strong">
+                            <p class="black-text">Edit Image</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body">
                     <!-- Name -->
                     <h4 class="card-title">User Name</h4>
                     <hr>
-                    <!-- Quotation -->
-                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>
                 </div>
             </div>
             <!-- Card -->
@@ -31,67 +35,59 @@
     <!-- Row 1 -->
 
     <!-- Row 2 -->
-    <div class="row">
-        <div class="col">
+    <div class="row mt-4 justify-content-center">
+        <div class="col-lg-5">
+            <!--Table-->
+            <table class="table table-hover">
 
-            <table class="table">
+                <!--Table head-->
                 <thead class="thead-dark">
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                        <th>Personal</th>
+                    </tr>
+                </thead>
+                <!--Table head-->
+
+                <!--Table body-->
+                <tbody>
+                    <tr data-toggle="modal" data-target="#modalChangePassword">
+                        <td>Change Password</td>
+                    </tr>
+                    <tr id="ViewFavBook">
+                        <td>Favorite Book</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Information</td>
+                    </tr>
+                    <tr>
+                        <td>Billing Information</td>
+                    </tr>
+                    <tr>
+                        <td>Payment Options</td>
+                    </tr>
+                </tbody>
+                <!--Table body-->
+
+            </table>
+            <!--Table-->
+        </div>
+        <div class="col-lg-4">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">Purchases</th>
                     </tr>
                 </thead>
                     <tbody>
                         <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>twitter</td>
+                            <td>
+                                <ul>
+                                    <li>Order history</li>
+                                    <li>Cart</li>
+                                    <li>Wish List</li>
+                                    <li>Review My Books</li>
+                                </ul>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -100,3 +96,68 @@
     <!-- Row 2 -->
 
 </div>
+
+<!-- MODAL Change password -->
+<div class="modal fade" id="modalChangePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Change Password</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                    <i class="fa fa-lock prefix grey-text"></i>
+                    <input type="password" id="defaultForm-pass" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Your old password</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fa fa-lock prefix grey-text"></i>
+                    <input type="password" id="defaultForm-pass" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Your new password</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fa fa-lock prefix grey-text"></i>
+                    <input type="password" id="defaultForm-pass" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Confirm new password</label>
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-default">Change Password</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL Change password -->  
+
+<!-- MODAL Favorite Book -->
+<div class="modal fade" id="modalFavoriteBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+                <p>Favorite book stuff...</p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p>yeah!</p>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-default">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL Favorite Book -->  
