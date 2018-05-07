@@ -146,6 +146,7 @@ namespace BookCave.Controllers
                 await _userManager.AddToRoleAsync(user, model.UserType);
                 return RedirectToAction("AddEmployee");
             }
+            
             return View();
         }                   
 

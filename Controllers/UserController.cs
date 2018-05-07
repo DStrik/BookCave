@@ -95,16 +95,9 @@ namespace BookCave.Controllers
         }
         public IActionResult FavoriteBook()
         {
-            var data = _bookService.GetBookById(2);
+            var data = _bookService.GetBookDetails(1);
 
             return Json(data);
-        }
-
-        [HttpPost]
-        public IActionResult ChangePassword(UserChangePasswordInputModel data)
-        {
-            // I DON'T KNOW WHAT TO DO WITH THE PASSWORD YET!!! JOHNNY BOI HEEEEEEEEEEEELP!.....
-            return Ok();
         }
 
         [Authorize]
