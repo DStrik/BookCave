@@ -3,19 +3,24 @@ $(document).ready(function () {
 
     $("#changePassword").click(function (e) { 
         e.preventDefault();
-        var oldPassword = $("#oldPassword");
-        var newPassword = $("#newPassword");
-        var confirmPassword = $("#confirmPassword");
+        var oldPassword = $("#oldPassword").val();
+        var newPassword = $("#newPassword").val();
+        var confirmPassword = $("#confirmPassword").val();
         var inp = {
             "oldPassword" : oldPassword,
             "newPassword" : newPassword,
             "confirmPassword" : confirmPassword
         };
 
-        $.post("User/ChangePassword", inp, function (data, status) {
+        $.post("ChangePassword", inp, function (data, status) {
             $("#centralModalSuccess").modal("show");
-        }).fail(function (err) {
+            $("#modalChangePassword").modal("hide");
 
+            var oldPassword = $("#oldPassword").val("");
+            var newPassword = $("#newPassword").val("");
+            var confirmPassword = $("#confirmPassword").val("");
+        }).fail(function (err) {
+            $("#ModalWarning").modal("show");
         });
     });
 

@@ -34,10 +34,7 @@ namespace BookCave.Services
         {
 
         }
-        public void ChangePassword(PasswordInputModel pw)
-        {
-
-        }
+        
         public void ChangeShippingInfo(ShippingInputModel ShipInfo)
         {
 
