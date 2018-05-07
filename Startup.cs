@@ -39,7 +39,7 @@ namespace BookCave
             services.ConfigureApplicationCookie(options => {
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromHours(3);
-
+            
                 options.LoginPath = "/User/Login";
                 options.AccessDeniedPath = "/User/AccessDenied";
                 options.SlidingExpiration = true;

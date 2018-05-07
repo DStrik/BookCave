@@ -58,9 +58,9 @@ namespace BookCave.Controllers
 
             if(result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, "User");
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _signInManager.SignInAsync(user, false);
-                await _userManager.AddToRoleAsync(user, "User");
 
                 return RedirectToAction("Index", "Home");
             }
@@ -90,7 +90,6 @@ namespace BookCave.Controllers
         {
 
         }
-        [Authorize]
         public IActionResult OrderHistory()
         {
             return View();
