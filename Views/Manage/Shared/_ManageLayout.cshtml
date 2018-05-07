@@ -7,13 +7,13 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewBag.PageTitle</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/lib/mdb/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/mdb/css/mdb.min.css" />
-    <link rel="stylesheet" href="~/css/dashboard.css" /> 
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/mdb/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/lib/mdb/css/mdb.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/manageCSS/manage.css" /> 
     @{ var action = ViewContext.RouteData.Values["action"].ToString().ToLower(); if (action == "viewbooks") {
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" /> 
-    <link rel="stylesheet" href="~/css/manageCSS/manageAddBook.css" /> 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" type="text/css" href="~/css/manageCSS/manageAddBook.css" /> 
     } }
 
 </head>

@@ -21,3 +21,10 @@ div.dataTables_wrapper div.dataTables_info {
 .dataTables_filter {
     float: right;
 }
+
+.table-wrapper {
+    display: block;
+    max-height: 300px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}

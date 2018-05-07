@@ -78,6 +78,12 @@ namespace BookCave.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetBookById(int id)
+        {
+            return Json(_bookService.GetBookById(id));
+        }
+
+        [HttpGet]
         public IActionResult AddAuthor() 
         {
             return View();
@@ -114,6 +120,12 @@ namespace BookCave.Controllers
         {
             _bookService.AddGenre(model);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public void RemoveBookById(int id) 
+        {
+            _bookService.RemoveBookById(id);
         }
 
         public IActionResult Orders() 

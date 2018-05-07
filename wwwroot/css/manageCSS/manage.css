@@ -8,3 +8,7 @@
 .border-top-nav {
     border-top: 1px solid rgba(153,153,153,.298039);
 }
+
+.table-fit {
+    white-space: normal;
+}
