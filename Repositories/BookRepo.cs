@@ -93,15 +93,17 @@ namespace BookCave.Repositories
 
         public List<BookViewModel> GetAllBooks()
         {
-            var books = new List<BookViewModel>();
-            foreach(var b in _db.Books)
+            var allBooks = new List<BookViewModel>();
+            var books = (from b in _db.Books
+                         select b).ToList();
+            foreach(var b in books)
             {
                 var authors = GetAuthors(b.Id);
                 var genres = GetGenres(b.Id);
                 var coverImage = GetCoverImage(b.Id);
-
                 var book = new BookViewModel
                 {
+                    BookId = b.Id,
                     Title = b.Title,
                     Isbn = b.Isbn,
                     Type = b.Type,
@@ -112,10 +114,10 @@ namespace BookCave.Repositories
                     CoverImage = coverImage.Img
                 };
 
-                books.Add(book);
+                allBooks.Add(book);
             }
 
-            return books; 
+            return allBooks; 
         }
 
         public List<GenreViewModel> GetAllGenres()
