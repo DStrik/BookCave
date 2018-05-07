@@ -3,7 +3,7 @@ namespace BookCave.Data.EntityModels
     public class ShippingBilling
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string ShippingFirstName { get; set; }
         public string ShippingLastName { get; set; }
         public string ShippingStreetName { get; set; }
