@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using BookCave.Models;
 using BookCave.Models.InputModels;
+using BookCave.Models.ViewModels;
 using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,11 +17,13 @@ namespace BookCave.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private BookService _bookService;
+        private UserService _userService;
         public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _bookService = new BookService();
+            _userService = new UserService();
         }
 
         [AllowAnonymous]
@@ -89,11 +92,32 @@ namespace BookCave.Controllers
             return View();
         }
 
-        public void ChangeShippingInformation(ShippingInputModel ShipBillInfo)
+        [HttpGet]
+        public async Task<ShippingBillingViewModel> GetShippingBillingInformation ()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if(user == null)
+            {
+                return null;
+            }
 
+            ShippingBillingViewModel shipBill = _userService.GetShippingBillingInfo(user.Id);
+            if(shipBill == null)
+            {
+                return null;
+            }
+
+            return shipBill;
         }
 
+        public async Task<IActionResult> ChangeShippingInformation (ShippingInputModel ShipBillInfo)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            return Ok();
+        }
+
+        [HttpGet]
         public void ChangeBillingInformation(BillingInputModel BillInfo)
         {
             

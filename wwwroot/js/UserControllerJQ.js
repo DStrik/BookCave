@@ -85,5 +85,18 @@ $(document).ready(function () {
         });
     });
 
+    $("#changeShippingBilling").click(function (e) { 
+        e.preventDefault();
+        $.get("GetShippingBillingInformation", function (data, status) {
+            console.log(data);
+            console.log("Success");
+            $("#editShippingBilling").modal("show");
+        }).fail(function (err) {
+            console.log(err);
+            console.log(data);
+            console.log("FailureAF");
+            $("#editShippingBilling").modal("show");
+        });
+    });
 });
 
