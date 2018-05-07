@@ -12,6 +12,6 @@ namespace BookCave.Models.InputModels
         [Required]
         public string Password { get; set; }
         [Required]
-        public bool Admin { get; set; }
+        public string UserType { get; set; }
     }
 }
