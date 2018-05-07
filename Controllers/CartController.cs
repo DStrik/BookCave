@@ -16,6 +16,7 @@ namespace BookCave.Controllers
         public CartController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
+            _cartService = new CartService();
         }
         public IActionResult Index()
         {
