@@ -91,33 +91,24 @@ namespace BookCave.Repositories
             return publisher.Id;
         }
 
-        public List<BookViewModel> GetAllBooks()
+        public List<BookListViewModel> GetBookList()
         {
-            var allBooks = new List<BookViewModel>();
-            var books = (from b in _db.Books
-                         select b).ToList();
-            foreach(var b in books)
+            var books = new List<BookListViewModel>();
+            foreach(var b in _db.Books)
             {
-                var authors = GetAuthors(b.Id);
-                var genres = GetGenres(b.Id);
-                var coverImage = GetCoverImage(b.Id);
-                var book = new BookViewModel
+                var book = new BookListViewModel
                 {
                     BookId = b.Id,
                     Title = b.Title,
                     Isbn = b.Isbn,
                     Type = b.Type,
                     PublishingYear = b.PublishingYear,
-                    Price = b.Price,
-                    Author = authors,
-                    Genre = genres,
-                    CoverImage = coverImage.Img
                 };
 
-                allBooks.Add(book);
+                books.Add(book);
             }
 
-            return allBooks; 
+            return books; 
         }
 
         public List<GenreViewModel> GetAllGenres()
