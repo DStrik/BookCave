@@ -345,7 +345,7 @@ namespace BookCave.Repositories
         }
 
         
-        public List<BookViewModel> Results(BookInputModel search)
+        public List<BookViewModel> GetSearchResults(BookInputModel search)
         {
             var books = (from b in _db.Books
                          where b.Title.Contains(search.Title)
