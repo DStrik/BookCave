@@ -1,4 +1,4 @@
-@model BookCave.Models.InputModels.EmployeeLoginInputModel
+@model BookCave.Models.InputModels.EmployeeRegisterInputModel
 
 
 <div class="col-lg-7 col-md-12 offset-lg-2 wow fadeInDown mb-5 mt-5">
@@ -21,7 +21,19 @@
                 <div class="col-md-10">
                     <input class="form-control pt-0 form-control-lg" id="Title" type="text">
                 </div>
-            </div>        
+            </div>    
+
+            <div class="form-inline mt-2 mb-4 row" id="typeSelector">
+                <div class="form-check col">
+                    <input class="form-check-input" asp-for="UserType" type="radio" id="typeEmployee" checked="checked" value="Paperback">
+                    <label class="form-check-label" for="typeEmployee">Employee</label>
+                </div>
+
+                <div class="form-check col">
+                    <input class="form-check-input" asp-for="UserType" type="radio" id="typeAdmin" value="Hardcover">
+                    <label class="form-check-label" for="typeAdmin">Admin</label>
+                </div>
+            </div>                
 
           <div class="text-right mb-5 pb-5">
             <button class="btn btn-danger waves-light">Cancel</button>
