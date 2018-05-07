@@ -344,7 +344,10 @@ namespace BookCave.Repositories
             return books; 
         }
 
-        
+        /*public List<BookViewModel> GetSearchResults(BookInputModel search)
+        {
+            
+        }*/
         public List<BookViewModel> GetSearchResults(BookInputModel search)
         {
             var books = (from b in _db.Books
@@ -406,49 +409,42 @@ namespace BookCave.Repositories
         return results;
      }
 
-        public List<BookViewModel> GetBooksByIds(List<int> Ids)
+        public BookViewModel GetBookById(int id)
         {
-            var requestedBooks = new List<BookViewModel>();
-            foreach(var id in Ids)
+            var book = (from b in _db.Books
+                        where b.Id == id
+                        select b).SingleOrDefault();
+
+            var authors = (from bac in _db.BookAuthorConnections
+                            where bac.BookId == book.Id
+                            join a in _db.Authors on bac.AuthorId equals a.Id
+                            select new AuthorViewModel
+                            {
+                                Id = a.Id,
+                                Name = a.Name
+                            }).ToList(); 
+        
+            var genres = (from bgc in _db.BookGenreConnections
+                        where bgc.BookId == book.Id
+                        join g in _db.Genres on bgc.GenreId equals g.Id
+                        select new GenreViewModel
+                        {
+                            Id = g.Id,
+                            Name = g.Name
+                        }).ToList();
+
+            var retBook = new BookViewModel
             {
-                var books = (from b in _db.Books
-                         where b.Id == id
-                         select b);
-                foreach(var b in books)
-                {
-                    var authors = (from bac in _db.BookAuthorConnections
-                                   where bac.BookId == b.Id
-                                   join a in _db.Authors on bac.AuthorId equals a.Id
-                                   select new AuthorViewModel
-                                   {
-                                       Id = a.Id,
-                                       Name = a.Name
-                                   }).ToList(); 
-                
-                    var genres = (from bgc in _db.BookGenreConnections
-                              where bgc.BookId == b.Id
-                              join g in _db.Genres on bgc.GenreId equals g.Id
-                              select new GenreViewModel
-                              {
-                                  Id = g.Id,
-                                  Name = g.Name
-                              }).ToList();
+                Title = book.Title,
+                Isbn = book.Isbn,
+                Type = book.Type,
+                PublishingYear = book.PublishingYear,
+                Price = book.Price,
+                Author = authors,
+                Genre = genres
+            };
 
-                    var book = new BookViewModel
-                    {
-                        Title = b.Title,
-                        Isbn = b.Isbn,
-                        Type = b.Type,
-                        PublishingYear = b.PublishingYear,
-                        Price = b.Price,
-                        Author = authors,
-                        Genre = genres
-                    };
-
-                    requestedBooks.Add(book);
-                }       
-            }
-            return requestedBooks;
+                return retBook;
         }
 
         public BookModifyViewModel GetBookModify(int bookId)
