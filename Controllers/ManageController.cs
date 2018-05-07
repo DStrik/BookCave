@@ -9,6 +9,7 @@ using BookCave.Models.InputModels;
 using Microsoft.AspNetCore.Identity;
 using BookCave.Data;
 using BookCave.Services;
+using BookCave.Data.EntityModels;
 
 namespace BookCave.Controllers
 {
@@ -17,6 +18,8 @@ namespace BookCave.Controllers
 
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+
+        BookService _bookService = new BookService();
 
         public ManageController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager) 
         {
@@ -29,27 +32,37 @@ namespace BookCave.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult AddBook() 
         {
             return View();
         }
 
-        [HttpGet]
-        public IActionResult RefreshAuthors()
+        [HttpPost]
+        public IActionResult AddBook(BookInputModel model) 
         {
-            BookService b = new BookService();
-            var allAuthors = b.GetAllAuthors();
+            _bookService.AddBook(model);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult GetAllAuthors()
+        {
+            
+            var allAuthors = _bookService.GetAllAuthors();
             return Json(allAuthors);
         }
 
-        public IActionResult RefreshGenres()
+        public IActionResult GetAllGenres()
         {
-            return View();
+            var allGenres = _bookService.GetAllGenres();
+            return Json(allGenres);
         }
 
-        public IActionResult RefreshPublishers()
+        public IActionResult GetAllPublishers()
         {
-            return View();
+            var allPublishers = _bookService.GetAllPublishers();
+            return Json(allPublishers);
         }
 
         public IActionResult ViewBooks() 
@@ -57,19 +70,49 @@ namespace BookCave.Controllers
             return View();
         }
 
+        public IActionResult GetAllBooks()
+        {
+            var allBooks = _bookService.GetAllBooks();
+            return Json(allBooks);
+        }
+
+        [HttpGet]
         public IActionResult AddAuthor() 
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult AddAuthor(AuthorInputModel model)
+        {
+            _bookService.AddAuthor(model);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public IActionResult AddPublisher() 
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult AddPublisher(PublisherInputModel model)
+        {
+            _bookService.AddPublisher(model);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public IActionResult AddGenre()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddGenre(GenreInputModel model)
+        {
+            _bookService.AddGenre(model);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Orders() 
@@ -86,24 +129,23 @@ namespace BookCave.Controllers
         public IActionResult AddEmployee() 
         {
             return View();
-        }     
-
-        [HttpPost]
+        }
+        [HttpPost]     
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddEmployee(EmployeeRegisterInputModel model) 
         {
-            if (!ModelState.IsValid) { return View(); }
-
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded) 
+            if(!ModelState.IsValid)
             {
-                // New employee successfully created and admin gets prompted
-                return RedirectToAction("Index", "Manage");
+                return View();
             }
-
+            
+            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if(result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, model.UserType);
+                return RedirectToAction("AddEmployee");
+            }
             return View();
         }                   
 
@@ -118,28 +160,6 @@ namespace BookCave.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            ViewBag.PageTitle = "Login to site management";
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(EmployeeLoginInputModel model) 
-        {
-            if (!ModelState.IsValid) { return View(); }
-
-            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Manager");
-            }
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOut()

@@ -9,10 +9,10 @@ namespace BookCave.Services
 {
     public class BookService
     {
-        private BookRepo repo;
+        private BookRepo _bookRepo;
         public BookService()
         {
-            repo = new BookRepo();
+            _bookRepo = new BookRepo();
         }
         public List<BookViewModel> GetTop10()
         {
@@ -20,16 +20,15 @@ namespace BookCave.Services
         }
         public List<BookViewModel> GetNewReleases()
         {
-            return null;
+            return _bookRepo.GetNewReleases();
         }
-        public BookDetailViewModel GetBookDetails(int BookId)
+        public BookDetailViewModel GetBookDetails(int bookId)
         {
-            //TO DO!!!
-            return null;
+            return _bookRepo.GetBookDetails(bookId);
         }
-        public BookInputModel GetBookInputModel()
+        public BookModifyViewModel GetBookModifyModel(int bookId)
         {
-            return null;
+            return _bookRepo.GetBookModify(bookId);
         }
         public void ModifyBook(BookModifyInputModel book)
         {
@@ -53,7 +52,7 @@ namespace BookCave.Services
                 Length = book.Length
             };
 
-            repo.ModBookDetails(details);
+            _bookRepo.ModBookDetails(details);
 
             foreach(var id in book.Author)
             {
@@ -63,7 +62,7 @@ namespace BookCave.Services
                     AuthorId = id
                 };
 
-                repo.ModBookAuthorConnection(AuthorConnection);
+                _bookRepo.ModBookAuthorConnection(AuthorConnection);
             }
 
             foreach(var id in book.Genre)
@@ -73,7 +72,7 @@ namespace BookCave.Services
                     BookId = book.BookId,
                     GenreId = id
                 };
-                repo.ModBookGenreConnection(GenreConnection);
+                _bookRepo.ModBookGenreConnection(GenreConnection);
             }
         }
         public async void AddBook(BookInputModel book)
@@ -88,7 +87,7 @@ namespace BookCave.Services
                 PublisherId = book.PublisherId
             };
 
-            var bookId = repo.AddBook(bookEntity);
+            var bookId = _bookRepo.AddBook(bookEntity);
             
             var details = new BookDetails
             {
@@ -99,7 +98,7 @@ namespace BookCave.Services
                 Length = book.Length
             };
 
-            repo.AddBookDetails(details);
+            _bookRepo.AddBookDetails(details);
 
             foreach(var id in book.Author)
             {
@@ -109,7 +108,7 @@ namespace BookCave.Services
                     AuthorId = id
                 };
 
-                repo.AddBookAuthorConnection(AuthorConnection);
+                _bookRepo.AddBookAuthorConnection(AuthorConnection);
             }
 
             foreach(var id in book.Genre)
@@ -119,18 +118,20 @@ namespace BookCave.Services
                     BookId = bookId,
                     GenreId = id
                 };
-                repo.AddBookGenreConnection(GenreConnection);
+                _bookRepo.AddBookGenreConnection(GenreConnection);
             }
 
-            var memoryStream = new MemoryStream();
-            await book.CoverImage.CopyToAsync(memoryStream);
-            var img = new CoverImage
+            using (var memoryStream = new MemoryStream())
             {
-                BookId = bookId,
-                Img = memoryStream.ToArray()
+                await book.CoverImage.CopyToAsync(memoryStream);
+                var img = new CoverImage
+                {
+                    BookId = bookId,
+                    Img = memoryStream.ToArray()
 
-            };
-            repo.AddImage(img);
+                };
+                _bookRepo.AddImage(img);
+            }
         }
 
         public void AddAuthor(AuthorInputModel author)
@@ -140,7 +141,7 @@ namespace BookCave.Services
                 Name = author.Name
             };
 
-            repo.AddAuthor(authorEntity);
+            _bookRepo.AddAuthor(authorEntity);
 
         }
 
@@ -151,7 +152,7 @@ namespace BookCave.Services
                 Name = genre.Name
             };
 
-            repo.AddGenre(genreEntity);
+            _bookRepo.AddGenre(genreEntity);
         }
         
         public void AddPublisher(PublisherInputModel publisher)
@@ -161,28 +162,32 @@ namespace BookCave.Services
                 Name = publisher.Name
             };
 
-            repo.AddPublisher(publisherEntity);
+            _bookRepo.AddPublisher(publisherEntity);
         }
 
         public List<BookViewModel> GetAllBooks()
         {
-            return repo.GetAllBooks();
+            return _bookRepo.GetAllBooks();
         }
 
         public List<GenreViewModel> GetAllGenres()
         {
-            return repo.GetAllGenres();
+            return _bookRepo.GetAllGenres();
         }
 
         public List<AuthorViewModel> GetAllAuthors()
         {
-            return repo.GetAllAuthors();
+            return _bookRepo.GetAllAuthors();
         }
 
         public List<PublisherViewModel> GetAllPublishers()
         {
-            return repo.GetAllPublishers();
+            return _bookRepo.GetAllPublishers();
         }
 
+        public BookViewModel GetBookById(int bookId)
+        {
+            return _bookRepo.GetBookById(bookId);
+        }
     }
 }

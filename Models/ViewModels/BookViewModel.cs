@@ -11,7 +11,7 @@ namespace BookCave.Models.ViewModels
         public string Type { get; set; }
         public List<GenreViewModel> Genre { get; set; }
         public int PublishingYear { get; set; }
-        public string Img { get; set; }
+        public byte[] CoverImage { get; set; }
         public double Price { get; set; }
     }
 }

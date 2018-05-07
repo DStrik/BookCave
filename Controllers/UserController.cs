@@ -2,6 +2,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using BookCave.Models;
 using BookCave.Models.InputModels;
+using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,12 @@ namespace BookCave.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private BookService _bookService;
         public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _bookService = new BookService();
         }
         [HttpGet]
         public IActionResult Login()
@@ -58,9 +61,9 @@ namespace BookCave.Controllers
 
             if(result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, "User");
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _signInManager.SignInAsync(user, false);
-                await _userManager.AddToRoleAsync(user, "User");
 
                 return RedirectToAction("Index", "Home");
             }
@@ -90,7 +93,15 @@ namespace BookCave.Controllers
         {
 
         }
+        public IActionResult FavoriteBook()
+        {
+            var data = _bookService.GetBookDetails(1);
+
+            return Json(data);
+        }
+
         [Authorize]
+
         public IActionResult OrderHistory()
         {
             return View();
