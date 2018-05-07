@@ -1,15 +1,16 @@
-<h1>This is your cart m8</h1>
-<div class="container">
+@model List<BookCave.Models.ViewModels.BookListViewModel>
+<div class="container pt-5">
     <section class="section my-5">
         <div class="table-responsive">
-            <table class="table product-table">
+            <table class="table product-table text-center">
                 <thead>
                     <tr>
+                        <th></th>
                         <th class="font-weight-bold">
-                            <strong>Product</strong>
+                            <strong>Title</strong>
                         </th>
                         <th class="font-weight-bold">
-                            <strong>Color</strong>
+                            <strong>Type</strong>
                         </th>
                         <th class="font-weight-bold">
                             <strong>Price</strong>
@@ -24,20 +25,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach(var book in Model)
+                    {
                    <tr>
-                        <td>somestuff</td>
-                        <td>onemorestuff</td>
-                        <td>anotherstuff</td>
-                        <td class="text-center text-md-left">
-                            <span id="qty"></span>
+                        <td></td>
+                        <td>@book.Title</td>
+                        <td>@book.Type</td>
+                        <td><span id="price"></span></td>
+                        <td class="md-form text-center text-sm-center">
                             <button class="btn btn-sm btn-primary btn-rounded waves-effect waves-light" id="incrementQty">+</button>
+                            <input type="text" class="text-center col-md-1" id="qty" value="1">
                             <button class="btn btn-sm btn-primary btn-rounded waves-effect waves-light" id="decrementQty">-</button>
                         </td>
-                        <td>wtf?</td>
+                        <td><span id="amount"></span></td>
                         <td>
                             <button type="button" class="btn btn-sm btn-danger waves-effect waves-light">X</button>
                         </td>
                    </tr>
+                    }
                 </tbody>
             </table>
         </div>

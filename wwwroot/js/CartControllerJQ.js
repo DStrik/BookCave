@@ -1,10 +1,13 @@
-var incBtn = document.getElementById("incrementQty");
-var decBtn = document.getElementById("decrementQty");
-var counter = document.getElementById("qty");
-counter.innerHTML = 1;
-incBtn.onclick = function(){
-    counter.innerHTML++;
-}
-decBtn.onclick = function(){
-    counter.innerHTML--;
-}
+$('#incrementQty').click( function() {
+    var counter = $('#qty').val();
+    counter++ ;
+    $('#qty').val(counter);
+});
+$('#decrementQty').click( function() {
+    var counter = $('#qty').val();
+    if(counter > 1){
+    counter-- ;
+    $('#qty').val(counter);
+    }
+
+});
