@@ -129,10 +129,23 @@ namespace BookCave.Controllers
         public IActionResult AddEmployee() 
         {
             return View();
-        }     
-
-        public IActionResult AddEmployee(EmployeeRegisterInputModel model) 
+        }
+        [HttpPost]     
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEmployee(EmployeeRegisterInputModel model) 
         {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+            
+            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if(result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, model.UserType);
+                return RedirectToAction("AddEmployee");
+            }
             return View();
         }                   
 
@@ -147,28 +160,6 @@ namespace BookCave.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            ViewBag.PageTitle = "Login to site management";
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(EmployeeLoginInputModel model) 
-        {
-            if (!ModelState.IsValid) { return View(); }
-
-            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Manager");
-            }
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOut()

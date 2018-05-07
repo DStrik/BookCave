@@ -8,36 +8,36 @@
       </div>
       <div class="card-body ">
         
-        <form class="mt-5 pt-5">
+        <form class="mt-5 pt-5" asp-action="AddEmployee" asp-controller="Manage" method="POST">
             <div class="form-group row d-flex">
-                <p class="label col-md-2 pt-2 form-control-lg">Username</p>
+                <p class="label col-md-2 pt-2 form-control-lg">Email</p>
                 <div class="col-md-10">
-                    <input class="form-control pt-0 form-lg form-control-lg" id="Title" type="text">
+                    <input class="form-control pt-0 form-lg form-control-lg" id="Title" type="text" asp-for="Email">
                 </div>
             </div>
 
             <div class="form-group row d-flex">
                 <p class="label col-md-2 pt-2 form-control-lg">Password</p>
                 <div class="col-md-10">
-                    <input class="form-control pt-0 form-control-lg" id="Title" type="text">
+                    <input class="form-control pt-0 form-control-lg" id="Title" type="text" asp-for="Password">
                 </div>
             </div>    
 
             <div class="form-inline mt-2 mb-4 row" id="typeSelector">
                 <div class="form-check col">
-                    <input class="form-check-input" asp-for="UserType" type="radio" id="typeEmployee" checked="checked" value="Paperback">
+                    <input class="form-check-input" asp-for="UserType" type="radio" id="typeEmployee" checked="checked" value="Employee">
                     <label class="form-check-label" for="typeEmployee">Employee</label>
                 </div>
 
                 <div class="form-check col">
-                    <input class="form-check-input" asp-for="UserType" type="radio" id="typeAdmin" value="Hardcover">
+                    <input class="form-check-input" asp-for="UserType" type="radio" id="typeAdmin" value="Admin">
                     <label class="form-check-label" for="typeAdmin">Admin</label>
                 </div>
             </div>                
 
           <div class="text-right mb-5 pb-5">
             <button class="btn btn-danger waves-light">Cancel</button>
-            <button class="btn success-color-dark waves-light">Create employee</button>
+            <button class="btn success-color-dark waves-light" type="submit">Create employee</button>
           </div>
           
         </form>
