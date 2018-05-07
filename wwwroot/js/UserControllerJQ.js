@@ -28,7 +28,7 @@ $(document).ready(function () {
     $("#ViewFavBook").click(function (e) { 
         e.preventDefault();
         $("#errorImage").hide();
-        var loading = '<div class="preloader-wrapper big active m-5 p-1 loading-thing">'
+        var loading = '<div class="preloader-wrapper big active m-5 loading-thing">'
                       + '<div class="spinner-layer spinner-blue-only">'
                       + '<div class="circle-clipper left">'
                       + '<div class="circle"></div>'
@@ -50,7 +50,7 @@ $(document).ready(function () {
         // The image is taken in as a byte array and then converted to a jpg
         $.get("FavoriteBook", function(data, status){
             console.log("status: " + status);
-            var content = '<img class="img-fluid mt-5 ml-3" src="data:image/png;base64,' + data.coverImage + '">';
+            var content = '<img class="img-fluid mt-5 ml-3" src="data:image/jpg;base64,' + data.coverImage + '">';
             $("#FavoriteBookImg").html(content);
 
             var authorMarkup = "";
@@ -84,4 +84,6 @@ $(document).ready(function () {
             $("#FavoriteBookInfo").html("<br><br><br><br><p>There was an error in retrieving your book</p><p>Please try again later...</p>");
         });
     });
+
 });
+
