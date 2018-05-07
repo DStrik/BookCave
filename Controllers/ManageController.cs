@@ -72,7 +72,7 @@ namespace BookCave.Controllers
 
         public IActionResult GetAllBooks()
         {
-            var allBooks = _bookService.GetAllBooks();
+            var allBooks = _bookService.GetBookList();
             return Json(allBooks);
         }
 
@@ -146,7 +146,6 @@ namespace BookCave.Controllers
                 await _userManager.AddToRoleAsync(user, model.UserType);
                 return RedirectToAction("AddEmployee");
             }
-            
             return View();
         }                   
 
