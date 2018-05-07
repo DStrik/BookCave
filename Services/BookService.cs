@@ -165,7 +165,7 @@ namespace BookCave.Services
             _bookRepo.AddPublisher(publisherEntity);
         }
 
-        public List<BookViewModel> GetBookList()
+        public List<BookListViewModel> GetBookList()
         {
             return _bookRepo.GetBookList();
         }

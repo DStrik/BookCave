@@ -7,7 +7,7 @@
         </div>
         <div class="card-body ">
 
-            <form method="POST">
+            <form asp-action="addbook" asp-controller="manage" enctype="multipart/form-data" method="POST">
 
                 <div class="form-inline mt-2 mb-4 row" id="typeSelector">
                     <div class="form-check col">
@@ -32,6 +32,14 @@
                         <input asp-for="Title" class="form-control pt-0" type="text">
                     </div>
                 </div>
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">ISBN</p>
+                    <div class="col-md-8">
+                        <input asp-for="Isbn" class="form-control pt-0" type="text">
+                    </div>
+                </div>
+
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Author(s) <a asp-controller="manage" asp-action="addauthor" target="_blank" class="btn btn-outline-info waves-effect btn-sm px-2">New author</a></p>
@@ -81,7 +89,7 @@
                     </div>
                 </div>
 
-                    
+
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Page count</p>
                     <div class="col-md-8">
@@ -123,10 +131,10 @@
                     <div class="file-field col-md-8">
                         <a class="btn-floating blue-gradient mt-0 float-left btn-sm">
                         <i class="fa fa-cloud-upload"></i>
-                        <input type="file" accept="image/*">
+                        <input type="file" asp-for="CoverImage" accept="image/jpeg">
                     </a>
                         <div class="file-path-wrapper">
-                            <input asp-for="CoverImage" class="file-path validate form-control pt-0" type="text" placeholder="Upload image" disabled>
+                            <input class="file-path validate form-control pt-0" type="text" placeholder="Upload image" disabled>
                         </div>
                     </div>
                 </div>
