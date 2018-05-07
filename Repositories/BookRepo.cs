@@ -97,8 +97,8 @@ namespace BookCave.Repositories
             foreach(var b in _db.Books)
             {
                 var authors = GetAuthors(b.Id);
-                
                 var genres = GetGenres(b.Id);
+                var coverImage = GetCoverImage(b.Id);
 
                 var book = new BookViewModel
                 {
@@ -108,7 +108,8 @@ namespace BookCave.Repositories
                     PublishingYear = b.PublishingYear,
                     Price = b.Price,
                     Author = authors,
-                    Genre = genres
+                    Genre = genres,
+                    CoverImage = coverImage.Img
                 };
 
                 books.Add(book);
@@ -218,21 +219,24 @@ namespace BookCave.Repositories
                            select d).SingleOrDefault();
             return details;
         }
-
+        
+        private CoverImage GetCoverImage(int bookId)
+        {
+            var img = (from ci in _db.CoverImages
+                       where ci.BookId == bookId
+                       select ci).SingleOrDefault();
+            return img;
+        }
 
         public BookDetailViewModel GetBookDetails(int bookId)
         {
             var book = GetBook(bookId);
-
             var authors = GetAuthors(bookId);
-                
             var genres = GetGenres(bookId);
-            
             var publisher = GetPublisher(bookId);
-            
             var details = GetDetails(bookId);
-
             var reviews = GetReviews(bookId);
+            var coverImage = GetCoverImage(bookId);
             
             var bookDetails = new BookDetailViewModel
             {
@@ -248,6 +252,7 @@ namespace BookCave.Repositories
                 PageCount = details.PageCount,
                 Length = details.Length,
                 Review = reviews,
+                CoverImage = coverImage.Img
             };
 
             return bookDetails;
@@ -333,7 +338,6 @@ namespace BookCave.Repositories
             foreach(var b in newReleases)
             {
                 var authors = GetAuthors(b.Id);
-                
                 var genres = GetGenres(b.Id);
 
                 var book = new BookViewModel
@@ -385,8 +389,8 @@ namespace BookCave.Repositories
             foreach(var b in books)
             {
                 var authors = GetAuthors(b.Id);
-                
                 var genres = GetGenres(b.Id);
+                var coverImage = GetCoverImage(b.Id);
 
                 var book = new BookViewModel
                 {
@@ -396,7 +400,8 @@ namespace BookCave.Repositories
                     PublishingYear = b.PublishingYear,
                     Price = b.Price,
                     Author = authors,
-                    Genre = genres
+                    Genre = genres,
+                    CoverImage = coverImage.Img
                 };
 
                 results.Add(book);
@@ -409,6 +414,7 @@ namespace BookCave.Repositories
             var book = GetBook(id);
             var authors = GetAuthors(id);
             var genres = GetGenres(id);
+            var coverImage = GetCoverImage(id);
 
             var retBook = new BookViewModel
             {
@@ -418,7 +424,8 @@ namespace BookCave.Repositories
                 PublishingYear = book.PublishingYear,
                 Price = book.Price,
                 Author = authors,
-                Genre = genres
+                Genre = genres,
+                CoverImage = coverImage.Img
             };
 
                 return retBook;
@@ -428,6 +435,7 @@ namespace BookCave.Repositories
         {
             var book = GetBook(bookId);
             var details = GetDetails(bookId);
+            var coverImage = GetCoverImage(bookId);
 
             var authorIds = (from bac in _db.BookAuthorConnections
                             where bac.BookId == bookId
@@ -457,7 +465,8 @@ namespace BookCave.Repositories
                 Font = details.Font,
                 PublishingYear = book.PublishingYear,
                 PageCount = details.PageCount,
-                Length = details.Length
+                Length = details.Length,
+                CoverImage = coverImage.Img
             };
 
             return bookDetails;

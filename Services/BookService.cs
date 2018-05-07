@@ -121,15 +121,17 @@ namespace BookCave.Services
                 _bookRepo.AddBookGenreConnection(GenreConnection);
             }
 
-            var memoryStream = new MemoryStream();
-            await book.CoverImage.CopyToAsync(memoryStream);
-            var img = new CoverImage
+            using (var memoryStream = new MemoryStream())
             {
-                BookId = bookId,
-                Img = memoryStream.ToArray()
+                await book.CoverImage.CopyToAsync(memoryStream);
+                var img = new CoverImage
+                {
+                    BookId = bookId,
+                    Img = memoryStream.ToArray()
 
-            };
-            _bookRepo.AddImage(img);
+                };
+                _bookRepo.AddImage(img);
+            }
         }
 
         public void AddAuthor(AuthorInputModel author)
