@@ -1,23 +1,27 @@
-@model BookCave.Models.InputModels.BookInputModel
+@model BookCave.Models.InputModels.GenreInputModel
 
 <div class="col-lg-7 col-md-12 offset-lg-2 wow fadeInDown mb-5">
     <div class="card card-cascade wider">
-      <div class="view gradient-card-header blue-gradient p-3">
-        <h4 class="h2 mb-0">Add book</h4>
-      </div>
-      <div class="card-body ">
-        
-        <form>
+        <div class="view gradient-card-header blue-gradient p-3">
+            <h4 class="h2 mb-0">Add book</h4>
+        </div>
+        <div class="card-body ">
 
-            <div class="form-group row d-flex">
-                <p class="label col-md-4 pt-2">Title</p>
-                <div class="col-md-8">
-                    <input class="form-control pt-0" id="Title" type="text">
+            <form asp-action="AddGenre" asp-controller="Manage" method="POST">
+
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Genre Name</p>
+                    <div class="col-md-8">
+                        <input asp-for="Name" class="form-control pt-0" id="Title" type="text">
+                    </div>
                 </div>
-            </div>
 
-        </form>
-        
-      </div>
+                <div>
+                    <input type="submit">
+                </div>
+
+            </form>
+
+        </div>
     </div>
-  </div>
+</div>
