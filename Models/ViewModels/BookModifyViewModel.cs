@@ -12,7 +12,7 @@ namespace BookCave.Models.ViewModels
         public int PublisherId { get; set; } 
         public string Description { get; set; }
         public List<string> Image { get; set; }
-        public string CoverImage { get; set; }
+        public byte[] CoverImage { get; set; }
         public double Price { get; set; }
         public string Type { get; set; }
         public int PublishingYear { get; set; }
