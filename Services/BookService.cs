@@ -26,7 +26,7 @@ namespace BookCave.Services
         {
             return _bookRepo.GetBookDetails(bookId);
         }
-        public BookModifyViewModel GetBookInputModel(int bookId)
+        public BookModifyViewModel GetBookModifyModel(int bookId)
         {
             return _bookRepo.GetBookModify(bookId);
         }
