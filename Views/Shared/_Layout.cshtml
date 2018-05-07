@@ -47,7 +47,11 @@
 
     if (controller == "user")
     {
-        @await Html.PartialAsync("../User/_LoadJavascript.cshtml");
+        <script type="text/javascript" src="~/js/UserControllerJQ.js"></script>
+    }
+    else if (controller == "cart")
+    {
+        <script type="text/javascript" src="~/js/CartControllerJQ.js"></script>
     }
 
   }
