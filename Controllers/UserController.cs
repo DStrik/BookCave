@@ -127,7 +127,7 @@ namespace BookCave.Controllers
 
         public IActionResult FavoriteBook()
         {
-            var data = _bookService.GetBookById(13);
+            var data = _bookService.GetBookById(23);
 
             return Json(data);
         }
