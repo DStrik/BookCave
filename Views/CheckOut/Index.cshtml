@@ -1,68 +1,94 @@
-
+@model BookCave.Models.InputModels.CheckOutInputModel
 
 <div class="container body-container">
-<div class="col mr-3 ml-3 mt-3">
-    <h3 class="mb-0 mt-3">Shipping Information</h3>
+    <form asp-action="Index" asp-controller="CheckOut" method="POST">
+        <div class="row">
+            <div class="col mr-3 ml-3">
+                <h3 class="mb-0 mt-3">Shipping Information</h3>
 
-    <div class="form-check mb-0 mt-3 for-space">
-        <input type="checkbox" class="form-check-input" id="checkbox96847">
-        <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
-    </div>
+                <div class="form-check mb-0 mt-3 for-space">
+                    <input type="checkbox" class="form-check-input" id="checkbox96847">
+                    <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
+                </div>
 
-    <label for="ShippingFirstName">First Name</label>
-    <input type="text" id="ShippingFirstName" class="form-control validate" required>
+                <label for="ShippingFirstName">First Name</label>
+                <input type="text" id="ShippingFirstName" asp-for="ShippingFirstName" class="form-control validate" required>
 
-    <label for="ShippingLastName">Last Name</label>
-    <input type="text" id="ShippingLastName" class="form-control validate" required>
+                <label for="ShippingLastName">Last Name</label>
+                <input type="text" id="ShippingLastName" asp-for="ShippingLastName" class="form-control validate" required>
 
-    <label for="ShippingStreetName">Street</label>
-    <input type="text" id="ShippingStreetName" class="form-control validate" required>
+                <label for="ShippingStreetName">Street</label>
+                <input type="text" id="ShippingStreetName" asp-for="ShippingStreetName" class="form-control validate" required>
 
-    <label for="ShippingHouseNumber">House Number</label>
-    <input type="number" id="ShippingHouseNumber" class="form-control validate" required>
+                <label for="ShippingHouseNumber">House Number</label>
+                <input type="number" id="ShippingHouseNumber" asp-for="ShippingHouseNumber" class="form-control validate" required>
 
-    <label for="ShippingCity">City</label>
-    <input type="text" id="ShippingCity" class="form-control validate" required>
+                <label for="ShippingCity">City</label>
+                <input type="text" id="ShippingCity" asp-for="ShippingCity" class="form-control validate" required>
 
-    <label for="ShippingZipCode">Zip Code</label>
-    <input type="text" id="ShippingZipCode" class="form-control validate" required>
+                <label for="ShippingZipCode">Zip Code</label>
+                <input type="text" id="ShippingZipCode" asp-for="ShippingZipCode" class="form-control validate" required>
 
-    <label for="ShippingCountry">Country</label>
-    <input type="text" id="ShippingCountry" class="form-control validate" required>
-    
-</div>
+                <label for="ShippingCountry">Country</label>
+                <input type="text" id="ShippingCountry" asp-for="ShippingCountry" class="form-control validate" required>
+                
+            </div>
     <!-- Shipping Information -->
 
     <!-- Billing Information -->
-<div class="col mr-3 ml-3"> 
-    <h3 class="mb-0 mt-3">Billing Information</h3>
-        
-    <div class="form-check mb-0 mt-3">
-        <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
-        <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
-    </div>
+            <div class="col mr-3 ml-3"> 
+                <h3 class="mb-0 mt-3">Billing Information</h3>
+                    
+                <div class="form-check mb-0 mt-3">
+                    <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
+                    <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
+                </div>
 
-        <label for="BillingFirstName">First Name</label>
-        <input type="text" id="BillingFirstName" asp-for="BillingFirstName" class="form-control validate billing-information" required>
-    
-        <label for="BillingLastName">Last Name</label>
-        <input type="text" id="BillingLastName" class="form-control validate billing-information" required>
+                <label for="BillingFirstName">First Name</label>
+                <input type="text" id="BillingFirstName" asp-for="BillingFirstName" class="form-control validate billing-information" required>
+            
+                <label for="BillingLastName">Last Name</label>
+                <input type="text" id="BillingLastName" asp-for="BillingLastName" class="form-control validate billing-information" required>
 
-        <label for="BillingStreetName">Street</label>
-        <input type="text" id="BillingStreetName" class="form-control validate billing-information" required>
+                <label for="BillingStreetName">Street</label>
+                <input type="text" id="BillingStreetName" asp-for="BillingStreetName" class="form-control validate billing-information" required>
 
-        <label for="BillingHouseNumber">House Number</label>
-        <input type="number" id="BillingHouseNumber" class="form-control validate billing-information" required>
+                <label for="BillingHouseNumber">House Number</label>
+                <input type="number" id="BillingHouseNumber" asp-for="BillingHouseNumber" class="form-control validate billing-information" required>
 
-        <label for="BillingCity">City</label>
-        <input type="text" id="BillingCity" class="form-control validate billing-information" required>
+                <label for="BillingCity">City</label>
+                <input type="text" id="BillingCity" asp-for="BillingCity" class="form-control validate billing-information" required>
 
-        <label for="BillingZipCode">Zip Code</label>
-        <input type="text" id="BillingZipCode" class="form-control validate billing-information" required>
+                <label for="BillingZipCode">Zip Code</label>
+                <input type="text" id="BillingZipCode" asp-for="BillingZipCode" class="form-control validate billing-information" required>
 
-        <label for="BillingCountry">Country</label>
-        <input type="text" id="BillingCountry" class="form-control validate billing-information" required>
-    </div>
+                <label for="BillingCountry">Country</label>
+                <input type="text" id="BillingCountry" asp-for="BillingCountry" class="form-control validate billing-information" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 mr-3 ml-3">
+                <h3 class="mb-0 mt-3">Payment Information</h3>
+
+                <label for="FullName">Name of Cardholder</label>
+                <input type="text" id="FullName" asp-for="FullName" class="form-control validate" required>
+
+                <label for="CardNumber">CardNumber</label>
+                <input type="text" id="CardNumber" asp-for="CardNumber" class="form-control validate" required>
+                
+                <div class="row">
+                    <div class="col mr-3 ml-3">
+                        <label for="ExpirationDate">Exp. Date</label>
+                        <input type="date" id="ExpirationDate" asp-for="ExpirationDate" class="form-control validate" required> 
+                    </div>
+
+                    <div class="col mr-3 ml-3">
+                        <label for="Cvc">CVC</label>
+                        <input type="text" id="Cvc" asp-for="Cvc" class="form-control validate" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     <!-- Billing Information -->
-</div>
 </div>

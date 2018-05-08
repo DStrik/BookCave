@@ -1,3 +1,4 @@
+using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
@@ -14,9 +15,27 @@ namespace BookCave.Services
         {
             
         }
-        public ShippingBillingViewModel GetShippingBillingViewModel(string id)
+        public CheckOutInputModel GetShippingBillingViewModel(string id)
         {
-            ShippingBillingViewModel data = _userRepo.GetShippingBilling(id);
+            CheckOutInputModel data = new CheckOutInputModel();
+            ShippingBillingViewModel shippingBilling = _userRepo.GetShippingBilling(id);
+            if(shippingBilling != null)
+            {
+                data.ShippingFirstName = shippingBilling.ShippingFirstName;
+                data.ShippingLastName = shippingBilling.ShippingLastName;
+                data.ShippingStreetName = shippingBilling.ShippingStreetName;
+                data.ShippingHouseNumber = shippingBilling.ShippingHouseNumber;
+                data.ShippingCity = shippingBilling.ShippingCity;
+                data.ShippingZipCode = shippingBilling.ShippingZipCode;
+                data.ShippingCountry = shippingBilling.ShippingCountry;
+                data.BillingFirstName = shippingBilling.BillingFirstName;
+                data.BillingLastName = shippingBilling.BillingLastName;
+                data.BillingStreetName = shippingBilling.BillingStreetName;
+                data.BillingHouseNumber = shippingBilling.BillingHouseNumber;
+                data.BillingCity = shippingBilling.BillingCity;
+                data.BillingZipCode = shippingBilling.BillingZipCode;
+                data.BillingCountry = shippingBilling.BillingCountry;
+            }
             return data;
         }
     }
