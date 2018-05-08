@@ -213,12 +213,17 @@ namespace BookCave.Repositories
             return details;
         }
         
-        private CoverImage GetCoverImage(int bookId)
+        private byte[] GetCoverImage(int bookId)
         {
             var img = (from ci in _db.CoverImages
                        where ci.BookId == bookId
                        select ci).SingleOrDefault();
-            return img;
+            if(img == null)
+            {
+                return null;
+            }
+            
+            return img.Img;
         }
 
         public BookDetailViewModel GetBookDetails(int bookId)
@@ -245,7 +250,7 @@ namespace BookCave.Repositories
                 PageCount = details.PageCount,
                 Length = details.Length,
                 Review = reviews,
-                CoverImage = coverImage.Img
+                CoverImage = coverImage
             };
 
             return bookDetails;
@@ -355,14 +360,16 @@ namespace BookCave.Repositories
              var books = (from b in _db.Books
                          where b.Title.Contains(search.Title) || search.Title == null
                          where b.Isbn.ToString().Contains(search.Isbn.ToString()) || search.Isbn == null
-                         select b).ToList();
+                         select b);
             
+
+
             if(search.AuthorIds != null)
             {
                 books = (from bac in _db.BookAuthorConnections
                          join a in search.AuthorIds on bac.AuthorId equals a
                          join b in books on bac.BookId equals b.Id
-                         select b).ToList();
+                         select b);
             }
 
             if(search.GenreIds != null)
@@ -370,14 +377,21 @@ namespace BookCave.Repositories
                 books = (from bgc in _db.BookGenreConnections
                          join g in search.GenreIds on bgc.GenreId equals g
                          join b in books on bgc.BookId equals b.Id
-                         select b).ToList();
+                         select b);
             }
 
             if(search.PublisherIds != null)
             {
                 books = (from b in books
                          join p in search.PublisherIds on b.PublisherId equals p
-                         select b).ToList();
+                         select b);
+            }
+
+            if(search.Types != null)
+            {
+                books = (from b in books
+                         join t in search.Types on b.Type equals t
+                         select b);
             }
 
             var results = new List<BookViewModel>();
@@ -389,6 +403,7 @@ namespace BookCave.Repositories
 
                 var book = new BookViewModel
                 {
+                    BookId = b.Id,
                     Title = b.Title,
                     Isbn = b.Isbn,
                     Type = b.Type,
@@ -396,7 +411,7 @@ namespace BookCave.Repositories
                     Price = b.Price,
                     Author = authors,
                     Genre = genres,
-                    CoverImage = coverImage.Img
+                    CoverImage = coverImage
                 };
 
                 results.Add(book);
@@ -420,7 +435,7 @@ namespace BookCave.Repositories
                 Price = book.Price,
                 Author = authors,
                 Genre = genres,
-                CoverImage = coverImage.Img
+                CoverImage = coverImage
             };
 
                 return retBook;
@@ -466,7 +481,7 @@ namespace BookCave.Repositories
                 PublishingYear = book.PublishingYear,
                 PageCount = details.PageCount,
                 Length = details.Length,
-                CoverImage = coverImage.Img
+                CoverImage = coverImage
             };
 
             return bookDetails;

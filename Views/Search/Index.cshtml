@@ -1,12 +1,11 @@
 @model BookCave.Models.InputModels.SearchInputModel;
 
-<div class="col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5">
+<div class="col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5 container body-container">
     <div class="card card-cascade wider">
         <div class="view gradient-card-header blue-gradient p-3">
-            <h4 class="h2 mb-0">Add book</h4>
+            <h4 class="h2 mb-0">Advanced search</h4>
         </div>
         <div class="card-body">
-
             <form method="POST" asp-action="Results">
 
                 <div class="form-group row d-flex">
@@ -17,20 +16,27 @@
                 </div>
 
                 <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Isbn</p>
+                    <div class="col-md-8">
+                        <input asp-for="Isbn" class="form-control pt-0" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Author(s)</p>
                     <div class="col-md-8">
                         <select asp-for="AuthorIds" id="authorList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
-                        <option value="" disabled selected>Select Author(s)...</option>
-                    </select>
+                            <option value="" disabled selected>Select Author(s)...</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Genre(s)</p>
                     <div class="col-md-8">
                         <select asp-for="GenreIds" id="genreList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
-                        <option value="" disabled selected>Select Genre(s)...</option>
-                    </select>
-                        <button class="btn-save btn btn-primary btn-sm">Save</button>
+                            <option value="" disabled selected>Select Genre(s)...</option>
+                        </select>
                     </div>
                 </div>
 
@@ -38,15 +44,24 @@
                     <p class="label col-md-4 pt-2">Publisher(s)</p>
                     <div class="col-md-8">
                         <select asp-for="PublisherIds" id="publisherList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
-                        <option value="" disabled selected>Select Publisher(s)...</option>
-                    </select>
-                        <button class="btn-save btn btn-primary btn-sm">Save</button>
+                            <option value="" disabled selected>Select Publisher(s)...</option>
+                        </select>
                     </div>
                 </div>
 
+                <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">Format(s)</p>
+                    <div class="col-md-8">
+                        <select asp-for="Types" id="publisherList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
+                            <option value="" disabled selected>Select Format(s)...</option>
+                            <option value="Paperback">Paperback</option>
+                            <option value="Hardcover">Hardcover</option>
+                            <option value="E-book">E-book</option>                            
+                        </select>
+                    </div>
+                </div>
 
                 <div class="text-right">
-                    <button class="btn btn-danger waves-light">Cancel</button>
                     <input type="submit" class="btn success-color-dark waves-light" value="Search!">
                 </div>
 

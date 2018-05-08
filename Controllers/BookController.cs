@@ -20,9 +20,10 @@ namespace BookCave.Controllers
         {
             return View();
         }
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-            return View();
+            var book = _bookService.GetBookDetails(id);
+            return View(book);
         }
     }
 }
