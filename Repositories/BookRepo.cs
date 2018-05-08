@@ -444,11 +444,6 @@ namespace BookCave.Repositories
         public BookModifyInputModel GetBookModify(int bookId)
         {
             var book = GetBook(bookId);
-
-            if (book == null) 
-            {
-                return null;
-            }
             var details = GetDetails(bookId);
             var coverImage = GetCoverImage(bookId);
 
@@ -470,7 +465,7 @@ namespace BookCave.Repositories
             {
                 BookId = book.Id,
                 Title = book.Title,
-                //Isbn = book.Isbn,
+                Isbn = book.Isbn,
                 Author = authorIds,
                 Publisher = publisherId,
                 Genre = genreIds,

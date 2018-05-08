@@ -37,10 +37,10 @@ namespace BookCave.Services
                 Id = book.BookId,
                 Title = book.Title,
                 Isbn = book.Isbn,
-                PublishingYear = book.PublishingYear,
+                PublishingYear = (int)book.PublishingYear,
                 Type = book.Type,
-                Price = book.Price,
-                PublisherId = book.Publisher
+                Price = (double)book.Price,
+                PublisherId = (int)book.Publisher
             };
             
             var details = new BookDetails
@@ -48,8 +48,8 @@ namespace BookCave.Services
                 BookId = book.BookId,
                 Description = book.Description,
                 Font = book.Font,
-                PageCount = book.PageCount,
-                Length = book.Length
+                PageCount = (int)book.PageCount,
+                Length = (int)book.Length
             };
 
             _bookRepo.ModBookDetails(details);
