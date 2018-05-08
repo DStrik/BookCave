@@ -496,7 +496,7 @@ namespace BookCave.Repositories
                 Title = book.Title,
                 Type = book.Type,
                 Price = book.Price,
-                CoverImage = coverImage.Img
+                CoverImage = coverImage
             };
 
                 return retBook;
