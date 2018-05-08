@@ -20,9 +20,13 @@ namespace BookCave.Repositories
             return cartItems;
         }
 
-        public void ChangeQuantity(int BookTypeId, int UserId)
+        public void ChangeQuantity(List<CartItem> items)
         {
-            
+            foreach(CartItem i in items)
+            {
+                _db.Update(i);
+            }
+            _db.SaveChanges();
         }
 
         public void RemoveBook(CartItem item)

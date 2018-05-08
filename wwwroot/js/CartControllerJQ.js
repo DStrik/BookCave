@@ -45,6 +45,18 @@ $(document).ready(function(){
             getTotal();
         });
     }
-    $("#update").click(Update);
-    Update();
+    $("#update").click(function(){
+        var list = [];
+        $.post("/Cart/ChangeQuantity", list, function(data, status){
+            $(".price").each(function() {
+                var input = $(this).parent().parent().next().find("input").val();
+                list.push(input);
+                
+        }).fail(function(err){
+            alert("errorman sorry");
+        });
+
+        });
+        Update();
+    });
 });

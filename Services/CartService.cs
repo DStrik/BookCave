@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
@@ -20,21 +21,26 @@ namespace BookCave.Services
             var booksInCart = new List<BookCartViewModel>();
             var _bookService = new BookService();
             var cartItems = _cartRepo.GetCart(userId);
-            foreach(var id in cartItems)
+            foreach(var item in cartItems)
             {
-                booksInCart.Add(_bookService.GetCartBookById(id));
+                booksInCart.Add(_bookService.GetCartBookById(item));
             }
 
             return booksInCart;
         }
         
-        public void ChangeQuantity(int BookId, int UserId)
+        public void ChangeQuantity(int[] qtys, string userId)
         {
-
+            var cartItems = _cartRepo.GetCart(userId);
+            for(int i = 0; i < qtys.Length; i++)
+            {
+                cartItems[i].Quantity = qtys[i];
+            }
+            _cartRepo.ChangeQuantity(cartItems);
         }
-        public void RemoveBook(int BookId, int UserId)
+        public void RemoveBook(CartItem item)
         {
-
+            _cartRepo.RemoveBook(item);
         }
         public void ClearCart(int UserId)
         {

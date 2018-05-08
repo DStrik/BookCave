@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BookCave.Data.EntityModels;
 using BookCave.Models;
+using BookCave.Models.ViewModels;
 using BookCave.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,8 +28,11 @@ namespace BookCave.Controllers
             
             return View(cartItems);
         }
-        public void ChangeQuantity(int BookId)
+        [HttpPost]
+        public async void ChangeQuantity(int[] qtys)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            _cartService.ChangeQuantity(qtys, user.Id);
 
         }
         public void RemoveBook(int BookId, ApplicationUser user)
