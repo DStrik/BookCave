@@ -29,26 +29,26 @@ namespace BookCave.Controllers
             return View(cartItems);
         }
         [HttpPost]
-        public async void ChangeQuantity(int[] qtys)
+        public async void ChangeQuantity(int[] qtys, int[] cartItemIds)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            _cartService.ChangeQuantity(qtys, user.Id);
+            _cartService.ChangeQuantity(qtys, cartItemIds);
 
         }
-        public void RemoveBook(int BookId, ApplicationUser user)
+        public void RemoveItem(int cartItemId)
         {
-            var book = _bookService.GetBookById(BookId);
+            _cartService.RemoveItem(cartItemId);
         }
         public void ClearCart()
         {
             
         }
-        public void AddToCart(ApplicationUser user, int bookId, int qty)
+        public void AddToCart(ApplicationUser user, int bookId)
         {
                 var item = new CartItem {
                 BookId = bookId,
                 UserId = user.Id,
-                Quantity = qty
+                Quantity = 1
 
                 };
             _cartService.AddToCart(item);

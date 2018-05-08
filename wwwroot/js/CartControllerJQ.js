@@ -52,7 +52,19 @@ $(document).ready(function(){
             var input = $(this).parent().parent().next().find("input").val();
             qtys.push(input);
         });
-        $.post("/Cart/ChangeQuantity", {"qtys": qtys}, function(data, status){
+        var cartItemIds = [];
+        $(".cartItem").each(function(){
+            var id = $(this).text();
+            cartItemIds.push(id);
         });
+
+        $.post("/Cart/ChangeQuantity", {"qtys": qtys, "cartItemIds": cartItemIds}, function(data, status){
+        });
+    });
+    $(".removeBtn").click(function(){
+        var id = Number($(this).parent().next().find("p").text());
+        $.post("/Cart/RemoveItem", {"cartItemId": id}, function(data, status){
+        });
+        await location.reload();
     });
 });

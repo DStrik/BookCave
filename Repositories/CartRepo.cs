@@ -19,6 +19,13 @@ namespace BookCave.Repositories
                             select i).ToList();
             return cartItems;
         }
+        public CartItem GetCartItem(int cartItemId)
+        {
+            var cartItem = (from i in _db.CartItems
+                            where i.Id == cartItemId
+                            select i).SingleOrDefault();
+            return cartItem;
+        }
 
         public void ChangeQuantity(List<CartItem> items)
         {
@@ -29,7 +36,7 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void RemoveBook(CartItem item)
+        public void RemoveItem(CartItem item)
         {
             _db.Remove(item);
             _db.SaveChanges();
