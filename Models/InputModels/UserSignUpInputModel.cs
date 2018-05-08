@@ -14,6 +14,7 @@ namespace BookCave.Models.InputModels
         [Required]
         public string Password { get; set; }
         [Required]
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
         [Required]
         public bool TermsAndConditions { get; set; }
