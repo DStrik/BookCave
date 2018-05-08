@@ -1,4 +1,4 @@
-@model List<BookCave.Models.ViewModels.BookViewModel>
+@model List<BookCave.Models.ViewModels.BookCartViewModel>
 <div class="container pt-5">
     <section class="section my-5">
         <div class="table-responsive">
@@ -31,13 +31,13 @@
                         <td></td>
                         <td>@book.Title</td>
                         <td>@book.Type</td>
-                        <td><span id="price"><strong>@book.Price $</strong></span></td>
+                        <td><strong><span id="price">@book.Price</span> $</strong></td>
                         <td class="md-form text-center text-sm-center">
-                            <button class="btn btn-sm btn-primary btn-rounded waves-effect waves-light">+</button>
-                            <input type="text" class="text-center col-md-1" id="qty" value="1">
-                            <button class="decremntQty btn btn-sm btn-primary btn-rounded waves-effect waves-light">-</button>
+                            <button class="btn btn-sm btn-primary btn-rounded waves-effect waves-light incrementQty">+</button>
+                            <input type="text" class="text-center col-md-1 qty" value="1">
+                            <button class="decremntQty btn btn-sm btn-primary btn-rounded waves-effect waves-light decrementQty">-</button>
                         </td>
-                        <td><strong><p id="amount">@book.Price $</p></strong></td>
+                        <td><strong><span class="amount">@book.Price</span> $</strong></td>
                         <td>
                             <button type="button" class="btn btn-sm btn-danger waves-effect waves-light">X</button>
                         </td>
@@ -52,5 +52,4 @@
         <span></span>
         <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Complete purchase</button>
     </div>
-    <button class="btn btn-primary" id="gaur">hallo</button>
 </div>
