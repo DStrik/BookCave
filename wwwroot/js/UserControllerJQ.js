@@ -88,34 +88,8 @@ $(document).ready(function () {
     // Change shipping and billing modal controller
     $("#changeShippingBilling").click(function (e) { 
         e.preventDefault();
-        console.log("CLICKED!!!!");
-        $.get("GetShippingBillingInformation", function (data, status) {
-            console.log("My data: " + data);
 
-            if(data)
-            {
-                $("#ShippingFirstName").val(data.shippingfirstname);
-                $("#ShippingLastName").val(data.shippinglastname);
-                $("#ShippingStreetName").val(data.shippingstreetname);
-                $("#ShippingHouseNumber").val(data.shippinghousenumber);
-                $("#ShippingCity").val(data.shippingcity);
-                $("#ShippingZipCode").val(data.shippingzipcode);
-                $("#ShippingCountry").val(data.shippingcountry);
-
-                $("#BillingFirstName").val(data.billingfirstname);
-                $("#BillingLastName").val(data.billinglastname);
-                $("#BillingStreetName").val(data.billingstreetname);
-                $("#BillingHouseNumber").val(data.billinghousenumber);
-                $("#BillingCity").val(data.billingcity);
-                $("#BillingZipCode").val(data.billingzipcode);
-                $("#BillingCountry").val(data.billingcountry);
-            }
-            
-            $("#editShippingBilling").modal("show");
-        }).fail(function () {
-            console.log("IN FAIL FUNCTION");
-            $("#editShippingBilling").modal("show");
-        });
+        $("#editShippingBilling").modal("show");
     });
 
     // Function for closing the modal

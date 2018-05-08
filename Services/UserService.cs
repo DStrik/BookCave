@@ -66,12 +66,37 @@ namespace BookCave.Services
                 BillingCounry = input.BillingCountry
             };
 
-            _userRepo.ChangeShippingBillingInformation(write);
+            _userRepo.ChangeShippingBillingInformation(write, id);
         }
         
-        public ShippingBillingViewModel GetShippingBillingInfo(string id)
+        public ShippingBillingInputModel GetShippingBillingInfo(string id)
         {
-            return _userRepo.GetShippingBilling(id);
+            var viewmodel = _userRepo.GetShippingBilling(id);
+
+            if(viewmodel == null)
+            {
+                return null;
+            }
+
+            var inputmodel = new ShippingBillingInputModel() {
+                ShippingFirstName = viewmodel.ShippingFirstName,
+                ShippingLastName = viewmodel.ShippingLastName,
+                ShippingStreetName = viewmodel.ShippingStreetName,
+                ShippingHouseNumber = viewmodel.ShippingHouseNumber,
+                ShippingCity = viewmodel.ShippingCity,
+                ShippingZipCode = viewmodel.ShippingCity,
+                ShippingCountry = viewmodel.ShippingCountry,
+
+                BillingFirstName = viewmodel.BillingFirstName,
+                BillingLastName = viewmodel.BillingLastName,
+                BillingStreetName = viewmodel.BillingStreetName,
+                BillingHouseNumber = viewmodel.BillingHouseNumber,
+                BillingCity = viewmodel.BillingCity,
+                BillingZipCode = viewmodel.BillingCity,
+                BillingCountry = viewmodel.BillingCountry
+            };
+
+            return inputmodel;
         }
 
         public void GetBillingInfo(int id)

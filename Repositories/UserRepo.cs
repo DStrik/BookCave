@@ -25,12 +25,6 @@ namespace BookCave.Repositories
 
         }
 
-        public void ChangeShippingBillingInformation(ShippingBilling input)
-        {
-            _db.Add(input);
-            _db.SaveChanges();
-        }
-
         public List<BookViewModel> GetWishlist(int UserId)
         {
             return new List<BookViewModel>();
@@ -68,6 +62,43 @@ namespace BookCave.Repositories
                               BillingCountry = sb.BillingCounry,
                           }).SingleOrDefault();
             return result;
+        }
+
+        public void ChangeShippingBillingInformation(ShippingBilling input, string id)
+        {
+            if(ContainsShippingBilling(id))
+            {
+                input.Id = ContainingId(id);
+                _db.Update(input);
+            }
+            else
+            {
+                _db.Add(input);
+            }
+
+            _db.SaveChanges();
+
+        }
+
+        private bool ContainsShippingBilling(string id)
+        {
+            var check = _db.ShippingBillingInfo.Any(n => n.UserId == id);
+
+            if(check == true)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private int ContainingId(string id)
+        {
+            var dbId = (from num in _db.ShippingBillingInfo
+                       where num.UserId == id
+                       select num.Id).SingleOrDefault();
+
+            return dbId;
         }
     }
 }
