@@ -15,12 +15,11 @@ namespace BookCave.Services
             _cartRepo = new CartRepo();
         }
 
-        /*public List<BookViewModel> GetCart(int UserId)
-        {
-            //Ehv kóði sem sækir lista af bookId úr cookies/cache köllum hann List<int> cartItem
-            
+        public List<BookViewModel> GetCart(string userId)
+        {            
             var booksInCart = new List<BookViewModel>();
             var _bookService = new BookService();
+            var cartItems = _cartRepo.GetCart(userId);
             foreach(var id in cartItems)
             {
                 booksInCart.Add(_bookService.GetBookById(id));
@@ -28,7 +27,7 @@ namespace BookCave.Services
 
             return booksInCart;
         }
-        */
+        
         public void ChangeQuantity(int BookId, int UserId)
         {
 

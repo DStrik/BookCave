@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BookCave.Data;
+using System.Linq;
 using BookCave.Data.EntityModels;
 
 namespace BookCave.Repositories
@@ -11,9 +12,12 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-        public List<int> GetCart(int UserId)
+        public List<int> GetCart(string UserId)
         {
-            return new List<int>();
+            var cartItems = (from i in _db.CartItems
+                            where i.UserId == UserId
+                            select i.BookId).ToList();
+            return cartItems;
         }
 
         public void ChangeQuantity(int BookTypeId, int UserId)

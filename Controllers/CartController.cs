@@ -12,7 +12,6 @@ namespace BookCave.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private CartService _cartService;
         private BookService _bookService;
-        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         public CartController(UserManager<ApplicationUser> userManager)
         {
@@ -20,11 +19,12 @@ namespace BookCave.Controllers
             _cartService = new CartService();
             _bookService = new BookService();
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var user = GetCurrentUserAsync();
-            var list = _bookService.GetBookList();
-            return View(list);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var cartItems = _cartService.GetCart(user.Id);
+            
+            return View(cartItems);
         }
         public void ChangeQuantity(int BookId)
         {
@@ -38,23 +38,14 @@ namespace BookCave.Controllers
         {
             
         }
-        public void AddToCart(int bookId)
+        public void AddToCart(int bookId, ApplicationUser user)
         {
-            var user = GetCurrentUserAsync();
-            var userId = user?.Id;
-            if(userId == null)
-            {
-
-            }
-            else
-            {
                 var item = new CartItem {
                 BookId = bookId,
-                UserId = userId
+                UserId = user.Id
 
-            };
-           // _cartService.AddToCart(item);
-            }
+                };
+            _cartService.AddToCart(item);
         }
 
     }
