@@ -1,4 +1,4 @@
-@model List<BookCave.Models.ViewModels.BookViewModel>
+@model List<BookCave.Models.ViewModels.BookCartViewModel>
 <div class="container pt-5">
     <section class="section my-5">
         <div class="table-responsive">
@@ -27,17 +27,19 @@
                 <tbody>
                     @foreach(var book in Model)
                     {
-                   <tr>
-                        <td></td>
+                   <tr> 
+                        <div class="imgRow">
+                            <td><img class="img-fluid mt-5 ml-3" src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage)"></td>
+                        </div>
                         <td>@book.Title</td>
                         <td>@book.Type</td>
-                        <td><span id="price"></span></td>
+                        <td><strong><span class="price">@book.Price</span> $</strong></td>
                         <td class="md-form text-center text-sm-center">
-                            <button class="btn btn-sm btn-primary btn-rounded waves-effect waves-light" id="incrementQty">+</button>
-                            <input type="text" class="text-center col-md-1" id="qty" value="1">
-                            <button class="btn btn-sm btn-primary btn-rounded waves-effect waves-light" id="decrementQty">-</button>
+                            <button class="btn btn-sm btn-primary btn-rounded waves-effect waves-light incrementQty">+</button>
+                            <input type="text" class="text-center col-md-1 qty" value="@book.Quantity">
+                            <button class="decremntQty btn btn-sm btn-primary btn-rounded waves-effect waves-light decrementQty">-</button>
                         </td>
-                        <td><span id="amount"></span></td>
+                        <td><strong><span class="amount">@book.Price</span> $</strong></td>
                         <td>
                             <button type="button" class="btn btn-sm btn-danger waves-effect waves-light">X</button>
                         </td>
@@ -47,9 +49,9 @@
             </table>
         </div>
     </section>
-    <div class="container">
-        <h4 class="mt-2">Total</h4>
-        <span></span>
-        <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Complete purchase</button>
+    <div class="form-group">
+        <h4 class="mt-2">Total: <strong><span id="total"></span> $</strong></h4>
+        <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" id="completePurchase">Complete purchase</button>
+        <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" id="update">Update Cart</button>
     </div>
 </div>

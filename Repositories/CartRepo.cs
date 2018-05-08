@@ -12,22 +12,23 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-        public List<int> GetCart(string UserId)
+        public List<CartItem> GetCart(string UserId)
         {
             var cartItems = (from i in _db.CartItems
                             where i.UserId == UserId
-                            select i.BookId).ToList();
+                            select i).ToList();
             return cartItems;
         }
 
         public void ChangeQuantity(int BookTypeId, int UserId)
         {
-
+            
         }
 
-        public void RemoveBook(int BookTypeId, int UserId)
+        public void RemoveBook(CartItem item)
         {
-
+            _db.Remove(item);
+            _db.SaveChanges();
         }
 
         public void ClearCart(int UserId)

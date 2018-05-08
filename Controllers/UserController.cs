@@ -82,45 +82,42 @@ namespace BookCave.Controllers
             return View();
         }
 
-        public IActionResult AccountInformation()
-        {   
-            return View();
+        [HttpGet]
+        public async Task<IActionResult> AccountInformation()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var ret = _userService.GetShippingBillingInfo(user.Id);
+            if(ret == null)
+            {
+                return View();
+            }
+            return View(ret);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> AccountInformation(ShippingBillingInputModel input)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user == null)
+            {
+                return View();
+            }
+
+            _userService.ChangeShippingBillingInfo(input, user.Id);
+
+            return RedirectToAction("AccountInformation", "User");
         }
 
         public IActionResult ChangeImage(string Img)
         {
             return View();
-        }
-
-        [HttpGet]
-        public async Task<ShippingBillingViewModel> GetShippingBillingInformation ()
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            if(user == null)
-            {
-                return null;
-            }
-
-            ShippingBillingViewModel shipBill = _userService.GetShippingBillingInfo(user.Id);
-            if(shipBill == null)
-            {
-                return null;
-            }
-
-            return shipBill;
-        }
-
-        public async Task<IActionResult> ChangeShippingInformation (ShippingInputModel ShipBillInfo)
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-
-            return Ok();
-        }
-
-        [HttpGet]
-        public void ChangeBillingInformation(BillingInputModel BillInfo)
-        {
-            
         }
 
         public void ChangePaymenrInformation(PaymentInputModel PaymentInfo)
@@ -145,14 +142,12 @@ namespace BookCave.Controllers
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if(data.NewPassword == data.ConfirmPassword)
+            var result = await _userManager.ChangePasswordAsync(user, data.OldPassword, data.NewPassword);
+            
+            if(result.Succeeded)
             {
-                var result = await _userManager.ChangePasswordAsync(user, data.OldPassword, data.NewPassword);
-                if(result.Succeeded)
-                {
-                    return Ok();
-                }  
-            }
+                return Ok();
+            }  
 
             return BadRequest();
         }

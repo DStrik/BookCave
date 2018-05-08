@@ -9,5 +9,6 @@ namespace BookCave.Models.InputModels
         public List<int> AuthorIds { get; set; }
         public List<int> GenreIds { get; set; }
         public List<int> PublisherIds { get; set; }
+        public List<string> Types { get; set; }
     }
 }

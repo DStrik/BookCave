@@ -4,8 +4,8 @@ namespace BookCave.Models.ViewModels
     public class PaymentViewModel
     {
         public string FullName { get; set; }
-        public int CardNumber { get; set; }
+        public string CardNumber { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public int Cvc { get; set; }
+        public string Cvc { get; set; }
     }
 }

@@ -85,18 +85,94 @@ $(document).ready(function () {
         });
     });
 
+    // Change shipping and billing modal controller
     $("#changeShippingBilling").click(function (e) { 
         e.preventDefault();
-        $.get("GetShippingBillingInformation", function (data, status) {
-            console.log(data);
-            console.log("Success");
-            $("#editShippingBilling").modal("show");
-        }).fail(function (err) {
-            console.log(err);
-            console.log(data);
-            console.log("FailureAF");
-            $("#editShippingBilling").modal("show");
-        });
+
+        $("#editShippingBilling").modal("show");
     });
+
+    // Function for closing the modal
+    $("#BillShipClose").click(function (e) { 
+        e.preventDefault();
+        $("#editShippingBilling").modal("hide")
+    });
+
+    // Changes the status of the input boxes in billing so that if checked
+    // the input is disabled and information from shipping is copied to
+    // billing in real time
+    $("#checkbox1").change(function (e) { 
+        e.preventDefault();
+
+        if($("input.check-for-bill").is(":checked")) {
+            $(".billing-information").prop("readonly", true);
+            $("#BillingFirstName").val($("#ShippingFirstName").val());
+            $("#BillingLastName").val($("#ShippingLastName").val());
+            $("#BillingStreetName").val($("#ShippingStreetName").val());
+            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
+            $("#BillingCity").val($("#ShippingCity").val());
+            $("#BillingZipCode").val($("#ShippingZipCode").val());
+            $("#BillingCountry").val($("#ShippingCountry").val());
+        }
+    
+        if(!$("input.check-for-bill").is(":checked")) {
+            $(".billing-information").prop("readonly", false);
+        }
+    });
+
+    $("#ShippingFirstName").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingFirstName").val($("#ShippingFirstName").val());
+        }
+    });
+
+    $("#ShippingLastName").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingLastName").val($("#ShippingLastName").val());
+        }
+    });
+
+    $("#ShippingStreetName").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingStreetName").val($("#ShippingStreetName").val());
+        }
+    });
+
+    $("#ShippingHouseNumber").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
+        }
+    });
+
+    $("#ShippingHouseNumber").change(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
+        }
+    });
+
+    $("#ShippingCity").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingCity").val($("#ShippingCity").val());
+        }
+    });
+
+    $("#ShippingZipCode").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingZipCode").val($("#ShippingZipCode").val());
+        }
+    });
+
+    $("#ShippingCountry").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingCountry").val($("#ShippingCountry").val());
+        }
+    });
+
+    /*$("#submitShipBill").click(function (e) { 
+        e.preventDefault();
+        $("#areYouSure").modal("show");
+    }); */
+
+    // End of Modal controller
 });
 

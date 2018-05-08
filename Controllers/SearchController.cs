@@ -23,7 +23,7 @@ namespace BookCave.Controllers
         public IActionResult Results(SearchInputModel search)
         {
             var results = _searchService.GetSearchResults(search);
-            return Json(results);
+            return View(results);
         }
     
         public IActionResult GetAllAuthors()

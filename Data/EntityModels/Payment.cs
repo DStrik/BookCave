@@ -7,8 +7,8 @@ namespace BookCave.Data.EntityModels
         public int Id { get; set; }
         public string UserId { get; set; }
         public string FullName { get; set; }
-        public int CardNumber { get; set; } 
+        public string CardNumber { get; set; } 
         public DateTime ExpirationDate { get; set; }
-        public int Cvc { get; set; }
+        public string Cvc { get; set; }
     }
 }

@@ -194,5 +194,9 @@ namespace BookCave.Services
         {
             _bookRepo.DeleteBook(id);
         }
+        public BookCartViewModel GetCartBookById(CartItem item)
+        {
+            return _bookRepo.GetCartBookById(item);
+        }
     }
 }
