@@ -8,21 +8,21 @@ $(document).ready(function () {
 });
 
 function getAllAuthors() {
-  getSelectList("GetAllAuthors", "#authorList", "Author(s)")
+  getSelectList("search/GetAllAuthors", "#authorList", "Author(s)")
 }
 
 function getAllGenres() {
-  getSelectList("GetAllGenres", "#genreList", "Genre(s)");
+  getSelectList("search/GetAllGenres", "#genreList", "Genre(s)");
 }
 
 function getAllPublishers() {
-  getSelectList("GetAllPublishers", "#publisherList", "Publisher");
+  getSelectList("search/GetAllPublishers", "#publisherList", "Publisher");
 }
 
 // Get get select list from "Controller", put into the Select list, and insert "field name" into the disabled box.
-function getSelectList(callController, selectList, fieldName) {
+function getSelectList(callAction, selectList, fieldName) {
 
-  $.get(callController, function (data, status) {
+  $.get(callAction, function (data, status) {
     $(selectList).material_select('destroy');
     $(selectList).empty();
     $(selectList).append('<option value="" disabled selected>Select ' + fieldName + '...</option>');

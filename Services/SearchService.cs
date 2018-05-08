@@ -14,7 +14,7 @@ namespace BookCave.Services
             _bookRepo = new BookRepo();
         }
         
-        public List<BookViewModel> GetSearchResults(BookInputModel search)
+        public List<BookViewModel> GetSearchResults(SearchInputModel search)
         {
             return _bookRepo.GetSearchResults(search);
         }

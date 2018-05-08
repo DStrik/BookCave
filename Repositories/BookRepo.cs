@@ -350,32 +350,34 @@ namespace BookCave.Repositories
             return books; 
         }
 
-        /*public List<BookViewModel> GetSearchResults(BookInputModel search)
+        public List<BookViewModel> GetSearchResults(SearchInputModel search)
         {
+             var books = (from b in _db.Books
+                         where b.Title.Contains(search.Title) || search.Title == null
+                         where b.Isbn.ToString().Contains(search.Isbn.ToString()) || search.Isbn == null
+                         select b).ToList();
             
-        }*/
-        public List<BookViewModel> GetSearchResults(BookInputModel search)
-        {
-            var books = (from b in _db.Books
-                         where b.Title.Contains(search.Title)
-                         where b.Isbn.ToString().Contains(search.Isbn.ToString())
-                         where b.PublisherId == search.PublisherId || search.PublisherId == 0
-                         select b);
-            
-            if(search.Author.Any())
+            if(search.AuthorIds != null)
             {
                 books = (from bac in _db.BookAuthorConnections
-                         join a in search.Author on bac.AuthorId equals a
+                         join a in search.AuthorIds on bac.AuthorId equals a
                          join b in books on bac.BookId equals b.Id
-                         select b);
+                         select b).ToList();
             }
 
-            if(search.Genre.Any())
+            if(search.GenreIds != null)
             {
                 books = (from bgc in _db.BookGenreConnections
-                         join g in search.Genre on bgc.GenreId equals g
-                         join b in books on bgc.GenreId equals b.Id
-                         select b);
+                         join g in search.GenreIds on bgc.GenreId equals g
+                         join b in books on bgc.BookId equals b.Id
+                         select b).ToList();
+            }
+
+            if(search.PublisherIds != null)
+            {
+                books = (from b in books
+                         join p in search.PublisherIds on b.PublisherId equals p
+                         select b).ToList();
             }
 
             var results = new List<BookViewModel>();
