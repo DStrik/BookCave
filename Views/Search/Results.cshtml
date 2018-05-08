@@ -1,38 +1,37 @@
 @model List<BookCave.Models.ViewModels.BookViewModel>
-<div class="col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5 container body-container">
-    @foreach(var book in Model)
-    {
-        <div class="card narrower">
-            <div class="view overlay">
-                <img class="img-fluid mt-5 ml-3" src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) "
-                <a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">
-                    <div class="mask rgba-whitei-slght"></div>
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="card-text">ISBN: @book.Isbn</p>
-                <h4 class="card-title">@book.Title</h4>
-                <p class="card-text">@book.PublishingYear</p>
-                <p class="card-text">
-                    <span>| </span>
-                    @foreach(var author in book.Author)
-                    {
-                        @author.Name <span> | </span>
-                    }
-                </p>
-                <!-- Genres -->
-                <p class="card-text">
-                    <span>| </span>
-                    @foreach(var genre in book.Genre)
-                    {
-                        @genre.Name<span> | </span>
-                    }
-                </p>
-                <p class="card-text">@book.PublishingYear</p>
-                <p class="card-text">@book.Type</p>
-                <h4 class="list-inline-item">$ @book.Price</h4>
-                <a class="btn btn-unique">Add to cart!</a>  
+    <div class="row col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5 container body-container elflow">
+        @foreach(var book in Model) {
+        <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch elflow">
+            <div class="card card-ecommerce">
+                <div class="row view overlay justify-content-center">
+                    <img class="card-img-top thumb " src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) ">
+                    <a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">
+                        <div class="mask rgba-whitei-slght"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h6 class="col-12 card-title mb-2">@book.Title</h6>
+                            <p class="col-12 card-text mb-1">
+                                @foreach(var author in book.Author) 
+                                { 
+                                    if(author != book.Author.Last())
+                                    {
+                                        <span>@author.Name, </span>
+                                    }
+                                    else
+                                    {
+                                        <span>@author.Name</span>
+                                    }
+                                }    
+                            </p>
+                            <p class="col-12 card-text mb-1">@book.Type</p>
+                            <p class="col-12 card-text mb-1">@book.Rating</p>
+                            <h4 class="col-12 mb-0">$ @book.Price</h4>
+                            <a class="btn btn-unique">Add to cart!</a>
+                    </div>
+                </div>
             </div>
         </div>
-    }
-</div>
+        }
+    </div>

@@ -45,6 +45,14 @@ $(document).ready(function(){
             getTotal();
         });
     }
-    $("#update").click(Update);
-    Update();
+    $("#update").click(function(){
+        Update();
+        var qtys = [];
+        $(".price").each(function() {
+            var input = $(this).parent().parent().next().find("input").val();
+            qtys.push(input);
+        });
+        $.post("/Cart/ChangeQuantity", {"qtys": qtys}, function(data, status){
+        });
+    });
 });

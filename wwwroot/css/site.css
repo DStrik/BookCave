@@ -176,3 +176,15 @@ header,
     width: 100%;
     height: auto;
 }
+
+.thumb {
+    max-height: 200px;
+    width: auto;
+    max-width: 200px;
+}
+
+.elflow {
+    position: relative;
+    text-overflow: hidden !important;
+    white-space: nowrap !important; 
+}
