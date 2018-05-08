@@ -427,31 +427,36 @@ namespace BookCave.Repositories
         public BookModifyViewModel GetBookModify(int bookId)
         {
             var book = GetBook(bookId);
+
+            if (book == null) 
+            {
+                return null;
+            }
             var details = GetDetails(bookId);
             var coverImage = GetCoverImage(bookId);
 
-            var authorIds = (from bac in _db.BookAuthorConnections
+            var authors = (from bac in _db.BookAuthorConnections
                             where bac.BookId == bookId
                             join a in _db.Authors on bac.AuthorId equals a.Id
-                            select a.Id).ToList(); 
+                            select a.Name).ToList(); 
                 
-            var genreIds = (from bgc in _db.BookGenreConnections
+            var genres = (from bgc in _db.BookGenreConnections
                           where bgc.BookId == bookId
                           join g in _db.Genres on bgc.GenreId equals g.Id
-                          select g.Id).ToList();
+                          select g.Name).ToList();
             
-            var publisherId = (from p in _db.Publishers
+            var publisher = (from p in _db.Publishers
                              where p.Id == book.PublisherId
-                             select p.Id).SingleOrDefault();
+                             select p.Name).SingleOrDefault();
 
             var bookDetails = new BookModifyViewModel
             {
                 BookId = book.Id,
                 Title = book.Title,
                 Isbn = book.Isbn,
-                Author = authorIds,
-                PublisherId = publisherId,
-                Genre = genreIds,
+                Author = authors,
+                Publisher = publisher,
+                Genre = genres,
                 Description = details.Description,
                 Price = book.Price,
                 Type = book.Type,

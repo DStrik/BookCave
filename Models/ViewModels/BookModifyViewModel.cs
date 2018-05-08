@@ -7,9 +7,9 @@ namespace BookCave.Models.ViewModels
         public int BookId { get; set; }
         public string Title { get; set; }
         public int Isbn { get; set; }
-        public List<int> Author { get; set; }
-        public List<int> Genre { get; set; }
-        public int PublisherId { get; set; } 
+        public List<string> Author { get; set; }
+        public List<string> Genre { get; set; }
+        public string Publisher { get; set; } 
         public string Description { get; set; }
         public List<string> Image { get; set; }
         public byte[] CoverImage { get; set; }

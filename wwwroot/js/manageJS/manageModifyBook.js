@@ -21,15 +21,15 @@ $('#refreshPublishers').click(function () {
 })
 
 function getAllAuthors() {
-  getSelectList("GetAllAuthors", "#authorList", "Author(s)");
+  getSelectList("../GetAllAuthors", "#authorList", "Author(s)");
 }
 
 function getAllGenres() {
-  getSelectList("GetAllGenres", "#genreList", "Genre(s)");
+  getSelectList("../GetAllGenres", "#genreList", "Genre(s)");
 }
 
 function getAllPublishers() {
-  getSelectList("GetAllPublishers", "#publisherList", "Publisher");
+  getSelectList("../GetAllPublishers", "#publisherList", "Publisher");
 }
 
 // Get get select list from "Controller" Action, put into the Select list, and insert "field name" into the disabled box.

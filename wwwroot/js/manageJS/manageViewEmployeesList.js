@@ -2,10 +2,10 @@
 // Initialize select list
 $(document).ready(function () {
 
-    var table = $('#viewBooksTable').DataTable({
+    var table = $('#viewEmployeesTable').DataTable({
         "processing": true,
         "serverSide": false,
-        "ajax": { "url": "getBookList", "dataSrc": "" },
+        "ajax": { "url": "getEmployeesList", "dataSrc": "" },
         "scrollX": "100%",
         "columns": [
             { "data": "bookId" },
