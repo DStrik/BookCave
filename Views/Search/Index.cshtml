@@ -1,13 +1,13 @@
-@model BookCave.Models.InputModels.BookInputModel;
+@model BookCave.Models.InputModels.SearchInputModel;
 
 <div class="col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5">
     <div class="card card-cascade wider">
         <div class="view gradient-card-header blue-gradient p-3">
             <h4 class="h2 mb-0">Add book</h4>
         </div>
-        <div class="card-body ">
+        <div class="card-body">
 
-            <form method="POST">
+            <form method="POST" asp-action="Results">
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Title</p>
@@ -18,7 +18,7 @@
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Author(s)</p>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <select asp-for="AuthorIds" id="authorList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
                         <option value="" disabled selected>Select Author(s)...</option>
                     </select>
@@ -26,7 +26,7 @@
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Genre(s)</p>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <select asp-for="GenreIds" id="genreList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
                         <option value="" disabled selected>Select Genre(s)...</option>
                     </select>
@@ -36,7 +36,7 @@
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Publisher(s)</p>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <select asp-for="PublisherIds" id="publisherList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
                         <option value="" disabled selected>Select Publisher(s)...</option>
                     </select>
