@@ -5,6 +5,8 @@ namespace BookCave.Models.ViewModels
     public class BookDetailViewModel
     {
         public string Title { get; set; }
+
+        public string Isbn { get; set; }
         public List<AuthorViewModel> Author { get; set; }
         public PublisherViewModel Publisher { get; set; }
         public List<GenreViewModel> Genre { get; set; }

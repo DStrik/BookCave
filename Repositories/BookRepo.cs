@@ -470,7 +470,7 @@ namespace BookCave.Repositories
             {
                 BookId = book.Id,
                 Title = book.Title,
-                Isbn = book.Isbn,
+                //Isbn = book.Isbn,
                 Author = authorIds,
                 Publisher = publisherId,
                 Genre = genreIds,
