@@ -226,6 +226,15 @@ namespace BookCave.Repositories
             return img.Img;
         }
 
+        private double GetRating(int bookId)
+        {
+            var rating = (from r in _db.BookReviews
+                          where r.BookId == bookId
+                          select r.Grade).DefaultIfEmpty(0);
+                          
+            return rating.Average();
+        }
+
         public BookDetailViewModel GetBookDetails(int bookId)
         {
             var book = GetBook(bookId);
@@ -336,17 +345,15 @@ namespace BookCave.Repositories
             foreach(var b in newReleases)
             {
                 var authors = GetAuthors(b.Id);
-                var genres = GetGenres(b.Id);
+                var rating = GetRating(b.Id);
 
                 var book = new BookViewModel
                 {
                     Title = b.Title,
-                    Isbn = b.Isbn,
                     Type = b.Type,
-                    PublishingYear = b.PublishingYear,
                     Price = b.Price,
                     Author = authors,
-                    Genre = genres
+                    Rating = rating
                 };
 
                 books.Add(book);
@@ -398,20 +405,18 @@ namespace BookCave.Repositories
             foreach(var b in books)
             {
                 var authors = GetAuthors(b.Id);
-                var genres = GetGenres(b.Id);
                 var coverImage = GetCoverImage(b.Id);
+                var rating = GetRating(b.Id);
 
                 var book = new BookViewModel
                 {
                     BookId = b.Id,
                     Title = b.Title,
-                    Isbn = b.Isbn,
                     Type = b.Type,
-                    PublishingYear = b.PublishingYear,
                     Price = b.Price,
                     Author = authors,
-                    Genre = genres,
-                    CoverImage = coverImage
+                    CoverImage = coverImage,
+                    Rating = rating
                 };
 
                 results.Add(book);
@@ -423,19 +428,17 @@ namespace BookCave.Repositories
         {
             var book = GetBook(id);
             var authors = GetAuthors(id);
-            var genres = GetGenres(id);
             var coverImage = GetCoverImage(id);
-
+            var rating = GetRating(id);
             var retBook = new BookViewModel
             {
+                BookId = id,
                 Title = book.Title,
-                Isbn = book.Isbn,
                 Type = book.Type,
-                PublishingYear = book.PublishingYear,
                 Price = book.Price,
                 Author = authors,
-                Genre = genres,
-                CoverImage = coverImage
+                CoverImage = coverImage,
+                Rating = rating
             };
 
                 return retBook;
