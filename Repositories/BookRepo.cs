@@ -459,11 +459,6 @@ namespace BookCave.Repositories
         public BookModifyInputModel GetBookModify(int bookId)
         {
             var book = GetBook(bookId);
-
-            if (book == null) 
-            {
-                return null;
-            }
             var details = GetDetails(bookId);
             var coverImage = GetCoverImageAsync(bookId);
 

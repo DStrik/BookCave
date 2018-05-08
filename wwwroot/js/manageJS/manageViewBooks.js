@@ -20,10 +20,10 @@ $(document).ready(function () {
                 "searchable": false,
                 "autoSize": true,
                 "render": function (data, type, row, meta) {
-                    var markup = '<div class="text-center"><button class="btn btn-sm btn-danger" onclick="giveModalBookData(\'' 
-                                + data.title + '\', ' + data.bookId + ')" data-toggle="modal" data-target="#confirmDelete" value="' 
-                                + data.bookId + '">Delete</button><button class="btn btn-sm btn-warning" href="' 
-                                + data + '">Modify</button> </div>';
+                    var markup = '<div class="text-center"><button class="btn btn-sm btn-danger" onclick="giveModalBookData(\''
+                        + data.title + '\', ' + data.bookId + ')" data-toggle="modal" data-target="#confirmDelete" value="'
+                        + data.bookId + '">Delete</button>'
+                        + '<a class="btn btn-sm btn-warning" onclick="redirectToModifyById(' + data.bookId + ')">Modify</a> </div>';
                     return (markup);
                 }
             }
@@ -49,7 +49,7 @@ $(document).ready(function () {
 function giveModalBookData(title, id) {
     $("#modalText span").text(title);
     $("#yesDelete").click(function () {
-        
+
         $
         $.post("RemoveBookById", { "id": id }, function (id) {
             {
@@ -59,6 +59,10 @@ function giveModalBookData(title, id) {
             alert("error lol");
         });
     });
+}
+
+function redirectToModifyById(id){
+    $.redirect("/Manage/modifybookbyid/" + id);
 }
 
 
