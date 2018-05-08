@@ -486,16 +486,17 @@ namespace BookCave.Repositories
 
             return bookDetails;
         }
-            public BookCartViewModel GetCartBookById(int id)
+            public BookCartViewModel GetCartBookById(CartItem item)
         {
-            var book = GetBook(id);
-            var coverImage = GetCoverImage(id);
+            var book = GetBook(item.BookId);
+            var coverImage = GetCoverImage(item.BookId);
 
             var retBook = new BookCartViewModel
             {
                 Title = book.Title,
                 Type = book.Type,
                 Price = book.Price,
+                Quantity = item.Quantity,
                 CoverImage = coverImage
             };
 
