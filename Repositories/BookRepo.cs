@@ -492,7 +492,8 @@ namespace BookCave.Repositories
                 Type = book.Type,
                 Price = book.Price,
                 Quantity = item.Quantity,
-                CoverImage = coverImage
+                CoverImage = coverImage,
+                CartItemId = item.Id
             };
 
                 return retBook;
