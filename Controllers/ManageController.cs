@@ -188,7 +188,7 @@ namespace BookCave.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Manager");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Error()
