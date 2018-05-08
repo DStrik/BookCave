@@ -46,17 +46,13 @@ $(document).ready(function(){
         });
     }
     $("#update").click(function(){
-        var list = [];
-        $.post("/Cart/ChangeQuantity", list, function(data, status){
-            $(".price").each(function() {
-                var input = $(this).parent().parent().next().find("input").val();
-                list.push(input);
-                
-        }).fail(function(err){
-            alert("errorman sorry");
-        });
-
-        });
         Update();
+        var qtys = [];
+        $(".price").each(function() {
+            var input = $(this).parent().parent().next().find("input").val();
+            qtys.push(input);
+        });
+        $.post("/Cart/ChangeQuantity", {"qtys": qtys}, function(data, status){
+        });
     });
 });
