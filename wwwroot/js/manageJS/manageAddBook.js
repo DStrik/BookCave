@@ -5,6 +5,12 @@ $(document).ready(function () {
   getAllAuthors();
   getAllGenres();
   getAllPublishers();
+
+  if  ($("#typeAudioBook").is(":checked")){
+    toggleAudioAndOthers("audiobook");
+  } else {
+    toggleAudioAndOthers("other");
+  }
 });
 
 
@@ -41,8 +47,28 @@ function getSelectList(callAction, selectList, fieldName) {
     $.each(data, function (i, j) {
       $(selectList).append('<option value="' + j.id + '">' + j.name + '</option>');
     })
+    $(selectList).append('<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>');
     $(selectList).material_select();
   }).fail(function (err) {
-    alert("Error has occured!");
+    alert("Error has occured! Selection field for " + fieldName + " could not be obtained!");
   });
+}
+
+
+$("#typeSelector input").click(function (e) {
+  if ($(this).val() == "Audio Book") {
+    toggleAudioAndOthers("audiobook");
+  } else {
+    toggleAudioAndOthers("other");
+  }
+});
+
+function toggleAudioAndOthers(setToType) {
+  if (setToType == "audiobook") {
+    $("#pageCount").prop("disabled", true);
+    $("#audioLength").prop("disabled", false);
+  } else {
+    $("#audioLength").prop("disabled", true);
+    $("#pageCount").prop("disabled", false);
+  }
 }

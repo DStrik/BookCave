@@ -1,5 +1,5 @@
 // Material Select Initialization
-// Initialize select list
+// Initialize and fill out the table.
 $(document).ready(function () {
 
     var table = $('#viewBooksTable').DataTable({
