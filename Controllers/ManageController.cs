@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using BookCave.Data;
 using BookCave.Services;
 using BookCave.Data.EntityModels;
+using System.Security.Claims;
 
 namespace BookCave.Controllers
 {
@@ -168,6 +169,8 @@ namespace BookCave.Controllers
             if(result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, model.UserType);
+                //Það þarf að laga AddEmployee.cshtml
+                await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 return RedirectToAction("AddEmployee");
             }
             return View();
