@@ -1,5 +1,5 @@
 // Material Select Initialization
-// Initialize select list
+// Initialize and fill out the table.
 $(document).ready(function () {
 
     var table = $('#viewBooksTable').DataTable({
@@ -20,7 +20,11 @@ $(document).ready(function () {
                 "searchable": false,
                 "autoSize": true,
                 "render": function (data, type, row, meta) {
-                    return '<div class="text-center"><button class="btn btn-sm btn-danger" onclick="giveModalBookData(\'' + data.title + '\', ' + data.bookId + ')" data-toggle="modal" data-target="#confirmDelete" value="' + data.bookId + '">Delete</button><button class="btn btn-sm btn-warning" href="' + data + '">Modify</button> </div>';
+                    var markup = '<div class="text-center"><button class="btn btn-sm btn-danger" onclick="giveModalBookData(\'' 
+                                + data.title + '\', ' + data.bookId + ')" data-toggle="modal" data-target="#confirmDelete" value="' 
+                                + data.bookId + '">Delete</button><button class="btn btn-sm btn-warning" href="' 
+                                + data + '">Modify</button> </div>';
+                    return (markup);
                 }
             }
         ]
@@ -40,11 +44,13 @@ $(document).ready(function () {
     $('.dataTables_filter').find('label').remove();
 });
 
+
+
 function giveModalBookData(title, id) {
     $("#modalText span").text(title);
-
     $("#yesDelete").click(function () {
-        alert(id);
+        
+        $
         $.post("RemoveBookById", { "id": id }, function (id) {
             {
                 alert("deleted " + title + '!');
@@ -54,3 +60,5 @@ function giveModalBookData(title, id) {
         });
     });
 }
+
+

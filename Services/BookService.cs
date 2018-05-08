@@ -26,7 +26,7 @@ namespace BookCave.Services
         {
             return _bookRepo.GetBookDetails(bookId);
         }
-        public BookModifyViewModel GetBookModifyModel(int bookId)
+        public BookModifyInputModel GetBookModifyModel(int bookId)
         {
             return _bookRepo.GetBookModify(bookId);
         }
@@ -40,7 +40,7 @@ namespace BookCave.Services
                 PublishingYear = book.PublishingYear,
                 Type = book.Type,
                 Price = book.Price,
-                PublisherId = book.PublisherId
+                PublisherId = book.Publisher
             };
             
             var details = new BookDetails
@@ -81,10 +81,10 @@ namespace BookCave.Services
             {
                 Title = book.Title,
                 Isbn = book.Isbn,
-                PublishingYear = book.PublishingYear,
+                PublishingYear = (int)book.PublishingYear,
                 Type = book.Type,
-                Price = book.Price,
-                PublisherId = book.PublisherId
+                Price = (double)book.Price,
+                PublisherId = (int)book.PublisherId
             };
 
             var bookId = _bookRepo.AddBook(bookEntity);
@@ -94,8 +94,8 @@ namespace BookCave.Services
                 BookId = bookId,
                 Description = book.Description,
                 Font = book.Font,
-                PageCount = book.PageCount,
-                Length = book.Length
+                PageCount = (int)book.PageCount,
+                Length = (int)book.Length
             };
 
             _bookRepo.AddBookDetails(details);

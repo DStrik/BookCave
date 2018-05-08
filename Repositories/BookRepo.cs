@@ -441,7 +441,7 @@ namespace BookCave.Repositories
                 return retBook;
         }
 
-        public BookModifyViewModel GetBookModify(int bookId)
+        public BookModifyInputModel GetBookModify(int bookId)
         {
             var book = GetBook(bookId);
 
@@ -452,28 +452,28 @@ namespace BookCave.Repositories
             var details = GetDetails(bookId);
             var coverImage = GetCoverImage(bookId);
 
-            var authors = (from bac in _db.BookAuthorConnections
+            var authorIds = (from bac in _db.BookAuthorConnections
                             where bac.BookId == bookId
                             join a in _db.Authors on bac.AuthorId equals a.Id
-                            select a.Name).ToList(); 
+                            select a.Id).ToList(); 
                 
-            var genres = (from bgc in _db.BookGenreConnections
+            var genreIds = (from bgc in _db.BookGenreConnections
                           where bgc.BookId == bookId
                           join g in _db.Genres on bgc.GenreId equals g.Id
-                          select g.Name).ToList();
+                          select g.Id).ToList();
             
-            var publisher = (from p in _db.Publishers
+            var publisherId = (from p in _db.Publishers
                              where p.Id == book.PublisherId
-                             select p.Name).SingleOrDefault();
+                             select p.Id).SingleOrDefault();
 
-            var bookDetails = new BookModifyViewModel
+            var bookDetails = new BookModifyInputModel
             {
                 BookId = book.Id,
                 Title = book.Title,
-                Isbn = book.Isbn,
-                Author = authors,
-                Publisher = publisher,
-                Genre = genres,
+                //Isbn = book.Isbn,
+                Author = authorIds,
+                Publisher = publisherId,
+                Genre = genreIds,
                 Description = details.Description,
                 Price = book.Price,
                 Type = book.Type,

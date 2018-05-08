@@ -1,6 +1,6 @@
-@model BookCave.Models.ViewModels.BookModifyViewModel
+@model BookCave.Models.ViewModels.BookModifyInputModel
 
-<div class="col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5">
+<div class="col-lg-8 col-md-12 offset-lg-2 animated fadeIn mb-5">
     <div class="card card-cascade wider">
         <div class="view gradient-card-header blue-gradient p-3">
             <h4 class="h2 mb-0">Modify book</h4>
@@ -11,18 +11,23 @@
 
                 <div class="form-inline mt-2 mb-4 row" id="typeSelector">
                     <div class="form-check col">
-                        <input class="form-check-input" asp-for="Type" type="radio" id="typePaperback" checked="checked" value="Paperback">
+                        <input class="form-check-input" asp-for="Type" type="radio" id="typePaperback" checked="checked" value="Paperback" required>
                         <label class="form-check-label" for="typePaperback">Paperback</label>
                     </div>
 
                     <div class="form-check col">
-                        <input class="form-check-input" asp-for="Type" type="radio" id="typeHardcover" value="Hardcover">
+                        <input class="form-check-input" asp-for="Type" type="radio" id="typeHardcover" value="Hardcover" required>
                         <label class="form-check-label" for="typeHardcover">Hardcover</label>
                     </div>
 
                     <div class="form-check col">
-                        <input class="form-check-input" asp-for="Type" type="radio" id="typeEbook" value="E-book">
-                        <label class="form-check-label" for="typeEbook">E-book</label>
+                        <input class="form-check-input" asp-for="Type" type="radio" id="typeEbook" value="E-Book" required>
+                        <label class="form-check-label" for="typeEbook">E-Book</label>
+                    </div>
+
+                    <div class="form-check col">
+                        <input class="form-check-input" asp-for="Type" type="radio" id="typeAudioBook" value="Audio Book" required>
+                        <label class="form-check-label" for="typeAudioBook">Audio Book</label>
                     </div>
                 </div>
 
@@ -42,26 +47,16 @@
 
                 <hr>
                 <div class="text-center">
-                    <h4>The following fields must be refilled!</h4>
+                    <h4>Ensure the following are correct!</h4>
                 </div>
 
                 <div>
                     <small>Previous Author(s):</small>
-                    <p>
-                        <small>
-                            @foreach(var author in Model.Author) 
-                            {
-                                @if (Model.Author.IndexOf(author) == Model.Author.Count - 1) 
-                                {
-                                    <span>"@author"</span>
-                                }
-                                else
-                                {
-                                    <span>"@author", </span>
-                                }
-                            }
-                            </small>
-                    </p>
+                    <small id="oldAuthorList"></small>
+                    <div id="oldAuthor" class="d-none">
+                        @foreach(var author in Model.Author) {
+                        <span>@author</span> }
+                    </div>
                 </div>
 
 
@@ -71,30 +66,20 @@
                         <select asp-for="Author" id="authorList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
                         <option value="" disabled selected>Select Author(s)...</option>
                     </select>
-                        <button class="btn-save btn btn-primary btn-sm">Save</button>
+                        <button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-outline-info waves-effect btn-sm" id="refreshAuthors">Refresh</a>
+                        <a class="btn btn-outline-warning waves-effect btn-sm" id="refreshAuthors">Undo</a>
                     </div>
                 </div>
 
                 <div>
                     <small>Previous Genre(s):</small>
-                    <p>
-                        <small>
-                            @foreach(var genre in Model.Genre) 
-                            {
-                                @if (Model.Genre.IndexOf(genre) == Model.Genre.Count - 1) 
-                                {
-                                    <span>"@genre"</span>
-                                }
-                                else
-                                {
-                                    <span>"@genre", </span>
-                                }
-                            }
-                            </small>
-                    </p>
+                    <small id="oldGenreList"></small>
+                    <div id="oldGenre" class="d-none">
+                        @foreach(var genre in Model.Genre) {
+                        <span>@genre</span> }
+                    </div>
                 </div>
 
                 <div class="form-group row d-flex">
@@ -103,20 +88,19 @@
                         <select asp-for="Genre" id="genreList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
                         <option value="" disabled selected>Select Genre(s)...</option>
                     </select>
-                        <button class="btn-save btn btn-primary btn-sm">Save</button>
+                        <button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-outline-info waves-effect btn-sm ">Refresh</a>
+                        <a class="btn btn-outline-warning waves-effect btn-sm" id="refreshGenres">Undo</a>
                     </div>
                 </div>
 
                 <div>
                     <small>Previous Publisher:</small>
-                    <p>
-                        <small>
-                            @Model.Publisher
-                        </small>
-                    </p>
+                    <small id="oldPublisherList"></small>
+                    <div id="oldPublisher" class="d-none">
+                        <span>@Model.Publisher</span>
+                    </div>
                 </div>
 
                 <div class="form-group row d-flex">
@@ -125,10 +109,10 @@
                         <select asp-for="Publisher" id="publisherList" class="mdb-select colorful-select dropdown-primary" searchable="Search here..">
                         <option value="" disabled selected>Select Publisher...</option>
                     </select>
-                        <button class="btn-save btn btn-primary btn-sm">Save</button>
+                        <button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-outline-info waves-effect btn-sm ">Refresh</a>
+                        <a class="btn btn-outline-warning waves-effect btn-sm" id="refreshPublisher">Undo</a>
                     </div>
                 </div>
 
@@ -147,14 +131,14 @@
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Page count</p>
                     <div class="col-md-8">
-                        <input asp-for="PageCount" class="form-control pt-0" type="text">
+                        <input id="pageCount" asp-for="PageCount" class="form-control pt-0" type="text" required>
                     </div>
                 </div>
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Audio Length</p>
                     <div class="col-md-8">
-                        <input asp-for="Length" class="form-control pt-0" type="text">
+                        <input id="audioLength" asp-for="Length" class="form-control pt-0" type="text" required>
                     </div>
                 </div>
 
