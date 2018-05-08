@@ -6,7 +6,8 @@ namespace BookCave.Models.InputModels
     {
         public string FullName { get; set; }
         public string CardNumber { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public string ExpirationMonth { get; set; }
+        public string ExpirationYear { get; set; }
         public string Cvc { get; set; }
     }
 }
