@@ -486,5 +486,20 @@ namespace BookCave.Repositories
 
             return bookDetails;
         }
+            public BookCartViewModel GetCartBookById(int id)
+        {
+            var book = GetBook(id);
+            var coverImage = GetCoverImage(id);
+
+            var retBook = new BookCartViewModel
+            {
+                Title = book.Title,
+                Type = book.Type,
+                Price = book.Price,
+                CoverImage = coverImage.Img
+            };
+
+                return retBook;
+        }
     }
 }

@@ -15,14 +15,14 @@ namespace BookCave.Services
             _cartRepo = new CartRepo();
         }
 
-        public List<BookViewModel> GetCart(string userId)
+        public List<BookCartViewModel> GetCart(string userId)
         {            
-            var booksInCart = new List<BookViewModel>();
+            var booksInCart = new List<BookCartViewModel>();
             var _bookService = new BookService();
             var cartItems = _cartRepo.GetCart(userId);
             foreach(var id in cartItems)
             {
-                booksInCart.Add(_bookService.GetBookById(id));
+                booksInCart.Add(_bookService.GetCartBookById(id));
             }
 
             return booksInCart;

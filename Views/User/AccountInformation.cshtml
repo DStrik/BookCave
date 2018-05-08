@@ -1,3 +1,5 @@
+
+
 <div class="container body-container">
     <!-- Row 1 -->
     <div class="row justify-content-center">
@@ -227,96 +229,95 @@
 <!-- MODAL Change shipping and billing -->
 <div class="modal fade" id="editShippingBilling" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <form asp-controller="" asp-action="">
+            <div class="modal-content">
+                <!-- Modal row 1 -->
+                <div class="row">
 
-            <div class="row">
-                <!-- Shipping Information -->
-                <div class="col mr-3 ml-3">
-                    <h3 class="mb-0 mt-3">Shipping Information</h3>
-                    <div class="md-form">
-                        <input type="text" id="ShippingFirstName" class="form-control validate">
+                    <!-- Shipping Information -->
+                    <div class="col mr-3 ml-3">
+                        <h3 class="mb-0 mt-3">Shipping Information</h3>
+
+                        <div class="form-check mb-0 mt-3 for-space">
+                            <input type="checkbox" class="form-check-input" id="checkbox96847">
+                            <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
+                        </div>
+
                         <label for="ShippingFirstName">First Name</label>
-                    </div>
-
-                    <div class="md-form">
-                        <input type="text" id="ShippingLastName" class="form-control validate">
+                        <input type="text" id="ShippingFirstName" class="form-control validate" required>
+                    
                         <label for="ShippingLastName">Last Name</label>
-                    </div>
-
-                    <div class="md-form">
-                        <input type="text" id="ShippingStreetName" class="form-control validate">
+                        <input type="text" id="ShippingLastName" class="form-control validate" required>
+                    
                         <label for="ShippingStreetName">Street</label>
-                    </div>
-
-                    <div class="md-form">
-                        <input type="number" id="ShippingHouseNumber" class="form-control validate">
+                        <input type="text" id="ShippingStreetName" class="form-control validate" required>
+                    
                         <label for="ShippingHouseNumber">House Number</label>
-                    </div>
-
-                    <div class="md-form">
-                        <input type="text" id="ShippingCity" class="form-control validate">
+                        <input type="number" id="ShippingHouseNumber" class="form-control validate" required>
+                    
                         <label for="ShippingCity">City</label>
-                    </div>
+                        <input type="text" id="ShippingCity" class="form-control validate" required>
 
-                    <div class="md-form">
-                        <input type="text" id="ShippingZipCode" class="form-control validate">
                         <label for="ShippingZipCode">Zip Code</label>
-                    </div>
+                        <input type="text" id="ShippingZipCode" class="form-control validate" required>
 
-                    <div class="md-form">
-                        <input type="text" id="ShippingCountry" class="form-control validate">
                         <label for="ShippingCountry">Country</label>
+                        <input type="text" id="ShippingCountry" class="form-control validate" required>
+                        
                     </div>
+                    <!-- Shipping Information -->
+
+                    <!-- Billing Information -->
+                    <div class="col mr-3 ml-3"> 
+                        <h3 class="mb-0 mt-3">Billing Information</h3>
+                            
+                        <div class="form-check mb-0 mt-3">
+                            <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
+                            <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
+                        </div>
+
+                            <label for="BillingFirstName">First Name</label>
+                            <input type="text" id="BillingFirstName" class="form-control validate billing-information" required>
+                        
+                            <label for="BillingLastName">Last Name</label>
+                            <input type="text" id="BillingLastName" class="form-control validate billing-information" required>
+
+                            <label for="BillingStreetName">Street</label>
+                            <input type="text" id="BillingStreetName" class="form-control validate billing-information" required>
+
+                            <label for="BillingHouseNumber">House Number</label>
+                            <input type="number" id="BillingHouseNumber" class="form-control validate billing-information" required>
+
+                            <label for="BillingCity">City</label>
+                            <input type="text" id="BillingCity" class="form-control validate billing-information" required>
+
+                            <label for="BillingZipCode">Zip Code</label>
+                            <input type="text" id="BillingZipCode" class="form-control validate billing-information" required>
+
+                            <label for="BillingCountry">Country</label>
+                            <input type="text" id="BillingCountry" class="form-control validate billing-information" required>
+                        </div>
+                    <!-- Billing Information -->
                 </div>
+                <!-- Modal Row 1 -->
 
-                <!-- Billing Information -->
-                <div class="col mr-3 ml-3">
-                    <h3 class="mb-0 mt-3">Billing Information</h3>
-                    <div class="md-form">
-                        <input type="text" id="BillingFirstName" class="form-control validate">
-                        <label for="BillingFirstName">First Name</label>
+                <!-- Modal Footer -->
+                <div class="row d-flex flex-row-reverse">
+
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button id="submitShipBill" class="btn btn-default mr-5">Submnit Changes</button>
                     </div>
 
-                    <div class="md-form">
-                        <input type="text" id="BillingLastName" class="form-control validate">
-                        <label for="BillingLastName">Last Name</label>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button id="BillShipClose" class="btn btn-default">Close</button>
                     </div>
 
-                    <div class="md-form">
-                        <input type="text" id="BillingStreetName" class="form-control validate">
-                        <label for="BillingStreetName">Street</label>
-                    </div>
-
-                    <div class="md-form">
-                        <input type="number" id="BillingHouseNumber" class="form-control validate">
-                        <label for="BillingHouseNumber">House Number</label>
-                    </div>
-
-                    <div class="md-form">
-                        <input type="text" id="BillingCity" class="form-control validate">
-                        <label for="BillingCity">City</label>
-                    </div>
-
-                    <div class="md-form">
-                        <input type="text" id="BillingZipCode" class="form-control validate">
-                        <label for="BillingZipCode">Zip Code</label>
-                    </div>
-
-                    <div class="md-form">
-                        <input type="text" id="BillingCountry" class="form-control validate">
-                        <label for="BillingCountry">Country</label>
-                    </div>
                 </div>
+                <!-- Modal Footer -->
 
             </div>
-        </div>
-
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer d-flex justify-content-center">
-            <button class="btn btn-default">Close</button>
-        </div>
+        </form>
     </div>
-</div>
+        
 </div>
 <!-- MODAL Change shipping and billing -->

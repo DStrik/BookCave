@@ -85,18 +85,113 @@ $(document).ready(function () {
         });
     });
 
+    // Change shipping and billing modal controller
     $("#changeShippingBilling").click(function (e) { 
         e.preventDefault();
+        console.log("CLICKED!!!!");
         $.get("GetShippingBillingInformation", function (data, status) {
-            console.log(data);
-            console.log("Success");
+            console.log("My data: " + data);
+
+            if(data)
+            {
+                $("#ShippingFirstName").val(data.shippingfirstname);
+                $("#ShippingLastName").val(data.shippinglastname);
+                $("#ShippingStreetName").val(data.shippingstreetname);
+                $("#ShippingHouseNumber").val(data.shippinghousenumber);
+                $("#ShippingCity").val(data.shippingcity);
+                $("#ShippingZipCode").val(data.shippingzipcode);
+                $("#ShippingCountry").val(data.shippingcountry);
+
+                $("#BillingFirstName").val(data.billingfirstname);
+                $("#BillingLastName").val(data.billinglastname);
+                $("#BillingStreetName").val(data.billingstreetname);
+                $("#BillingHouseNumber").val(data.billinghousenumber);
+                $("#BillingCity").val(data.billingcity);
+                $("#BillingZipCode").val(data.billingzipcode);
+                $("#BillingCountry").val(data.billingcountry);
+            }
+            
             $("#editShippingBilling").modal("show");
-        }).fail(function (err) {
-            console.log(err);
-            console.log(data);
-            console.log("FailureAF");
+        }).fail(function () {
+            console.log("IN FAIL FUNCTION");
             $("#editShippingBilling").modal("show");
         });
     });
+
+    // Function for closing the modal
+    $("#BillShipClose").click(function (e) { 
+        e.preventDefault();
+        $("#editShippingBilling").modal("hide")
+    });
+
+    // Changes the status of the input boxes in billing so that if checked
+    // the input is disabled
+    $("#checkbox1").change(function (e) { 
+        e.preventDefault();
+
+        if($("input.check-for-bill").is(":checked")) {
+            $(".billing-information").prop("disabled", true);
+            $("#BillingFirstName").val($("#ShippingFirstName").val());
+            $("#BillingLastName").val($("#ShippingLastName").val());
+            $("#BillingStreetName").val($("#ShippingStreetName").val());
+            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
+            $("#BillingCity").val($("#ShippingCity").val());
+            $("#BillingZipCode").val($("#ShippingZipCode").val());
+            $("#BillingCountry").val($("#ShippingCountry").val());
+        }
+    
+        if(!$("input.check-for-bill").is(":checked")) {
+            $(".billing-information").prop("disabled", false);
+        }
+    });
+
+    $("#ShippingFirstName").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingFirstName").val($("#ShippingFirstName").val());
+        }
+    });
+
+    $("#ShippingLastName").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingLastName").val($("#ShippingLastName").val());
+        }
+    });
+
+    $("#ShippingStreetName").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingStreetName").val($("#ShippingStreetName").val());
+        }
+    });
+
+    $("#ShippingHouseNumber").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
+        }
+    });
+
+    $("#ShippingHouseNumber").change(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
+        }
+    });
+
+    $("#ShippingCity").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingCity").val($("#ShippingCity").val());
+        }
+    });
+
+    $("#ShippingZipCode").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingZipCode").val($("#ShippingZipCode").val());
+        }
+    });
+
+    $("#ShippingCountry").keyup(function () {
+        if($("input.check-for-bill").is(":checked")) {
+            $("#BillingCountry").val($("#ShippingCountry").val());
+        }
+    });
+    // End of Modal controller
 });
 

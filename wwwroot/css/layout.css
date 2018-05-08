@@ -90,3 +90,7 @@
 .hover-pointer tr {
   cursor: pointer;
 }
+
+.for-space {
+  visibility: hidden;
+}

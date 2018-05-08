@@ -145,14 +145,12 @@ namespace BookCave.Controllers
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if(data.NewPassword == data.ConfirmPassword)
+            var result = await _userManager.ChangePasswordAsync(user, data.OldPassword, data.NewPassword);
+            
+            if(result.Succeeded)
             {
-                var result = await _userManager.ChangePasswordAsync(user, data.OldPassword, data.NewPassword);
-                if(result.Succeeded)
-                {
-                    return Ok();
-                }  
-            }
+                return Ok();
+            }  
 
             return BadRequest();
         }

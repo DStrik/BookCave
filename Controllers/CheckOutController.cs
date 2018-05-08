@@ -1,15 +1,38 @@
+using System.Threading.Tasks;
+using BookCave.Models;
 using BookCave.Models.InputModels;
+using BookCave.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
+
 {
     public class CheckOutController : Controller
     {
-        public IActionResult Index()
+        private readonly UserManager<ApplicationUser> _userManager;
+        private CheckOutService _checkOutService;
+        
+        public CheckOutController(UserManager<ApplicationUser> userManger)
         {
-            return View();
+            _userManager = userManger;
+            _checkOutService = new CheckOutService();
         }
-        public IActionResult Index(ShippingInputModel Shipping, BillingInputModel Billing, PaymentInputModel Payment)
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var info = _checkOutService.GetShippingBillingViewModel(user.Id);
+            if(info == null)
+            {
+                return View();
+            }
+
+            return View(info);
+        }
+        [HttpPost]
+        public IActionResult Index(int id)
         {
             return View();
         }
