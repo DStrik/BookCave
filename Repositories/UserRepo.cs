@@ -3,6 +3,7 @@ using BookCave.Data;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using System.Linq;
+using BookCave.Data.EntityModels;
 
 namespace BookCave.Repositories
 {
@@ -24,9 +25,10 @@ namespace BookCave.Repositories
 
         }
 
-        public void ChangeShippingBillingInformation(ShippingInputModel ShippingInput, BillingInputModel BillingInput, int UserId)
+        public void ChangeShippingBillingInformation(ShippingBilling input)
         {
-
+            _db.Add(input);
+            _db.SaveChanges();
         }
 
         public List<BookViewModel> GetWishlist(int UserId)

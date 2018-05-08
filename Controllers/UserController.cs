@@ -86,6 +86,26 @@ namespace BookCave.Controllers
         {   
             return View();
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> AccountInformation(ShippingBillingInputModel input)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user == null)
+            {
+                return View();
+            }
+
+            _userService.ChangeShippingBillingInfo(input, user.Id);
+
+            return RedirectToAction("AccountInformation", "User");
+        }
 
         public IActionResult ChangeImage(string Img)
         {
@@ -108,19 +128,6 @@ namespace BookCave.Controllers
             }
 
             return shipBill;
-        }
-
-        public async Task<IActionResult> ChangeShippingInformation (ShippingInputModel ShipBillInfo)
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-
-            return Ok();
-        }
-
-        [HttpGet]
-        public void ChangeBillingInformation(BillingInputModel BillInfo)
-        {
-            
         }
 
         public void ChangePaymenrInformation(PaymentInputModel PaymentInfo)

@@ -125,12 +125,13 @@ $(document).ready(function () {
     });
 
     // Changes the status of the input boxes in billing so that if checked
-    // the input is disabled
+    // the input is disabled and information from shipping is copied to
+    // billing in real time
     $("#checkbox1").change(function (e) { 
         e.preventDefault();
 
         if($("input.check-for-bill").is(":checked")) {
-            $(".billing-information").prop("disabled", true);
+            $(".billing-information").prop("readonly", true);
             $("#BillingFirstName").val($("#ShippingFirstName").val());
             $("#BillingLastName").val($("#ShippingLastName").val());
             $("#BillingStreetName").val($("#ShippingStreetName").val());
@@ -141,7 +142,7 @@ $(document).ready(function () {
         }
     
         if(!$("input.check-for-bill").is(":checked")) {
-            $(".billing-information").prop("disabled", false);
+            $(".billing-information").prop("readonly", false);
         }
     });
 
@@ -192,6 +193,12 @@ $(document).ready(function () {
             $("#BillingCountry").val($("#ShippingCountry").val());
         }
     });
+
+    /*$("#submitShipBill").click(function (e) { 
+        e.preventDefault();
+        $("#areYouSure").modal("show");
+    }); */
+
     // End of Modal controller
 });
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
@@ -43,14 +44,29 @@ namespace BookCave.Services
 
         }
         
-        public void ChangeShippingInfo(ShippingInputModel ShipInfo)
+        public void ChangeShippingBillingInfo(ShippingBillingInputModel input, string id)
         {
+            ShippingBilling write = new ShippingBilling()
+            {
+                UserId = id,
+                ShippingFirstName = input.ShippingFirstName,
+                ShippingLastName = input.ShippingLastName,
+                ShippingStreetName = input.ShippingStreetName,
+                ShippingHouseNumber = input.ShippingHouseNumber,
+                ShippingCity = input.ShippingCity,
+                ShippingZipCode = input.ShippingCity,
+                ShippingCountry = input.ShippingCountry,
 
-        }
+                BillingFirstName = input.BillingFirstName,
+                BillingLastName = input.BillingLastName,
+                BillingStreetName = input.BillingStreetName,
+                BillingHouseNumber = input.BillingHouseNumber,
+                BillingCity = input.BillingCity,
+                BillingZipCode = input.BillingCity,
+                BillingCounry = input.BillingCountry
+            };
 
-        public void ChangeBillingInfo(BillingInputModel BillInfo)
-        {
-
+            _userRepo.ChangeShippingBillingInformation(write);
         }
         
         public ShippingBillingViewModel GetShippingBillingInfo(string id)
