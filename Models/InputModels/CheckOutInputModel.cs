@@ -50,8 +50,10 @@ namespace BookCave.Models.InputModels
         public string FullName { get; set; }
         [Required(ErrorMessage = "Valid Cart number is required")]
         public string CardNumber { get; set; }
-        [Required(ErrorMessage = "Expiration date is required")]
-        public DateTime? ExpirationDate { get; set; }
+        [Required(ErrorMessage = "Month is required")]
+        public string ExpirationMonth { get; set; }
+        [Required(ErrorMessage = "Year is required")]
+        public string ExpirationYear { get; set; }
         [Required(ErrorMessage = "Cvc is required")]
         public string Cvc { get; set; }
     }
