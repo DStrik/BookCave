@@ -22,7 +22,7 @@ namespace BookCave.Controllers
 
         BookService _bookService = new BookService();
 
-        public ManageController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager) 
+        public ManageController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -34,13 +34,13 @@ namespace BookCave.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddBook() 
+        public IActionResult AddBook()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddBook(BookInputModel model) 
+        public IActionResult AddBook(BookInputModel model)
         {
             _bookService.AddBook(model);
             return RedirectToAction("Index");
@@ -49,7 +49,7 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult GetAllAuthors()
         {
-            
+
             var allAuthors = _bookService.GetAllAuthors();
             return Json(allAuthors);
         }
@@ -66,21 +66,26 @@ namespace BookCave.Controllers
             return Json(allPublishers);
         }
 
-        public IActionResult ViewBooks() 
-        { 
+        public IActionResult ViewBooks()
+        {
             return View();
         }
 
+        [HttpPost]
         public IActionResult ModifyBookById(int id)
         {
-             var book = _bookService.GetBookModifyModel(id);
+            var book = _bookService.GetBookModifyModel(id);
 
-             if (book == null) 
-             {
-                 return View("Index");
-             }
+            try
+            {
+                return View(book);
 
-             return View(book);
+            }
+            catch
+            {
+                return View("Index");
+            }
+
         }
 
         public IActionResult GetBookModifyModel(int id)
@@ -96,7 +101,7 @@ namespace BookCave.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddAuthor() 
+        public IActionResult AddAuthor()
         {
             return View();
         }
@@ -109,7 +114,7 @@ namespace BookCave.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddPublisher() 
+        public IActionResult AddPublisher()
         {
             return View();
         }
@@ -135,38 +140,38 @@ namespace BookCave.Controllers
         }
 
         [HttpPost]
-        public void RemoveBookById(int id) 
+        public void RemoveBookById(int id)
         {
             _bookService.RemoveBookById(id);
         }
 
-        public IActionResult Orders() 
+        public IActionResult Orders()
         {
             return View();
         }
 
-        public IActionResult Stock() 
+        public IActionResult Stock()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult AddEmployee() 
+        public IActionResult AddEmployee()
         {
             return View();
         }
-        [HttpPost]     
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddEmployee(EmployeeRegisterInputModel model) 
+        public async Task<IActionResult> AddEmployee(EmployeeRegisterInputModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View();
             }
-            
-            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, model.UserType);
                 //Það þarf að laga AddEmployee.cshtml
@@ -174,15 +179,15 @@ namespace BookCave.Controllers
                 return RedirectToAction("AddEmployee");
             }
             return View();
-        }                   
+        }
 
-        public IActionResult ViewEmployeesList() 
+        public IActionResult ViewEmployeesList()
         {
             return View();
         }
 
 
-        public IActionResult ChangePassword() 
+        public IActionResult ChangePassword()
         {
             return View();
         }
