@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewBag.PageTitle</title>
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/lib/mdb/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/mdb/css/mdb.min.css" />
-    <link rel="stylesheet" href="~/css/dashboard.css" />
 
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/mdb/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/lib/mdb/css/mdb.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/manageCSS/manage.css" /> 
+    @{ 
+        var action = ViewContext.RouteData.Values["action"].ToString().ToLower(); 
+        if (action == "viewbooks") {
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+            <link rel="stylesheet" type="text/css" href="~/css/manageCSS/manageAddBook.css" />
+        }
+    }
 
 </head>
+
 <body class="indigo-skin fixed-sn grey lighten-4">
 
     <header>
@@ -32,14 +40,22 @@
     <script type="text/javascript" src="~/lib/mdb/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/lib/mdb/js/mdb.min.js"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
-    <script type="text/javascript" src="~/js/manage.js"></script>
-@{
-    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
-    if (action == "addbook")
+    <script type="text/javascript" src="~/js/manageJS/manage.js"></script>
+    @{ var action = ViewContext.RouteData.Values["action"].ToString().ToLower(); if (action == "addbook") {
+    <script type="text/javascript" src="~/js/manageJS/manageAddBook.js"></script>
+    } else if (action == "modifybookbyid") {
+        <script type="text/javascript" src="~/js/manageJS/manageModifyBook.js"></script>
+    } else if (action == "viewbooks") {
+    <script type="text/javascript" src="~/js/manageJS/manageViewBooks.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    } else if (action == "viewemployeeslist")
     {
-    <script type="text/javascript" src="~/js/manageAddBook.js"></script>
-    }
-}
+    <script type="text/javascript" src="~/js/manageJS/manageViewEmployeesList.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    }}
 
 </body>
+
 </html>

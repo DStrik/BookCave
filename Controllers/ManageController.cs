@@ -70,7 +70,25 @@ namespace BookCave.Controllers
             return View();
         }
 
-        public IActionResult GetAllBooks()
+        public IActionResult ModifyBookById(int id)
+        {
+             var book = _bookService.GetBookModifyModel(id);
+
+             if (book == null) 
+             {
+                 return View("Index");
+             }
+
+             return View(book);
+        }
+
+        public IActionResult GetBookModifyModel(int id)
+        {
+            return Json(_bookService.GetBookModifyModel(id));
+        }
+
+        [HttpGet]
+        public IActionResult GetBookList()
         {
             var allBooks = _bookService.GetBookList();
             return Json(allBooks);
@@ -115,6 +133,12 @@ namespace BookCave.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public void RemoveBookById(int id) 
+        {
+            _bookService.RemoveBookById(id);
+        }
+
         public IActionResult Orders() 
         {
             return View();
@@ -149,11 +173,10 @@ namespace BookCave.Controllers
             return View();
         }                   
 
-        public IActionResult ManageEmployees() 
+        public IActionResult ViewEmployeesList() 
         {
             return View();
         }
-
 
 
         public IActionResult ChangePassword() 

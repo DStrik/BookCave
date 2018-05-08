@@ -86,3 +86,7 @@
   -ms-transform-origin: 100% 100%;
   transform-origin: 100% 100%;
 }
+
+.hover-pointer tr {
+  cursor: pointer;
+}

@@ -1,9 +1,9 @@
-@model BookCave.Models.InputModels.BookInputModel
+@model BookCave.Models.ViewModels.BookModifyViewModel
 
 <div class="col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5">
     <div class="card card-cascade wider">
         <div class="view gradient-card-header blue-gradient p-3">
-            <h4 class="h2 mb-0">Add book</h4>
+            <h4 class="h2 mb-0">Modify book</h4>
         </div>
         <div class="card-body ">
 
@@ -40,6 +40,30 @@
                     </div>
                 </div>
 
+                <hr>
+                <div class="text-center">
+                    <h4>The following fields must be refilled!</h4>
+                </div>
+
+                <div>
+                    <small>Previous Author(s):</small>
+                    <p>
+                        <small>
+                            @foreach(var author in Model.Author) 
+                            {
+                                @if (Model.Author.IndexOf(author) == Model.Author.Count - 1) 
+                                {
+                                    <span>"@author"</span>
+                                }
+                                else
+                                {
+                                    <span>"@author", </span>
+                                }
+                            }
+                            </small>
+                    </p>
+                </div>
+
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Author(s) <a asp-controller="manage" asp-action="addauthor" target="_blank" class="btn btn-outline-info waves-effect btn-sm px-2">New author</a></p>
@@ -52,6 +76,25 @@
                     <div class="col-md-2">
                         <a class="btn btn-outline-info waves-effect btn-sm" id="refreshAuthors">Refresh</a>
                     </div>
+                </div>
+
+                <div>
+                    <small>Previous Genre(s):</small>
+                    <p>
+                        <small>
+                            @foreach(var genre in Model.Genre) 
+                            {
+                                @if (Model.Genre.IndexOf(genre) == Model.Genre.Count - 1) 
+                                {
+                                    <span>"@genre"</span>
+                                }
+                                else
+                                {
+                                    <span>"@genre", </span>
+                                }
+                            }
+                            </small>
+                    </p>
                 </div>
 
                 <div class="form-group row d-flex">
@@ -67,10 +110,19 @@
                     </div>
                 </div>
 
+                <div>
+                    <small>Previous Publisher:</small>
+                    <p>
+                        <small>
+                            @Model.Publisher
+                        </small>
+                    </p>
+                </div>
+
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Publisher <a asp-controller="manage" asp-action="addpublisher" target="_blank" class="btn btn-outline-info waves-effect btn-sm px-2">New publisher</a></p>
                     <div class="col-md-6">
-                        <select asp-for="PublisherId" id="publisherList" class="mdb-select colorful-select dropdown-primary" searchable="Search here..">
+                        <select asp-for="Publisher" id="publisherList" class="mdb-select colorful-select dropdown-primary" searchable="Search here..">
                         <option value="" disabled selected>Select Publisher...</option>
                     </select>
                         <button class="btn-save btn btn-primary btn-sm">Save</button>
@@ -79,6 +131,8 @@
                         <a class="btn btn-outline-info waves-effect btn-sm ">Refresh</a>
                     </div>
                 </div>
+
+                <hr>
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Description</p>

@@ -8,6 +8,7 @@
   <div id="slide-out" class="side-nav fixed sn-bg-2">
       <ul class="custom-scrollbar list-unstyled">
           
+          <p class="pl-3 pt-3">Logged in as:</p>
           <li class="text-center mt-4 mb-5 p-5" ><a asp-action="index" class="pl-0" ><img class="img-fluid" src="~/images/logo.png" alt="book cave logo"></a></li>
           
           <li class="mt-5">
@@ -35,6 +36,20 @@
                 </li>
                 <li><a asp-controller="manage" asp-action="orders" class="collapsible-header waves-effect @ViewBag.Active"><i class="fa fa-bar-chart"></i>Orders</a></li>
                 <li><a asp-controller="manage" asp-action="stock" class="collapsible-header waves-effect @ViewBag.Active"><i class="fa fa-stack-overflow"></i> Stock</a></li>
+                
+                <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-user-secret"></i> Employees<i class="fa fa-angle-down rotate-icon"></i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a asp-controller="manage" asp-action="addemployee" class="waves-effect"><i class="fa fa-user-plus"></i>Create new employee</a>
+                            </li>
+                            <li>
+                                <a asp-controller="manage" asp-action="viewemployeeslist" class="waves-effect"><i class="fa fa-users"></i>View employees</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </li>
 

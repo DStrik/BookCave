@@ -189,5 +189,10 @@ namespace BookCave.Services
         {
             return _bookRepo.GetBookById(bookId);
         }
+
+        public void RemoveBookById(int id) 
+        {
+            _bookRepo.DeleteBook(id);
+        }
     }
 }

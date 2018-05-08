@@ -13,29 +13,28 @@ $(document).ready(function () {
 $("#refreshAuthors").click(function () {
   getAllAuthors();
 });
-$("#refreshGenres").click(function() {
+$("#refreshGenres").click(function () {
   getAllGenres();
 })
-$("#refreshPublishers").click(function() {
+$('#refreshPublishers').click(function () {
   getAllPublishers();
 })
 
 function getAllAuthors() {
-  getSelectList("GetAllAuthors", "#authorList", "Author(s)")
+  getSelectList("../GetAllAuthors", "#authorList", "Author(s)");
 }
 
 function getAllGenres() {
-  getSelectList("GetAllGenres", "#genreList", "Genre(s)");
+  getSelectList("../GetAllGenres", "#genreList", "Genre(s)");
 }
 
 function getAllPublishers() {
-  getSelectList("GetAllPublishers", "#publisherList", "Publisher");
+  getSelectList("../GetAllPublishers", "#publisherList", "Publisher");
 }
 
-// Get get select list from "Controller", put into the Select list, and insert "field name" into the disabled box.
-function getSelectList(callController, selectList, fieldName) {
-
-  $.get(callController, function (data, status) {
+// Get get select list from "Controller" Action, put into the Select list, and insert "field name" into the disabled box.
+function getSelectList(callAction, selectList, fieldName) {
+  $.get(callAction, function (data, status) {
     $(selectList).material_select('destroy');
     $(selectList).empty();
     $(selectList).append('<option value="" disabled selected>Select ' + fieldName + '...</option>');
