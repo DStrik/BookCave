@@ -30,19 +30,20 @@ namespace BookCave.Controllers
         {
 
         }
-        public void RemoveBook(int BookId)
+        public void RemoveBook(int BookId, ApplicationUser user)
         {
-
+            var book = _bookService.GetBookById(BookId);
         }
         public void ClearCart()
         {
             
         }
-        public void AddToCart(int bookId, ApplicationUser user)
+        public void AddToCart(ApplicationUser user, int bookId, int qty)
         {
                 var item = new CartItem {
                 BookId = bookId,
-                UserId = user.Id
+                UserId = user.Id,
+                Quantity = qty
 
                 };
             _cartService.AddToCart(item);

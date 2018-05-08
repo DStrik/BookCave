@@ -11,9 +11,10 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180508170846_CartItemsTable_updated")]
+    partial class CartItemsTable_updated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,13 +250,11 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CardNumber");
+                    b.Property<int>("CardNumber");
 
-                    b.Property<string>("Cvc");
+                    b.Property<int>("Cvc");
 
-                    b.Property<string>("ExpirationMonth");
-
-                    b.Property<string>("ExpirationYear");
+                    b.Property<DateTime>("ExpirationDate");
 
                     b.Property<string>("FullName");
 
