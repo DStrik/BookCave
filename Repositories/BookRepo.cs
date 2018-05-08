@@ -6,6 +6,8 @@ using BookCave.Models.ViewModels;
 using System.Linq;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System;
 
 namespace BookCave.Repositories
 {
@@ -213,14 +215,20 @@ namespace BookCave.Repositories
             return details;
         }
         
-        private byte[] GetCoverImage(int bookId)
+        private byte[] GetCoverImageAsync(int bookId)
         {
             var img = (from ci in _db.CoverImages
                        where ci.BookId == bookId
                        select ci).SingleOrDefault();
             if(img == null)
             {
-                return null;
+                
+                using (var memoryStream = new MemoryStream())
+                {
+                    new FileInfo("wwwroot/images/nopic.jpg").OpenRead().CopyTo(memoryStream);
+                    var image =  memoryStream.ToArray();
+                    return image;
+                }
             }
             
             return img.Img;
@@ -243,7 +251,7 @@ namespace BookCave.Repositories
             var publisher = GetPublisher(bookId);
             var details = GetDetails(bookId);
             var reviews = GetReviews(bookId);
-            var coverImage = GetCoverImage(bookId);
+            var coverImage = GetCoverImageAsync(bookId);
             
             var bookDetails = new BookDetailViewModel
             {
@@ -288,18 +296,18 @@ namespace BookCave.Repositories
             return false;
         }
 
-        public void DeleteBook(int BookId)
+        public void DeleteBook(int bookId)
         {
-            var book = new Book { Id = BookId };
+            var book = new Book { Id = bookId };
             _db.Books.Attach(book);
             _db.Books.Remove(book);
             
-            var bookDetails = new BookDetails { Id = BookId};
+            var bookDetails = new BookDetails { Id = bookId};
             _db.BookDetails.Attach(bookDetails);
             _db.BookDetails.Remove(bookDetails);
 
             var genreConnection = (from bgc in _db.BookGenreConnections
-                                   where bgc.BookId == BookId
+                                   where bgc.BookId == bookId
                                    select bgc).ToList();
             
             foreach(var g in genreConnection)
@@ -308,7 +316,7 @@ namespace BookCave.Repositories
             }
 
             var authorConnection = (from bac in _db.BookAuthorConnections
-                                    where bac.BookId == BookId
+                                    where bac.BookId == bookId
                                     select bac).ToList();
             
             foreach(var a in authorConnection)
@@ -317,14 +325,18 @@ namespace BookCave.Repositories
             }
 
             var reviews = (from r in _db.BookReviews
-                           where r.BookId == BookId
+                           where r.BookId == bookId
                            select r).ToList();
-            
+
             foreach(var r in reviews)
             {
                 _db.BookReviews.Remove(r);
             }
 
+            var img = (from i in _db.CoverImages
+                       where i.BookId == bookId
+                       select i).SingleOrDefault();
+            _db.CoverImages.Remove(img);
             _db.SaveChanges();
         }
 
@@ -405,7 +417,7 @@ namespace BookCave.Repositories
             foreach(var b in books)
             {
                 var authors = GetAuthors(b.Id);
-                var coverImage = GetCoverImage(b.Id);
+                var coverImage = GetCoverImageAsync(b.Id);
                 var rating = GetRating(b.Id);
 
                 var book = new BookViewModel
@@ -428,7 +440,7 @@ namespace BookCave.Repositories
         {
             var book = GetBook(id);
             var authors = GetAuthors(id);
-            var coverImage = GetCoverImage(id);
+            var coverImage = GetCoverImageAsync(id);
             var rating = GetRating(id);
             var retBook = new BookViewModel
             {
@@ -453,7 +465,7 @@ namespace BookCave.Repositories
                 return null;
             }
             var details = GetDetails(bookId);
-            var coverImage = GetCoverImage(bookId);
+            var coverImage = GetCoverImageAsync(bookId);
 
             var authorIds = (from bac in _db.BookAuthorConnections
                             where bac.BookId == bookId
@@ -473,7 +485,7 @@ namespace BookCave.Repositories
             {
                 BookId = book.Id,
                 Title = book.Title,
-                //Isbn = book.Isbn,
+                Isbn = book.Isbn,
                 Author = authorIds,
                 Publisher = publisherId,
                 Genre = genreIds,
@@ -492,7 +504,7 @@ namespace BookCave.Repositories
             public BookCartViewModel GetCartBookById(CartItem item)
         {
             var book = GetBook(item.BookId);
-            var coverImage = GetCoverImage(item.BookId);
+            var coverImage = GetCoverImageAsync(item.BookId);
 
             var retBook = new BookCartViewModel
             {

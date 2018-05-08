@@ -43,12 +43,12 @@ namespace BookCave.Controllers
         {
             
         }
-        public void AddToCart(ApplicationUser user, int bookId, int qty)
+        public void AddToCart(ApplicationUser user, int bookId)
         {
                 var item = new CartItem {
                 BookId = bookId,
                 UserId = user.Id,
-                Quantity = qty
+                Quantity = 1
 
                 };
             _cartService.AddToCart(item);

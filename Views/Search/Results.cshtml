@@ -28,7 +28,7 @@
                             <p class="col-12 card-text mb-1">@book.Type</p>
                             <p class="col-12 card-text mb-1">@book.Rating</p>
                             <h4 class="col-12 mb-0">$ @book.Price</h4>
-                            <a class="btn btn-unique">Add to cart!</a>
+                            <a class="btn btn-unique" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@book.BookId">Add to cart!</a>
                     </div>
                 </div>
             </div>
