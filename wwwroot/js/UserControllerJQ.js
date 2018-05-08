@@ -1,8 +1,22 @@
 $(document).ready(function () {
     console.log("UsercontrollerJavascript up and running");
 
+    // Changes the password for the user
+    
+    $("#togglePasswordModal").click(function (e) { 
+        e.preventDefault();
+        $("#oldPassword").val("");
+        $("#newPassword").val("");
+        $("#confirmPassword").val("");
+        $("#modalChangePassword").modal("show");
+    });
+
     $("#changePassword").click(function (e) { 
         e.preventDefault();
+
+        $("#processingModal").modal("show");
+        $("#modalChangePassword").modal("hide");
+
         var oldPassword = $("#oldPassword").val();
         var newPassword = $("#newPassword").val();
         var confirmPassword = $("#confirmPassword").val();
@@ -13,14 +27,18 @@ $(document).ready(function () {
         };
 
         $.post("ChangePassword", inp, function (data, status) {
+
             $("#centralModalSuccess").modal("show");
-            $("#modalChangePassword").modal("hide");
+            $("#processingModal").modal("hide");
 
             var oldPassword = $("#oldPassword").val("");
             var newPassword = $("#newPassword").val("");
             var confirmPassword = $("#confirmPassword").val("");
         }).fail(function (err) {
-            $("#ModalWarning").modal("show");
+            setTimeout(function() {
+                $("#ModalWarning").modal("show");
+                $("#processingModal").modal("hide");
+            }, 500);
         });
     });
 
@@ -28,6 +46,7 @@ $(document).ready(function () {
     $("#ViewFavBook").click(function (e) { 
         e.preventDefault();
         $("#errorImage").hide();
+        $(".un-center").addClass("text-center");
         var loading = '<div class="preloader-wrapper big active m-5 loading-thing">'
                       + '<div class="spinner-layer spinner-blue-only">'
                       + '<div class="circle-clipper left">'
@@ -73,7 +92,7 @@ $(document).ready(function () {
                          + data.publishingYear + '</p><br><h3 class="text-right mr-3"><strong>Price: </strong>' + data.price + '$</h3>'
                          + '<div class="text-center"><button type="button" class="btn btn-outline-info btn-rounded waves-effect'
                          + ' mt-0 mb-3 p-2 pl-3 pr-3">Go to book details page</button></div>';
-
+            $(".un-center").removeClass("text-center");
             $("#FavoriteBookInfo").html(markup);
 
             console.log(data);
@@ -168,10 +187,10 @@ $(document).ready(function () {
         }
     });
 
-    /*$("#submitShipBill").click(function (e) { 
-        e.preventDefault();
-        $("#areYouSure").modal("show");
-    }); */
+    $("#submitShipBill").click(function (e) { 
+        $("#processingModal").modal("show");
+        $("#editShippingBilling").modal("hide");
+    });
 
     // End of Modal controller
 });
