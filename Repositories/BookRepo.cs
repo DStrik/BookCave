@@ -73,6 +73,12 @@ namespace BookCave.Repositories
             _db.Add(img);
             _db.SaveChanges();
         }
+
+        public void ModImage(CoverImage img)
+        {
+            _db.Update(img);
+            _db.SaveChanges();
+        }
         public void AddAuthor(Author author)
         {
             _db.Add(author);

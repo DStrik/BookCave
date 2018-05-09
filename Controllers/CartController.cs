@@ -41,12 +41,12 @@ namespace BookCave.Controllers
         {
             _cartService.RemoveItem(cartItemId);
         }
-        /* 
+        
         public void ClearCart(int[] cartItems)
         {
             _cartService.ClearCart(cartItems);
         }
-*/
+
         public IActionResult AddToCart(int id)
         {
             var user = _userManager.GetUserId(HttpContext.User);
