@@ -41,9 +41,9 @@ namespace BookCave.Controllers
         {
             _cartService.RemoveItem(cartItemId);
         }
-        public void ClearCart()
+        public void ClearCart(int[] cartItems)
         {
-            
+            _cartService.ClearCart(cartItems);
         }
          public void AddToCart(int id)
         {

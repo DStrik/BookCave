@@ -64,9 +64,26 @@ $(document).ready(function(){
         var deletionRow = $(this).closest("tr");
         var id = Number($(this).parent().next().find("p").text());
         $.post("/Cart/RemoveItem", {"cartItemId": id}, function(data, status){
-            deletionRow.slideUp("slow", function() {
-                deletionRow.remove();
-            });
+            deletionRow.fadeOut(function() {
+                $(this).remove();
+                getTotal();
+            });   
+        });
+    });
+    $("#clearAll").click(function(){
+        var cartItems = [];
+        $(".cartItem").each(function(){
+            var id = $(this).text();
+            cartItems.push(id);
+        });
+        $.post("/Cart/ClearCart", {"cartItems": cartItems}, function(data, status){
+            $(".price").each(function(){
+                var deletionRow = $(this).closest("tr");
+                deletionRow.slideUp(function(){
+                    $(this).remove();
+                    getTotal();
+                })
+            })
         });
     });
     Update();

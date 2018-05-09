@@ -47,9 +47,13 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void ClearCart(int UserId)
+        public void ClearCart(List<CartItem> items)
         {
-
+            foreach(CartItem i in items)
+            {
+                _db.Remove(i);
+            }
+            _db.SaveChanges();
         }
         public void AddToCart(CartItem item)
         {
