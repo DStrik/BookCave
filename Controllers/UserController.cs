@@ -75,6 +75,7 @@ namespace BookCave.Controllers
             {
                 await _userManager.AddToRoleAsync(user, "User");
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
+                await _userManager.AddClaimAsync(user, new Claim("Image", $"{"~/images/default_pic.jpg"}"));
                 await _signInManager.SignInAsync(user, false);
 
                 return RedirectToAction("Index", "Home");
@@ -127,7 +128,7 @@ namespace BookCave.Controllers
 
         public IActionResult FavoriteBook()
         {
-            var data = _bookService.GetBookById(23);
+            var data = _bookService.GetBookDetails(23);
 
             return Json(data);
         }
@@ -175,6 +176,9 @@ namespace BookCave.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
+
+            var user = await _userManager.FindByEmailAsync("danni@danni.is");
+            await _userManager.DeleteAsync(user);
 
             return RedirectToAction("Index", "Home");
         }

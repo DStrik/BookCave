@@ -1,0 +1,33 @@
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var nameClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
+    var imageClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Image")?.Value;
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <!-- Avatar -->
+    <div class="avatar mx-auto white">
+        <div class="view overlay">
+            <img id="profilePic" src="data:image/jpg;base64,@imageClaim" class="rounded-circle" alt="Johnny boy default pic">
+            <div class="mask flex-center rgba-white-strong">
+                <p class="black-text">Edit Image</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <!-- Name -->
+        <h4 class="card-title">@nameClaim</h4>
+        <hr>
+    </div>
+}
+else
+{
+    
+}
