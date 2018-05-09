@@ -340,11 +340,12 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public List<BookViewModel> GetTop10()
+        public List<int> GetTop10()
         {
-
-
-            return new List<BookViewModel>();
+            var top10 = (from t in _db.BookReviews
+                        orderby t.Grade descending
+                        select t.BookId).Take(10).ToList();
+            return top10;
         }
 
         public List<BookViewModel> GetNewReleases()

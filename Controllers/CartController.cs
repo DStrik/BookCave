@@ -4,11 +4,13 @@ using BookCave.Data.EntityModels;
 using BookCave.Models;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -34,6 +36,7 @@ namespace BookCave.Controllers
             _cartService.ChangeQuantity(qtys, cartItemIds);
 
         }
+        [HttpPost]
         public void RemoveItem(int cartItemId)
         {
             _cartService.RemoveItem(cartItemId);
@@ -42,11 +45,17 @@ namespace BookCave.Controllers
         {
             
         }
-        public async void AddToCart(int bookId)
+<<<<<<< HEAD
+        public void AddToCart(int bookId)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            _cartService.AddToCart(user.Id, bookId);
+            var user = _userManager.GetUserId(HttpContext.User);
+            _cartService.AddToCart(user, bookId);
+=======
+        public void AddToCart(int id)
+        {
+            var user = _userManager.GetUserId(HttpContext.User);
+            _cartService.AddToCart(user, id);
+>>>>>>> 867a40dcf9ccc0ef30d1b67a07f8076f9e9bf5cb
         }
-
     }
 }

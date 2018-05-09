@@ -23,7 +23,6 @@ $(document).ready(function(){
         var totalArray = $('.amount').map(function(){
             return $.trim($(this).text());
         }).get();
-
         $.each(totalArray, function(i, j) {
             total += Number(j);
         });
@@ -62,8 +61,13 @@ $(document).ready(function(){
         });
     });
     $(".removeBtn").click(function(){
+        var deletionRow = $(this).closest("tr");
         var id = Number($(this).parent().next().find("p").text());
         $.post("/Cart/RemoveItem", {"cartItemId": id}, function(data, status){
+            deletionRow.slideUp("slow", function() {
+                deletionRow.remove();
+            });
         });
     });
+    Update();
 });
