@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BookCave.Models;
@@ -28,8 +29,14 @@ namespace BookCave.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
+            var user = await _userManager.FindByEmailAsync("danni@danni.is");
+            if(user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
+
             return View();
         }
 
@@ -74,12 +81,25 @@ namespace BookCave.Controllers
             if(result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, "User");
+
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
+            //    await _userManager.AddClaimAsync(user, new Claim("Image", $"{user.Image}"));
+                
                 await _signInManager.SignInAsync(user, false);
 
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        private byte[] GetDefaultProfileImage()
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                new FileInfo("wwwroot/images/default_pic.jpg").OpenRead().CopyTo(memoryStream);
+                var image =  memoryStream.ToArray();
+                return image;
+            }
         }
 
         [HttpGet]
@@ -127,7 +147,7 @@ namespace BookCave.Controllers
 
         public IActionResult FavoriteBook()
         {
-            var data = _bookService.GetBookById(23);
+            var data = _bookService.GetBookDetails(23);
 
             return Json(data);
         }
@@ -175,6 +195,12 @@ namespace BookCave.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
+
+            var user = await _userManager.FindByEmailAsync("danni@danni.is");
+            if(user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
 
             return RedirectToAction("Index", "Home");
         }

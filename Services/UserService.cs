@@ -14,15 +14,7 @@ namespace BookCave.Services
         {
             _userRepo = new UserRepo();
         }
-
-        public void Login(string Name, string pw)
-        {
-
-        }
-        public void SignUp(UserInputModel user)
-        {
-            
-        }
+        
         public List<OrderViewModel> GetOrderHistory(int UserId)
         {
             return null;

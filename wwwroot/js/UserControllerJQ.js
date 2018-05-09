@@ -1,6 +1,6 @@
 $(document).ready(function () {
     console.log("UsercontrollerJavascript up and running");
-
+    //$("#profilePic").attr("src","input image here");
     // Changes the password for the user
     
     $("#togglePasswordModal").click(function (e) { 

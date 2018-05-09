@@ -11,9 +11,10 @@ using System;
 namespace BookCave.Migrations.AuthenticationDb
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180509094253_AddingAspNetUserWithImage")]
+    partial class AddingAspNetUserWithImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,9 +36,7 @@ namespace BookCave.Migrations.AuthenticationDb
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("FavBookId");
-
-                    b.Property<string>("Image");
+                    b.Property<byte[]>("Image");
 
                     b.Property<bool>("LockoutEnabled");
 

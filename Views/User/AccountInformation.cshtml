@@ -13,20 +13,7 @@
                 </div>
 
                 <!-- Avatar -->
-                <div class="avatar mx-auto white">
-                    <div class="view overlay">
-                        <img src="~/images/default_pic.jpg" class="rounded-circle" alt="Johnny boy default pic">
-                        <div class="mask flex-center rgba-white-strong">
-                            <p class="black-text">Edit Image</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <!-- Name -->
-                    <h4 class="card-title">User Name</h4>
-                    <hr>
-                </div>
+                @await Html.PartialAsync("_AccountInfoPartial")
             </div>
             <!-- Card -->
         </div>

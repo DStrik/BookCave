@@ -77,12 +77,18 @@
                 <input type="text" id="CardNumber" asp-for="CardNumber" class="form-control validate" required>
                 
                 <div class="row">
-                    <div class="col mr-3 ml-3">
-                        <label for="ExpirationDate">Exp. Date</label>
-                        <input type="date" id="ExpirationDate" asp-for="ExpirationDate" class="form-control validate" required> 
+                    <div class="col mr-3">
+                        <label for="ExpirationMonth">Exp. month</label>
+                        <input type="text" id="ExpirationMonth" asp-for="ExpirationMonth" class="form-control validate" required> 
                     </div>
 
-                    <div class="col mr-3 ml-3">
+                    <div class="col ml-3">
+                        <label for="ExpirationYear">Exp. year</label>
+                        <input type="text" id="ExpirationYear" asp-for="ExpirationYear" class="form-control validate" required> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
                         <label for="Cvc">CVC</label>
                         <input type="text" id="Cvc" asp-for="Cvc" class="form-control validate" required>
                     </div>
