@@ -71,20 +71,12 @@ namespace BookCave.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult ModifyBookById(int id)
         {
+
             var book = _bookService.GetBookModifyModel(id);
-
-            try
-            {
-                return View(book);
-
-            }
-            catch
-            {
-                return View("Index");
-            }
+            return View(book); 
 
         }
 

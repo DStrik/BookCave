@@ -81,10 +81,10 @@ namespace BookCave.Services
             {
                 Title = book.Title,
                 Isbn = book.Isbn,
-                PublishingYear = (int)book.PublishingYear,
+                PublishingYear = book.PublishingYear ?? default(int),
                 Type = book.Type,
-                Price = (double)book.Price,
-                PublisherId = (int)book.PublisherId
+                Price = book.Price ?? default(double),
+                PublisherId = book.PublisherId ?? default(int)
             };
 
             var bookId = _bookRepo.AddBook(bookEntity);
@@ -94,8 +94,8 @@ namespace BookCave.Services
                 BookId = bookId,
                 Description = book.Description,
                 Font = book.Font,
-                PageCount = (int)book.PageCount,
-                Length = (int)book.Length
+                PageCount = book.PageCount ?? default(int),
+                Length = book.Length ?? default(int)
             };
 
             _bookRepo.AddBookDetails(details);

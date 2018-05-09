@@ -20,10 +20,11 @@ $(document).ready(function () {
                 "searchable": false,
                 "autoSize": true,
                 "render": function (data, type, row, meta) {
-                    var markup = '<div class="text-center"><button class="btn btn-sm btn-danger" onclick="giveModalBookData(\''
+                    var markup =
+                        '<div class="text-center"><button class="btn btn-sm btn-danger" onclick="giveModalBookData(\''
                         + data.title + '\', ' + data.bookId + ')" data-toggle="modal" data-target="#confirmDelete" value="'
                         + data.bookId + '">Delete</button>'
-                        + '<a class="btn btn-sm btn-warning" onclick="redirectToModifyById(' + data.bookId + ')">Modify</a> </div>';
+                        + '<a class="btn btn-sm btn-warning" href="/Manage/ModifyBookById/' + data.bookId + '">Modify</a> </div>';
                     return (markup);
                 }
             }
@@ -48,21 +49,23 @@ $(document).ready(function () {
 
 function giveModalBookData(title, id) {
     $("#modalText span").text(title);
-    $("#yesDelete").click(function () {
-
-        $
-        $.post("RemoveBookById", { "id": id }, function (id) {
+    $("#yesDelete").one("click", (function () {
+        $("#confirmDelete").modal("hide");
+        $("#waitingModal").modal("show");
+        $.post("/Manage/RemoveBookById", { "id": id }, function (id) {
             {
-                alert("deleted " + title + '!');
+                $("#waitingModal").modal("hide");
+
+                /* $("").click(function(event) {
+                     $(this).closest("tr").remove();
+                 });*/
             }
         }).fail(function () {
-            alert("error lol");
-        });
-    });
-}
+            $("#waitingModal").modal('hide');
+            $("#errorModal").modal('show');
 
-function redirectToModifyById(id){
-    $.redirect("/Manage/modifybookbyid/" + id);
-}
+        });
+    }));
+};
 
 
