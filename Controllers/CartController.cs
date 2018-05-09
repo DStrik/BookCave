@@ -4,11 +4,13 @@ using BookCave.Data.EntityModels;
 using BookCave.Models;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -42,11 +44,10 @@ namespace BookCave.Controllers
         {
             
         }
-        public async void AddToCart(int bookId)
+        public void AddToCart(int id)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            _cartService.AddToCart(user.Id, bookId);
+            var user = _userManager.GetUserId(HttpContext.User);
+            _cartService.AddToCart(user, id);
         }
-
     }
 }
