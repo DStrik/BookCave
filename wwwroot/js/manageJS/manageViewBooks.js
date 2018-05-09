@@ -1,12 +1,13 @@
 // Material Select Initialization
 // Initialize and fill out the table.
+var deleteRow;
 $(document).ready(function () {
 
     var table = $('#viewBooksTable').DataTable({
         "processing": true,
         "serverSide": false,
         "ajax": { "url": "getBookList", "dataSrc": "" },
-        "scrollX": "100%",
+        "autoWidth": true,
         "columns": [
             { "data": "bookId" },
             { "data": "title" },
@@ -21,10 +22,9 @@ $(document).ready(function () {
                 "autoSize": true,
                 "render": function (data, type, row, meta) {
                     var markup =
-                        '<div class="text-center"><button class="btn btn-sm btn-danger" onclick="giveModalBookData(\''
-                        + data.title + '\', ' + data.bookId + ')" data-toggle="modal" data-target="#confirmDelete" value="'
-                        + data.bookId + '">Delete</button>'
-                        + '<a class="btn btn-sm btn-warning" href="/Manage/ModifyBookById/' + data.bookId + '">Modify</a> </div>';
+                        '<div><button type="button" class="btn btn-sm btn-danger px-2 mr-2" data-toggle="modal" data-target="#confirmDelete" '
+                        + 'data-code="'+ data.bookId + '" data-name="' + data.title + '">Delete</button>'
+                        + '<a class="btn btn-sm btn-warning px-2" href="/Manage/ModifyBookById/' + data.bookId + '">Modify</a> </div>';
                     return (markup);
                 }
             }
@@ -43,22 +43,27 @@ $(document).ready(function () {
     $('.mdb-select').material_select();
     $('.mdb-select').removeClass('form-control form-control-sm');
     $('.dataTables_filter').find('label').remove();
+
+    
+    deleteRow = function(deletionRow) {
+        table.row(deletionRow).remove().draw( false );
+    }
 });
 
 
-
-function giveModalBookData(title, id) {
-    $("#modalText span").text(title);
+$("#viewBooksTable").on("click", "button", function() {
+    var parentTr = $(this).closest("tr");
+    var title = $(this).attr("data-name");
+    var id = $(this).attr("data-code");
+    $(".modalBookTitle").text(title);
     $("#yesDelete").one("click", (function () {
         $("#confirmDelete").modal("hide");
         $("#waitingModal").modal("show");
         $.post("/Manage/RemoveBookById", { "id": id }, function (id) {
             {
                 $("#waitingModal").modal("hide");
-
-                /* $("").click(function(event) {
-                     $(this).closest("tr").remove();
-                 });*/
+                $("#successModal").modal("show");
+                deleteRow(parentTr);
             }
         }).fail(function () {
             $("#waitingModal").modal('hide');
@@ -66,6 +71,6 @@ function giveModalBookData(title, id) {
 
         });
     }));
-};
+});
 
 

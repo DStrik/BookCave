@@ -17,37 +17,42 @@ $(document).ready(function () {
 // Refresh list on click
 // Get all information into select boxes
 $("#refreshAuthors").click(function () {
+  alert("yes");
   getAllAuthors();
 });
 $("#refreshGenres").click(function () {
+  alert("LOL");
   getAllGenres();
-})
+});
 $('#refreshPublishers').click(function () {
+  alert("hehe");
   getAllPublishers();
-})
+});
 
 function getAllAuthors() {
-  getSelectList("GetAllAuthors", "#authorList", "Author(s)");
+  getSelectList("/Manage/GetAllAuthors", "#authorList", "Author(s)");
 }
 
 function getAllGenres() {
-  getSelectList("GetAllGenres", "#genreList", "Genre(s)");
+  getSelectList("/Manage/GetAllGenres", "#genreList", "Genre(s)");
 }
 
 function getAllPublishers() {
-  getSelectList("GetAllPublishers", "#publisherList", "Publisher");
+  getSelectList("/Manage/GetAllPublishers", "#publisherList", "Publisher");
 }
 
 // Get get select list from "Controller" Action, put into the Select list, and insert "field name" into the disabled box.
 function getSelectList(callAction, selectList, fieldName) {
   $.get(callAction, function (data, status) {
     $(selectList).material_select('destroy');
-    $(selectList).empty();
-    $(selectList).append('<option value="" disabled selected>Select ' + fieldName + '...</option>');
+    var markup = "";
+    markup += '<option value="" disabled selected>Select ' + fieldName + '...</option>';
     $.each(data, function (i, j) {
-      $(selectList).append('<option value="' + j.id + '">' + j.name + '</option>');
+      markup += '<option value="' + j.id + '">' + j.name + '</option>';
     })
-    $(selectList).append('<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>');
+    $(selectList).after('<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>');
+    $(selectList).empty();
+    $(selectList).html(markup);
     $(selectList).material_select();
   }).fail(function (err) {
     alert("Error has occured! Selection field for " + fieldName + " could not be obtained!");

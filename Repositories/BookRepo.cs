@@ -302,7 +302,7 @@ namespace BookCave.Repositories
             _db.Books.Attach(book);
             _db.Books.Remove(book);
             
-            var bookDetails = new BookDetails { Id = bookId};
+            var bookDetails = GetDetails(bookId);
             _db.BookDetails.Attach(bookDetails);
             _db.BookDetails.Remove(bookDetails);
 
@@ -491,7 +491,7 @@ namespace BookCave.Repositories
                 PublishingYear = book.PublishingYear,
                 PageCount = details.PageCount,
                 Length = details.Length,
-                CoverImage = coverImage
+                CurrentCoverImage = coverImage
             };
 
             return bookDetails;

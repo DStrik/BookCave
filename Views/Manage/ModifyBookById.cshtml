@@ -1,4 +1,4 @@
-@model BookCave.Models.ViewModels.BookModifyInputModel
+@model BookCave.Models.InputModels.BookModifyInputModel
 
 <div class="col-lg-8 col-md-12 offset-lg-2 animated fadeIn mb-5">
     <div class="card card-cascade wider">
@@ -163,24 +163,34 @@
                     </div>
                 </div>
 
-                <div class="form-group row d-flex">
-                    <p class="label col-md-4 pt-2">Cover Image</p>
+                <hr>
+
+                <div class="text-center">
+                    <h4 class="mb-4">Leave empty to keep same cover image!</h4>
+                    <div class="form-group row d-flex">
+                    <p class="label col-md-4 pt-2">New Cover Image</p>
 
                     <div class="file-field col-md-8">
                         <a class="btn-floating blue-gradient mt-0 float-left btn-sm">
                         <i class="fa fa-cloud-upload"></i>
-                        <input type="file" asp-for="CoverImage" accept="image/jpeg">
+                        <input type="file" asp-for="NewCoverImage" accept="image/jpeg">
                     </a>
                         <div class="file-path-wrapper">
                             <input class="file-path validate form-control pt-0" type="text" placeholder="Upload image" disabled>
                         </div>
                     </div>
                 </div>
+                    <h5 class="">Current Image:</h5>
+                    <img class="img-fluid ml-3" src="data:image/jpg;base64, @Convert.ToBase64String(@Model.CurrentCoverImage)" />
+                </div>
+
+                <hr>
 
                 <div class="text-right">
                     <button class="btn btn-danger waves-light">Cancel</button>
                     <input type="submit" class="btn success-color-dark waves-light" value="Add book!">
                 </div>
+
 
             </form>
 

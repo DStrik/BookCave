@@ -37,10 +37,10 @@ namespace BookCave.Services
                 Id = book.BookId,
                 Title = book.Title,
                 Isbn = book.Isbn,
-                PublishingYear = (int)book.PublishingYear,
+                PublishingYear = book.PublishingYear ?? default(int),
                 Type = book.Type,
-                Price = (double)book.Price,
-                PublisherId = (int)book.Publisher
+                Price = book.Price ?? default(double),
+                PublisherId = book.Publisher ?? default(int)
             };
             
             var details = new BookDetails
@@ -48,8 +48,8 @@ namespace BookCave.Services
                 BookId = book.BookId,
                 Description = book.Description,
                 Font = book.Font,
-                PageCount = (int)book.PageCount,
-                Length = (int)book.Length
+                PageCount = book.PageCount ?? default(int),
+                Length = book.Length ?? default(int)
             };
 
             _bookRepo.ModBookDetails(details);
@@ -73,6 +73,11 @@ namespace BookCave.Services
                     GenreId = id
                 };
                 _bookRepo.ModBookGenreConnection(GenreConnection);
+            }
+
+            if (book.NewCoverImage != null)
+            {
+                _bookRepo.ModCoverImage(book.NewCoverImage);
             }
         }
         public async void AddBook(BookInputModel book)
