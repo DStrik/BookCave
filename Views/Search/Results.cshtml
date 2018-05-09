@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>-->
-    <div class="row col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5 container body-container">
+    <div class="row col-lg-8 col-md-12 offset-lg-2 animated fadeIn mb-5 container body-container">
         @foreach(var book in Model) {
         <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch">
             <div class="card card-ecommerce">
@@ -50,7 +50,7 @@
                             <p class="col-12 card-text mb-1">@book.Type</p>
                             <p class="col-12 card-text mb-1">@book.Rating</p>
                             <h4 class="col-12 mb-0">$ @book.Price</h4>
-                            <a class="btn btn-unique" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@book.BookId">Add to cart!</a>
+                            <button type="button" class="btn btn-secondary btn-rounded add-to-cart" data-id="@book.BookId">Add to cart!</button>
                     </div>
                 </div>
             </div>

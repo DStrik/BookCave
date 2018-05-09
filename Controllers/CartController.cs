@@ -44,10 +44,12 @@ namespace BookCave.Controllers
         {
             
         }
-        public void AddToCart(int id)
+        public IActionResult AddToCart(int id)
         {
             var user = _userManager.GetUserId(HttpContext.User);
             _cartService.AddToCart(user, id);
+
+            return Ok();
         }
     }
 }
