@@ -279,6 +279,7 @@ namespace BookCave.Repositories
             return bookDetails;
         }
 
+        
         public bool ContainsIsbn(int isbn)
         {
 
@@ -529,20 +530,20 @@ namespace BookCave.Repositories
             return id;
         }
 
-        public List<int> GetBookAuthorConnectionId(int bookId)
+        public List<int> GetBookAuthorConnections(int bookId)
         {
             var ids = (from a in _db.BookAuthorConnections
                        where a.BookId == bookId
-                       select a.Id).ToList();
+                       select a).ToList();
 
             return ids;
         }
 
-        public List<int> GetBookGenreConnectionId(int bookId)
+        public List<int> GetBookGenreConnections(int bookId)
         {
             var ids = (from g in _db.BookGenreConnections
                        where g.BookId == bookId
-                       select g.Id).ToList();
+                       select g).ToList();
 
             return ids;
         }
@@ -552,7 +553,7 @@ namespace BookCave.Repositories
             var id = (from c in _db.CoverImages
                       where c.BookId == bookId
                       select c.Id).SingleOrDefault();
-                      
+
             return id;
         }
     }

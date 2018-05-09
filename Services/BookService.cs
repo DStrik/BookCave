@@ -52,6 +52,7 @@ namespace BookCave.Services
             
             var details = new BookDetails
             {
+                Id = _bookRepo.GetDetailsId(book.BookId),
                 BookId = book.BookId,
                 Description = book.Description,
                 Font = book.Font,
@@ -60,17 +61,6 @@ namespace BookCave.Services
             };
 
             _bookRepo.ModBookDetails(details);
-
-            foreach(var id in book.Author)
-            {
-                var AuthorConnection = new BookAuthorConnection
-                {
-                    BookId = book.BookId,
-                    AuthorId = id
-                };
-
-                _bookRepo.ModBookAuthorConnection(AuthorConnection);
-            }
 
             foreach(var id in book.Genre)
             {
@@ -89,6 +79,7 @@ namespace BookCave.Services
                     await book.NewCoverImage.CopyToAsync(memoryStream);
                     var img = new CoverImage
                     {
+                        Id = _bookRepo.GetCoverImageId(book.BookId),
                         BookId = book.BookId,
                         Img = memoryStream.ToArray()
                     };
