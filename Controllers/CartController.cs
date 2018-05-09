@@ -45,17 +45,10 @@ namespace BookCave.Controllers
         {
             
         }
-<<<<<<< HEAD
-        public void AddToCart(int bookId)
-        {
-            var user = _userManager.GetUserId(HttpContext.User);
-            _cartService.AddToCart(user, bookId);
-=======
-        public void AddToCart(int id)
+         public void AddToCart(int id)
         {
             var user = _userManager.GetUserId(HttpContext.User);
             _cartService.AddToCart(user, id);
->>>>>>> 867a40dcf9ccc0ef30d1b67a07f8076f9e9bf5cb
         }
     }
 }
