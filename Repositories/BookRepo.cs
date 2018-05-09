@@ -50,9 +50,9 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void ModBookGenreConnection(BookGenreConnection connection)
+        public void RemoveBookGenreConnection(BookGenreConnection connection)
         {
-            _db.Update(connection);
+            _db.Remove(connection);
             _db.SaveChanges();
         }
 
@@ -62,9 +62,9 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void ModBookAuthorConnection(BookAuthorConnection connection)
+        public void RemoveBookAuthorConnection(BookAuthorConnection connection)
         {
-            _db.Update(connection);
+            _db.Remove(connection);
             _db.SaveChanges();
         }
 
@@ -522,7 +522,7 @@ namespace BookCave.Repositories
                 return retBook;
         }
 
-        public int GetDetailsId(int bookId)
+        public int ModDetailsId(int bookId)
         {
             var id = (from d in _db.BookDetails
                       where d.BookId == bookId
@@ -530,22 +530,22 @@ namespace BookCave.Repositories
             return id;
         }
 
-        public List<int> GetBookAuthorConnections(int bookId)
+        public List<BookAuthorConnection> GetBookAuthorConnections(int bookId)
         {
-            var ids = (from a in _db.BookAuthorConnections
+            var bac = (from a in _db.BookAuthorConnections
                        where a.BookId == bookId
                        select a).ToList();
 
-            return ids;
+            return bac;
         }
 
-        public List<int> GetBookGenreConnections(int bookId)
+        public List<BookGenreConnection> GetBookGenreConnections(int bookId)
         {
-            var ids = (from g in _db.BookGenreConnections
+            var bgc = (from g in _db.BookGenreConnections
                        where g.BookId == bookId
                        select g).ToList();
 
-            return ids;
+            return bgc;
         }
 
         public int GetCoverImageId(int bookId)

@@ -62,14 +62,36 @@ namespace BookCave.Services
 
             _bookRepo.ModBookDetails(details);
 
-            foreach(var id in book.Genre)
+            var genreConnections = _bookRepo.GetBookGenreConnections(book.BookId);
+            foreach(var g in genreConnections)
             {
-                var GenreConnection = new BookGenreConnection
+                _bookRepo.RemoveBookGenreConnection(g);
+            }
+
+            foreach(var g in book.Genre)
+            {
+                var genreConnection = new BookGenreConnection
                 {
                     BookId = book.BookId,
-                    GenreId = id
+                    GenreId = g
                 };
-                _bookRepo.ModBookGenreConnection(GenreConnection);
+                _bookRepo.AddBookGenreConnection(genreConnection);
+            }
+
+            var authorConnections = _bookRepo.GetBookAuthorConnections(book.BookId);
+            foreach(var a in authorConnections)
+            {
+                _bookRepo.RemoveBookAuthorConnection(a);
+            }
+
+            foreach(var a in book.Author)
+            {
+                var authorConnection = new BookAuthorConnection
+                {
+                    BookId = book.BookId,
+                    AuthorId = a
+                };
+                _bookRepo.AddBookAuthorConnection(authorConnection);
             }
 
             if (book.NewCoverImage != null)
