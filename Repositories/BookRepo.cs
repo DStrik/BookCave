@@ -50,9 +50,9 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void ModBookGenreConnection(BookGenreConnection connection)
+        public void RemoveBookGenreConnection(BookGenreConnection connection)
         {
-            _db.Update(connection);
+            _db.Remove(connection);
             _db.SaveChanges();
         }
 
@@ -62,9 +62,9 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void ModBookAuthorConnection(BookAuthorConnection connection)
+        public void RemoveBookAuthorConnection(BookAuthorConnection connection)
         {
-            _db.Update(connection);
+            _db.Remove(connection);
             _db.SaveChanges();
         }
 
@@ -279,6 +279,7 @@ namespace BookCave.Repositories
             return bookDetails;
         }
 
+        
         public bool ContainsIsbn(int isbn)
         {
 
@@ -308,7 +309,7 @@ namespace BookCave.Repositories
             _db.Books.Attach(book);
             _db.Books.Remove(book);
             
-            var bookDetails = new BookDetails { Id = bookId};
+            var bookDetails = GetDetails(bookId);
             _db.BookDetails.Attach(bookDetails);
             _db.BookDetails.Remove(bookDetails);
 
@@ -498,7 +499,7 @@ namespace BookCave.Repositories
                 PublishingYear = book.PublishingYear,
                 PageCount = details.PageCount,
                 Length = details.Length,
-                CoverImage = coverImage
+                CurrentCoverImage = coverImage
             };
 
             return bookDetails;
@@ -521,7 +522,7 @@ namespace BookCave.Repositories
                 return retBook;
         }
 
-        public int GetDetailsId(int bookId)
+        public int ModDetailsId(int bookId)
         {
             var id = (from d in _db.BookDetails
                       where d.BookId == bookId
@@ -529,22 +530,22 @@ namespace BookCave.Repositories
             return id;
         }
 
-        public List<int> GetBookAuthorConnectionId(int bookId)
+        public List<BookAuthorConnection> GetBookAuthorConnections(int bookId)
         {
-            var ids = (from a in _db.BookAuthorConnections
+            var bac = (from a in _db.BookAuthorConnections
                        where a.BookId == bookId
-                       select a.Id).ToList();
+                       select a).ToList();
 
-            return ids;
+            return bac;
         }
 
-        public List<int> GetBookGenreConnectionId(int bookId)
+        public List<BookGenreConnection> GetBookGenreConnections(int bookId)
         {
-            var ids = (from g in _db.BookGenreConnections
+            var bgc = (from g in _db.BookGenreConnections
                        where g.BookId == bookId
-                       select g.Id).ToList();
+                       select g).ToList();
 
-            return ids;
+            return bgc;
         }
 
         public int GetCoverImageId(int bookId)
@@ -552,7 +553,7 @@ namespace BookCave.Repositories
             var id = (from c in _db.CoverImages
                       where c.BookId == bookId
                       select c.Id).SingleOrDefault();
-                      
+
             return id;
         }
     }

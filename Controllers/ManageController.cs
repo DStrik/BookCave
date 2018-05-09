@@ -42,8 +42,12 @@ namespace BookCave.Controllers
         [HttpPost]
         public IActionResult AddBook(BookInputModel model)
         {
-            _bookService.AddBook(model);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _bookService.AddBook(model);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         [HttpGet]
@@ -54,6 +58,7 @@ namespace BookCave.Controllers
             return Json(allAuthors);
         }
 
+        [HttpGet]
         public IActionResult GetAllGenres()
         {
             var allGenres = _bookService.GetAllGenres();
@@ -66,6 +71,7 @@ namespace BookCave.Controllers
             return Json(allPublishers);
         }
 
+        [HttpGet]
         public IActionResult ViewBooks()
         {
             return View();
@@ -74,15 +80,19 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult ModifyBookById(int id)
         {
-
             var book = _bookService.GetBookModifyModel(id);
-            return View(book); 
-
+            return View(book);
         }
 
-        public IActionResult GetBookModifyModel(int id)
+        [HttpPost]
+        public IActionResult ModifyBookById(BookModifyInputModel model)
         {
-            return Json(_bookService.GetBookModifyModel(id));
+            if (ModelState.IsValid)
+            {
+                _bookService.ModifyBook(model);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpGet]
@@ -101,8 +111,12 @@ namespace BookCave.Controllers
         [HttpPost]
         public IActionResult AddAuthor(AuthorInputModel model)
         {
-            _bookService.AddAuthor(model);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _bookService.AddAuthor(model);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpGet]
@@ -114,8 +128,12 @@ namespace BookCave.Controllers
         [HttpPost]
         public IActionResult AddPublisher(PublisherInputModel model)
         {
+            if (ModelState.IsValid)
+            {
             _bookService.AddPublisher(model);
-            return RedirectToAction("Index");
+            return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpGet]
@@ -127,8 +145,13 @@ namespace BookCave.Controllers
         [HttpPost]
         public IActionResult AddGenre(GenreInputModel model)
         {
-            _bookService.AddGenre(model);
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            {
+                _bookService.AddGenre(model);
+                return Ok();
+            }
+            return BadRequest();
+            
         }
 
         [HttpPost]
@@ -137,12 +160,20 @@ namespace BookCave.Controllers
             _bookService.RemoveBookById(id);
         }
 
+        [HttpGet]
         public IActionResult Orders()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Stock()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateStock()
         {
             return View();
         }
@@ -173,22 +204,17 @@ namespace BookCave.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult ViewEmployeesList()
         {
             return View();
         }
 
 
+        [HttpGet]
         public IActionResult ChangePassword()
         {
             return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOut()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Error()

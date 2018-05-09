@@ -9,6 +9,7 @@
 
             <form asp-action="addbook" asp-controller="manage" enctype="multipart/form-data" method="POST">
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Type"></span>
                 <div class="form-inline mt-2 mb-4 row" id="typeSelector">
                     <div class="form-check col">
                         <input class="form-check-input" asp-for="Type" type="radio" id="typePaperback" checked="checked" value="Paperback" required>
@@ -31,6 +32,7 @@
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Title"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Title</p>
                     <div class="col-md-8">
@@ -38,14 +40,16 @@
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Isbn"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">ISBN</p>
                     <div class="col-md-8">
-                        <input asp-for="Isbn" class="form-control pt-0" type="text" required>
+                        <input asp-for="Isbn" class="form-control pt-0" type="text" required pattern="^(97(8|9))?\d{9}(\d|X)$" title="Must be a valid ISBN!">
                     </div>
                 </div>
 
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Author"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Author(s) <a asp-controller="manage" asp-action="addauthor" target="_blank" class="btn btn-outline-info waves-effect btn-sm px-2">New author</a></p>
                     <div class="col-md-6">
@@ -59,6 +63,7 @@
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Genre"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Genre(s) <a asp-controller="manage" asp-action="addgenre" target="_blank" class="btn btn-outline-info waves-effect btn-sm px-2">New genre</a></p>
                     <div class="col-md-6">
@@ -68,10 +73,11 @@
                         <button class="btn-save btn btn-primary btn-sm">Save</button>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-outline-info waves-effect btn-sm ">Refresh</a>
+                        <a class="btn btn-outline-info waves-effect btn-sm" id="refreshGenres">Refresh</a>
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="PublisherId"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Publisher <a asp-controller="manage" asp-action="addpublisher" target="_blank" class="btn btn-outline-info waves-effect btn-sm px-2">New publisher</a></p>
                     <div class="col-md-6">
@@ -81,10 +87,11 @@
                         <button class="btn-save btn btn-primary btn-sm">Save</button>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-outline-info waves-effect btn-sm ">Refresh</a>
+                        <a class="btn btn-outline-info waves-effect btn-sm" id="refreshPublishers">Refresh</a>
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Description"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Description</p>
                     <div class="col-md-8">
@@ -93,7 +100,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Page count</p>
@@ -109,6 +115,7 @@
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Price"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Price</p>
                     <div class="col-md-8">
@@ -116,13 +123,15 @@
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="PublishingYear"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Publishing year</p>
                     <div class="col-md-8">
-                        <input asp-for="PublishingYear" class="form-control pt-0" type="text" required>
+                        <input asp-for="PublishingYear" class="form-control pt-0" type="text" required min="1900" max="2100" title="Must be a range from 1900-2100">
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Font"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Font</p>
                     <div class="col-md-8">
@@ -130,6 +139,7 @@
                     </div>
                 </div>
 
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="CoverImage"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Cover Image</p>
 

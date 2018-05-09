@@ -8,7 +8,8 @@
         <div class="card-body ">
 
             <form asp-action="AddPublisher" asp-controller="Manage" method="POST">
-
+                
+                <span class="mr-5 font-weight-light text-danger" asp-validation-for="Name"></span>
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2">Publisher Name</p>
                     <div class="col-md-8">

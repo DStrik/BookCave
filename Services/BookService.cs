@@ -37,49 +37,76 @@ namespace BookCave.Services
         {
             return _bookRepo.GetBookModify(bookId);
         }
-        public void ModifyBook(BookModifyInputModel book)
+        public async void ModifyBook(BookModifyInputModel book)
         {
             var bookEntity = new Book
-            {
+            { 
                 Id = book.BookId,
                 Title = book.Title,
                 Isbn = book.Isbn,
-                PublishingYear = (int)book.PublishingYear,
+                PublishingYear = book.PublishingYear ?? default(int),
                 Type = book.Type,
-                Price = (double)book.Price,
-                PublisherId = (int)book.Publisher
+                Price = book.Price ?? default(double),
+                PublisherId = book.Publisher ?? default(int)
             };
             
             var details = new BookDetails
             {
+                Id = _bookRepo.GetDetailsId(book.BookId),
                 BookId = book.BookId,
                 Description = book.Description,
                 Font = book.Font,
-                PageCount = (int)book.PageCount,
-                Length = (int)book.Length
+                PageCount = book.PageCount ?? default(int),
+                Length = book.Length ?? default(int)
             };
 
             _bookRepo.ModBookDetails(details);
 
-            foreach(var id in book.Author)
+            var genreConnections = _bookRepo.GetBookGenreConnections(book.BookId);
+            foreach(var g in genreConnections)
             {
-                var AuthorConnection = new BookAuthorConnection
-                {
-                    BookId = book.BookId,
-                    AuthorId = id
-                };
-
-                _bookRepo.ModBookAuthorConnection(AuthorConnection);
+                _bookRepo.RemoveBookGenreConnection(g);
             }
 
-            foreach(var id in book.Genre)
+            foreach(var g in book.Genre)
             {
-                var GenreConnection = new BookGenreConnection
+                var genreConnection = new BookGenreConnection
                 {
                     BookId = book.BookId,
-                    GenreId = id
+                    GenreId = g
                 };
-                _bookRepo.ModBookGenreConnection(GenreConnection);
+                _bookRepo.AddBookGenreConnection(genreConnection);
+            }
+
+            var authorConnections = _bookRepo.GetBookAuthorConnections(book.BookId);
+            foreach(var a in authorConnections)
+            {
+                _bookRepo.RemoveBookAuthorConnection(a);
+            }
+
+            foreach(var a in book.Author)
+            {
+                var authorConnection = new BookAuthorConnection
+                {
+                    BookId = book.BookId,
+                    AuthorId = a
+                };
+                _bookRepo.AddBookAuthorConnection(authorConnection);
+            }
+
+            if (book.NewCoverImage != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await book.NewCoverImage.CopyToAsync(memoryStream);
+                    var img = new CoverImage
+                    {
+                        Id = _bookRepo.GetCoverImageId(book.BookId),
+                        BookId = book.BookId,
+                        Img = memoryStream.ToArray()
+                    };
+                    _bookRepo.ModImage(img);
+                }
             }
         }
         public async void AddBook(BookInputModel book)

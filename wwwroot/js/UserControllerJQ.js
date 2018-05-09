@@ -193,5 +193,10 @@ $(document).ready(function () {
     });
 
     // End of Modal controller
+
+    $("#EditImage").click(function (e) { 
+        e.preventDefault();
+        $("#UploadImageModal").modal("show");
+    });
 });
 

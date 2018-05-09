@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
-namespace BookCave.Models.ViewModels
+namespace BookCave.Models.InputModels
 {
     public class BookModifyInputModel
     {
-        public int BookId { get; set; }[Required(ErrorMessage = "Title is required!")]
+        [Required]
+        public int BookId { get; set; }
+
+        [Required(ErrorMessage = "Title is required!")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "ISBN is required!")]
@@ -24,8 +28,9 @@ namespace BookCave.Models.ViewModels
         [Required(ErrorMessage = "Descripton is required!")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Cover Image is required!")]
-        public byte[] CoverImage { get; set; }
+        public byte[] CurrentCoverImage { get; set; }
+
+        public IFormFile NewCoverImage { get; set; }
 
         [Required(ErrorMessage = "Price is required!")]
         public double? Price { get; set; }

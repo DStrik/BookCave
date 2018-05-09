@@ -28,15 +28,15 @@ $('#refreshPublisher').click(function () {
 })
 
 function getAllAuthors() {
-  getSelectList("../GetAllAuthors", "#authorList", "Author(s)", "Author");
+  getSelectList("/Manage/GetAllAuthors", "#authorList", "Author(s)", "Author");
 }
 
 function getAllGenres() {
-  getSelectList("../GetAllGenres", "#genreList", "Genre(s)", "Genre");
+  getSelectList("/Manage/GetAllGenres", "#genreList", "Genre(s)", "Genre");
 }
 
 function getAllPublishers() {
-  getSelectList("../GetAllPublishers", "#publisherList", "Publisher", "Publisher");
+  getSelectList("/Manage/GetAllPublishers", "#publisherList", "Publisher", "Publisher");
 }
 
 
@@ -44,32 +44,24 @@ function getAllPublishers() {
 function getSelectList(callAction, selectList, fieldName, idOfOld) {
   $.get(callAction, function (data, status) {
     $(selectList).material_select('destroy');
-    $(selectList).empty();
-    $(selectList).append('<option value="" disabled selected>Select ' + fieldName + '...</option>');
-
+    var markup = "";
+    markup += '<option value="" disabled selected>Select ' + fieldName + '...</option>';
     var arr = [];
-
     $("#old" + idOfOld + " span").each(function (index, elem) {
       arr.push(Number($(this).text()));
     });
-
     var oldList = "";
-    var SelectionListToPrint = "";
-
     $.each(data, function (i, j) {
       if ($.inArray(j.id, arr) !== -1) {
         oldList += '"' + j.name + '"'
-        SelectionListToPrint += '<option value="' + j.id + '" selected>' + j.name + '</option>';
+        markup += '<option value="' + j.id + '" selected>' + j.name + '</option>';
       } else {
-        SelectionListToPrint += '<option value="' + j.id + '">' + j.name + '</option>';
+        markup += '<option value="' + j.id + '">' + j.name + '</option>';
       }
     });
-
     $("#old" + idOfOld + "List").text(oldList);
-    $(selectList).html(SelectionListToPrint);
-
-    $(selectList).append('<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>');
-
+    markup += '<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>';
+    $(selectList).html(markup);
     $(selectList).material_select();
   }).fail(function (err) {
     alert("Error has occured! Selection field for " + fieldName + " could not be obtained!");
@@ -94,3 +86,15 @@ function toggleAudioAndOthers(setToType) {
     $("#pageCount").prop("disabled", false);
   }
 }
+
+
+$("#submitModifications").one("click", function() {
+  var that = $(this);
+  var form = $("#modifyBookForm").serialize();
+  $.post("/Manage/ModifyBookById", form, function(){
+    that.on();
+    alert("changed beeetch");
+  }).fail(function(){
+    alert("lol nice try");
+  });
+});

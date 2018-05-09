@@ -18,7 +18,7 @@ namespace BookCave.Data
         public DbSet<OrderInfo> OrderInfo { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<FavBook> FavBooks { get; set; }
-        public DbSet<ProfileImage> ProfileImages { get; set; }
+        public DbSet<AccountImage> AccountImages { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<ShippingBilling> ShippingBillingInfo { get; set; }
         public DbSet<Stock> Stocks { get; set; }

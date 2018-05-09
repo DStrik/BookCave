@@ -14,7 +14,7 @@
                                 <th>Type</th>
                                 <th>Publishing Year</th>
                                 <th>ISBN</th>
-                                <th class="text-center">Actions</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <h4 class="text-center" id="modalText">Are you sure you would like to delete the book "<span>BOOK TITLE</span>"?</h4>
+                        <h4 class="text-center">Are you sure you would like to delete the book "<span class="modalBookTitle">BOOK TITLE</span>"?</h4>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
 
 
 <!-- Success delete modal -->
-<div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-notify modal-success" role="document">
         <!--Content-->
         <div class="modal-content">
@@ -115,12 +115,12 @@
             <div class="modal-body">
                 <div class="text-center">
                     <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
-                    <p>Book has been successfully deleted!</p>
+                    <p><span class="modalBookTitle"></span>has been successfully deleted!</p>
                 </div>
             </div>
 
             <div class="modal-footer justify-content-center">
-                <a type="button" class="btn btn-primary">Close!</a>
+                <a type="button" class="btn btn-primary" data-dismiss="modal">Close!</a>
             </div>
 
         </div>
@@ -149,7 +149,7 @@
                 <div class="row">
                     <div class="text-center">
                         <p><strong>Something went wrong!</strong></p>
-                        <p>There was an error in the server when attempting to delete this book</p>
+                        <p>There was an error in the server when attempting to delete <span class="modalBookTitle"></span></p>
                     </div>
                 </div>
             </div>
