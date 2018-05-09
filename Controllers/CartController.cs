@@ -29,9 +29,8 @@ namespace BookCave.Controllers
             return View(cartItems);
         }
         [HttpPost]
-        public async void ChangeQuantity(int[] qtys, int[] cartItemIds)
+        public void ChangeQuantity(int[] qtys, int[] cartItemIds)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
             _cartService.ChangeQuantity(qtys, cartItemIds);
 
         }
