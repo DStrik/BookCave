@@ -50,9 +50,9 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void ModBookGenreConnection(BookGenreConnection connection)
+        public void RemoveBookGenreConnection(BookGenreConnection connection)
         {
-            _db.Update(connection);
+            _db.Remove(connection);
             _db.SaveChanges();
         }
 
@@ -62,9 +62,9 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void ModBookAuthorConnection(BookAuthorConnection connection)
+        public void RemoveBookAuthorConnection(BookAuthorConnection connection)
         {
-            _db.Update(connection);
+            _db.Remove(connection);
             _db.SaveChanges();
         }
 
@@ -522,7 +522,7 @@ namespace BookCave.Repositories
                 return retBook;
         }
 
-        public int GetDetailsId(int bookId)
+        public int ModDetailsId(int bookId)
         {
             var id = (from d in _db.BookDetails
                       where d.BookId == bookId
