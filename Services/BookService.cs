@@ -16,7 +16,14 @@ namespace BookCave.Services
         }
         public List<BookViewModel> GetTop10()
         {
-            return null;
+            var top10BookIds = _bookRepo.GetTop10();
+            var top10 = new List<BookViewModel>();
+            foreach(int i in top10BookIds)
+            {
+                var book = GetBookById(i);
+                top10.Add(book);
+            }
+            return top10;
         }
         public List<BookViewModel> GetNewReleases()
         {
@@ -30,10 +37,10 @@ namespace BookCave.Services
         {
             return _bookRepo.GetBookModify(bookId);
         }
-        public void ModifyBook(BookModifyInputModel book)
+        public async void ModifyBook(BookModifyInputModel book)
         {
             var bookEntity = new Book
-            {
+            { 
                 Id = book.BookId,
                 Title = book.Title,
                 Isbn = book.Isbn,
@@ -77,7 +84,16 @@ namespace BookCave.Services
 
             if (book.NewCoverImage != null)
             {
-                _bookRepo.ModCoverImage(book.NewCoverImage);
+                using (var memoryStream = new MemoryStream())
+                {
+                    await book.NewCoverImage.CopyToAsync(memoryStream);
+                    var img = new CoverImage
+                    {
+                        BookId = book.BookId,
+                        Img = memoryStream.ToArray()
+                    };
+                    _bookRepo.ModImage(img);
+                }
             }
         }
         public async void AddBook(BookInputModel book)

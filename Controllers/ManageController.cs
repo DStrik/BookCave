@@ -90,9 +90,9 @@ namespace BookCave.Controllers
             if (ModelState.IsValid)
             {
                 _bookService.ModifyBook(model);
-                return RedirectToAction("Index");
+                return Ok();
             }
-            return View();
+            return BadRequest();
         }
 
         [HttpGet]

@@ -29,8 +29,14 @@ namespace BookCave.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
+            var user = await _userManager.FindByEmailAsync("danni@danni.is");
+            if(user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
+
             return View();
         }
 
@@ -68,7 +74,7 @@ namespace BookCave.Controllers
                 return View();
             }
 
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Image = GetDefaultProfileImage()};
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -77,7 +83,7 @@ namespace BookCave.Controllers
                 await _userManager.AddToRoleAsync(user, "User");
 
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
-                await _userManager.AddClaimAsync(user, new Claim("Image", $"{user.Image}"));
+            //    await _userManager.AddClaimAsync(user, new Claim("Image", $"{user.Image}"));
                 
                 await _signInManager.SignInAsync(user, false);
 

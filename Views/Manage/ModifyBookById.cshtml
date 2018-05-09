@@ -7,7 +7,9 @@
         </div>
         <div class="card-body ">
 
-            <form asp-action="addbook" asp-controller="manage" enctype="multipart/form-data" method="POST">
+            <form id="modifyBookForm" enctype="multipart/form-data" method="POST">
+
+                <input type="text" class="d-none" asp-for="BookId">
 
                 <div class="form-inline mt-2 mb-4 row" id="typeSelector">
                     <div class="form-check col">
@@ -188,10 +190,8 @@
 
                 <div class="text-right">
                     <button class="btn btn-danger waves-light">Cancel</button>
-                    <input type="submit" class="btn success-color-dark waves-light" value="Add book!">
+                    <button id="submitModifications" type="button" class="btn success-color-dark waves-light" value="Add book!">Modify book!</button>
                 </div>
-
-
             </form>
 
         </div>

@@ -6,7 +6,10 @@ namespace BookCave.Models.InputModels
 {
     public class BookModifyInputModel
     {
-        public int BookId { get; set; }[Required(ErrorMessage = "Title is required!")]
+        [Required]
+        public int BookId { get; set; }
+
+        [Required(ErrorMessage = "Title is required!")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "ISBN is required!")]
