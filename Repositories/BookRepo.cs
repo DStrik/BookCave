@@ -522,7 +522,7 @@ namespace BookCave.Repositories
                 return retBook;
         }
 
-        public int ModDetailsId(int bookId)
+        public int GetDetailsId(int bookId)
         {
             var id = (from d in _db.BookDetails
                       where d.BookId == bookId
