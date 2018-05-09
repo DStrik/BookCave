@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace BookCave.Migrations
@@ -118,6 +120,24 @@ namespace BookCave.Migrations
                     b.ToTable("BookReviews");
                 });
 
+            modelBuilder.Entity("BookCave.Data.EntityModels.BooksInOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<double>("Price");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BooksInOrder");
+                });
+
             modelBuilder.Entity("BookCave.Data.EntityModels.CartItem", b =>
                 {
                     b.Property<int>("Id")
@@ -188,20 +208,6 @@ namespace BookCave.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.OrderBooksConnection", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BookId");
-
-                    b.Property<int>("OrderId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrderBooksConnection");
-                });
-
             modelBuilder.Entity("BookCave.Data.EntityModels.OrderInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -222,6 +228,14 @@ namespace BookCave.Migrations
                     b.Property<string>("BillingZipCode");
 
                     b.Property<int>("OrderId");
+
+                    b.Property<string>("PaymentCardNumber");
+
+                    b.Property<string>("PaymentExpirationMonth");
+
+                    b.Property<string>("PaymentExpirationYear");
+
+                    b.Property<string>("PaymentFullName");
 
                     b.Property<string>("ShippingCity");
 
@@ -269,7 +283,7 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Img");
+                    b.Property<byte[]>("Img");
 
                     b.Property<string>("UserId");
 
