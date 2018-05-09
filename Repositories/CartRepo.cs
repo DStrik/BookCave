@@ -27,12 +27,17 @@ namespace BookCave.Repositories
             return cartItem;
         }
 
-        public void ChangeQuantity(List<CartItem> items)
+        public void ChangeQuantities(List<CartItem> items)
         {
             foreach(CartItem i in items)
             {
                 _db.Update(i);
             }
+            _db.SaveChanges();
+        }
+        public void ChangeQuantity(CartItem item)
+        {
+            _db.Update(item);
             _db.SaveChanges();
         }
 
@@ -50,6 +55,27 @@ namespace BookCave.Repositories
         {
             _db.Add(item);
             _db.SaveChanges();
+        }
+        public bool Contains(string userId, int bookId)
+        {
+            var item = (from i in _db.CartItems
+                        where i.UserId == userId && i.BookId == bookId
+                        select i).SingleOrDefault();
+            if(item == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public CartItem GetCartItemByIds(string userId, int bookId)
+        {
+            var item = (from i in _db.CartItems
+                        where i.UserId == userId && i.BookId == bookId
+                        select i).SingleOrDefault();
+            return item;
         }
     }
 }

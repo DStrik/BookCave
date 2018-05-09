@@ -43,15 +43,10 @@ namespace BookCave.Controllers
         {
             
         }
-        public void AddToCart(ApplicationUser user, int bookId)
+        public async void AddToCart(int bookId)
         {
-                var item = new CartItem {
-                BookId = bookId,
-                UserId = user.Id,
-                Quantity = 1
-
-                };
-            _cartService.AddToCart(item);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            _cartService.AddToCart(user.Id, bookId);
         }
 
     }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
+using BookCave.Models;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
@@ -11,15 +12,17 @@ namespace BookCave.Services
     {
 
         private CartRepo _cartRepo;
+        private BookService _bookService;
         public CartService()
         {
             _cartRepo = new CartRepo();
+            _bookService = new BookService();
         }
 
         public List<BookCartViewModel> GetCart(string userId)
         {            
             var booksInCart = new List<BookCartViewModel>();
-            var _bookService = new BookService();
+            
             var cartItems = _cartRepo.GetCart(userId);
             foreach(var item in cartItems)
             {
@@ -38,7 +41,7 @@ namespace BookCave.Services
                 item.Quantity = qtys[i];
                 cartItems.Add(item);
             }
-            _cartRepo.ChangeQuantity(cartItems);
+            _cartRepo.ChangeQuantities(cartItems);
         }
 
         public void RemoveItem(int cartItemId)
@@ -50,9 +53,26 @@ namespace BookCave.Services
         {
             
         }
-        public void AddToCart(CartItem item)
-        {
-            _cartRepo.AddToCart(item);
+        public void AddToCart(string userId, int bookId)
+        {   
+            var contains = _cartRepo.Contains(userId, bookId);
+            if(contains)
+            {
+                var item = _cartRepo.GetCartItemByIds(userId, bookId);
+                item.Quantity += 1;
+                _cartRepo.ChangeQuantity(item);
+            
+            }
+            else
+            {
+                CartItem item = new CartItem
+                {
+                    UserId  = userId,
+                    BookId = bookId,
+                    Quantity = 1
+                };
+                _cartRepo.AddToCart(item);
+            }
         }
     }
 }
