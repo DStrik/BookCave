@@ -520,5 +520,40 @@ namespace BookCave.Repositories
 
                 return retBook;
         }
+
+        public int GetDetailsId(int bookId)
+        {
+            var id = (from d in _db.BookDetails
+                      where d.BookId == bookId
+                      select d.Id).SingleOrDefault();
+            return id;
+        }
+
+        public List<int> GetBookAuthorConnectionId(int bookId)
+        {
+            var ids = (from a in _db.BookAuthorConnections
+                       where a.BookId == bookId
+                       select a.Id).ToList();
+
+            return ids;
+        }
+
+        public List<int> GetBookGenreConnectionId(int bookId)
+        {
+            var ids = (from g in _db.BookGenreConnections
+                       where g.BookId == bookId
+                       select g.Id).ToList();
+
+            return ids;
+        }
+
+        public int GetCoverImageId(int bookId)
+        {
+            var id = (from c in _db.CoverImages
+                      where c.BookId == bookId
+                      select c.Id).SingleOrDefault();
+                      
+            return id;
+        }
     }
 }
