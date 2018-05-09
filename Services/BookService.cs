@@ -16,7 +16,14 @@ namespace BookCave.Services
         }
         public List<BookViewModel> GetTop10()
         {
-            return null;
+            var top10BookIds = _bookRepo.GetTop10();
+            var top10 = new List<BookViewModel>();
+            foreach(int i in top10BookIds)
+            {
+                var book = GetBookById(i);
+                top10.Add(book);
+            }
+            return top10;
         }
         public List<BookViewModel> GetNewReleases()
         {

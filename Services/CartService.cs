@@ -49,9 +49,15 @@ namespace BookCave.Services
             CartItem item = _cartRepo.GetCartItem(cartItemId);
             _cartRepo.RemoveItem(item);
         }
-        public void ClearCart(int UserId)
+        public void ClearCart(int[] cartItems)
         {
-            
+            var items = new List<CartItem>();
+            foreach(int i in cartItems)
+            {
+                var item = _cartRepo.GetCartItem(i);
+                items.Add(item);
+            }
+            _cartRepo.ClearCart(items);
         }
         public void AddToCart(string userId, int bookId)
         {   

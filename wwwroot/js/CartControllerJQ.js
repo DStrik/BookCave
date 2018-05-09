@@ -23,7 +23,6 @@ $(document).ready(function(){
         var totalArray = $('.amount').map(function(){
             return $.trim($(this).text());
         }).get();
-
         $.each(totalArray, function(i, j) {
             total += Number(j);
         });
@@ -62,8 +61,30 @@ $(document).ready(function(){
         });
     });
     $(".removeBtn").click(function(){
+        var deletionRow = $(this).closest("tr");
         var id = Number($(this).parent().next().find("p").text());
         $.post("/Cart/RemoveItem", {"cartItemId": id}, function(data, status){
+            deletionRow.fadeOut(function() {
+                $(this).remove();
+                getTotal();
+            });   
         });
     });
+    $("#clearAll").click(function(){
+        var cartItems = [];
+        $(".cartItem").each(function(){
+            var id = $(this).text();
+            cartItems.push(id);
+        });
+        $.post("/Cart/ClearCart", {"cartItems": cartItems}, function(data, status){
+            $(".price").each(function(){
+                var deletionRow = $(this).closest("tr");
+                deletionRow.slideUp(function(){
+                    $(this).remove();
+                    getTotal();
+                })
+            })
+        });
+    });
+    Update();
 });
