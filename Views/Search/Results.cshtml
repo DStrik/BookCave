@@ -1,7 +1,29 @@
 @model List<BookCave.Models.ViewModels.BookViewModel>
-    <div class="row col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5 container body-container elflow">
+    <div class="card">
+        <div class="card-body row">
+            <div class="col-md-2">
+                <select asp-for="GenreIds" id="genreList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
+                    <option value="" disabled selected>Filter by Genre(s)...</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select asp-for="PublisherIds" id="publisherList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
+                    <option value="" disabled selected>Select Publisher(s)...</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select asp-for="Types" id="publisherList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
+                    <option value="" disabled selected>Select Format(s)...</option>
+                    <option value="Paperback">Paperback</option>
+                    <option value="Hardcover">Hardcover</option>
+                    <option value="E-book">E-book</option>                            
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row col-lg-8 col-md-12 offset-lg-2 wow fadeIn mb-5 container body-container">
         @foreach(var book in Model) {
-        <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch elflow">
+        <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch">
             <div class="card card-ecommerce">
                 <div class="row view overlay justify-content-center">
                     <img class="card-img-top thumb " src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) ">
