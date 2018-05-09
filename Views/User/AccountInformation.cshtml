@@ -1,21 +1,50 @@
-@model BookCave.Models.InputModels.ShippingBillingInputModel
+@model BookCave.Models.ViewModels.AccountViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var nameClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
+}
 
 <div class="container body-container">
     <!-- Row 1 -->
     <div class="row justify-content-center">
         <!-- Column 1 -->
         <div class="col-lg-4">
-            <!-- Card -->
-            <div class="card testimonial-card">
+            <!-- Card Wider -->
+            <div class="card card-cascade wider">
 
-                <!-- Bacground color -->
-                <div class="card-up blue-gradient lighten-1">
+            <!-- Card image -->
+            <div class="view overlay" id="EditImage">
+                <img height="250px" width="100%" style="object-fit:fill" class="card-img-top" src="data:image/jpg;base64, @Convert.ToBase64String(@Model.Image)" alt="Profile Picture">
+                <div class="mask flex-center rgba-white-strong">
+                    <p class="black-text">Edit Image</p>
                 </div>
-
-                <!-- Avatar -->
-                @await Html.PartialAsync("_AccountInfoPartial")
             </div>
-            <!-- Card -->
+
+            <!-- Card content -->
+            <div class="card-body text-center">
+
+                <!-- Title -->
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="card-body">
+                        <!-- Name -->
+                        <h4 class="card-title mb-0"><strong>@nameClaim</strong></h4>
+                    </div>
+                }
+                <!-- Button -->
+                <button type="button" class="btn btn-elegant mt-3"><i class="fa fa-user-o pr-2" aria-hidden="true"></i>Change Name</button>
+                <!-- Button -->
+
+            </div>
+
+            </div>
+            <!-- Card Wider -->
         </div>
         <!-- Column 1 -->
     </div>
@@ -44,7 +73,7 @@
                         <td>My Favorite Book</td>
                     </tr>
                     <tr>
-                        <td id="changeShippingBilling">Change Shipping/Billing Information</td>
+                        <td>I don't do anything</td>
                     </tr>
                     <tr>
                         <td>Payment Options</td>
@@ -56,23 +85,30 @@
             <!--Table-->
         </div>
         <div class="col-lg-4">
-            <table class="table">
+            <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Purchases</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="hover-pointer">
+
                     <tr>
-                        <td>
-                            <ul>
-                                <li>Order history</li>
-                                <li>Cart</li>
-                                <li>Wish List</li>
-                                <li>Review My Books</li>
-                            </ul>
-                        </td>
+                        <td class="shipping-billing-button-style"><a asp-controller="User" asp-action="EditSippingBilling" class="shipping-billing-button-style">Change Shipping/Billing Information</a></td>
                     </tr>
+
+                    <tr>
+                        <td>Order History</td>
+                    </tr>
+
+                    <tr>
+                        <td>Cart</td>
+                    </tr>
+
+                    <tr>
+                        <td>Wish List</td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -212,115 +248,6 @@
 </div>
 <!-- MODAL fail warning-->
 
-<!-- MODAL Change shipping and billing -->
-<div class="modal fade" id="editShippingBilling" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form asp-controller="User" asp-action="AccountInformation" method="POST">
-            <div class="modal-content">
-                <!-- Modal row 1 -->
-                <div class="row">
-
-                    <!-- Shipping Information -->
-                    <div class="col mr-3 ml-3">
-                        <h3 class="mb-0 mt-3">Shipping Information</h3>
-
-                        <div class="form-check mb-0 mt-3 for-space">
-                            <input type="checkbox" class="form-check-input" id="checkbox96847">
-                            <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
-                        </div>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingFirstName"></span>
-                        <label asp-for="ShippingFirstName">First Name</label>
-                        <input asp-for="ShippingFirstName" type="text" id="ShippingFirstName" class="form-control validate" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingLastName"></span>
-                        <label asp-for="ShippingLastName">Last Name</label>
-                        <input asp-for="ShippingLastName" type="text" id="ShippingLastName" class="form-control validate" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingStreetName"></span>
-                        <label asp-for="ShippingStreetName">Street</label>
-                        <input asp-for="ShippingStreetName" type="text" id="ShippingStreetName" class="form-control validate" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingHouseNumber"></span>
-                        <label asp-for="ShippingHouseNumber">House Number</label>
-                        <input asp-for="ShippingHouseNumber" type="number" id="ShippingHouseNumber" class="form-control validate" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingCity"></span>
-                        <label asp-for="ShippingCity">City</label>
-                        <input asp-for="ShippingCity" type="text" id="ShippingCity" class="form-control validate" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingZipCode"></span>
-                        <label asp-for="ShippingZipCode">Zip Code</label>
-                        <input asp-for="ShippingZipCode" type="text" id="ShippingZipCode" class="form-control validate" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingCountry"></span>
-                        <label asp-for="ShippingCountry">Country</label>
-                        <input asp-for="ShippingCountry" type="text" id="ShippingCountry" class="form-control validate" required>
-
-                    </div>
-                    <!-- Shipping Information -->
-
-                    <!-- Billing Information -->
-                    <div class="col mr-3 ml-3">
-                        <h3 class="mb-0 mt-3">Billing Information</h3>
-
-                        <div class="form-check mb-0 mt-3">
-                            <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
-                            <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
-                        </div>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingFirstName"></span>
-                        <label asp-for="BillingFirstName">First Name</label>
-                        <input asp-for="BillingFirstName" type="text" id="BillingFirstName" class="form-control validate billing-information" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingLastName"></span>
-                        <label asp-for="BillingLastName">Last Name</label>
-                        <input asp-for="BillingLastName" type="text" id="BillingLastName" class="form-control validate billing-information" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingStreetName"></span>
-                        <label asp-for="BillingStreetName">Street</label>
-                        <input asp-for="BillingStreetName" type="text" id="BillingStreetName" class="form-control validate billing-information" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingHouseNumber"></span>
-                        <label asp-for="BillingHouseNumber">House Number</label>
-                        <input asp-for="BillingHouseNumber" type="number" id="BillingHouseNumber" class="form-control validate billing-information" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCity"></span>
-                        <label asp-for="BillingCity">City</label>
-                        <input asp-for="BillingCity" type="text" id="BillingCity" class="form-control validate billing-information" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingZipCode"></span>
-                        <label asp-for="BillingZipCode">Zip Code</label>
-                        <input asp-for="BillingZipCode" type="text" id="BillingZipCode" class="form-control validate billing-information" required>
-
-                        <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCountry"></span>
-                        <label asp-for="BillingCountry">Country</label>
-                        <input asp-for="BillingCountry" type="text" id="BillingCountry" class="form-control validate billing-information" required>
-                    </div>
-                    <!-- Billing Information -->
-                </div>
-                <!-- Modal Row 1 -->
-
-                <!-- Modal Footer -->
-                <div class="row d-flex flex-row-reverse">
-
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" id="submitShipBill" class="btn btn-default mr-5">Submit Changes</button>
-                    </div>
-
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button id="BillShipClose" class="btn btn-default">Close</button>
-                    </div>
-
-                </div>
-                <!-- Modal Footer -->
-
-            </div>
-        </form>
-    </div>
-</div>
-<!-- MODAL Change shipping and billing -->
-
 <!-- Modal processing -->
 <div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -382,3 +309,38 @@
     </div>
 </div>
 <!-- Modal processing -->
+
+<!-- Modal change image -->
+
+<div class="modal fade" id="UploadImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Upload Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="md-form" asp-controller="User" asp-action="ChangeImage" enctype="multipart/form-data" method="POST">
+                <div class="modal-body mb-3">
+                    <div class="file-field">
+                        <a class="btn-floating blue-gradient mt-0 float-left">
+                            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                            <input asp-for="NewImage" type="file" accept="image/jpeg">
+                        </a>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate form-control" type="text" placeholder="Upload your image" disabled>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal change image -->

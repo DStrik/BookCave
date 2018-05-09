@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
@@ -28,10 +29,6 @@ namespace BookCave.Services
             
         }
         public void RemoveFromWishlist(int BookId)
-        {
-
-        }
-        public void ChangeImage(string ImgUrl)
         {
 
         }
@@ -99,6 +96,38 @@ namespace BookCave.Services
         public void ChangePaymentInfo(PaymentInputModel PayInfo)
         {
             
+        }
+
+        public void addDefaultImage(string id)
+        {
+            _userRepo.addDefaultImage(new AccountImage(){
+                UserId = id,
+            }, id);
+        }
+
+        public AccountViewModel GetUserImage(string id)
+        {
+            var img = _userRepo.GetUserImage(id);
+
+            return new AccountViewModel() {
+                Image = img.Img,
+            };
+        }
+
+        public async void ChangeImage(AccountViewModel input, string id)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                await input.NewImage.CopyToAsync(memoryStream);
+                var img = new AccountImage
+                {
+                    Img = memoryStream.ToArray(),
+                    UserId = id,
+
+                };
+
+                _userRepo.AddImage(img, id);
+            }
         }
     }
 }

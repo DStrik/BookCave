@@ -95,6 +95,11 @@
   visibility: hidden;
 }
 
+.shipping-billing-button-style {
+  display:block;
+  width:100%
+}
+
 /* For Checkout  */
 
 .steps-form-2 {
