@@ -65,6 +65,5 @@ $(document).ready(function(){
         var id = Number($(this).parent().next().find("p").text());
         $.post("/Cart/RemoveItem", {"cartItemId": id}, function(data, status){
         });
-        await location.reload();
     });
 });
