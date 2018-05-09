@@ -4,6 +4,7 @@ using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using System.Linq;
 using BookCave.Data.EntityModels;
+using System.IO;
 
 namespace BookCave.Repositories
 {
@@ -15,9 +16,68 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-        public void ChangeImage(string ImgUrl, int UserId)
-        {
 
+        public void addDefaultImage(AccountImage acImg, string id)
+        {
+            acImg.Img = GetDefaultImageAsync();
+
+            if(ContainsImage(id))
+            {
+                acImg.Id = GetImageId(id);
+                _db.Update(acImg);
+            }
+            else
+            {
+                _db.Add(acImg);
+            }
+
+            _db.SaveChanges();   
+        }
+
+        public void AddImage(AccountImage input, string id)
+        {
+            if(ContainsImage(id))
+            {
+                input.Id = GetImageId(id);
+                _db.Update(input);
+            }
+            else
+            {
+                _db.Add(input);
+            }
+
+            _db.SaveChanges();   
+        }
+
+        private bool ContainsImage(string id)
+        {
+            var check = _db.AccountImages.Any(n => n.UserId == id);
+
+            if(check == true)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private int GetImageId(string id)
+        {
+            var dbId = (from num in _db.AccountImages
+                       where num.UserId == id
+                       select num.Id).SingleOrDefault();
+
+            return dbId;
+        }
+
+        private byte[] GetDefaultImageAsync()
+        {       
+            using (var memoryStream = new MemoryStream())
+            {
+                new FileInfo("wwwroot/images/default_pic.jpg").OpenRead().CopyTo(memoryStream);
+                var image =  memoryStream.ToArray();
+                return image;
+            }
         }
 
         public void ChangePaymentInformation(PaymentInputModel PInfo, int UserId)
@@ -99,6 +159,15 @@ namespace BookCave.Repositories
                        select num.Id).SingleOrDefault();
 
             return dbId;
+        }
+
+        public AccountImage GetUserImage(string id)
+        {
+            var retVal = (from img in _db.AccountImages
+                         where img.UserId == id
+                         select img).SingleOrDefault();
+            
+            return retVal;
         }
     }
 }

@@ -29,14 +29,8 @@ namespace BookCave.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
-            var user = await _userManager.FindByEmailAsync("danni@danni.is");
-            if(user != null)
-            {
-                await _userManager.DeleteAsync(user);
-            }
-
             return View();
         }
 
@@ -83,22 +77,23 @@ namespace BookCave.Controllers
                 await _userManager.AddToRoleAsync(user, "User");
 
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
-            //    await _userManager.AddClaimAsync(user, new Claim("Image", $"{user.Image}"));
                 
                 await _signInManager.SignInAsync(user, false);
+
+                _userService.addDefaultImage(user.Id);
 
                 return RedirectToAction("Index", "Home");
             }
             return View();
         }
 
-        private byte[] GetDefaultProfileImage()
+        private string GetDefaultProfileImage()
         {
             using (var memoryStream = new MemoryStream())
             {
                 new FileInfo("wwwroot/images/default_pic.jpg").OpenRead().CopyTo(memoryStream);
                 var image =  memoryStream.ToArray();
-                return image;
+                return System.Text.Encoding.Default.GetString(image);
             }
         }
 
@@ -107,30 +102,32 @@ namespace BookCave.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            var ret = _userService.GetShippingBillingInfo(user.Id);
-            if(ret == null)
-            {
-                return View();
-            }
-            return View(ret);
-        }
-        
-        [HttpPost]
-        public async Task<IActionResult> AccountInformation(ShippingBillingInputModel input)
-        {
-            if(!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-
             if(user == null)
             {
                 return View();
             }
 
-            _userService.ChangeShippingBillingInfo(input, user.Id);
+            var model = _userService.GetUserImage(user.Id);
+
+            if(model == null)
+            {
+                return View();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeImage(AccountViewModel input)
+        {
+            if(!ModelState.IsValid)
+            {
+                return RedirectToAction("AccountInformation", "User");
+            }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            _userService.ChangeImage(input, user.Id);
 
             return RedirectToAction("AccountInformation", "User");
         }
@@ -204,5 +201,39 @@ namespace BookCave.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditSippingBilling()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var ret = _userService.GetShippingBillingInfo(user.Id);
+            if(ret == null)
+            {
+                return View();
+            }
+            return View(ret);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditSippingBilling(ShippingBillingInputModel input)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user == null)
+            {
+                return View();
+            }
+
+            _userService.ChangeShippingBillingInfo(input, user.Id);
+
+            return RedirectToAction("EditSippingBilling", "User");
+        }
     }
+
 }
