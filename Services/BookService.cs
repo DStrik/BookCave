@@ -10,10 +10,12 @@ namespace BookCave.Services
     public class BookService
     {
         private BookRepo _bookRepo;
+        private UserService _userService;
 
         public BookService()
         {
             _bookRepo = new BookRepo();
+            _userService = new UserService();
         }
         public List<BookViewModel> GetTop10()
         {
@@ -27,11 +29,11 @@ namespace BookCave.Services
             return top10;
         }
 
-        public void AddReview(ReviewInputModel review, string userId)
+        public void AddReview(ReviewInputModel review, string reviewer)
         {
             var reviewEntity = new BookReview
             {
-                UserId = userId,
+                Reviewer = reviewer,
                 BookId = review.BookId,
                 Rating = review.Rating,
                 Review = review.Review

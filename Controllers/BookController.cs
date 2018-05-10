@@ -4,6 +4,7 @@ using BookCave.Models;
 using BookCave.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using BookCave.Models.InputModels;
 
 namespace BookCave.Controllers
 {
@@ -22,23 +23,17 @@ namespace BookCave.Controllers
         {
             return View();
         }
-        public IActionResult NewReleases()
+        public async Task<IActionResult> AddReviewAsync(ReviewInputModel review)
         {
-            return View();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var reviewer = user.FirstName + user.LastName;
+            _bookService.AddReview(review, reviewer);
+            return Ok();
         }
         public IActionResult Details(int id)
         {
             var book = _bookService.GetBookDetails(id);
             return View(book);
-        }
-
-        public async Task<string> GetUserNameById(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            
-            var retVal = user.FirstName + " " + user.LastName;
-
-            return retVal;      
         }
     }
 }

@@ -231,7 +231,7 @@ namespace BookCave.Repositories
                            where r.BookId == bookId
                            select new ReviewViewModel
                            {
-                               Reviewer = r.UserId,
+                               Reviewer = r.Reviewer,
                                Rating = r.Rating,
                                Review = r.Review
                            }).ToList();
