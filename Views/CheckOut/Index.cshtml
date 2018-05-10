@@ -1,8 +1,28 @@
 @model BookCave.Models.InputModels.CheckOutInputModel
 
 <div class="container body-container">
-    <form asp-action="Index" asp-controller="CheckOut" method="POST">
-        <div class="row">
+    <div class="steps-form-2">
+        <div class="mt-3 steps-row-2 setup-panel-2 d-flex justify-content-between">
+            <div class="steps-step-2">
+                <a href="#step-1" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-folder-open-o" aria-hidden="true"></i></a>
+            </div>
+            <div class="steps-step-2">
+                <a href="#step-2" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Personal Data"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            </div>
+            <div class="steps-step-2">
+                <a href="#step-3" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Terms and Conditions"><i class="fa fa-photo" aria-hidden="true"></i></a>
+            </div>
+            <div class="steps-step-2">
+                <a href="#step-4" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Finish"><i class="fa fa-check" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+
+<div class="card container">
+<!-- First Step -->
+<form role="form" asp-action="Index" asp-controller="CheckOut" method="post" id="checkOutForm">
+     <div class="row setup-content-2" id="step-1">
+         <div class="row">
             <div class="col mr-3 ml-3">
                 <h3 class="mb-0 mt-3">Shipping Information</h3>
 
@@ -10,27 +30,41 @@
                     <input type="checkbox" class="form-check-input" id="checkbox96847">
                     <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
                 </div>
+                <div class="form-group">
+                    <label for="ShippingFirstName" data-error="wrong" data-success="right">First Name</label>
+                    <input type="text" id="ShippingFirstName" asp-for="ShippingFirstName" class="form-control validate" required>
+                </div>
 
-                <label for="ShippingFirstName">First Name</label>
-                <input type="text" id="ShippingFirstName" asp-for="ShippingFirstName" class="form-control validate" required>
+                <div class="form-group mt-2">
+                    <label for="ShippingLastName" data-error="wrong" data-success="right">Last Name</label>
+                    <input type="text" id="ShippingLastName" asp-for="ShippingLastName" class="form-control validate" required>
+                </div>
 
-                <label for="ShippingLastName">Last Name</label>
-                <input type="text" id="ShippingLastName" asp-for="ShippingLastName" class="form-control validate" required>
+                <div class="form-group mt-2">
+                    <label for="ShippingStreetName" data-error="wrong" data-success="right">Street</label>
+                    <input type="text" id="ShippingStreetName" asp-for="ShippingStreetName" class="form-control validate" required>
+                </div>
 
-                <label for="ShippingStreetName">Street</label>
-                <input type="text" id="ShippingStreetName" asp-for="ShippingStreetName" class="form-control validate" required>
+                <div class="form-group mt-2">
+                    <label for="ShippingHouseNumber" data-error="wrong" data-success="right">House Number</label>
+                    <input type="number" id="ShippingHouseNumber" asp-for="ShippingHouseNumber" class="form-control validate" required>
+                </div>
 
-                <label for="ShippingHouseNumber">House Number</label>
-                <input type="number" id="ShippingHouseNumber" asp-for="ShippingHouseNumber" class="form-control validate" required>
+                <div class="form-group mt-2">
+                    <label for="ShippingCity" data-error="wrong" data-success="right">City</label>
+                    <input type="text" id="ShippingCity" asp-for="ShippingCity" class="form-control validate" required>                    
+                </div>
+                
+                <div class="form-group mt-2">
+                    <label for="ShippingZipCode" data-error="wrong" data-success="right">Zip Code</label>
+                    <input type="text" id="ShippingZipCode" asp-for="ShippingZipCode" class="form-control validate" required>
+                </div>
 
-                <label for="ShippingCity">City</label>
-                <input type="text" id="ShippingCity" asp-for="ShippingCity" class="form-control validate" required>
-
-                <label for="ShippingZipCode">Zip Code</label>
-                <input type="text" id="ShippingZipCode" asp-for="ShippingZipCode" class="form-control validate" required>
-
-                <label for="ShippingCountry">Country</label>
-                <input type="text" id="ShippingCountry" asp-for="ShippingCountry" class="form-control validate" required>
+                <div class="form-group mt-2">
+                    <label for="ShippingCountry" data-error="wrong" data-success="right">Country</label>
+                    <input type="text" id="ShippingCountry" asp-for="ShippingCountry" class="form-control validate" required>
+                </div>
+                
                 
             </div>
     <!-- Shipping Information -->
@@ -44,57 +78,275 @@
                     <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
                 </div>
 
-                <label for="BillingFirstName">First Name</label>
-                <input type="text" id="BillingFirstName" asp-for="BillingFirstName" class="form-control validate billing-information" required>
+                <div class="form-group ">
+                    <label for="BillingFirstName" data-error="wrong" data-success="right">First Name</label>
+                    <input type="text" id="BillingFirstName" asp-for="BillingFirstName" class="form-control validate billing-information" required>
+                </div>
             
-                <label for="BillingLastName">Last Name</label>
-                <input type="text" id="BillingLastName" asp-for="BillingLastName" class="form-control validate billing-information" required>
+                <div class="form-group mt-2">
+                    <label for="BillingLastName" data-error="wrong" data-success="right">Last Name</label>
+                    <input type="text" id="BillingLastName" asp-for="BillingLastName" class="form-control validate billing-information" required>
+                </div>
+                
+                <div class="form-group mt-2">
+                    <label for="BillingStreetName" data-error="wrong" data-success="right">Street</label>
+                    <input type="text" id="BillingStreetName" asp-for="BillingStreetName" class="form-control validate billing-information" required>
+                </div>
+                
+                <div class="form-group mt-2">
+                    <label for="BillingHouseNumber" data-error="wrong" data-success="right">House Number</label>
+                    <input type="number" id="BillingHouseNumber" asp-for="BillingHouseNumber" class="form-control validate billing-information" required>
+                </div>
+    
+                <div class="form-group mt-2">
+                    <label for="BillingCity" data-error="wrong" data-success="right">City</label>
+                    <input type="text" id="BillingCity" asp-for="BillingCity" class="form-control validate billing-information" required>
+                </div>
 
-                <label for="BillingStreetName">Street</label>
-                <input type="text" id="BillingStreetName" asp-for="BillingStreetName" class="form-control validate billing-information" required>
-
-                <label for="BillingHouseNumber">House Number</label>
-                <input type="number" id="BillingHouseNumber" asp-for="BillingHouseNumber" class="form-control validate billing-information" required>
-
-                <label for="BillingCity">City</label>
-                <input type="text" id="BillingCity" asp-for="BillingCity" class="form-control validate billing-information" required>
-
-                <label for="BillingZipCode">Zip Code</label>
-                <input type="text" id="BillingZipCode" asp-for="BillingZipCode" class="form-control validate billing-information" required>
-
-                <label for="BillingCountry">Country</label>
-                <input type="text" id="BillingCountry" asp-for="BillingCountry" class="form-control validate billing-information" required>
+                <div class="form-group mt-2">
+                    <label for="BillingZipCode" data-error="wrong" data-success="right">Zip Code</label>
+                    <input type="text" id="BillingZipCode" asp-for="BillingZipCode" class="form-control validate billing-information" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="BillingCountry" data-error="wrong" data-success="right">Country</label>
+                    <input type="text" id="BillingCountry" asp-for="BillingCountry" class="form-control validate billing-information" required>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-5 mr-3 ml-3">
+
+             <div class="col mr-3 ml-3">
                 <h3 class="mb-0 mt-3">Payment Information</h3>
 
-                <label for="FullName">Name of Cardholder</label>
-                <input type="text" id="FullName" asp-for="FullName" class="form-control validate" required>
+                <div class="form-check mb-0 mt-3 for-space">
+                    <input type="checkbox" class="form-check-input" id="checkbox96847">
+                    <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="FullName">Name of Cardholder</label>
+                    <input type="text" id="FullName" asp-for="FullName" class="form-control validate" required>
+                </div>
 
-                <label for="CardNumber">CardNumber</label>
-                <input type="text" id="CardNumber" asp-for="CardNumber" class="form-control validate" required>
+                <div class="form-group mt-2">
+                    <label for="CardNumber">CardNumber</label>
+                    <input type="text" id="CardNumber" asp-for="CardNumber" class="form-control validate" required>
+                </div>
                 
                 <div class="row">
                     <div class="col mr-3">
-                        <label for="ExpirationMonth">Exp. month</label>
-                        <input type="text" id="ExpirationMonth" asp-for="ExpirationMonth" class="form-control validate" required> 
+                        <div class="form-group mt-2">
+                            <label for="ExpirationMonth">Exp. month</label>
+                            <input type="text" id="ExpirationMonth" asp-for="ExpirationMonth" class="form-control validate" required> 
+                        </div>
                     </div>
 
                     <div class="col ml-3">
-                        <label for="ExpirationYear">Exp. year</label>
-                        <input type="text" id="ExpirationYear" asp-for="ExpirationYear" class="form-control validate" required> 
+                        <div class="form-group mt-2">
+                            <label for="ExpirationYear">Exp. year</label>
+                            <input type="text" id="ExpirationYear" asp-for="ExpirationYear" class="form-control validate" required> 
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="Cvc">CVC</label>
-                        <input type="text" id="Cvc" asp-for="Cvc" class="form-control validate" required>
+                        <div class="form-group mt-2">
+                            <label for="Cvc">CVC</label>
+                            <input type="text" id="Cvc" asp-for="Cvc" class="form-control validate" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Cart</h3>
+                    <div id="smallCart">
+
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+        <div class="col-md-12">
+            <div class="col-md-3 offset-md-9">
+                <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" id="verifyStep" type="button">Next</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Second Step -->
+    <div class="row setup-content-2" id="step-2">
+       <div class="row">
+            <div class="col mr-3 ml-3">
+                <h3 class="mb-0 mt-3">Shipping Information</h3>
+
+                <div class="form-check mb-0 mt-3 for-space">
+                    <input type="checkbox" class="form-check-input" id="checkbox96847">
+                    <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
+                </div>
+                <div class="form-group ">
+                    <label for="ShippingFirstName1" data-error="wrong" data-success="right">First Name</label>
+                    <input type="text" id="ShippingFirstName1" class="form-control" disabled>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="ShippingLastName1" data-error="wrong" data-success="right">Last Name</label>
+                    <input type="text" id="ShippingLastName1" class="form-control" disabled>
+                </div>
+
+                <div class="form-group  mt-2">
+                    <label for="ShippingStreetName1" data-error="wrong" data-success="right">Street</label>
+                    <input type="text" id="ShippingStreetName1" class="form-control" disabled>
+                </div>
+
+                <div class="form-group  mt-2">
+                    <label for="ShippingHouseNumber1" data-error="wrong" data-success="right">House Number</label>
+                    <input type="number" id="ShippingHouseNumber1" class="form-control" disabled>
+                </div>
+
+                <div class="form-group  mt-2">
+                    <label for="ShippingCity1" data-error="wrong" data-success="right">City</label>
+                    <input type="text" id="ShippingCity1" class="form-control" disabled>                    
+                </div>
+                
+                <div class="form-group  mt-2">
+                    <label for="ShippingZipCode1" data-error="wrong" data-success="right">Zip Code</label>
+                    <input type="text" id="ShippingZipCode1" class="form-control" disabled>
+                </div>
+
+                <div class="form-group  mt-2">
+                    <label for="ShippingCountry1" data-error="wrong" data-success="right">Country</label>
+                    <input type="text" id="ShippingCountry1" class="form-control" disabled>
+                </div>
+                
+                
+            </div>
+    <!-- Shipping Information -->
+
     <!-- Billing Information -->
+            <div class="col mr-3 ml-3"> 
+                <h3 class="mb-0 mt-3">Billing Information</h3>
+                    
+                <div class="form-check mb-0 mt-3 for-space">
+                    <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
+                    <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
+                </div>
+
+                <div class="form-group ">
+                    <label for="BillingFirstName1" data-error="wrong" data-success="right">First Name</label>
+                    <input type="text" id="BillingFirstName1" class="form-control" disabled>
+                </div>
+            
+                <div class="form-group mt-2">
+                    <label for="BillingLastName1" data-error="wrong" data-success="right">Last Name</label>
+                    <input type="text" id="BillingLastName1" class="form-control" disabled>
+                </div>
+                
+                <div class="form-group mt-2">
+                    <label for="BillingStreetName1" data-error="wrong" data-success="right">Street</label>
+                    <input type="text" id="BillingStreetName1" class="form-control" disabled>
+                </div>
+                
+                <div class="form-group mt-2">
+                    <label for="BillingHouseNumber1" data-error="wrong" data-success="right">House Number</label>
+                    <input type="number" id="BillingHouseNumber1" class="form-control" disabled>
+                </div>
+    
+                <div class="form-group mt-2">
+                    <label for="BillingCity1" data-error="wrong" data-success="right">City</label>
+                    <input type="text" id="BillingCity1" class="form-control" disabled>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="BillingZipCode1" data-error="wrong" data-success="right">Zip Code</label>
+                    <input type="text" id="BillingZipCode1" class="form-control" disabled>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="BillingCountry1" data-error="wrong" data-success="right">Country</label>
+                    <input type="text" id="BillingCountry1" class="form-control" disabled>
+                </div>
+            </div>
+
+             <div class="col mr-3 ml-3">
+                <h3 class="mb-0 mt-3">Payment Information</h3>
+
+                <div class="form-check mb-0 mt-3 for-space">
+                    <input type="checkbox" class="form-check-input" id="checkbox96847">
+                    <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
+                </div>
+                
+                <div class="form-group ">
+                    <label for="FullName1">Name of Cardholder</label>
+                    <input type="text" id="FullName1" class="form-control" disabled>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="CardNumber1">CardNumber</label>
+                    <input type="text" id="CardNumber1" class="form-control" disabled>
+                </div>
+                
+                <div class="row">
+                    <div class="col mr-3">
+                        <div class="form-group mt-2">
+                            <label for="ExpirationMonth1">Exp. month</label>
+                            <input type="text" id="ExpirationMonth1" class="form-control" disabled> 
+                        </div>
+                    </div>
+
+                    <div class="col ml-3">
+                        <div class="form-group mt-2">
+                            <label for="ExpirationYear1">Exp. year</label>
+                            <input type="text" id="ExpirationYear1" class="form-control" disabled> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group mt-2">
+                            <label for="Cvc1">CVC</label>
+                            <input type="text" id="Cvc1" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Cart</h3>
+                    <div id="smallCart">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button">Previous</button>
+            </div>
+            <div class="col-md-4 offset-md-8">
+                <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" id="pay" type="button">Pay Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Third Step -->
+    <div class="row setup-content-2" id="step-3">
+        <div class="col-md-12">
+            <h3 class="font-weight-bold pl-0 my-4"><strong>Terms and conditions</strong></h3>
+            <div class="form-check">
+                <input type="checkbox" id="checkbox111" class="form-check-input">
+                <label for="checkbox111" class="form-check-label">I agree to the terms and conditions</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="checkbox112" class="form-check-input">
+                <label for="checkbox112" class="form-check-label">I want to receive newsletter</label>
+            </div>
+            <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button">Previous</button>
+            <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button">Next</button>
+        </div>
+    </div>
+
+    <!-- Fourth Step -->
+    <div class="row setup-content-2" id="step-4">
+        <div class="col-md-12">
+            <h3 class="font-weight-bold pl-0 my-4"><strong>Finish</strong></h3>
+            <h2 class="text-center font-weight-bold my-4">Registration completed!</h2>
+            <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button">Previous</button>
+            <button class="btn btn-success btn-rounded float-right" type="submit">Submit</button>
+        </div>
+    </div>
+</form>
+</div>
 </div>

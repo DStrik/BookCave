@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BookCave.Models;
 using BookCave.Models.InputModels;
+using BookCave.Models.ViewModels;
 using BookCave.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +46,33 @@ namespace BookCave.Controllers
         public IActionResult Transaction()
         {
             return View();
+        }
+        [HttpGet]
+        public IActionResult GetCart()
+        {
+            var user = _userManager.GetUserId(HttpContext.User);
+            List<BookCartViewModel> cart = _checkOutService.GetCart(user);
+            return Json(cart);
+        }
+        [HttpGet]
+        public IActionResult Verify(CheckOutInputModel info)
+        {
+            if(ModelState.IsValid)
+            {
+                return Ok(info);
+            }
+            return BadRequest();
+        }
+        [HttpPost]
+        public IActionResult Pay(CheckOutInputModel info)
+        {
+            if(ModelState.IsValid)
+            {
+                var user = _userManager.GetUserId(HttpContext.User);
+                _checkOutService.AddOrder(info, user);
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }
