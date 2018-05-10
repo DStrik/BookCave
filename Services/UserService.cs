@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
@@ -114,7 +115,7 @@ namespace BookCave.Services
             };
         }
 
-        public async void ChangeImage(AccountViewModel input, string id)
+        public async Task<bool> ChangeImage(AccountViewModel input, string id)
         {
             using (var memoryStream = new MemoryStream())
             {
@@ -127,6 +128,8 @@ namespace BookCave.Services
                 };
 
                 _userRepo.AddImage(img, id);
+                
+                return true;
             }
         }
     }

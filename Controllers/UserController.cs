@@ -117,8 +117,13 @@ namespace BookCave.Controllers
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            _userService.ChangeImage(input, user.Id);
+            var success = await _userService.ChangeImage(input, user.Id);
 
+            if(!success)
+            {
+                return RedirectToAction("AccountInformation", "User"); // should go to error page
+            }
+            
             return RedirectToAction("AccountInformation", "User");
         }
 
