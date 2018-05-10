@@ -1,7 +1,7 @@
 @model List<BookCave.Models.ViewModels.BookCartViewModel>
 <div class="container mt-5">
-    <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light float-right mt-5" id="clearAll">Clear Cart</button>
-    <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light float-right mt-5" id="update">Update Cart</button>
+    <button type="button" class="btn btn-danger waves-effect waves-light float-right mt-5" id="clearAll">Clear Cart</button>
+    <button type="button" class="btn btn-primary waves-effect waves-light float-right mt-5 updateBtn">Update Cart</button>
     <section class="section my-5">
         <div class="table-responsive">
             <table class="table product-table text-center">
@@ -54,7 +54,7 @@
     </section>
     <div class="form-group">
         <h4 class="mt-2">Total: <strong><span id="total"></span> $</strong></h4>
-        <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" id="completePurchase">Complete purchase</button>
-        <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" id="update">Update Cart</button>
+        <button type="button" class="btn btn-success waves-effect waves-light" id="completePurchase">Complete purchase</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light updateBtn">Update Cart</button>
     </div>
 </div>

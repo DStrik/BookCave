@@ -44,7 +44,7 @@ $(document).ready(function(){
             getTotal();
         });
     }
-    $("#update").click(function(){
+    $(".updateBtn").click(function(){
         Update();
         var qtys = [];
         $(".price").each(function() {
