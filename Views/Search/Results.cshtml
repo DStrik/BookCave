@@ -21,39 +21,50 @@
             </div>
         </div>
     </div>-->
-    <div class="row col-lg-8 col-md-12 offset-lg-2 animated fadeIn mb-5 container body-container">
-        @foreach(var book in Model) {
-        <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch">
-            <div class="card card-ecommerce">
-                <div class="row view overlay justify-content-center">
-                    <img class="card-img-top thumb " src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) ">
-                    <a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">
-                        <div class="mask rgba-whitei-slght"></div>
-                    </a>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <h6 class="col-12 card-title mb-2">@book.Title</h6>
-                            <p class="col-12 card-text mb-1">
-                                @foreach(var author in book.Author) 
-                                { 
-                                    if(author != book.Author.Last())
-                                    {
-                                        <span>@author.Name, </span>
-                                    }
-                                    else
-                                    {
-                                        <span>@author.Name</span>
-                                    }
-                                }    
-                            </p>
-                            <p class="col-12 card-text mb-1">@book.Type</p>
-                            <p class="col-12 card-text mb-1">@book.Rating</p>
-                            <h4 class="col-12 mb-0">$ @book.Price</h4>
-                            <button type="button" class="btn btn-secondary btn-rounded add-to-cart" data-id="@book.BookId">Add to cart!</button>
+    <div class="col-lg-8 col-md-12 offset-lg-2 animated fadeIn mb-5 container body-container">
+        <div class="btn-group align-div-right">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by...</button>
+            <div class="dropdown-menu">
+                <a id="name-asc">Name Ascending</a>
+                <a id="name-desc">Name Descending</a>
+                <a id="price-asc">Price Ascending</a>
+                <a id="price-desc">Price Descending</a>
+            </div>
+        </div>
+        <div class="row carditems-container">
+            @foreach(var book in Model) {
+            <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch thecarditem">
+                <div class="card card-ecommerce">
+                    <div class="row view overlay justify-content-center">
+                        <img class="card-img-top thumb " src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) ">
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">
+                            <div class="mask rgba-whitei-slght"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <h6 class="col-12 card-title mb-2">@book.Title</h6>
+                                <p class="col-12 card-text mb-1">
+                                    @foreach(var author in book.Author) 
+                                    { 
+                                        if(author != book.Author.Last())
+                                        {
+                                            <span>@author.Name, </span>
+                                        }
+                                        else
+                                        {
+                                            <span>@author.Name</span>
+                                        }
+                                    }    
+                                </p>
+                                <p class="col-12 card-text mb-1">@book.Type</p>
+                                <p class="col-12 card-text mb-1">@book.Rating</p>
+                                <h4 class="col-12 mb-0">$ <span class="pricetag">@book.Price</span></h4>
+                                <button type="button" class="btn btn-secondary btn-rounded add-to-cart" data-id="@book.BookId">Add to cart!</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            }
         </div>
-        }
     </div>
