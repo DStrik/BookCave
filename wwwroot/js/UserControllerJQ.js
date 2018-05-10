@@ -200,7 +200,7 @@ $(document).ready(function () {
         $("#UploadImageModal").modal("show");
     });
 
-    $(submitImage).click(function (e) { 
+    $("#submitImage").click(function (e) { 
         $("#processingModal").modal("show");
         $("#UploadImageModal").modal("hide");
     });
@@ -265,7 +265,39 @@ $(document).ready(function () {
                 $("#ModalWarningUserName").modal("show");
                 $("#processingModal").modal("hide");
             }, 500);
-        });
+        });      
     }
+
+    $("#SignupSubmit").click(function (e) {
+
+        $("#processingModal").modal("show");
+        var SignupForm = $("#SignupForm").serialize();
+        
+        $.post("SignUp", SignupForm, function(data, status) {
+            document.location.href="/";
+        }).fail(function (err) {
+            setTimeout(function() {
+                $("#ModalWarningSignUp").modal("show");
+                $("#processingModal").modal("hide");
+            }, 500);
+        });
+    });
+
+    $("#LogInSubmit").click(function (e) {
+
+        $("#processingModal").modal("show");
+        var LoginForm = $("#LogInForm").serialize();
+        
+        $.post("Login", LoginForm, function(data, status) {
+            document.location.href="/";
+        }).fail(function (err) {
+            setTimeout(function() {
+                console.log("Status: " + status);
+                console.log("Error: " + err);
+                $("#ModalWarningLogin").modal("show");
+                $("#processingModal").modal("hide");
+            }, 500);
+        });
+    }); 
 });
 

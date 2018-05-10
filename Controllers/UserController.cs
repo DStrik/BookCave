@@ -42,14 +42,14 @@ namespace BookCave.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View();
+                return BadRequest();
             }
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             if(result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return Ok();
             }
-            return View();
+            return BadRequest();
         }
 
         [AllowAnonymous]
@@ -66,10 +66,15 @@ namespace BookCave.Controllers
         {
             if(!ModelState.IsValid) 
             {
-                return View();
+                return BadRequest();
             }
 
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+            if(!model.TermsAndConditions)
+            {
+                return BadRequest();
+            }
+
+            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -84,9 +89,9 @@ namespace BookCave.Controllers
 
                 _userService.addDefaultImage(user.Id);
 
-                return RedirectToAction("Index", "Home");
+                return Ok();
             }
-            return View();
+            return BadRequest();
         }
 
         [HttpGet]
@@ -165,21 +170,6 @@ namespace BookCave.Controllers
         public IActionResult OrderHistory()
         {
             return View();
-        }
-
-        public IActionResult Wishlist()
-        {
-            return View();
-        }
-
-        public void AddToWishlist(int BookId)
-        {
-
-        }
-
-        public void RemoveFromWishlist(int BookId)
-        {
-
         }
 
         public async Task<IActionResult> LogOut()
@@ -265,6 +255,13 @@ namespace BookCave.Controllers
             }
 
             return BadRequest();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult TermsAndConditions()
+        {
+            return View();
         }
     }
 

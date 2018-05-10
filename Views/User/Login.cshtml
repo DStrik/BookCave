@@ -6,7 +6,7 @@
             <!-- Sign In-->
             <section class="form-dark wow fadeIn">
                 <!-- Form -->
-                <form asp-controller="User" asp-action="Login">
+                <form id="LogInForm" method="POST">
                     <div class="card card-image" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/pricing-table7.jpg'); width: 28rem;">
                         <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
 
@@ -35,7 +35,7 @@
 
                                 <!--Grid column-->
                                 <div class="text-center mb-3 col-md-12">
-                                    <button type="submit" class="btn btn-success btn-block btn-rounded z-depth-1">Sign in</button>
+                                    <button id="LogInSubmit" type="button" class="btn btn-success btn-block btn-rounded z-depth-1">Sign in</button>
                                 </div>
                                 <!--Grid column-->
                             </div>
@@ -58,3 +58,101 @@
                            
     </div>
 </div>
+
+<!-- Modal processing -->
+<div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h4 class="modal-title" id="exampleModalLabel">Processing...</h4>
+            </div>
+            <div class="modal-body text-center">
+
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                    <div class="spinner-layer spinner-red">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                    <div class="spinner-layer spinner-yellow">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                    <div class="spinner-layer spinner-green">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal processing -->
+
+<!-- MODAL fail warning for log in-->
+<div class="modal fade left" id="ModalWarningLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-warning modal-dialog-centered" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading">Warning</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-9">
+                        <p>There was an error in your input</p>
+                        <p class="card-text"><strong>You must enter your correct e-mail and password</strong></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- MODAL fail warning for login-->
