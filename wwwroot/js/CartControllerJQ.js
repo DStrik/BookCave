@@ -1,10 +1,11 @@
 $(document).ready(function(){
-    
+    Update();
     console.log("CartJS up and running");
     $(".incrementQty").click( function() {
         var counter = $(this).parent().find("input").val();
         counter++;
         $(this).parent().find('input').val(counter);
+        Update();
     });
     $(".decrementQty").click( function() {
         var counter = $(this).parent().find("input").val();
@@ -12,6 +13,7 @@ $(document).ready(function(){
         counter--;
         }
         $(this).parent().find("input").val(counter);
+        Update();
     });
 
     function isInt(n) {

@@ -12,6 +12,11 @@ namespace BookCave.Controllers
     public class HomeController : Controller
     {
         private BookService _bookService;
+
+        public HomeController()
+        {
+            _bookService = new BookService();
+        }
         public IActionResult Index()
         {
             return View();

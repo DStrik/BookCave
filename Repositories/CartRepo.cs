@@ -19,10 +19,11 @@ namespace BookCave.Repositories
                             select i).ToList();
             return cartItems;
         }
-        public CartItem GetCartItem(int cartItemId)
+        public CartItem GetCartItem(int cartItemId, string userId)
         {
             var cartItem = (from i in _db.CartItems
                             where i.Id == cartItemId
+                            where i.UserId == userId
                             select i).SingleOrDefault();
             return cartItem;
         }
@@ -47,8 +48,12 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void ClearCart(List<CartItem> items)
+        public void ClearCart(string userId)
         {
+            var items = (from c in _db.CartItems
+                         where c.UserId == userId
+                         select c).ToList();
+
             foreach(CartItem i in items)
             {
                 _db.Remove(i);
