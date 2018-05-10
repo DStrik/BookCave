@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="full-height")>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,22 +13,22 @@
     <link rel="stylesheet" href="~/css/layout.css" />
 
 </head>
-<body>
+<body class="grey lighten-4">
 
-  <!-- Render header (special header for HomeController) -->
-  @{
-    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
-    
-    if (controller == "home")
-    {
-        @await Html.PartialAsync("_headerFrontPage.cshtml");
-    }
-    else
-    {
-        @await Html.PartialAsync("_header.cshtml");
-    }
+@{
+     var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
 
-  }
+     if (controller == "home"){
+         <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar rgba-black-strong">
+            @await Html.PartialAsync("_headerbody.cshtml");
+         </nav>
+     } else {
+         <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar unique-color-dark animated fadeIn">
+            @await Html.PartialAsync("_headerbody.cshtml");
+         </nav>
+     }
+}
+
 
   <!-- Render Body -->
   @RenderBody()
@@ -41,9 +41,10 @@
   <script type="text/javascript" src="~/lib/mdb/js/popper.min.js"></script>
   <script type="text/javascript" src="~/lib/mdb/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="~/lib/mdb/js/mdb.min.js"></script>
-  <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+  <script type="text/javascript" src="~/js/site.js"></script>
 
   @{
+     
 
     if (controller == "user")
     {
