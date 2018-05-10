@@ -88,8 +88,11 @@ namespace BookCave.Controllers
                 await _signInManager.SignInAsync(user, false);
 
                 _userService.addDefaultImage(user.Id);
-
-                return Ok();
+                var updateResult = await _userManager.UpdateAsync(user);
+                if(updateResult.Succeeded)
+                {
+                    return Ok();
+                }
             }
             return BadRequest();
         }
@@ -236,11 +239,11 @@ namespace BookCave.Controllers
 
             if(result.Succeeded)
             {
+                user.FirstName = Name.FirstName;
+                user.LastName = Name.LastName;
                 var updateResult = await _userManager.UpdateAsync(user);
                 if(updateResult.Succeeded)
                 {
-                    user.FirstName = Name.FirstName;
-                    user.LastName = Name.LastName;
                     return Ok();
                 }
             }

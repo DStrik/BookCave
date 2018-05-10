@@ -158,6 +158,9 @@
 .steps-form-2 .steps-row-2 .steps-step-2 .btn-circle-2 .fa {
   font-size: 1.7rem;
 }
+.steps-form-2 .steps-row-2 .steps-step-2 .btn.disabled {
+  opacity: 1!important;
+}
 
 /* For Checkout */
 

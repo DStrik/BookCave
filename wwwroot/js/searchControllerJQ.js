@@ -73,29 +73,28 @@ $(document).ready(function () {
 
   $('#name-asc').on('click', function () {
     var nameAsc = $(".thecarditem").sort(function (a, b) {
-        return $(a).find(".card-title").text() > $(b).find(".card-title").text();
+        return $(a).find(".card-title").text() > $(b).find(".card-title").text() ? 1 : -1;
     });
     $(".carditems-container").html(nameAsc);
   });
 
   $('#name-desc').on('click', function () {
     var nameDesc = $(".thecarditem").sort(function (a, b) {
-        return $(a).find(".card-title").text() < $(b).find(".card-title").text();
+        return $(a).find(".card-title").text() < $(b).find(".card-title").text() ? 1 : -1;
     });
     $(".carditems-container").html(nameDesc);
   });
 
   $('#price-asc').on('click', function () {
-    alert("works!");
     var priceAsc = $(".thecarditem").sort(function (a, b) {
-        return Number($(a).find(".pricetag").text()) > Number($(b).find(".pricetag").text());
+        return Number($(a).find(".pricetag").text()) > Number($(b).find(".pricetag").text()) ? 1 : -1;
     });
     $(".carditems-container").html(priceAsc);
   });
   
   $('#price-desc').on('click', function () {
     var priceDesc = $(".thecarditem").sort(function (a, b) {
-        return $(a).find(".pricetag").text() < $(b).find(".pricetag").text();
+        return Number($(a).find(".pricetag").text()) < Number($(b).find(".pricetag").text()) ? 1 : -1;
     });
     $(".carditems-container").html(priceDesc);
   });

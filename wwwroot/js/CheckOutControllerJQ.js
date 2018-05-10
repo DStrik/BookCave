@@ -20,7 +20,7 @@ $(document).ready(function () {
             nextStep = $item.parent().next().children("a")
 
         if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-amber').addClass('btn-success');
+            navListItems.removeClass('btn-amber');
             $item.removeClass('btn-blue-grey').addClass('btn-amber');
             allWells.hide();
             $target.show();
@@ -52,7 +52,7 @@ $(document).ready(function () {
         var curStep = $(this).closest(".setup-content-2"),
             curStepBtn = curStep.attr("id"),
             nextStepSteps = $('div.setup-panel-2 div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            currNavStep = $('div.setup-panel-2 div a[href="#' + curStepBtn + '"]');
+            currNavStep = ('#nav' + curStepBtn);
             curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
 
@@ -107,30 +107,45 @@ $(document).ready(function () {
             $("#pay").one('click', function(){
                 var bla = $("#checkOutForm").serialize();
                 $.post('/CheckOut/Pay', bla, function(data, status) {
+                    $(".form-group").removeClass("has-error");
+                    for (var i = 0; i < curInputs.length; i++) {
+                        if (!curInputs[i].validity.valid) {
+                            isValid = false;
+                            $(curInputs[i]).closest(".form-group").addClass("has-error");
+                        }
+                    }
+
+                    if (isValid){
+
+                        nextStepSteps.removeClass('disabled').trigger('click');
+                    }
                 }).fail(function(err) {
                     alert("Error has occured!")
                 });
             
             });
         }
+        console.log(currNavStep);
+        $(currNavStep).addClass('success');
     });
 
 
     $('div.setup-panel-2 div a.btn-amber').trigger('click');
 
     $.get('/CheckOut/GetCart', function(data, status) {
-        var markup = "";
-        var totalprice = 0;
+        var markupForTable = "";
+            markupTotalPrice = "";
+            totalprice = 0;
         $.each(data, function (i, j) {
-            markup += j.title + j.quantity + j.price;
-            totalprice += j.price
+            markupForTable += '<tr><td>' + j.title + '</td><td>' + j.quantity + '</td><td>' + j.price + '$</td><td>' + (j.quantity * j.price) + '$</td>';
+            totalprice += (j.price * j.quantity);
         });
-        markup += totalprice;
-        $('#smallCart').html(markup);
+        markupTotalPrice += 'Total Amount: ' + totalprice.toFixed(2) + '$';
+        $('#cartTable').html(markupForTable);
+        $('#totalPrice').html(markupTotalPrice);
     }).fail(function (err) {
         alert("Error has occured!")
     });
-
     
 
     // Changes the status of the input boxes in billing so that if checked
