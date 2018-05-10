@@ -16,8 +16,8 @@
 <body class="grey lighten-4">
 
 @{
-     var controller = ViewContext.RouteData.Values["Controller"];
-     var action = ViewContext.RouteData.Values["Action"];
+     var controller = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
+     var action = ViewContext.RouteData.Values["Action"].ToString().ToLower();
 
      if (controller == "home"){
          <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar rgba-black-strong">
