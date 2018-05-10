@@ -267,7 +267,7 @@ namespace BookCave.Repositories
 
         private double GetRating(int bookId)
         {
-            var rating = (from r in _db.BookRatings
+            double? rating = (from r in _db.BookRatings
                           where r.BookId == bookId
                           select r.Rating).SingleOrDefault();
             
@@ -276,7 +276,7 @@ namespace BookCave.Repositories
                 return 0;
             }
                           
-            return rating;
+            return (double)rating;
         }
 
         public BookDetailViewModel GetBookDetails(int bookId)
