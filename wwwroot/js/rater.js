@@ -3,6 +3,7 @@
  * https://github.com/auxiliary/rater
  */
 
+$(document).ready(function(){
 ;(function ($, window){
     $.fn.textWidth = function()
     {
@@ -549,3 +550,17 @@
     };
 
 }(jQuery, window));
+
+
+    // Initiate star ratings
+    var options = {
+        max_value: 5,
+        step_size: 0.5,
+    }
+    $(".rate").rate(options);
+
+    alert('off!');
+    $('.rate-off').off(function() {
+        alert("off!");
+    });
+});
