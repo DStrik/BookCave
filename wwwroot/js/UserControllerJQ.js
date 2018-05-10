@@ -260,12 +260,11 @@ $(document).ready(function () {
             $("#processingModal").modal("hide");
             
         }).fail(function (err) {
-            
+
             setTimeout(function() {
                 $("#ModalWarningUserName").modal("show");
                 $("#processingModal").modal("hide");
             }, 500);
-            
         });
     }
 });
