@@ -29,11 +29,12 @@ namespace BookCave.Services
             return top10;
         }
 
-        public void AddReview(ReviewInputModel review, string UserId, string reviewer)
+        public void AddReview(ReviewInputModel review, string userId, string reviewer)
         {
             var reviewEntity = new BookReview
             {
                 Reviewer = reviewer,
+                UserId = userId,
                 BookId = review.BookId,
                 Rating = review.Rating,
                 Review = review.Review
