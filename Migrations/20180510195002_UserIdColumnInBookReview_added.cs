@@ -10,11 +10,6 @@ namespace BookCave.Migrations
         {
             migrationBuilder.AddColumn<string>(
                 name: "UserId",
-                table: "OrderInfo",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "UserId",
                 table: "BookReviews",
                 nullable: true);
         }
