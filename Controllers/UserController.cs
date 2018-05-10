@@ -78,7 +78,8 @@ namespace BookCave.Controllers
                 await _userManager.AddToRoleAsync(user, "User");
 
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
-                
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
                 await _signInManager.SignInAsync(user, false);
 
                 _userService.addDefaultImage(user.Id);
@@ -241,6 +242,8 @@ namespace BookCave.Controllers
                 var updateResult = await _userManager.UpdateAsync(user);
                 if(updateResult.Succeeded)
                 {
+                    user.FirstName = Name.FirstName;
+                    user.LastName = Name.LastName;
                     return Ok();
                 }
             }
@@ -267,6 +270,17 @@ namespace BookCave.Controllers
 
             return BadRequest();
         }
+
+       /* public async Task<string> GetUserNameById()
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            
+
+            return "Hi";
+                     
+        }*/
+
+        //.FirstOrDefault(c => c.Type == "Name")?.Value
     }
 
 }
