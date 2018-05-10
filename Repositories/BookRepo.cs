@@ -14,10 +14,11 @@ namespace BookCave.Repositories
     public class BookRepo
     {
         private DataContext _db;
-
+        private UserRepo _userRepo;
         public BookRepo()
         {
             _db = new DataContext();
+            _userRepo = new UserRepo();
         }
         public int AddBook(Book book)
         {
@@ -233,7 +234,8 @@ namespace BookCave.Repositories
                            {
                                Reviewer = r.Reviewer,
                                Rating = r.Rating,
-                               Review = r.Review
+                               Review = r.Review,
+                               ProfileImg = _userRepo.GetUserImage(r.UserId).Img
                            }).ToList();
             return reviews;
         }
