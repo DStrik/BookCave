@@ -4,13 +4,13 @@
     <div id="toTop" class="steps-form-2">
         <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
             <div class="steps-step-2">
-                <a href="#step-1" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-address-card" aria-hidden="true"></i></a>
+                <a href="#step-1" id="navstep1" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-address-card" aria-hidden="true"></i></a>
             </div>
             <div class="steps-step-2">
-                <a href="#step-2" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect disabled" data-toggle="tooltip" data-placement="top" title="Personal Data"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                <a href="#step-2" id="navstep1" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect disabled" data-toggle="tooltip" data-placement="top" title="Personal Data"><i class="fa fa-eye" aria-hidden="true"></i></a>
             </div>
             <div class="steps-step-2">
-                <a href="#step-3" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0 disabled" data-toggle="tooltip" data-placement="top" title="Terms and Conditions"><i class="fa fa-check" aria-hidden="true"></i></a>
+                <a href="#step-3" id="navstep1" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0 disabled" data-toggle="tooltip" data-placement="top" title="Terms and Conditions"><i class="fa fa-check" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
@@ -151,12 +151,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <h3>Cart</h3>
-                    <div id="smallCart">
-
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-md-12">
@@ -167,99 +161,130 @@
     </div>
 
 <!-- Second Step -->
-    <div class="row setup-content-2" id="step-2">
+    <div class="setup-content-2" id="step-2">
+        <div class="row">
+                <div class="col-lg-12 col-md-12 m-0">
+
+                    <!-- Card -->
+                    <div class="card card-image" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/pricing-table%20(4).jpg');">
+
+                        <!--Pricing card-->
+                        <div class="text-white text-center pricing-card d-flex align-items-center rgba-indigo-strong py-3 px-3">
+
+                            <!--Content-->
+                            <div class="card-body col-md-12">
+                                <h1><strong>Cart</strong></h1>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Quantity</th>
+                                            <th>Unit price</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cartTable">
+
+                                    </tbody>
+                                </table>
+                                <h2><strong id="totalPrice"></strong></h2>
+                            </div>
+                        </div>
+                        <!--Pricing card-->
+                    </div>
+                </div>
+        </div>
        <div class="row">
-            <div class="col mr-3 ml-3">
-                <h3 class="mb-0 mt-3">Shipping Information</h3>
+                <div class="col">
+                    <h3 class="mb-0 mt-3">Shipping Information</h3>
 
-                <div class="form-check mb-0 mt-3 for-space">
-                    <input type="checkbox" class="form-check-input" id="checkbox96847">
-                    <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
-                </div>
-                <div class="form-group ">
-                    <label for="ShippingFirstName1" data-error="wrong" data-success="right">First Name</label>
-                    <input type="text" id="ShippingFirstName1" class="form-control" disabled>
-                </div>
+                    <div class="form-check mb-0 mt-3 for-space">
+                        <input type="checkbox" class="form-check-input" id="checkbox96847">
+                        <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
+                    </div>
+                    <div class="form-group ">
+                        <label for="ShippingFirstName1" data-error="wrong" data-success="right">First Name</label>
+                        <input type="text" id="ShippingFirstName1" class="form-control" disabled>
+                    </div>
 
-                <div class="form-group mt-2">
-                    <label for="ShippingLastName1" data-error="wrong" data-success="right">Last Name</label>
-                    <input type="text" id="ShippingLastName1" class="form-control" disabled>
-                </div>
+                    <div class="form-group mt-2">
+                        <label for="ShippingLastName1" data-error="wrong" data-success="right">Last Name</label>
+                        <input type="text" id="ShippingLastName1" class="form-control" disabled>
+                    </div>
 
-                <div class="form-group  mt-2">
-                    <label for="ShippingStreetName1" data-error="wrong" data-success="right">Street</label>
-                    <input type="text" id="ShippingStreetName1" class="form-control" disabled>
-                </div>
+                    <div class="form-group  mt-2">
+                        <label for="ShippingStreetName1" data-error="wrong" data-success="right">Street</label>
+                        <input type="text" id="ShippingStreetName1" class="form-control" disabled>
+                    </div>
 
-                <div class="form-group  mt-2">
-                    <label for="ShippingHouseNumber1" data-error="wrong" data-success="right">House Number</label>
-                    <input type="number" id="ShippingHouseNumber1" class="form-control" disabled>
-                </div>
+                    <div class="form-group  mt-2">
+                        <label for="ShippingHouseNumber1" data-error="wrong" data-success="right">House Number</label>
+                        <input type="number" id="ShippingHouseNumber1" class="form-control" disabled>
+                    </div>
 
-                <div class="form-group  mt-2">
-                    <label for="ShippingCity1" data-error="wrong" data-success="right">City</label>
-                    <input type="text" id="ShippingCity1" class="form-control" disabled>                    
-                </div>
-                
-                <div class="form-group  mt-2">
-                    <label for="ShippingZipCode1" data-error="wrong" data-success="right">Zip Code</label>
-                    <input type="text" id="ShippingZipCode1" class="form-control" disabled>
-                </div>
-
-                <div class="form-group  mt-2">
-                    <label for="ShippingCountry1" data-error="wrong" data-success="right">Country</label>
-                    <input type="text" id="ShippingCountry1" class="form-control" disabled>
-                </div>
-                
-                
-            </div>
-    <!-- Shipping Information -->
-
-    <!-- Billing Information -->
-            <div class="col mr-3 ml-3"> 
-                <h3 class="mb-0 mt-3">Billing Information</h3>
+                    <div class="form-group  mt-2">
+                        <label for="ShippingCity1" data-error="wrong" data-success="right">City</label>
+                        <input type="text" id="ShippingCity1" class="form-control" disabled>                    
+                    </div>
                     
-                <div class="form-check mb-0 mt-3 for-space">
-                    <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
-                    <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
-                </div>
+                    <div class="form-group  mt-2">
+                        <label for="ShippingZipCode1" data-error="wrong" data-success="right">Zip Code</label>
+                        <input type="text" id="ShippingZipCode1" class="form-control" disabled>
+                    </div>
 
-                <div class="form-group ">
-                    <label for="BillingFirstName1" data-error="wrong" data-success="right">First Name</label>
-                    <input type="text" id="BillingFirstName1" class="form-control" disabled>
+                    <div class="form-group  mt-2">
+                        <label for="ShippingCountry1" data-error="wrong" data-success="right">Country</label>
+                        <input type="text" id="ShippingCountry1" class="form-control" disabled>
+                    </div>
+                    
+                    
                 </div>
-            
-                <div class="form-group mt-2">
-                    <label for="BillingLastName1" data-error="wrong" data-success="right">Last Name</label>
-                    <input type="text" id="BillingLastName1" class="form-control" disabled>
-                </div>
+        <!-- Shipping Information -->
+
+        <!-- Billing Information -->
+                <div class="col"> 
+                    <h3 class="mb-0 mt-3">Billing Information</h3>
+                        
+                    <div class="form-check mb-0 mt-3 for-space">
+                        <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
+                        <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="BillingFirstName1" data-error="wrong" data-success="right">First Name</label>
+                        <input type="text" id="BillingFirstName1" class="form-control" disabled>
+                    </div>
                 
-                <div class="form-group mt-2">
-                    <label for="BillingStreetName1" data-error="wrong" data-success="right">Street</label>
-                    <input type="text" id="BillingStreetName1" class="form-control" disabled>
-                </div>
-                
-                <div class="form-group mt-2">
-                    <label for="BillingHouseNumber1" data-error="wrong" data-success="right">House Number</label>
-                    <input type="number" id="BillingHouseNumber1" class="form-control" disabled>
-                </div>
-    
-                <div class="form-group mt-2">
-                    <label for="BillingCity1" data-error="wrong" data-success="right">City</label>
-                    <input type="text" id="BillingCity1" class="form-control" disabled>
-                </div>
+                    <div class="form-group mt-2">
+                        <label for="BillingLastName1" data-error="wrong" data-success="right">Last Name</label>
+                        <input type="text" id="BillingLastName1" class="form-control" disabled>
+                    </div>
+                    
+                    <div class="form-group mt-2">
+                        <label for="BillingStreetName1" data-error="wrong" data-success="right">Street</label>
+                        <input type="text" id="BillingStreetName1" class="form-control" disabled>
+                    </div>
+                    
+                    <div class="form-group mt-2">
+                        <label for="BillingHouseNumber1" data-error="wrong" data-success="right">House Number</label>
+                        <input type="number" id="BillingHouseNumber1" class="form-control" disabled>
+                    </div>
+        
+                    <div class="form-group mt-2">
+                        <label for="BillingCity1" data-error="wrong" data-success="right">City</label>
+                        <input type="text" id="BillingCity1" class="form-control" disabled>
+                    </div>
 
-                <div class="form-group mt-2">
-                    <label for="BillingZipCode1" data-error="wrong" data-success="right">Zip Code</label>
-                    <input type="text" id="BillingZipCode1" class="form-control" disabled>
+                    <div class="form-group mt-2">
+                        <label for="BillingZipCode1" data-error="wrong" data-success="right">Zip Code</label>
+                        <input type="text" id="BillingZipCode1" class="form-control" disabled>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="BillingCountry1" data-error="wrong" data-success="right">Country</label>
+                        <input type="text" id="BillingCountry1" class="form-control" disabled>
+                    </div>
                 </div>
-                <div class="form-group mt-2">
-                    <label for="BillingCountry1" data-error="wrong" data-success="right">Country</label>
-                    <input type="text" id="BillingCountry1" class="form-control" disabled>
-                </div>
-            </div>
-
-             <div class="col mr-3 ml-3">
+            <div class="col">
                 <h3 class="mb-0 mt-3">Payment Information</h3>
 
                 <div class="form-check mb-0 mt-3 for-space">
@@ -300,12 +325,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <h3>Cart</h3>
-                    <div id="smallCart">
-
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-md-12">
@@ -313,7 +332,7 @@
                 <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button">Previous</button>
             </div>
             <div class="col-md-4 offset-md-8">
-                <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" id="pay" type="button">Pay Now</button>
+                <button class="btn btn-success btn-rounded nextBtn-2 float-right" id="pay" type="button">Pay Now</button>
             </div>
         </div>
     </div>
