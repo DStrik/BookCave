@@ -262,6 +262,7 @@ namespace BookCave.Repositories
             var bookDetails = new BookDetailViewModel
             {
                 Title = book.Title,
+                Isbn = book.Isbn,
                 Author = authors,
                 Publisher = publisher,
                 PublishingYear = book.PublishingYear,
