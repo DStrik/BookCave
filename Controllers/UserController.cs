@@ -87,16 +87,6 @@ namespace BookCave.Controllers
             return View();
         }
 
-        private string GetDefaultProfileImage()
-        {
-            using (var memoryStream = new MemoryStream())
-            {
-                new FileInfo("wwwroot/images/default_pic.jpg").OpenRead().CopyTo(memoryStream);
-                var image =  memoryStream.ToArray();
-                return System.Text.Encoding.Default.GetString(image);
-            }
-        }
-
         [HttpGet]
         public async Task<IActionResult> AccountInformation()
         {
@@ -104,14 +94,14 @@ namespace BookCave.Controllers
 
             if(user == null)
             {
-                return View();
+                return View(); // Should go to error page here
             }
 
             var model = _userService.GetUserImage(user.Id);
 
             if(model == null)
             {
-                return View();
+                return View(); // Should go to error page here
             }
 
             return View(model);
@@ -192,12 +182,6 @@ namespace BookCave.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-
-            var user = await _userManager.FindByEmailAsync("danni@danni.is");
-            if(user != null)
-            {
-                await _userManager.DeleteAsync(user);
-            }
 
             return RedirectToAction("Index", "Home");
         }

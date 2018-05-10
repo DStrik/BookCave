@@ -80,6 +80,22 @@ namespace BookCave.Repositories
             }
         }
 
+        public AccountImage GetUserImage(string id)
+        {
+            if(!ContainsImage(id))
+            {
+                addDefaultImage(new AccountImage(){
+                    UserId = id,
+                }, id);
+            }
+
+            var retVal = (from img in _db.AccountImages
+                         where img.UserId == id
+                         select img).SingleOrDefault();
+            
+            return retVal;
+        }
+
         public void ChangePaymentInformation(PaymentInputModel PInfo, int UserId)
         {
 
@@ -159,15 +175,6 @@ namespace BookCave.Repositories
                        select num.Id).SingleOrDefault();
 
             return dbId;
-        }
-
-        public AccountImage GetUserImage(string id)
-        {
-            var retVal = (from img in _db.AccountImages
-                         where img.UserId == id
-                         select img).SingleOrDefault();
-            
-            return retVal;
         }
     }
 }
