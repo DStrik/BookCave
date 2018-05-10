@@ -27,7 +27,7 @@ namespace BookCave.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var reviewer = user.FirstName + user.LastName;
-            _bookService.AddReview(review, reviewer);
+            _bookService.AddReview(review, user.Id, reviewer);
             return Ok();
         }
         public IActionResult Details(int id)
