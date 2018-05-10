@@ -100,7 +100,7 @@ $(document).ready(function () {
         }).fail(function(err) {
             $(".loading-thing").hide();
             $("#errorImage").show();
-            $("#FavoriteBookInfo").html("<br><br><br><br><p>There was an error in retrieving your book</p><p>Please try again later...</p>");
+            $("#FavoriteBookInfo").html("<br><br><p class='pt-4'><strong>There was an error in retrieving your book</strong></p><p>You might not have added a favorite book yet.</p>");
         });
     });
 

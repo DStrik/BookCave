@@ -134,14 +134,10 @@ namespace BookCave.Controllers
             return View();
         }
 
-        public void ChangePaymenrInformation(PaymentInputModel PaymentInfo)
+        public async Task<IActionResult> FavoriteBook()
         {
-
-        }
-
-        public IActionResult FavoriteBook()
-        {
-            var data = _bookService.GetBookDetails(23);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var data = _bookService.GetBookDetails(user.FavBookId);
 
             return Json(data);
         }

@@ -35,5 +35,25 @@ namespace BookCave.Controllers
             var book = _bookService.GetBookDetails(id);
             return View(book);
         }
+
+        public async Task<IActionResult> AddFavoriteBook(int id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if(user == null)
+            {
+                return BadRequest();
+            }
+
+            user.FavBookId = id;
+            var result = await _userManager.UpdateAsync(user);
+
+            if(result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+
+        }
     }
 }
