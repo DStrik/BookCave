@@ -10,6 +10,7 @@ namespace BookCave.Services
     public class BookService
     {
         private BookRepo _bookRepo;
+
         public BookService()
         {
             _bookRepo = new BookRepo();
@@ -25,6 +26,20 @@ namespace BookCave.Services
             }
             return top10;
         }
+
+        public void AddReview(ReviewInputModel review, string userId)
+        {
+            var reviewEntity = new BookReview
+            {
+                UserId = userId,
+                BookId = review.BookId,
+                Rating = review.Rating,
+                Review = review.Review
+            };
+
+            _bookRepo.AddReview(reviewEntity);
+        }
+
         public List<BookViewModel> GetNewReleases()
         {
             return _bookRepo.GetNewReleases();
