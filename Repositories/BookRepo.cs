@@ -99,6 +99,30 @@ namespace BookCave.Repositories
             return publisher.Id;
         }
 
+        public void AddReview(BookReview review)
+        {
+            _db.Add(review);
+            _db.SaveChanges();
+            RedoRating(review.BookId);
+        }
+
+        private void RedoRating(int bookId)
+        {
+            var newRating = (from r in _db.BookReviews
+                             where r.BookId == bookId
+                             select r.Rating).DefaultIfEmpty(0).Average();
+            
+            var rating = (from r in _db.BookRatings
+                          where r.BookId == bookId
+                          select r).SingleOrDefault();
+            if(rating != null)
+            {
+                rating.Rating = newRating;
+                _db.Update(rating);
+                _db.SaveChanges();
+            }
+        }
+
         public List<BookListViewModel> GetBookList()
         {
             var books = new List<BookListViewModel>();
@@ -200,14 +224,15 @@ namespace BookCave.Repositories
                              }).SingleOrDefault();
             return publisher;
         }
-
+ 
         private List<ReviewViewModel> GetReviews(int bookId)
         {
             var reviews = (from r in _db.BookReviews
                            where r.BookId == bookId
                            select new ReviewViewModel
                            {
-                               Grade = r.Grade,
+                               Reviewer = r.UserId,
+                               Rating = r.Rating,
                                Review = r.Review
                            }).ToList();
             return reviews;
@@ -242,11 +267,16 @@ namespace BookCave.Repositories
 
         private double GetRating(int bookId)
         {
-            var rating = (from r in _db.BookReviews
+            var rating = (from r in _db.BookRatings
                           where r.BookId == bookId
-                          select r.Grade).DefaultIfEmpty(0);
+                          select r.Rating).SingleOrDefault();
+            
+            if(rating == null)
+            {
+                return 0;
+            }
                           
-            return rating.Average();
+            return rating;
         }
 
         public BookDetailViewModel GetBookDetails(int bookId)
@@ -350,10 +380,18 @@ namespace BookCave.Repositories
 
         public List<int> GetTop10()
         {
-            var top10 = (from t in _db.BookReviews
-                        orderby t.Grade descending
-                        select t.BookId).Take(10).ToList();
-            return top10;
+            var top10 = (from b in _db.BookRatings
+                         orderby b.Rating descending
+                         select b.BookId);
+
+            if(top10.Count() < 10)
+            {
+                return top10.ToList();
+            }
+            else
+            {
+                return top10.Take(10).ToList();
+            }
         }
 
         public List<BookViewModel> GetNewReleases()
