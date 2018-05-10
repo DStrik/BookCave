@@ -1,3 +1,13 @@
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var nameClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
+}
+   
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand" asp-controller="Home" asp-action="Index">
@@ -75,7 +85,7 @@
         </ul>
 
             <!-- Right -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <!-- Search button -->
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Search" asp-action="Index">
@@ -92,7 +102,14 @@
 
                 <!-- Account stuff -->
                 <li class="nav-item dropdown">
-                    <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect id="navbarDropdownMenuLink" data-toggle="dropdown"><i class="icon fa fa-user"></i><span class="caret"></span></a>
+                    <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect id="navbarDropdownMenuLink" data-toggle="dropdown">
+                        <i class="icon fa fa-user"></i>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <span>@nameClaim</span>
+                            }
+                            <span class="caret"></span>
+                        </a>
                     <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary">
                         @await Html.PartialAsync("_accountDropdown.cshtml")
                     </div>
@@ -103,3 +120,4 @@
 
         </div>
     </div>
+

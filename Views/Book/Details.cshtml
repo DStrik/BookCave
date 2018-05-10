@@ -1,11 +1,136 @@
 @model BookCave.Models.ViewModels.BookDetailViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var nameClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
+}
+
 <div class="container body-container">
 
-    <div class="card">
+    <div class="card container">
         <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    <img class="img-fluid ml-3" src="data:image/jpg;base64, @Convert.ToBase64String(@Model.CoverImage)" />
+            <div class="row animated fadeIn">
+                <div class="col-md-12 col-lg-5">
+                    <img class="img-fluid rounded w-100 img-thumbnail" src="data:image/jpg;base64, @Convert.ToBase64String(@Model.CoverImage)" />
+                </div>
+
+                <div class="col-md-12 col-lg-7 pt-5">
+
+                    <div class="col-12">
+                        <h1 class="h1 mb-4"><strong>@Model.Title</strong> <small>(@Model.Type)</small></h1>
+                    </div>
+
+                    <div class="col-12">
+                        <p class="mb-0"><strong>Author(s): </strong> @foreach (var author in Model.Author) { if(author != Model.Author.Last()) {
+                            <span>@author.Name, </span> } else {
+                            <span>@author.Name</span> } }
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <p><strong>Genre(s):</strong> @foreach (var genre in Model.Genre) { if(genre != Model.Genre.Last()) {
+                            <span>@genre.Name, </span> } else {
+                            <span>@genre.Name</span> } }
+                        </p>
+                    </div>
+
+                    <div class="col-12 text-right my-0">
+                        <h3 class="h3 my-0 py-0 pr-4 mr-3"><strong>Price:</strong> $@Model.Price</h3>
+                    </div>
+
+                    <div class="col-12 btn-group p-5">
+                        <button type="button" class="btn btn-default btn-lg btn-block mr-2"><i class="fa fa-cart-plus fa-5x"></i> <br> Add to cart!</button>
+                        <button type="button" class="btn btn-pink btn-lg btn-block"><i class="fa fa-heart fa-5x"></i> <br> Set as favorite book!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-4">
+                <div class="col-12">
+                    <hr>
+                    <div class="row container wow fadeIn">
+                        <div class="col-4">
+                            <div class="row">
+                                <h2 class="h2"><strong>Product details:</strong></h2>
+                            </div>
+                            <p class="my-0"><strong>Format:</strong> @Model.Type</p>
+                            @if (@Model.Type != "Audio Book") {
+                            <p class="my-0"><strong>Page count:</strong> @Model.PageCount</p>
+                            } else {
+                            <p><strong>Audio Length:</strong> @Model.Length</p>
+                            }
+                            <p class="mb-0"><strong>ISBN:</strong> @Model.Isbn</p>
+                            <p class="mb-0"><strong>Publisher:</strong> @Model.Publisher</p>
+                            <p class="mb-0"><strong>Publishing Year:</strong> @Model.PublishingYear</p>
+                            <p class="mb-0"><strong>Font:</strong> @Model.Font</p>
+
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <h2 class="h2"><strong>Description:</strong></h2>
+                                <p class="my-0">@Model.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row container wow fadeIn">
+                <div class="col-12">
+                    <div class="row">
+                        <h2 class="h2"><strong>Reviews:</strong></h2>
+                    </div>
+                    
+                    <div class="row">
+                        @if (!@Model.Review.Any())
+                        {
+                            <div class="col-12 py-5 my-5">
+                                <h4 class="h4 text-center">No reviews has been made for this book, be the first!</h4>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row container wow fadeIn">
+                <div class="row container">
+                    <h2 class="h2"><strong>Write your review!</strong></h2>
+                </div>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="col-12">
+                    <form class="media">
+                        <div class="media-body">
+                            <div class="media mt-3 shadow-textarea">
+                                <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h4 class="my-0 font-weight-bold blue-text">@nameClaim</h4>
+                                    <div id="userRating" class="rate h1 orange-text"></div>
+                                    <div class="form-group basic-textarea rounded-corners">
+                                        <textarea class="form-control z-depth-1" id="exampleFormControlTextarea3" rows="6" placeholder="Write your comment..."></textarea>
+                                    </div>
+                                    <button type="submit" id="submitReview" class="btn btn-primary pull-right mt-0 mr-0">Submit review!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            } 
+            else 
+            { 
+                <div class="col-12 py-5 my-5">
+                    <h4 class="h4 text-center">Please sign in to write a review!</h4>
+                </div>
+            }
                 </div>
             </div>
         </div>

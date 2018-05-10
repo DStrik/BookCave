@@ -20,6 +20,5 @@ namespace BookCave.Models.ViewModels
         public List<ReviewViewModel> Review { get; set; }
         public byte[] CoverImage { get; set; }
         
-
     }
 }

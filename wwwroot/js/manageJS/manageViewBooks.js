@@ -7,7 +7,8 @@ $(document).ready(function () {
         "processing": true,
         "serverSide": false,
         "ajax": { "url": "getBookList", "dataSrc": "" },
-        "autoWidth": true,
+        "autoWidth": false,
+        "autoHeight": true,
         "columns": [
             { "data": "bookId" },
             { "data": "title" },

@@ -86,15 +86,3 @@ function toggleAudioAndOthers(setToType) {
     $("#pageCount").prop("disabled", false);
   }
 }
-
-
-$("#submitModifications").one("click", function() {
-  var that = $(this);
-  var form = $("#modifyBookForm").serialize();
-  $.post("/Manage/ModifyBookById", form, function(){
-    that.on();
-    alert("changed beeetch");
-  }).fail(function(){
-    alert("lol nice try");
-  });
-});
