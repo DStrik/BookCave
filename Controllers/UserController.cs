@@ -270,18 +270,6 @@ namespace BookCave.Controllers
 
             return BadRequest();
         }
-
-        public async Task<string> GetUserNameById(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            
-            var retVal = user.FirstName + " " + user.LastName;
-
-            return retVal;
-                     
-        }
-
-        //.FirstOrDefault(c => c.Type == "Name")?.Value
     }
 
 }
