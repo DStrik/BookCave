@@ -18,8 +18,8 @@ $(document).ready(function () {
             $item = $(this);
 
         if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-amber').addClass('btn-blue-grey');
-            $item.addClass('btn-amber');
+            navListItems.removeClass('btn-amber').addClass('btn-success');
+            $item.removeClass('btn-blue-gray').addClass('btn-amber');
             allWells.hide();
             $target.show();
             $target.find('input:eq(0)').focus();
@@ -49,8 +49,22 @@ $(document).ready(function () {
             }
         }
 
-        if (isValid)
+        if (isValid){
+
             nextStepSteps.removeAttr('disabled').trigger('click');
+            
+        }
+        /*
+        var target = nextStepSteps.attr('href');
+
+        if (!nextStepSteps.hasClass('disabled')) {
+            navListItems.removeClass('btn-amber').addClass('btn-success');
+            nextStepSteps.addClass('btn-amber');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+        */
     });
 
     $('div.setup-panel-2 div a.btn-amber').trigger('click');
@@ -94,8 +108,9 @@ $(document).ready(function () {
             $("#ExpirationYear1").val($("#ExpirationYear").val());
             $("#Cvc1").val($("#Cvc").val());
 
+
         }).fail(function(err) {
-            alert("Error has occured!")
+            alert("something wrong!")
         });
 
         $("#pay").one('click', function(){

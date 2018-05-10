@@ -1,9 +1,0 @@
-namespace BookCave.Data.EntityModels
-{
-    public class User
-    {
-        public int Id { get; set; }
-        public string AuthorizedUserId { get; set; }
-
-    }
-}
