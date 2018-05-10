@@ -63,9 +63,9 @@ namespace BookCave.Services
                 PaymentCardNumber = cardNumber,
                 PaymentExpirationMonth = info.ExpirationMonth,
                 PaymentExpirationYear = info.ExpirationYear,
-           };
-           _orderRepo.AddOrderInfo(orderInfo);
-            
+            };
+            _orderRepo.AddOrderInfo(orderInfo);
+            _cartService.ClearCart(id);
 
    }
        public CheckOutInputModel GetShippingBillingViewModel(string id)
