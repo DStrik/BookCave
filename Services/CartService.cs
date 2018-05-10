@@ -32,32 +32,30 @@ namespace BookCave.Services
             return booksInCart;
         }
         
-        public void ChangeQuantity(int[] qtys, int[] cartItemIds)
+        public void ChangeQuantity(int[] qtys, int[] cartItemIds, string userId)
         {
             var cartItems = new List<CartItem>();
             for(int i = 0; i < cartItemIds.Length; i++)
             {
-                CartItem item = _cartRepo.GetCartItem(cartItemIds[i]);
+                var item = _cartRepo.GetCartItem(cartItemIds[i], userId);
                 item.Quantity = qtys[i];
                 cartItems.Add(item);
             }
             _cartRepo.ChangeQuantities(cartItems);
         }
 
-        public void RemoveItem(int cartItemId)
+        public void RemoveItem(int cartItemId, string userId)
         {
-            CartItem item = _cartRepo.GetCartItem(cartItemId);
-            _cartRepo.RemoveItem(item);
-        }
-        public void ClearCart(int[] cartItems)
-        {
-            var items = new List<CartItem>();
-            foreach(int i in cartItems)
+            var item = _cartRepo.GetCartItem(cartItemId, userId);
+            if(item != null)
             {
-                var item = _cartRepo.GetCartItem(i);
-                items.Add(item);
+                _cartRepo.RemoveItem(item);
             }
-            _cartRepo.ClearCart(items);
+            
+        }
+        public void ClearCart(string userId)
+        {
+            _cartRepo.ClearCart(userId);
         }
         public void AddToCart(string userId, int bookId)
         {   

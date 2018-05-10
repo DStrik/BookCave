@@ -19,38 +19,40 @@ namespace BookCave.Controllers
 
         public CartController(UserManager<ApplicationUser> userManager)
         {
-            _userManager = userManager;
+            _userManager = userManager;                          
             _cartService = new CartService();
             _bookService = new BookService();
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            var cartItems = _cartService.GetCart(user.Id);
+            var userId = _userManager.GetUserId(HttpContext.User); 
+            var cartItems = _cartService.GetCart(userId);
             
             return View(cartItems);
         }
         [HttpPost]
         public void ChangeQuantity(int[] qtys, int[] cartItemIds)
-        {
-            _cartService.ChangeQuantity(qtys, cartItemIds);
+        { 
+            var userId = _userManager.GetUserId(HttpContext.User); 
+            _cartService.ChangeQuantity(qtys, cartItemIds, userId);
 
         }
         [HttpPost]
         public void RemoveItem(int cartItemId)
-        {
-            _cartService.RemoveItem(cartItemId);
+        {   
+            var userId = _userManager.GetUserId(HttpContext.User); 
+            _cartService.RemoveItem(cartItemId, userId);
         }
         
-        public void ClearCart(int[] cartItems)
-        {
-            _cartService.ClearCart(cartItems);
+        public void ClearCart()
+        {   var userId = _userManager.GetUserId(HttpContext.User);            
+            _cartService.ClearCart(userId);
         }
 
         public IActionResult AddToCart(int id)
         {
-            var user = _userManager.GetUserId(HttpContext.User);
-            _cartService.AddToCart(user, id);
+            var userId = _userManager.GetUserId(HttpContext.User); 
+            _cartService.AddToCart(userId, id);
 
             return Ok();
         }
