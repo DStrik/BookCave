@@ -49,6 +49,8 @@ namespace BookCave.Services
                 Price = book.Price ?? default(double),
                 PublisherId = book.Publisher ?? default(int)
             };
+
+            _bookRepo.ModBook(bookEntity);
             
             var details = new BookDetails
             {
