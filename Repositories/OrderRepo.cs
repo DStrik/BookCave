@@ -48,10 +48,10 @@ namespace BookCave.Repositories
             return ordersView;
         }
 
-        public OrderDetailViewModel GetOrderDetails(int orderId)
+        public OrderDetailViewModel GetOrderDetails(int orderId, string userId)
         {
             var order = (from o in _db.OrderInfo
-                        where orderId == o.OrderId
+                        where orderId == o.OrderId && userId == o.UserId
                         select o).SingleOrDefault();
             var orderedBooks = GetBooks(orderId);
             var orderInfo = GetOrderInfo(orderId);

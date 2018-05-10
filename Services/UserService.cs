@@ -11,29 +11,22 @@ namespace BookCave.Services
     public class UserService
     {
         private UserRepo _userRepo;
+        private OrderRepo _orderRepo;
 
         public UserService()
         {
             _userRepo = new UserRepo();
+            _orderRepo = new OrderRepo();
         }
         
-        public List<OrderViewModel> GetOrderHistory(int UserId)
+        public List<OrderViewModel> GetOrderHistory(string userId)
         {
-            return null;
+            return _orderRepo.GetOrderHistory(userId);
         }
-        public List<BookViewModel> GetWishlist(int UserId)
+        public OrderDetailViewModel GetOrderDetails(int orderId, string userId)
         {
-            return null;
+            return _orderRepo.GetOrderDetails(orderId, userId);
         }
-        public void AddToWishlist(int BookId)
-        {
-            
-        }
-        public void RemoveFromWishlist(int BookId)
-        {
-
-        }
-        
         public void ChangeShippingBillingInfo(ShippingBillingInputModel input, string id)
         {
             ShippingBilling write = new ShippingBilling()
@@ -88,15 +81,9 @@ namespace BookCave.Services
 
             return inputmodel;
         }
-
-        public void GetBillingInfo(int id)
-        {
-
-        }
-        
         public void ChangePaymentInfo(PaymentInputModel PayInfo)
         {
-            
+            //geyma
         }
 
         public void addDefaultImage(string id)

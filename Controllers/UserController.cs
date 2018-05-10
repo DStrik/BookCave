@@ -169,7 +169,18 @@ namespace BookCave.Controllers
 
         public IActionResult OrderHistory()
         {
-            return View();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var orders = _userService.GetOrderHistory(userId);
+
+            return View(orders);
+        }
+        public IActionResult OrderDetails(int id)
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var order = _userService.GetOrderDetails(id, userId);
+
+            return View(order);
+
         }
 
         public async Task<IActionResult> LogOut()
