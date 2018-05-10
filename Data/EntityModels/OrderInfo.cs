@@ -19,5 +19,9 @@ namespace BookCave.Data.EntityModels
         public string BillingCity { get; set; }
         public string BillingZipCode { get; set; }
         public string BillingCounry { get; set; }
+        public string PaymentFullName { get; set; }
+        public string PaymentCardNumber { get; set; }
+        public string PaymentExpirationMonth { get; set; }
+        public string PaymentExpirationYear { get; set; }
     }
 }
