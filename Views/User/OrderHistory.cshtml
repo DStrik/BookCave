@@ -1,0 +1,73 @@
+@model List<BookCave.Models.ViewModels.OrderViewModel>
+<div class="container body-container">
+    <div class="container card">
+        @if(!Model.Any())
+        {
+            <h1 class="text-center mt-5 mb-5">You have no orders ...</h1>
+            <h3 class="text-center mt-5 mb-5">Go shopping! ...</h3>
+        }
+        else
+        {
+            <h1 class="text-center mt-5 mb-4">Your Orders</h1>
+            <table class="table table-responsive-md text-center">
+                <thead class="cyan lighten-3">
+                    <tr>
+                        <th class="th-lg">Order Number</th>
+                        <th class="th-lg">Date Of Purchase</th>
+                        <th class="th-lg">Click to View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var order in Model)
+                    {   
+                        <tr>
+                                <td>@order.Id</td>
+                                <td>@order.DateOfPurchase</td>
+                                <td>
+                                    <button class="btn btn-primary btn-md waves-light viewDetails" data-id="@order.Id">View Details</button>
+                                </td>
+                        </tr>
+                        
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<div mdbModal #style="mdb-modal" class="modal fade" id="ViewDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Order Details</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <!--Table-->
+<table class="table">
+
+    <!--Table head-->
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Quanity</th>
+            <th>Unit Price</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody id="books">
+    </tbody>
+</table>
+
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary waves-light" mdbWavesEffect>Get it now <i class="fa fa-diamond ml-1"></i></a>
+                <a type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="style.hide()" mdbWavesEffect>No, thanks</a>
+            </div>
+        </div>
+    </div>
+</div>
