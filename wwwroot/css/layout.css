@@ -97,7 +97,8 @@
 
 .shipping-billing-button-style {
   display:block;
-  width:100%
+  width:100%;
+  border: 0 !important;
 }
 
 /* For Checkout  */
@@ -159,3 +160,13 @@
 }
 
 /* For Checkout */
+
+/* For Account Information */
+
+#ChangeNameInput {
+  display: none;
+}
+
+#UserName {
+  font-weight: bold;
+}

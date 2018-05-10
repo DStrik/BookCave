@@ -11,149 +11,149 @@
 }
 
 <div class="container body-container">
-
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <!-- First row -->
-        <div class="row mb-5">
-            <h1>@nameClaim&apos;s shipping and billing information: <button id="changeShippingBilling" class="btn btn-primary"><strong>Update Shipping/Billing</strong></button></h1>
-        </div>
-
-        @if(Model == null)
+    <div class="card container">
+        @if (SignInManager.IsSignedIn(User))
         {
-            <h3>Your shipping and billing information is empty</h3>
-            <h4>Press &quot;Update Shipping/Billing&quot; to modify your information</h4>
-        }
+            <!-- First row -->
+            <div class="row mb-3">
+                <div class="col mt-3 ml-2">
+                    <h1>@nameClaim&apos;s shipping and billing information: <button id="changeShippingBilling" class="btn btn-primary"><strong>Update Shipping/Billing</strong></button></h1>
 
-        <a asp-controller="User" asp-action="AccountInformation" type="button" class="btn btn-default btn-lg btn-block mt-1 mb-1">Back To User Account Information</a>
-
-        <!-- First row -->
-
-        <div class="row mt-5">
-            <div class="col">
-            
-                <!--Table-->
-                <table class="table table-striped table-bordered">
-
-                    <!--Table head-->
-                    <thead class="thead-dark">
-                        <tr>
-                            <th colspan="2">Shipping Information</th>
-                        </tr>
-                    </thead>
-                    <!--Table head-->
-
-                    <!--Table body-->
-                    <tbody class="">
-                        @if(@Model != null)
-                        {
-                            <tr>
-                                <th width="30%"><strong>First Name</strong></th>
-                                <td width="70%">@Model.ShippingFirstName</td>
-                            </tr>
-
-                            <tr>
-                                <th width="30%"><strong>Last Name</strong></th>
-                                <td width="70%">@Model.ShippingLastName</td>
-                            </tr>
-
-                            <tr>
-                                <th width="30%"><strong>Street Name</strong></th>
-                                <td width="70%">@Model.ShippingStreetName</td>
-                            </tr>
-
-                            <tr>
-                                <th width="30%"><strong>House Number</strong></th>
-                                <td width="70%">@Model.ShippingHouseNumber</td>
-                            </tr>
-
-                            <tr>
-                                <th width="30%"><strong>City</strong></th>
-                                <td width="70%">@Model.ShippingCity</td>
-                            </tr>
-
-                            <tr>
-                                <th width="30%"><strong>Zip Code</strong></th>
-                                <td width="70%">@Model.ShippingZipCode</td>
-                            </tr>
-
-                            <tr>
-                                <th width="30%"><strong>Country</strong></th>
-                                <td width="70%">@Model.ShippingCountry</td>
-                            </tr>
-                        }
-                    </tbody>
-                    <!--Table body-->
-
-                </table>
-                <!--Table-->
-
+                    @if(Model == null)
+                    {
+                        <h3>Your shipping and billing information is empty</h3>
+                        <h4>Press &quot;Update Shipping/Billing&quot; to modify your information</h4>
+                    }
+                </div>
             </div>
 
-            <div class="col">
+            <a asp-controller="User" asp-action="AccountInformation" type="button" class="btn btn-default btn-lg btn-block mt-1 mb-1">Back To User Account Information</a>
 
+            <!-- Second row -->
+
+            <div class="row mt-5">
+                <div class="col">
+                
                     <!--Table-->
-                <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered">
 
-                    <!--Table head-->
-                    <thead class="thead-dark">
-                        <tr>
-                            <th colspan="2">Billing Information</th>
-                        </tr>
-                    </thead>
-                    <!--Table head-->
-
-                    <!--Table body-->
-                    <tbody class="">
-                        @if(@Model != null)
-                        {
+                        <!--Table head-->
+                        <thead class="thead-dark">
                             <tr>
-                                <th width="30%"><strong>First Name</strong></th>
-                                <td width="70%">@Model.BillingFirstName</td>
+                                <th colspan="2">Shipping Information</th>
                             </tr>
+                        </thead>
+                        <!--Table head-->
 
+                        <!--Table body-->
+                        <tbody class="">
+                            @if(@Model != null)
+                            {
+                                <tr>
+                                    <th width="30%"><strong>First Name</strong></th>
+                                    <td width="70%">@Model.ShippingFirstName</td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%"><strong>Last Name</strong></th>
+                                    <td width="70%">@Model.ShippingLastName</td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%"><strong>Street Name</strong></th>
+                                    <td width="70%">@Model.ShippingStreetName</td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%"><strong>House Number</strong></th>
+                                    <td width="70%">@Model.ShippingHouseNumber</td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%"><strong>City</strong></th>
+                                    <td width="70%">@Model.ShippingCity</td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%"><strong>Zip Code</strong></th>
+                                    <td width="70%">@Model.ShippingZipCode</td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%"><strong>Country</strong></th>
+                                    <td width="70%">@Model.ShippingCountry</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <!--Table body-->
+
+                    </table>
+                    <!--Table-->
+
+                </div>
+
+                <div class="col">
+
+                        <!--Table-->
+                    <table class="table table-striped table-bordered">
+
+                        <!--Table head-->
+                        <thead class="thead-dark">
                             <tr>
-                                <th width="30%"><strong>Last Name</strong></th>
-                                <td width="70%">@Model.BillingLastName</td>
+                                <th colspan="2">Billing Information</th>
                             </tr>
+                        </thead>
+                        <!--Table head-->
 
-                            <tr>
-                                <th width="30%"><strong>Street Name</strong></th>
-                                <td width="70%">@Model.BillingStreetName</td>
-                            </tr>
+                        <!--Table body-->
+                        <tbody class="">
+                            @if(@Model != null)
+                            {
+                                <tr>
+                                    <th width="30%"><strong>First Name</strong></th>
+                                    <td width="70%">@Model.BillingFirstName</td>
+                                </tr>
 
-                            <tr>
-                                <th width="30%"><strong>House Number</strong></th>
-                                <td width="70%">@Model.BillingHouseNumber</td>
-                            </tr>
+                                <tr>
+                                    <th width="30%"><strong>Last Name</strong></th>
+                                    <td width="70%">@Model.BillingLastName</td>
+                                </tr>
 
-                            <tr>
-                                <th width="30%"><strong>City</strong></th>
-                                <td width="70%">@Model.BillingCity</td>
-                            </tr>
+                                <tr>
+                                    <th width="30%"><strong>Street Name</strong></th>
+                                    <td width="70%">@Model.BillingStreetName</td>
+                                </tr>
 
-                            <tr>
-                                <th width="30%"><strong>Zip Code</strong></th>
-                                <td width="70%">@Model.BillingZipCode</td>
-                            </tr>
+                                <tr>
+                                    <th width="30%"><strong>House Number</strong></th>
+                                    <td width="70%">@Model.BillingHouseNumber</td>
+                                </tr>
 
-                            <tr>
-                                <th width="30%"><strong>Country</strong></th>
-                                <td width="70%">@Model.BillingCountry</td>
-                            </tr>
-                        }
-                    </tbody>
-                    <!--Table body-->
+                                <tr>
+                                    <th width="30%"><strong>City</strong></th>
+                                    <td width="70%">@Model.BillingCity</td>
+                                </tr>
 
-                </table>
-                <!--Table-->
+                                <tr>
+                                    <th width="30%"><strong>Zip Code</strong></th>
+                                    <td width="70%">@Model.BillingZipCode</td>
+                                </tr>
 
+                                <tr>
+                                    <th width="30%"><strong>Country</strong></th>
+                                    <td width="70%">@Model.BillingCountry</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <!--Table body-->
+
+                    </table>
+                    <!--Table-->
+
+                </div>
             </div>
-        </div>
-        
-
-
-    }
+        }
+    </div>
 
     <!-- MODAL Change shipping and billing -->
     <div class="modal fade" id="editShippingBilling" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

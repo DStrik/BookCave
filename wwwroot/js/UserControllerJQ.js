@@ -194,9 +194,79 @@ $(document).ready(function () {
 
     // End of Modal controller
 
+    // Upload Image
     $("#EditImage").click(function (e) { 
         e.preventDefault();
         $("#UploadImageModal").modal("show");
     });
+
+    $(submitImage).click(function (e) { 
+        $("#processingModal").modal("show");
+        $("#UploadImageModal").modal("hide");
+    });
+    // Upload Image
+
+    //Change Profile Name
+    $("#ChangeUserName").click(function (e) { 
+        e.preventDefault();
+
+        $("#UserName").hide();
+        $("#ChangeNameInput").show();
+        
+    });
+
+    $("#UserFirstNameInput").keypress(function (e) { 
+        if(e.which == 13) {
+            UpdateUserName();
+        }
+    });
+
+    $("#UserLastNameInput").keypress(function (e) { 
+        if(e.which == 13) {
+            UpdateUserName();
+        }
+    });
+
+    $("#AcceptNameChange").click(function (e) { 
+        e.preventDefault();
+        UpdateUserName();
+    });
+
+    $("#CancelNameChange").click(function (e) { 
+        e.preventDefault();
+        $("#ChangeNameInput").hide();
+        $("#UserName").show();
+    });
+
+    function UpdateUserName() {
+        
+        $("#processingModal").modal("show");
+
+        var newFirstName = $("#UserFirstNameInput").val();
+        var newLastName = $("#UserLastNameInput").val();
+
+        var inp = {
+            "firstname" : newFirstName,
+            "lastname" : newLastName
+        }
+
+        $.post("ChangeFirstLastName", inp, function (data, status) {
+
+            $("#UserFirstNameInput").empty();
+            $("#UserLastNameInput").empty();
+
+            $("#ChangeNameInput").hide();
+            $("#UserName").empty().text(newFirstName + " " + newLastName).show();
+            $("#processingModal").modal("hide");
+            
+        }).fail(function (err) {
+            
+            setTimeout(function() {
+                $("#ModalWarningUserName").modal("show");
+                $("#processingModal").modal("hide");
+            }, 500);
+            
+        });
+    }
 });
 

@@ -9,6 +9,7 @@ using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace BookCave.Controllers
 {
@@ -123,7 +124,7 @@ namespace BookCave.Controllers
             {
                 return RedirectToAction("AccountInformation", "User"); // should go to error page
             }
-            
+
             return RedirectToAction("AccountInformation", "User");
         }
 
@@ -222,6 +223,49 @@ namespace BookCave.Controllers
             _userService.ChangeShippingBillingInfo(input, user.Id);
 
             return RedirectToAction("EditSippingBilling", "User");
+        }
+
+        public async Task<IActionResult> ChangeFirstLastName(UserChangeName Name)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var result = await _userManager.ReplaceClaimAsync(user, ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name"), new Claim("Name", $"{Name.FirstName} {Name.LastName}"));
+
+            if(result.Succeeded)
+            {
+                var updateResult = await _userManager.UpdateAsync(user);
+                if(updateResult.Succeeded)
+                {
+                    return Ok();
+                }
+            }
+
+            return BadRequest();
+        }
+
+        public async Task<IActionResult> SetFavoriteBookId(int id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user == null)
+            {
+                return BadRequest();
+            }
+
+            user.FavBookId = id;
+            var result = await _userManager.UpdateAsync(user);
+
+            if(result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 

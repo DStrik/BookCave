@@ -11,110 +11,117 @@
 }
 
 <div class="container body-container">
-    <!-- Row 1 -->
-    <div class="row justify-content-center">
-        <!-- Column 1 -->
-        <div class="col-lg-4">
-            <!-- Card Wider -->
-            <div class="card card-cascade wider">
+    <div class="card container">
+        <!-- Row 1 -->
+        <div class="row justify-content-center mt-3">
+            <!-- Column 1 -->
+            <div class="col-lg-4">
+                <!-- Card Wider -->
+                <div class="card card-cascade wider">
 
-            <!-- Card image -->
-            <div class="view overlay" id="EditImage">
-                <img height="250px" width="100%" style="object-fit:fill" class="card-img-top" src="data:image/jpg;base64, @Convert.ToBase64String(@Model.Image)" alt="Profile Picture">
-                <div class="mask flex-center rgba-white-strong">
-                    <p class="black-text">Edit Image</p>
-                </div>
-            </div>
-
-            <!-- Card content -->
-            <div class="card-body text-center">
-
-                <!-- Title -->
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <div class="card-body">
-                        <!-- Name -->
-                        <h4 class="card-title mb-0"><strong>@nameClaim</strong></h4>
+                <!-- Card image -->
+                <div class="view overlay" id="EditImage">
+                    <img height="250px" width="100%" style="object-fit:fill" class="card-img-top" src="data:image/jpg;base64, @Convert.ToBase64String(@Model.Image)" alt="Profile Picture">
+                    <div class="mask flex-center rgba-white-strong">
+                        <p class="black-text">Edit Image</p>
                     </div>
-                }
-                <!-- Button -->
-                <button type="button" class="btn btn-elegant mt-3"><i class="fa fa-user-o pr-2" aria-hidden="true"></i>Change Name</button>
-                <!-- Button -->
+                </div>
 
+                <!-- Card content -->
+                <div class="card-body text-center">
+
+                    <!-- Title -->
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <div class="card-body ">
+                            <!-- Name -->
+                            <h4 id="UserName" class="card-title mb-0">@nameClaim</h4>
+                            <form id="ChangeNameInput">
+                                <input type="text" id="UserFirstNameInput" class="form-control" placeholder="New First Name" required>
+                                <input type="text" id="UserLastNameInput" class="form-control" placeholder="New Last Name" required>
+                                <a id="CancelNameChange" class="btn-floating btn-sm red"><i class="fa fa-window-close"></i></a>
+                                <a id="AcceptNameChange" class="btn-floating btn-sm green"><i class="fa fa-check"></i></a>
+                            </form>
+                        </div>
+                    }
+
+                    <!-- Button -->
+                    <button id="ChangeUserName" type="button" class="btn btn-elegant mt-3"><i class="fa fa-user-o pr-2" aria-hidden="true"></i>Change Name</button>
+                    <!-- Button -->
+
+                </div>
+
+                </div>
+                <!-- Card Wider -->
             </div>
+            <!-- Column 1 -->
+        </div>
+        <!-- Row 1 -->
 
+        <!-- Row 2 -->
+        <div class="row mt-4 justify-content-center">
+            <div class="col-lg-5">
+                <!--Table-->
+                <table class="table table-bordered table-hover">
+
+                    <!--Table head-->
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Personal</th>
+                        </tr>
+                    </thead>
+                    <!--Table head-->
+
+                    <!--Table body-->
+                    <tbody class="hover-pointer accountBody">
+                        <tr id="togglePasswordModal">
+                            <td>Change Password</td>
+                        </tr>
+                        <tr id="ViewFavBook">
+                            <td>My Favorite Book</td>
+                        </tr>
+                        <tr>
+                            <td>I don't do anything</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Options</td>
+                        </tr>
+                    </tbody>
+                    <!--Table body-->
+
+                </table>
+                <!--Table-->
             </div>
-            <!-- Card Wider -->
-        </div>
-        <!-- Column 1 -->
-    </div>
-    <!-- Row 1 -->
+            <div class="col-lg-4">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Purchases</th>
+                        </tr>
+                    </thead>
+                    <tbody class="hover-pointer accountBody">
 
-    <!-- Row 2 -->
-    <div class="row mt-4 justify-content-center">
-        <div class="col-lg-5">
-            <!--Table-->
-            <table class="table table-hover">
+                        <tr>
+                            <td class="shipping-billing-button-style"><a asp-controller="User" asp-action="EditSippingBilling" class="shipping-billing-button-style">Change Shipping/Billing Information</a></td>
+                        </tr>
 
-                <!--Table head-->
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Personal</th>
-                    </tr>
-                </thead>
-                <!--Table head-->
+                        <tr>
+                            <td>Order History</td>
+                        </tr>
 
-                <!--Table body-->
-                <tbody class="hover-pointer">
-                    <tr id="togglePasswordModal">
-                        <td>Change Password</td>
-                    </tr>
-                    <tr id="ViewFavBook">
-                        <td>My Favorite Book</td>
-                    </tr>
-                    <tr>
-                        <td>I don't do anything</td>
-                    </tr>
-                    <tr>
-                        <td>Payment Options</td>
-                    </tr>
-                </tbody>
-                <!--Table body-->
+                        <tr>
+                            <td>Cart</td>
+                        </tr>
 
-            </table>
-            <!--Table-->
-        </div>
-        <div class="col-lg-4">
-            <table class="table table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Purchases</th>
-                    </tr>
-                </thead>
-                <tbody class="hover-pointer">
+                        <tr>
+                            <td>Wish List</td>
+                        </tr>
 
-                    <tr>
-                        <td class="shipping-billing-button-style"><a asp-controller="User" asp-action="EditSippingBilling" class="shipping-billing-button-style">Change Shipping/Billing Information</a></td>
-                    </tr>
-
-                    <tr>
-                        <td>Order History</td>
-                    </tr>
-
-                    <tr>
-                        <td>Cart</td>
-                    </tr>
-
-                    <tr>
-                        <td>Wish List</td>
-                    </tr>
-
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <!-- Row 2 -->
-
 </div>
 
 <!-- MODAL Change password -->
@@ -334,7 +341,7 @@
                     </div>
                     
                     <div class="modal-footer text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button id="submitImage" type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </form>
@@ -344,3 +351,39 @@
 </div>
 
 <!-- Modal change image -->
+
+<!-- MODAL fail warning for user name-->
+<div class="modal fade left" id="ModalWarningUserName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-warning modal-dialog-centered" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading">Warning</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-9">
+                        <p>Both fields are required!</p>
+                        <p class="card-text"><strong>You must enter your first name and last name!</strong></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- MODAL fail warning-->
