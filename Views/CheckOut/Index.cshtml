@@ -1,16 +1,16 @@
 @model BookCave.Models.InputModels.CheckOutInputModel
 
 <div class="container body-container pt-2">
-    <div class="steps-form-2">
+    <div id="toTop" class="steps-form-2">
         <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
             <div class="steps-step-2">
                 <a href="#step-1" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-address-card" aria-hidden="true"></i></a>
             </div>
             <div class="steps-step-2">
-                <a href="#step-2" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Personal Data" disabled><i class="fa fa-eye" aria-hidden="true"></i></a>
+                <a href="#step-2" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect disabled" data-toggle="tooltip" data-placement="top" title="Personal Data"><i class="fa fa-eye" aria-hidden="true"></i></a>
             </div>
             <div class="steps-step-2">
-                <a href="#step-3" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Terms and Conditions" disabled><i class="fa fa-check" aria-hidden="true"></i></a>
+                <a href="#step-3" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0 disabled" data-toggle="tooltip" data-placement="top" title="Terms and Conditions"><i class="fa fa-check" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
@@ -160,8 +160,8 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-3 offset-md-9">
-                <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" id="verifyStep" type="button">Next</button>
+            <div class="col-md-3 offset-md-9 smooth-scroll list-unstyled">
+                <button href="#toTop" class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" id="verifyStep" type="button">Next</button>
             </div>
         </div>
     </div>
