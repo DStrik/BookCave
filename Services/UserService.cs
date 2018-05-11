@@ -86,9 +86,9 @@ namespace BookCave.Services
             //geyma
         }
 
-        public void addDefaultImage(string id)
+        public void AddDefaultImage(string id)
         {
-            _userRepo.addDefaultImage(new AccountImage(){
+            _userRepo.AddDefaultImage(new AccountImage(){
                 UserId = id,
             }, id);
         }
