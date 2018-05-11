@@ -56,11 +56,22 @@ $(document).ready(function () {
             curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
 
+        $(".form-group").removeClass("has-error");
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+
+        if('form-group'.hasClass("has-error"))
+
+        if (isValid){
         //verifies input in step on before going to next step
         //also fills in the input feild in step 2 as a read only
         if($(this).attr('id') == "verifyStep"){
 
-
+            //$('#processingModal').modal('show');
             var bla = $("#checkOutForm").serialize();
             $.get('/CheckOut/Verify', bla, function(data, status) {
 
@@ -70,48 +81,45 @@ $(document).ready(function () {
                 $("#BillingHouseNumber1").val($("#BillingHouseNumber").val());
                 $("#BillingCity1").val($("#BillingCity").val());
                 $("#BillingZipCode1").val($("#BillingZipCode").val());
-                $("#BillingCountry1").val($("#BillingCountry").val());
+               // $("#BillingCountry1").val($('.BillingCountrySelect option:selected').val());
                 $("#ShippingFirstName1").val($("#ShippingFirstName").val());
                 $("#ShippingLastName1").val($("#ShippingLastName").val());
                 $("#ShippingStreetName1").val($("#ShippingStreetName").val());
                 $("#ShippingHouseNumber1").val($("#ShippingHouseNumber").val());
                 $("#ShippingCity1").val($("#ShippingCity").val());
                 $("#ShippingZipCode1").val($("#ShippingZipCode").val());
-                $("#ShippingCountry1").val($("#ShippingCountry").val());
+               // $("#ShippingCountry1").val($('.BillingCountrySelect option:selected').val());
                 $("#FullName1").val($("#FullName").val());
                 $("#CardNumber1").val($("#CardNumber").val());
                 $("#ExpirationMonth1").val($("#ExpirationMonth").val());
                 $("#ExpirationYear1").val($("#ExpirationYear").val());
                 $("#Cvc1").val($("#Cvc").val());
 
-                $(".form-group").removeClass("has-error");
-                for (var i = 0; i < curInputs.length; i++) {
-                    if (!curInputs[i].validity.valid) {
-                        isValid = false;
-                        $(curInputs[i]).closest(".form-group").addClass("has-error");
-                    }
-                }
-
                 if (isValid){
 
                     nextStepSteps.removeClass('disabled').trigger('click');
                 }
 
+                $('#processingModal').modal('hide');
+
             }).fail(function(err) {
+                $('#processingModal').modal('hide');
                 alert("something wrong!")
             });
         };
 
         if($(this).attr('id') == "pay") {
+            
             $('#pay').prop('disabled', true);
             var bla = $("#checkOutForm").serialize();
+            $('#processingModal').modal('show');
+
             $.post('/CheckOut/Pay', bla, function(data, status) {
                 $(".form-group").removeClass("has-error");
                 console.log("bla")
                 for (var i = 0; i < curInputs.length; i++) {
                     if (!curInputs[i].validity.valid) {
                         isValid = false;
-                        console.log('Badbla')
                         $(curInputs[i]).closest(".form-group").addClass("has-error");
                     }
                 }
@@ -120,9 +128,13 @@ $(document).ready(function () {
 
                     nextStepSteps.removeClass('disabled').trigger('click');
                 }
+
+                $('#processingModal').modal('hide');
             }).fail(function(err) {
-                alert("Error has occured!")
+                $('#processingModal').modal('hide');
+                alert("Error has occured!");
             });
+        }
         }
     });
 
@@ -174,7 +186,9 @@ $(document).ready(function () {
             $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
             $("#BillingCity").val($("#ShippingCity").val());
             $("#BillingZipCode").val($("#ShippingZipCode").val());
-            $('.BillingCountrySelect option:selected').val($('.ShippingCountrySelect option:selected').val());
+            //$('.BillingCountrySelect option:selected').val($('.ShippingCountrySelect option:selected').val());
+           // $('#BillingCountry').val($('.ShippingCountrySelect option:active selected').val());
+            //$('#BillingCountry').val($('#ShippingCountry').val());
         }
     
         if(!$("input.check-for-bill").is(":checked")) {

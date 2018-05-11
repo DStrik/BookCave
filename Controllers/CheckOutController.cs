@@ -25,13 +25,13 @@ namespace BookCave.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            //var info = _checkOutService.GetShippingBillingViewModel(user.Id);
-            //if(info == null)
-            //{
-              //  return View();
-            //}
+            var info = _checkOutService.GetShippingBillingViewModel(user.Id);
+            if(info == null)
+            {
+                return View();
+            }
 
-            return View();
+            return View(info);
         }
         
         [HttpPost]
