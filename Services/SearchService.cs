@@ -19,28 +19,6 @@ namespace BookCave.Services
         {
             var test = _bookRepo.GetSearchResults(search);
 
-            test.Add(test[0]);
-            test.Add(test[1]);
-            test.Add(test[0]);
-            test.Add(test[1]);
-            test.Add(test[0]);
-            test.Add(test[2]);
-            test.Add(test[0]);
-            test.Add(test[3]);
-            test.Add(test[0]);
-            test.Add(test[0]);
-            test.Add(test[1]);
-            test.Add(test[1]);
-            test.Add(test[1]);
-            test.Add(test[0]);
-            test.Add(test[2]);
-            test.Add(test[3]);
-            test.Add(test[2]);
-            test.Add(test[2]);
-            test.Add(test[0]);
-            test.Add(test[0]);
-            test.Add(test[0]);
-            test.Add(test[1]);
             return test;
 
         }

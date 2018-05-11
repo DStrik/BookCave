@@ -1,38 +1,19 @@
 @model List<BookCave.Models.ViewModels.BookViewModel>
-    <!--<div class="card">
-        <div class="card-body row">
-            <div class="col-md-2">
-                <select asp-for="GenreIds" id="genreList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
-                    <option value="" disabled selected>Filter by Genre(s)...</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select asp-for="PublisherIds" id="publisherList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
-                    <option value="" disabled selected>Select Publisher(s)...</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select asp-for="Types" id="publisherList" class="mdb-select colorful-select dropdown-primary" multiple searchable="Search here..">
-                    <option value="" disabled selected>Select Format(s)...</option>
-                    <option value="Paperback">Paperback</option>
-                    <option value="Hardcover">Hardcover</option>
-                    <option value="E-book">E-book</option>                            
-                </select>
-            </div>
-        </div>
-    </div>-->
     <div class="col-lg-8 col-md-12 offset-lg-2 animated fadeIn mb-5 container body-container">
-        <div class="btn-group align-div-right mb-3">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by...</button>
-            <div class="dropdown-menu">
-                <a id="name-asc">Name Ascending</a>
-                <a id="name-desc">Name Descending</a>
-                <a id="price-asc">Price Ascending</a>
-                <a id="price-desc">Price Descending</a>
+        <div class="row">
+            <div class="col-12 pull-right">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by...</button>
+                <div class="dropdown-menu">
+                    <a id="name-asc">Name Ascending</a>
+                    <a id="name-desc">Name Descending</a>
+                    <a id="price-asc">Price Ascending</a>
+                    <a id="price-desc">Price Descending</a>
+                </div>
             </div>
         </div>
         <div class="row carditems-container">
-            @foreach(var book in Model) {
+            @foreach(var book in Model) 
+            {
             <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch thecarditem">
                 <div class="card card-ecommerce">
                     <div class="row view overlay justify-content-center">
