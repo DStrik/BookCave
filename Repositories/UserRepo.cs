@@ -96,11 +96,6 @@ namespace BookCave.Repositories
             return retVal;
         }
 
-        public void ChangePaymentInformation(PaymentInputModel PInfo, int UserId)
-        {
-
-        }
-
         public List<BookViewModel> GetWishlist(int UserId)
         {
             return new List<BookViewModel>();

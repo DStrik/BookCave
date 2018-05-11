@@ -26,7 +26,11 @@ namespace BookCave.Services
             var cartItems = _cartRepo.GetCart(userId);
             foreach(var item in cartItems)
             {
-                booksInCart.Add(_bookService.GetCartBookById(item));
+                var book = _bookService.GetCartBookById(item);
+                if(book != null)
+                {
+                    booksInCart.Add(book);
+                }
             }
 
             return booksInCart;
@@ -65,7 +69,6 @@ namespace BookCave.Services
                 var item = _cartRepo.GetCartItemByIds(userId, bookId);
                 item.Quantity += 1;
                 _cartRepo.ChangeQuantity(item);
-            
             }
             else
             {

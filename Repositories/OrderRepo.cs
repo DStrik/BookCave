@@ -53,6 +53,12 @@ namespace BookCave.Repositories
             var order = (from o in _db.OrderInfo
                         where orderId == o.OrderId && userId == o.UserId
                         select o).SingleOrDefault();
+
+            if(order == null)
+            {
+                return null;
+            }
+
             var orderedBooks = GetBooks(orderId);
             var orderInfo = GetOrderInfo(orderId);
             var shippingBillingInfo = GetShippingBilling(orderInfo);
@@ -73,11 +79,6 @@ namespace BookCave.Repositories
             _db.Add(order);
             _db.SaveChanges();
             return order.Id;
-        }
-
-        public void DeleteOrder(int OrderId)
-        {
-
         }
         
         public void AddBookOrderConnection(BooksInOrder bio)

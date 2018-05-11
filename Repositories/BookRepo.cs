@@ -296,6 +296,12 @@ namespace BookCave.Repositories
         public BookDetailViewModel GetBookDetails(int bookId)
         {
             var book = GetBook(bookId);
+
+            if(book == null)
+            {
+                return null;
+            }
+
             var authors = GetAuthors(bookId);
             var genres = GetGenres(bookId);
             var publisher = GetPublisher(bookId);
@@ -325,30 +331,6 @@ namespace BookCave.Repositories
             };
 
             return bookDetails;
-        }
-
-        
-        public bool ContainsIsbn(int isbn)
-        {
-
-            return false;
-        }
-        public bool ContainsAuthorId(int authorId)
-        {
-            
-            return false;
-        }
-
-        public bool ContainsGenreId(int genreId)
-        {
-            
-            return false;
-        }
-
-        public bool ContainsPublisherId(int publisher)
-        {
-            
-            return false;
         }
 
         public void DeleteBook(int bookId)
@@ -508,6 +490,12 @@ namespace BookCave.Repositories
         public BookViewModel GetBookById(int id)
         {
             var book = GetBook(id);
+            
+            if(book == null)
+            {
+                return null;
+            }
+
             var authors = GetAuthors(id);
             var coverImage = GetCoverImageAsync(id);
             var rating = GetRating(id);
@@ -568,6 +556,10 @@ namespace BookCave.Repositories
             public BookCartViewModel GetCartBookById(CartItem item)
         {
             var book = GetBook(item.BookId);
+            if(book == null)
+            {
+                return null;
+            }
             var coverImage = GetCoverImageAsync(item.BookId);
 
             var retBook = new BookCartViewModel
