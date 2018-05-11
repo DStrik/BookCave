@@ -17,7 +17,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public void addDefaultImage(AccountImage acImg, string id)
+        public void AddDefaultImage(AccountImage acImg, string id)
         {
             acImg.Img = GetDefaultImageAsync();
 
@@ -84,7 +84,7 @@ namespace BookCave.Repositories
         {
             if(!ContainsImage(id))
             {
-                addDefaultImage(new AccountImage(){
+                AddDefaultImage(new AccountImage(){
                     UserId = id,
                 }, id);
             }

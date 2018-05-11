@@ -87,7 +87,7 @@ namespace BookCave.Controllers
                 user.LastName = model.LastName;
                 await _signInManager.SignInAsync(user, false);
 
-                _userService.addDefaultImage(user.Id);
+                _userService.AddDefaultImage(user.Id);
                 var updateResult = await _userManager.UpdateAsync(user);
                 if(updateResult.Succeeded)
                 {
