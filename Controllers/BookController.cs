@@ -47,6 +47,11 @@ namespace BookCave.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var book = _bookService.GetBookDetails(id);
+            if(book == null)
+            {
+                return View("Error");
+            }
+
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null) 
             {
