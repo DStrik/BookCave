@@ -82,7 +82,10 @@ $(document).ready(function () {
     var nameDesc = $(".thecarditem").sort(function (a, b) {
         return $(a).find(".card-title").text() < $(b).find(".card-title").text() ? 1 : -1;
     });
-    $(".carditems-container").html(nameDesc);
+    $(".carditems-container").fadeOut(function() {
+      $(this).html(nameDesc);
+      $(this).fadeIn();
+    });
   });
 
   $('#price-asc').on('click', function () {
