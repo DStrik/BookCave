@@ -45,6 +45,7 @@ namespace BookCave.Services
             var orderInfo = new OrderInfo
             {
                 OrderId = orderid,
+                UserId = id,
                 ShippingFirstName = info.ShippingFirstName,
                 ShippingLastName = info.ShippingLastName,
                 ShippingStreetName = info.ShippingStreetName,
