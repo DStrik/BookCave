@@ -28,41 +28,47 @@
                     <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
                 </div>
                 <div class="form-group">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingFirstName"></span>
                     <label for="ShippingFirstName" data-error="wrong" data-success="right">First Name</label>
                     <input type="text" id="ShippingFirstName" asp-for="ShippingFirstName" class="form-control validate" required>
                 </div>
 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingLastName"></span>
                     <label for="ShippingLastName" data-error="wrong" data-success="right">Last Name</label>
                     <input type="text" id="ShippingLastName" asp-for="ShippingLastName" class="form-control validate" required>
                 </div>
 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingStreetName"></span>
                     <label for="ShippingStreetName" data-error="wrong" data-success="right">Street</label>
                     <input type="text" id="ShippingStreetName" asp-for="ShippingStreetName" class="form-control validate" required>
                 </div>
 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingHouseNumber"></span>
                     <label for="ShippingHouseNumber" data-error="wrong" data-success="right">House Number</label>
                     <input type="number" id="ShippingHouseNumber" asp-for="ShippingHouseNumber" class="form-control validate" required>
                 </div>
 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingCity"></span>
                     <label for="ShippingCity" data-error="wrong" data-success="right">City</label>
                     <input type="text" id="ShippingCity" asp-for="ShippingCity" class="form-control validate" required>                    
                 </div>
                 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingZipCode"></span>
                     <label for="ShippingZipCode" data-error="wrong" data-success="right">Zip Code</label>
                     <input type="text" id="ShippingZipCode" asp-for="ShippingZipCode" class="form-control validate" required>
                 </div>
 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingCountry"></span>
                     <label for="ShippingCountry" data-error="wrong" data-success="right">Country</label>
-                    <select class="mdb-select colorful-select dropdown-primary validate" asp-for="ShippingCountry"  id="ShippingCountry" multiple searchable="Search here..">
+                    <select class="mdb-select colorful-select dropdown-primary validate ShippingCountrySelect" asp-for="ShippingCountry"  id="ShippingCountry" searchable="Search here..">
                         
                     </select>
-                    <button class="btn-save btn btn-primary btn-sm">Save</button>
                 </div>
                 
                 
@@ -79,37 +85,44 @@
                 </div>
 
                 <div class="form-group ">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingFirstName"></span>
                     <label for="BillingFirstName" data-error="wrong" data-success="right">First Name</label>
                     <input type="text" id="BillingFirstName" asp-for="BillingFirstName" class="form-control validate billing-information" required>
                 </div>
             
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCountry"></span>
                     <label for="BillingLastName" data-error="wrong" data-success="right">Last Name</label>
                     <input type="text" id="BillingLastName" asp-for="BillingLastName" class="form-control validate billing-information" required>
                 </div>
                 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCountry"></span>
                     <label for="BillingStreetName" data-error="wrong" data-success="right">Street</label>
                     <input type="text" id="BillingStreetName" asp-for="BillingStreetName" class="form-control validate billing-information" required>
                 </div>
                 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCountry"></span>
                     <label for="BillingHouseNumber" data-error="wrong" data-success="right">House Number</label>
                     <input type="number" id="BillingHouseNumber" asp-for="BillingHouseNumber" class="form-control validate billing-information" required>
                 </div>
     
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCountry"></span>
                     <label for="BillingCity" data-error="wrong" data-success="right">City</label>
                     <input type="text" id="BillingCity" asp-for="BillingCity" class="form-control validate billing-information" required>
                 </div>
 
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCountry"></span>
                     <label for="BillingZipCode" data-error="wrong" data-success="right">Zip Code</label>
                     <input type="text" id="BillingZipCode" asp-for="BillingZipCode" class="form-control validate billing-information" required>
                 </div>
                 <div class="form-group mt-2">
+                    <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCountry"></span>
                     <label for="BillingCountry" data-error="wrong" data-success="right">Country</label>
-                    <select class="mdb-select colorful-select dropdown-primary validate BillingCountrySelect" asp-for="BillingCountry"  id="BillingCountry" multiple searchable="Search here..">
+                    <select class="mdb-select colorful-select dropdown-primary validate BillingCountrySelect" asp-for="BillingCountry"  id="BillingCountry" searchable="Search here..">
                         
                     </select>
                 </div>
@@ -204,7 +217,7 @@
                     <h3 class="mb-0 mt-3">Shipping Information</h3>
 
                     <div class="form-check mb-0 mt-3 for-space">
-                        <input type="checkbox" class="form-check-input" id="checkbox96847">
+                        <input type="checkbox" class="form-check-input" id="checkbox96848">
                         <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
                     </div>
                     <div class="form-group ">
@@ -251,7 +264,7 @@
                     <h3 class="mb-0 mt-3">Billing Information</h3>
                         
                     <div class="form-check mb-0 mt-3 for-space">
-                        <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
+                        <input type="checkbox" class="form-check-input check-for-bill" id="checkbox2">
                         <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
                     </div>
 
@@ -293,7 +306,7 @@
                 <h3 class="mb-0 mt-3">Payment Information</h3>
 
                 <div class="form-check mb-0 mt-3 for-space">
-                    <input type="checkbox" class="form-check-input" id="checkbox96847">
+                    <input type="checkbox" class="form-check-input" id="checkbox9647">
                     <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
                 </div>
                 
@@ -365,3 +378,65 @@
 </form>
 </div>
 </div>
+
+<!-- Modal processing -->
+<div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h4 class="modal-title" id="exampleModalLabel">Processing...</h4>
+            </div>
+            <div class="modal-body text-center">
+
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                    <div class="spinner-layer spinner-red">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                    <div class="spinner-layer spinner-yellow">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                    <div class="spinner-layer spinner-green">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal processing -->

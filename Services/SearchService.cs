@@ -22,10 +22,5 @@ namespace BookCave.Services
             return test;
 
         }
-
-        public List<BookViewModel> SortByNameAscending(List<BookViewModel> results)
-        {
-            return results.OrderBy(r => r.Title).ToList();
-        }
     }
 }

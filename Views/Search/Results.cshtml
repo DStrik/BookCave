@@ -1,27 +1,54 @@
 @model List<BookCave.Models.ViewModels.BookViewModel>
+@section scripts {
+    
+     <script type="text/javascript" src="~/js/rater.js"></script>
+}
     <div class="col-lg-8 col-md-12 offset-lg-2 animated fadeIn mb-5 container body-container">
-        <div class="row">
-            <div class="col-12 pull-right">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by...</button>
+        <h4 class="display-3 text-center my-1 "><strong>Search results</strong></h4>
+        <div class="row mb-4 d-flex justify-content-between">
+            <div class="col">
+                <a asp-controller="Search" asp-action="Index" class="btn btn-primary">
+                    <i class="fa fa-arrow-circle-left" aria-hidden="true">&nbsp;&nbsp;</i>
+                    Back to search
+                </a>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary dropdown-toggle pull-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-sort" aria-hidden="true">&nbsp;&nbsp;</i>
+                    Sort by...
+                </button>
                 <div class="dropdown-menu">
-                    <a id="name-asc">Name Ascending</a>
-                    <a id="name-desc">Name Descending</a>
-                    <a id="price-asc">Price Ascending</a>
-                    <a id="price-desc">Price Descending</a>
+                    <a class="dropdown-item" id="name-asc">
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true">&nbsp;&nbsp;</i>
+                        Name Ascending
+                    </a>
+                    <a class="dropdown-item" id="name-desc">
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true">&nbsp;&nbsp;</i>
+                        Name Descending
+                    </a>
+                    <a class="dropdown-item" id="price-asc">
+                        <i class="fa fa-sort-amount-asc" aria-hidden="true">&nbsp;&nbsp;</i>
+                        Price Ascending
+                    </a>
+                    <a class="dropdown-item" id="price-desc">
+                        <i class="fa fa-sort-amount-desc" aria-hidden="true">&nbsp;&nbsp;</i>
+                        Price Descending
+                    </a>
                 </div>
             </div>
+
         </div>
         <div class="row carditems-container">
             @foreach(var book in Model) 
             {
             <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch thecarditem">
-                <div class="card card-ecommerce">
-                    <div class="row view overlay justify-content-center">
-                        <img class="card-img-top thumb " src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) ">
+                <div class="card">
+                    <div class="view overlay justify-content-center">
+                        <img class="card-img-top thumb" src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) ">
                         <a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">
                             <div class="mask rgba-whitei-slght"></div>
                         </a>
-                    </div>
+                        </div>
                     <div class="card-body">
                         <div class="row">
                             <h6 class="col-12 card-title mb-2">@book.Title</h6>
@@ -39,9 +66,9 @@
                                     }    
                                 </p>
                                 <p class="col-12 card-text mb-1">@book.Type</p>
-                                <p class="col-12 card-text mb-1">@book.Rating</p>
+                                <div class="rate orange-text rate-off mb-1 ml-3" data-rate-value=@book.Rating></div>
                                 <h4 class="col-12 mb-0">$ <span class="pricetag">@book.Price</span></h4>
-                                <button type="button" class="btn btn-default add-to-cart" data-id="@book.BookId">Add to cart!</button>
+                                <button type="button" class="btn btn-default add-to-cart" data-id="@book.BookId"><i class="fa fa-cart-plus">&nbsp;&nbsp;</i>Add to cart!</button>
                         </div>
                     </div>
                 </div>

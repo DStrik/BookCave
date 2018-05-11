@@ -327,13 +327,27 @@ $(document).ready(function () {
         $("#ViewDetailsModal").modal("show");
 
         $.get("/User/OrderDetails/" + id, function(data, status){
-
-            console.log("gaur");
+            document.location.href="/User/OrderDetails/" + id;
+            $('#printer').click(function(){
+                var divToPrint=document.getElementById('printMe');
+    
+                var newWin=window.open('','Print-Window');
+    
+                newWin.document.open();
+    
+                newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+    
+                newWin.document.close();
+    
+                setTimeout(function(){newWin.close();},10);
+            });
         }).fail(function(err) {
             $(".loading-thing").hide();
             $("#errorImage").show();
             $("#FavoriteBookInfo").html("<br><br><p class='pt-4'><strong>Fuck</strong></p>");
         });
     });
+
+    
 
 });
