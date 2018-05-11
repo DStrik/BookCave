@@ -30,8 +30,13 @@ namespace BookCave.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if(user != null)
+            {
+                return RedirectToAction("AccountInformation", "User");
+            }
             return View();
         }
 
@@ -54,8 +59,14 @@ namespace BookCave.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult SignUp()
+        public async Task<IActionResult> SignUp()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if(user != null)
+            {
+                return RedirectToAction("AccountInformation", "User");
+            }
+
             return View();
         }
 
