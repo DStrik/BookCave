@@ -80,6 +80,21 @@ namespace BookCave.Repositories
             }
         }
 
+        public AccountImage GetReviewUserImage(string id)
+        {
+            if(!ContainsImage(id))
+            {
+                return new AccountImage() {
+                    Img = GetDefaultImageAsync(),
+                };
+            }
+
+            var retVal = (from img in _db.AccountImages
+                         where img.UserId == id
+                         select img).SingleOrDefault();
+
+            return retVal;
+        }
         public AccountImage GetUserImage(string id)
         {
             if(!ContainsImage(id))

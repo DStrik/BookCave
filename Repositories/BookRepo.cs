@@ -247,7 +247,7 @@ namespace BookCave.Repositories
                                Reviewer = r.Reviewer,
                                Rating = r.Rating,
                                Review = r.Review,
-                               ProfileImg = _userRepo.GetUserImage(r.UserId).Img
+                               ProfileImg = _userRepo.GetReviewUserImage(r.UserId).Img
                            }).ToList();
             return reviews;
         }

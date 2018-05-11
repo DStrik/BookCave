@@ -27,6 +27,9 @@ namespace BookCave.Controllers
         public IActionResult Top10()
         {
             List<BookViewModel> books = _bookService.GetTop10();
+            if (books.Count < 10){
+                return View("Top10NotAvailable");
+            }
             return View(books);
         }
 

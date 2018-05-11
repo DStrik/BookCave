@@ -12,8 +12,10 @@ $(document).ready(function () {
             "Review": review
         }
 
-        console.log(output);
         $.post("/Book/AddReview", { "Review": output }, function () {
+            location.reload();
+        }).fail(function () {
+            Command: toastr["error"]("There was an error attempting to add review, please try again later", "Error adding review!");
             toastr.options = {
                 "closeButton": true,
                 "debug": false,
@@ -31,12 +33,8 @@ $(document).ready(function () {
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             }
-            toastr["success"]("Your review has successfully been added!");
-        }).fail(function () {
-            alert("your review sucks");
         });
     });
-
 
     $("#setFavorite").click(function () {
         $.post("/Book/SetFavoriteBook", { "id": bookId }, function () {
@@ -59,7 +57,7 @@ $(document).ready(function () {
             }
             toastr["success"]("This book has been set as your favorite book!", "Book added to favorite");
         }).fail(function () {
-            Command: toastr["error"]("This book has been set as your favorite book!", "Book added to favorite");
+            Command: toastr["error"]("This book has been set as your favorite book!", "Book NOT added to favorite");
             toastr.options = {
                 "closeButton": true,
                 "debug": false,
@@ -80,46 +78,46 @@ $(document).ready(function () {
         });
     });
 
-    $(".add-to-cart").click(function(){
-        var id = $(this).data("id");
-        $.post("/Cart/AddToCart/" + id, function(data, status){
-          Command: toastr["success"]("Click here to view your cart", "Book has been added to cart!")
-          toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "showDuration": 300,
-            "hideDuration": 1000,
-            "timeOut": 5000,
-            "extendedTimeOut": 1000,
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-          }
-        }).fail(function(){
-          Command: toastr["error"]("Please try again later", "Book was not added to cart")
-          toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "showDuration": 300,
-            "hideDuration": 1000,
-            "timeOut": 5000,
-            "extendedTimeOut": 1000,
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-          }
+    $(".add-to-cart").click(function () {
+
+        $.post("/Cart/AddToCart/", {"id" : bookId}, function (data, status) {
+            Command: toastr["success"]("Click here to view your cart", "Book has been added to cart!")
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "showDuration": 300,
+                "hideDuration": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000,
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        }).fail(function () {
+            Command: toastr["error"]("Please try again later", "Book was not added to cart")
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "showDuration": 300,
+                "hideDuration": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000,
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
         });
-      });
+    });
 
 
 });

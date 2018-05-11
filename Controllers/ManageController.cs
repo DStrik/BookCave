@@ -166,24 +166,6 @@ namespace BookCave.Controllers
         }
 
         [HttpGet]
-        public IActionResult Orders()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Stock()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult UpdateStock()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public IActionResult AddEmployee()
         {
             return View();

@@ -40,20 +40,9 @@
                             <li>
                                 <a asp-controller="manage" asp-action="viewbooks" class="waves-effect">View books</a>
                             </li>
-                            <li class="border-top-nav">
-                                <a asp-controller="manage" asp-action="addauthor" class="waves-effect">Add author</a>
-                            </li>
-                            <li>
-                                <a asp-controller="manage" asp-action="addpublisher" class="waves-effect">Add publisher</a>
-                            </li>
-                            <li>
-                                <a asp-controller="manage" asp-action="addgenre" class="waves-effect">Add genre</a>
-                            </li>
                         </ul>
                     </div>
                 </li>
-                <li><a asp-controller="manage" asp-action="orders" class="collapsible-header waves-effect @ViewBag.Active"><i class="fa fa-bar-chart"></i>Orders</a></li>
-                <li><a asp-controller="manage" asp-action="stock" class="collapsible-header waves-effect @ViewBag.Active"><i class="fa fa-stack-overflow"></i> Stock</a></li>
                 
                 @if (this.User.IsInRole("Admin"))
                 {
