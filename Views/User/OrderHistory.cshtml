@@ -24,7 +24,7 @@
                                 <td>@order.Id</td>
                                 <td>@order.DateOfPurchase</td>
                                 <td>
-                                    <button class="btn btn-primary btn-md waves-light viewDetails" data-id="@order.Id">View Details</button>
+                                    <a class="btn btn-primary btn-md waves-light viewDetails" data-id="@order.Id">View Details</a>
                                 </td>
                         </tr>
                         
@@ -35,39 +35,3 @@
     </div>
 </div>
 
-<div mdbModal #style="mdb-modal" class="modal fade" id="ViewDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-notify modal-info" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p class="heading lead">Order Details</p>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
-                    <span aria-hidden="true" class="white-text">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center">
-                    <!--Table-->
-<table class="table">
-
-    <!--Table head-->
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Quanity</th>
-            <th>Unit Price</th>
-            <th>Amount</th>
-        </tr>
-    </thead>
-    <tbody id="books">
-    </tbody>
-</table>
-
-                </div>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <a type="button" class="btn btn-primary waves-light" mdbWavesEffect>Get it now <i class="fa fa-diamond ml-1"></i></a>
-                <a type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="style.hide()" mdbWavesEffect>No, thanks</a>
-            </div>
-        </div>
-    </div>
-</div>

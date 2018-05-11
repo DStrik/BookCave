@@ -1,0 +1,141 @@
+@model BookCave.Models.ViewModels.OrderDetailViewModel
+@{
+    var amount = 0.0;
+    var total = 0.0;
+    foreach (var item in Model.Books)
+    {
+        amount = (item.Quantity * item.Price);
+        total += amount;
+    }
+}
+<!-- Second Step -->
+    <div class="container body-container py-1">
+        <div class="card" id="printMe">
+            <a class="mt-3 ml-3" id="printer"><i class="fa fa-print" aria-hidden="true"></i>  Print</a>
+            <div class="row">
+                    <div class="col-lg-12 col-md-12 m-0">
+                            <div class="text-left pricing-card d-flex align-items-center">
+                                <div class="card-body col-md-12">
+                                    <h1 class="text-center mt-3"><strong>Order #@Model.Id</strong></h1>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Quantity</th>
+                                                <th>Unit price</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Books)
+                                            {
+                                                
+                                                <tr>
+                                                    <td>@item.Title</td>
+                                                    <td>@item.Quantity</td>
+                                                    <td>@item.Price $</td>
+                                                    <td>@(item.Quantity * item.Price) $</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <h2 class="text-right mr-4">Total Price:  <strong>@total</strong> $</h2>
+                    </div>
+            </div>
+            <hr>
+        <div class="container row">
+                    <div class="col">
+                        <h3 class="mb-4 mt-3"><strong>Shipping Information</strong></h3>
+
+                        <div class="form-group ">
+                            <strong>First Name:</strong> @Model.ShippingBillingInfo.ShippingFirstName
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <strong>Last Name:</strong>  @Model.ShippingBillingInfo.ShippingLastName
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <strong>Street Name:</strong>  @Model.ShippingBillingInfo.ShippingStreetName
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <strong>House Number:</strong>  @Model.ShippingBillingInfo.ShippingHouseNumber
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <strong>City:</strong>  @Model.ShippingBillingInfo.ShippingCity
+                        </div>
+                        
+                        <div class="form-group  mt-2">
+                            <strong>Zip Code:</strong>  @Model.ShippingBillingInfo.ShippingZipCode
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <strong>Country:</strong>  @Model.ShippingBillingInfo.ShippingCountry
+                        </div>
+                        
+                        
+                    </div>
+
+                    <div class="col"> 
+                        <h3 class="mb-4 mt-3"><strong>Billing Information</strong></h3>
+                            
+                        <div class="form-group ">
+                            <strong>First Name:</strong> @Model.ShippingBillingInfo.BillingFirstName
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <strong>Last Name:</strong>  @Model.ShippingBillingInfo.BillingLastName
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <strong>Street Name:</strong>  @Model.ShippingBillingInfo.BillingStreetName
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <strong>House Number:</strong>  @Model.ShippingBillingInfo.BillingHouseNumber
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <strong>City:</strong>  @Model.ShippingBillingInfo.BillingCity
+                        </div>
+                        
+                        <div class="form-group  mt-2">
+                            <strong>Zip Code:</strong>  @Model.ShippingBillingInfo.BillingZipCode
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <strong>Country:</strong>  @Model.ShippingBillingInfo.BillingCountry
+                        </div>
+                    </div>
+                <div class="col">
+                    <h3 class="mb-4 mt-3"><strong>Payment Information</strong></h3>
+
+                    <div class="form-group ">
+                        <strong>Name of Cardholder:</strong> @Model.PaymentInfo.FullName
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <strong>Card Number:</strong> @Model.PaymentInfo.CardNumber
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <strong>Expiration Month:</strong> @Model.PaymentInfo.ExpirationMonth
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <strong>Expiration Year:</strong> @Model.PaymentInfo.ExpirationYear
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="form-row text-center">
+                <div class="col-12 pb-3">
+                    <a class="btn btn-primary waves-light" asp-controller="User" asp-action="OrderHistory">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>

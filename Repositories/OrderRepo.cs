@@ -59,7 +59,7 @@ namespace BookCave.Repositories
             var paymentInfo = Payment(orderInfo);
             var orderDetailed = new OrderDetailViewModel
             {
-                Id = order.Id,
+                Id = order.OrderId,
                 Books = orderedBooks,
                 ShippingBillingInfo = shippingBillingInfo,
                 PaymentInfo = paymentInfo

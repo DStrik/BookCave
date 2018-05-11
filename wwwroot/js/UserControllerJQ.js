@@ -242,33 +242,20 @@ $(document).ready(function () {
     $(".viewDetails").click(function (e) {
         var id = $(this).data("id");
         console.log(id);
-        e.preventDefault();
-        $("#errorImage").hide();
-        $(".un-center").addClass("text-center");
-        var loading = '<div class="preloader-wrapper big active m-5 loading-thing">'
-                      + '<div class="spinner-layer spinner-blue-only">'
-                      + '<div class="circle-clipper left">'
-                      + '<div class="circle"></div>'
-                      + '</div>'
-                      + '<div class="gap-patch">'
-                      + '<div class="circle"></div>'
-                      + '</div>'
-                      + '<div class="circle-clipper right">'
-                      + '<div class="circle"></div>'
-                      + '</div>'
-                      + '</div>'
-                      + '</div>';
-                      
-        $("#ViewDetailsModal").modal("show");
+        document.location.href="/User/OrderDetails/" + id;
+    });
+    $('#printer').click(function(){
+        var divToPrint=document.getElementById('printMe');
 
-        $.get("/User/OrderDetails/" + id, function(data, status){
+          var newWin=window.open('','Print-Window');
 
-            console.log("gaur");
-        }).fail(function(err) {
-            $(".loading-thing").hide();
-            $("#errorImage").show();
-            $("#FavoriteBookInfo").html("<br><br><p class='pt-4'><strong>Fuck</strong></p>");
-        });
+        newWin.document.open();
+
+        newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+        newWin.document.close();
+
+        setTimeout(function(){newWin.close();},10);
     });
 
 });

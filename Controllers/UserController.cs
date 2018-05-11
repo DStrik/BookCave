@@ -182,7 +182,7 @@ namespace BookCave.Controllers
             var userId = _userManager.GetUserId(HttpContext.User);
             var order = _userService.GetOrderDetails(id, userId);
 
-            return Json(order);
+            return View(order);
 
         }
 
