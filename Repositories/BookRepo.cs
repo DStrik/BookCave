@@ -106,32 +106,6 @@ namespace BookCave.Repositories
             _db.SaveChanges();
             UpdateRating(review.BookId);
         }
-
-        public bool ContainsReview(int bookId, string userId)
-        {
-            var review = (from r in _db.BookReviews
-                          where r.BookId == bookId && r.UserId == userId
-                          select r).SingleOrDefault();
-
-            if(review == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public void UpdateReview(BookReview review)
-        {
-            var reviewId = (from r in _db.BookReviews
-                            where r.UserId == review.UserId && r.BookId == review.BookId
-                            select r.Id).SingleOrDefault();
-            review.Id = reviewId;
-            _db.Update(review);
-            _db.SaveChanges();
-        }
         private void UpdateRating(int bookId)
         {
             var newRating = (from r in _db.BookReviews
@@ -142,7 +116,12 @@ namespace BookCave.Repositories
                           where r.BookId == bookId
                           select r).SingleOrDefault();
             
-            if(rating == null)
+            if(rating != null)
+            {
+                rating.Rating = newRating;
+                _db.Update(rating);
+            }
+            else
             {
                 var firstRating = new BookRating
                 {
@@ -150,13 +129,6 @@ namespace BookCave.Repositories
                     Rating = newRating
                 };
                 _db.Add(firstRating);
-            }
-            else
-            {
-                // must remove and add, update doesnt work for rating.
-                _db.Remove(rating);
-                rating.Rating = newRating;                
-                _db.Add(rating);
             }
             _db.SaveChanges();
         }
@@ -412,6 +384,11 @@ namespace BookCave.Repositories
             {
                 _db.BookReviews.Remove(r);
             }
+
+            var rating = (from r in _db.BookRatings
+                              where r.BookId == bookId
+                              select r).SingleOrDefault();
+            _db.BookRatings.Remove(rating);
 
             var img = (from i in _db.CoverImages
                        where i.BookId == bookId

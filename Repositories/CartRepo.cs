@@ -48,6 +48,23 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
+        public void RemoveBookFromCarts(int bookId)
+        {
+            var cartItems = GetCartItemsByBookId(bookId);
+            foreach(var c in cartItems)
+            {
+                RemoveItem(c);
+            }
+        }
+
+        private List<CartItem> GetCartItemsByBookId(int bookId)
+        {
+            var items = (from c in _db.CartItems
+                       where c.BookId == bookId
+                       select c).ToList();
+            return items;
+        }
+
         public void ClearCart(string userId)
         {
             var items = (from c in _db.CartItems

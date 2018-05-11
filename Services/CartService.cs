@@ -78,5 +78,10 @@ namespace BookCave.Services
                 _cartRepo.AddToCart(item);
             }
         }
+
+        public void RemoveBookFromCarts(int bookId)
+        {
+            _cartRepo.RemoveBookFromCarts(bookId);
+        }
     }
 }
