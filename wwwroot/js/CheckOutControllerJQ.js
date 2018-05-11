@@ -5,6 +5,7 @@ $(function () {
 
 // Steppers                
 $(document).ready(function () {
+    $('.mdb-select').material_select();
     var navListItems = $('div.setup-panel-2 div a'),
         allWells = $('.setup-content-2'),
         allNextBtn = $('.nextBtn-2'),
@@ -20,14 +21,14 @@ $(document).ready(function () {
             nextStep = $item.parent().next().children("a")
 
         if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-amber');
+            navListItems.removeClass('btn-amber').addClass('btn-success');
             $item.removeClass('btn-blue-grey').addClass('btn-amber');
             allWells.hide();
             $target.show();
             $target.find('input:eq(0)').focus();
         }
 
-        if(!lastNavStep.hasClass('btn-success')){
+        if(lastNavStep.hasClass('disabled')){
 
             while(!nextStep.hasClass('disabled')){
                 nextStep.addClass('disabled');
@@ -52,7 +53,6 @@ $(document).ready(function () {
         var curStep = $(this).closest(".setup-content-2"),
             curStepBtn = curStep.attr("id"),
             nextStepSteps = $('div.setup-panel-2 div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            currNavStep = ('#nav' + curStepBtn);
             curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
 
@@ -103,30 +103,27 @@ $(document).ready(function () {
         };
 
         if($(this).attr('id') == "pay") {
-
-            $("#pay").one('click', function(){
-                var bla = $("#checkOutForm").serialize();
-                $.post('/CheckOut/Pay', bla, function(data, status) {
-                    $(".form-group").removeClass("has-error");
-                    for (var i = 0; i < curInputs.length; i++) {
-                        if (!curInputs[i].validity.valid) {
-                            isValid = false;
-                            $(curInputs[i]).closest(".form-group").addClass("has-error");
-                        }
+            $('#pay').prop('disabled', true);
+            var bla = $("#checkOutForm").serialize();
+            $.post('/CheckOut/Pay', bla, function(data, status) {
+                $(".form-group").removeClass("has-error");
+                console.log("bla")
+                for (var i = 0; i < curInputs.length; i++) {
+                    if (!curInputs[i].validity.valid) {
+                        isValid = false;
+                        console.log('Badbla')
+                        $(curInputs[i]).closest(".form-group").addClass("has-error");
                     }
+                }
 
-                    if (isValid){
+                if (isValid){
 
-                        nextStepSteps.removeClass('disabled').trigger('click');
-                    }
-                }).fail(function(err) {
-                    alert("Error has occured!")
-                });
-            
+                    nextStepSteps.removeClass('disabled').trigger('click');
+                }
+            }).fail(function(err) {
+                alert("Error has occured!")
             });
         }
-        console.log(currNavStep);
-        $(currNavStep).addClass('success');
     });
 
 
@@ -146,6 +143,21 @@ $(document).ready(function () {
     }).fail(function (err) {
         alert("Error has occured!")
     });
+
+    $.get("https://restcountries.eu/rest/v2", function (data, success) { 
+        var markupCountry = '<option value="" disabled selected>Choose your country</option>';
+        for(i = 0; i < data.length; i++) {
+            markupCountry +='<option value="' + data[i].name + '">' + data[i].name + '</option>';
+            console.log(data[i].name); 
+        }
+        $('#ShippingCountry').html(markupCountry).material_select();
+        $('#BillingCountry').html(markupCountry).material_select();
+        //$('.ShippingCountry-stuff').material_select();
+        
+        console.log(markupCountry);
+    }).fail(function(err){
+        alert("Error has occured");
+    });
     
 
     // Changes the status of the input boxes in billing so that if checked
@@ -162,7 +174,7 @@ $(document).ready(function () {
             $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
             $("#BillingCity").val($("#ShippingCity").val());
             $("#BillingZipCode").val($("#ShippingZipCode").val());
-            $("#BillingCountry").val($("#ShippingCountry").val());
+            $('.BillingCountrySelect option:selected').val($('.ShippingCountrySelect option:selected').val());
         }
     
         if(!$("input.check-for-bill").is(":checked")) {
@@ -222,4 +234,5 @@ $(document).ready(function () {
         $("#processingModal").modal("show");
         $("#editShippingBilling").modal("hide");
     });
+    var newCountry = $('.className option:selected').val();
 });

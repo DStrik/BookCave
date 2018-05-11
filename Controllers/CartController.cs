@@ -51,7 +51,11 @@ namespace BookCave.Controllers
 
         public IActionResult AddToCart(int id)
         {
-            var userId = _userManager.GetUserId(HttpContext.User); 
+            var userId = _userManager.GetUserId(HttpContext.User);
+            if(userId == null)
+            {
+                RedirectToAction("Login", "User");
+            } 
             _cartService.AddToCart(userId, id);
 
             return Ok();
