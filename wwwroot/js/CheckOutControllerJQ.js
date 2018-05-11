@@ -71,7 +71,7 @@ $(document).ready(function () {
                 $("#BillingHouseNumber1").val($("#BillingHouseNumber").val());
                 $("#BillingCity1").val($("#BillingCity").val());
                 $("#BillingZipCode1").val($("#BillingZipCode").val());
-                $("#BillingCountry1").val($('#BillingCountrySelect option:selected').val());
+                $("#BillingCountry1").val($('#BillingCountry option:selected').val());
                 $("#ShippingFirstName1").val($("#ShippingFirstName").val());
                 $("#ShippingLastName1").val($("#ShippingLastName").val());
                 $("#ShippingStreetName1").val($("#ShippingStreetName").val());
