@@ -119,6 +119,7 @@ namespace BookCave.Repositories
             
             if(rating != null)
             {
+                rating.Rating = newRating;
                 _db.Update(rating);
             }
             else
