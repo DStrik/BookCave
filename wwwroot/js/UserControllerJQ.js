@@ -46,6 +46,7 @@ $(document).ready(function () {
     $("#ViewFavBook").click(function (e) { 
         e.preventDefault();
         $("#errorImage").hide();
+        $("#FavoriteBookImg").html("");
         $(".un-center").addClass("text-center");
         var loading = '<div class="preloader-wrapper big active m-5 loading-thing">'
                       + '<div class="spinner-layer spinner-blue-only">'
@@ -69,7 +70,7 @@ $(document).ready(function () {
         // The image is taken in as a byte array and then converted to a jpg
         $.get("FavoriteBook", function(data, status){
             console.log("status: " + status);
-            var content = '<img class="img-fluid mt-5 ml-3" src="data:image/jpg;base64,' + data.coverImage + '">';
+            var content = '<a href="/book/details/' + data.bookId + '" <img class="img-fluid" src="data:image/jpg;base64,' + data.coverImage + '"></a>';
             $("#FavoriteBookImg").html(content);
 
             var authorMarkup = "";
@@ -90,8 +91,8 @@ $(document).ready(function () {
                          + authorMarkup + '<br><strong>Genre: </strong>' + genreMarkup + '<br><strong>ISBN: </strong>'
                          + data.isbn + '<br><strong>Type: </strong>' + data.type + '<br><strong>Publishing Year: </strong>'
                          + data.publishingYear + '</p><br><h3 class="text-right mr-3"><strong>Price: </strong>' + data.price + '$</h3>'
-                         + '<div class="text-center"><button type="button" class="btn btn-outline-info btn-rounded waves-effect'
-                         + ' mt-0 mb-3 p-2 pl-3 pr-3">Go to book details page</button></div>';
+                         + '<div class="text-center"><a type="button" href="/book/details/' + data.bookId + '" class="btn btn-outline-info btn-rounded waves-effect'
+                         + ' mt-0 mb-3 p-2 pl-3 pr-3">Go to book details page</a></div>';
             $(".un-center").removeClass("text-center");
             $("#FavoriteBookInfo").html(markup);
 

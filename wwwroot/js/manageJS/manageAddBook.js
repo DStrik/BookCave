@@ -17,15 +17,12 @@ $(document).ready(function () {
 // Refresh list on click
 // Get all information into select boxes
 $("#refreshAuthors").click(function () {
-  alert("yes");
   getAllAuthors();
 });
 $("#refreshGenres").click(function () {
-  alert("LOL");
   getAllGenres();
 });
 $('#refreshPublishers').click(function () {
-  alert("hehe");
   getAllPublishers();
 });
 

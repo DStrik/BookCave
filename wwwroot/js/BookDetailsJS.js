@@ -1,8 +1,8 @@
 $(document).ready(function () {
+    var bookId = $("#bookIdStorage").attr("data-bookId");
 
     $("#submitReview").click(function () {
         var review = $("#reviewText").val();
-        var bookId = Number($(this).attr("data-bookId"));
         var rating = Number($("#userRating").attr("data-rate-value"));
 
         console.log(review + bookId + rating);
@@ -39,7 +39,7 @@ $(document).ready(function () {
 
 
     $("#setFavorite").click(function () {
-        $.post("/Book/SetFavoriteBook", function () {
+        $.post("/Book/SetFavoriteBook", { "id": bookId }, function () {
             toastr.options = {
                 "closeButton": true,
                 "debug": false,
