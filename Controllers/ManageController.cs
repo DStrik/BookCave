@@ -33,7 +33,6 @@ namespace BookCave.Controllers
         }
         public IActionResult Index()
         {
-            ViewBag.PageTitle = "Dashboard home";
             return View();
         }
 
