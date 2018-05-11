@@ -167,11 +167,6 @@
                         <div class="col mr-3 ml-3">
                             <h3 class="mb-0 mt-3">Shipping Information</h3>
 
-                            <div class="form-check mb-0 mt-3 for-space">
-                                <input type="checkbox" class="form-check-input" id="checkbox96847">
-                                <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
-                            </div>
-
                             <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingFirstName"></span>
                             <label asp-for="ShippingFirstName">First Name</label>
                             <input asp-for="ShippingFirstName" type="text" id="ShippingFirstName" class="form-control validate" required>
@@ -207,11 +202,6 @@
                         <!-- Billing Information -->
                         <div class="col mr-3 ml-3">
                             <h3 class="mb-0 mt-3">Billing Information</h3>
-
-                            <div class="form-check mb-0 mt-3">
-                                <input type="checkbox" class="form-check-input check-for-bill" id="checkbox1">
-                                <label class="form-check-label" for="checkbox1">Check if same as shipping address</label>
-                            </div>
 
                             <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingFirstName"></span>
                             <label asp-for="BillingFirstName">First Name</label>
