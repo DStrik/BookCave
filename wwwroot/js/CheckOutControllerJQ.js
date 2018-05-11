@@ -107,6 +107,7 @@ $(document).ready(function () {
             });
 
         });
+        $('#processingModal').modal('hide');
         
         $('#pay').one('click', function (){
             var curStep = $(this).closest(".setup-content-2"),
@@ -275,5 +276,4 @@ $(document).ready(function () {
         $("#processingModal").modal("show");
         $("#editShippingBilling").modal("hide");
     });
-    var newCountry = $('.className option:selected').val();
 });

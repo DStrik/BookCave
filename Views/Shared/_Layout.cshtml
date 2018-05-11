@@ -19,7 +19,7 @@
      var controller = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
      var action = ViewContext.RouteData.Values["Action"].ToString().ToLower();
 
-     if (controller == "home"){
+     if (controller == "home" && action == "index"){
          <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar rgba-black-strong">
             @await Html.PartialAsync("_headerbody.cshtml");
          </nav>
