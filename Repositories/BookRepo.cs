@@ -120,8 +120,12 @@ namespace BookCave.Repositories
             {
                 rating.Rating = newRating;
                 _db.Update(rating);
-                _db.SaveChanges();
             }
+            else
+            {
+                _db.Add(rating);
+            }
+            _db.SaveChanges();
         }
 
         public List<BookListViewModel> GetBookList()
