@@ -135,9 +135,10 @@ $(document).ready(function () {
             $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
             $("#BillingCity").val($("#ShippingCity").val());
             $("#BillingZipCode").val($("#ShippingZipCode").val());
+            $('#BillingCountry').val($('#ShippingCountry').val());
+            $('#BillingCountry').html($('#ShippingCountry'));
             $('#BillingCountry').prop('disabled', true);
-            $('#BillingCountry').html($('#ShippingCountry')).material_select();
-
+            $('#BillingCountry').material_select(); 
         }
     
         if(!$("input.check-for-bill").is(":checked")) {
@@ -202,13 +203,19 @@ $(document).ready(function () {
 
     $("#ShippingCountry").change(function () {
         if($("input.check-for-bill").is(":checked")) {
-            $('#BillingCountry').prop('disabled', true);
             $('#BillingCountry').html($('#ShippingCountry')).material_select();
-            $('#BillingCountry').val($('#ShippingCountry').val());
+            $('#BillingCountry > option:selected').val($('#ShippingCountry > option:selected').val());
+            $('#BillingCountry').removeAttr('disabled')
+            console.log($('#BillingCountry > option:selected').val());
         }
     });
 
     $("#submitShipBill").click(function (e) { 
+        if($("input.check-for-bill").is(":checked")) {
+            $('#BillingCountry > option:selected').val($('#ShippingCountry > option:selected').val());
+            $('#BillingCountry > option:selected').removeAttr('disabled');
+            console.log($('#BillingCountry > option:selected').val());
+        }
         $("#processingModal").modal("show");
         $("#editShippingBilling").modal("hide");
     });
