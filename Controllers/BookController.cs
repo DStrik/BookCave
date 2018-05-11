@@ -5,6 +5,8 @@ using BookCave.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using BookCave.Models.InputModels;
+using System.Collections.Generic;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Controllers
 {
@@ -21,14 +23,20 @@ namespace BookCave.Controllers
 
         public IActionResult Top10()
         {
-            return View();
+            List<BookViewModel> books = _bookService.GetTop10();
+            return View(books);
         }
-        public async Task<IActionResult> AddReviewAsync(ReviewInputModel review)
+
+        public async Task<IActionResult> AddReview(ReviewInputModel review)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            var reviewer = user.FirstName + user.LastName;
-            _bookService.AddReview(review, user.Id, reviewer);
-            return Ok();
+            if(ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                var reviewer = user.FirstName + " "  + user.LastName;
+                _bookService.AddReview(review, user.Id, reviewer);
+                return Ok();
+            }
+            return BadRequest();
         }
         public IActionResult Details(int id)
         {

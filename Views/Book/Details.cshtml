@@ -6,6 +6,7 @@
 
 @section scripts {
      <script type="text/javascript" src="~/js/rater.js"></script>
+     <script type="text/javascript" src="~/js/BookDetailsJS.js"></script>
 }
   
 
@@ -41,6 +42,9 @@
                             <span>@genre.Name, </span> } else {
                             <span>@genre.Name</span> } }
                         </p>
+                    </div>
+                    <div class="col-12">
+                        <p><strong>Rating: </strong><div class="rate h3 orange-text rate-off mb-0" data-rate-value=@Model.Rating></div></p>
                     </div>
 
                     <div class="col-12 text-right my-0">
@@ -81,9 +85,10 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
                 </div>
             </div>
+
+            <hr>
 
             <div class="row container wow fadeIn">
                 <div class="col-12">
@@ -106,9 +111,9 @@
                                 <div class="col-12">
                                     <div class="media">
                                         <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-10.jpg" alt="Avatar">
-                                        <div class="media-body">
+                                        <div class="media-body mb-3">
                                             <h4 class="my-0 font-weight-bold blue-text">@review.Reviewer</h4>
-                                            <div id="userRating" class="rate h1 orange-text" data-rate-value=@((double)review.Rating / 2)></div>
+                                            <div class="rate h1 orange-text rate-off mb-0" data-rate-value=@review.Rating></div>
                                             @review.Review
                                             </div>
                                     </div>
@@ -130,23 +135,22 @@
             @if (SignInManager.IsSignedIn(User))
             {
                 <div class="col-12">
-                    <form class="media">
+                    <form class="media" method="POST" id="reviewForm">
                         <div class="media-body">
                             <div class="media mt-3 shadow-textarea">
                                 <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h4 class="my-0 font-weight-bold blue-text pb-0">@nameClaim</h4>
-                                    <div id="userRating" class="rate h1 orange-text rate-off"></div>
+                                    <div id="userRating" class="rate h1 orange-text" data-rate-value="0"></div>
                                     <div class="form-group basic-textarea rounded-corners">
-                                        <textarea class="form-control z-depth-1" id="exampleFormControlTextarea3" rows="6" placeholder="Write your comment..."></textarea>
+                                        <textarea class="form-control z-depth-1" id="reviewText" rows="6" placeholder="Write your comment..."></textarea>
                                     </div>
-                                    <button type="submit" id="submitReview" class="btn btn-primary pull-right mt-0 mr-0">Submit review!</button>
+                                    <button type="button" data-bookId="@Model.BookId" id="submitReview" class="btn btn-primary pull-right mt-0 mr-0">Submit review!</button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                
             } 
             else 
             { 

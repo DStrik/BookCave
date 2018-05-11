@@ -299,9 +299,11 @@ namespace BookCave.Repositories
             var details = GetDetails(bookId);
             var reviews = GetReviews(bookId);
             var coverImage = GetCoverImageAsync(bookId);
+            var rating = GetRating(bookId);
             
             var bookDetails = new BookDetailViewModel
             {
+                BookId = book.Id,
                 Title = book.Title,
                 Isbn = book.Isbn,
                 Author = authors,
@@ -315,6 +317,7 @@ namespace BookCave.Repositories
                 PageCount = details.PageCount,
                 Length = details.Length,
                 Review = reviews,
+                Rating = rating,
                 CoverImage = coverImage
             };
 

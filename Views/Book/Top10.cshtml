@@ -1,12 +1,244 @@
-<div class="container body-container">
-    <div class="row">
+@model List<BookCave.Models.ViewModels.BookViewModel>
 
+<div class="container body-container card pb-5">
+    <div class="row animated fadeIn">
         <div class="col-12">
+            <h1 class="display-2 text-center my-5"><strong>Top 10 Books</strong></h1>
+            <h5 class="display-5 text-center my-5"><strong>By Rating</strong></h1>
+        </div>
+    </div>
 
+    <div class="row animated fadeInDown">
+        <div class="col-12">
+            <div class="col-6 offset-lg-3">
+                <div class="card card-cascade p-4">
+                    <div class="text-center">
+                        <h2 class="display-3"><strong>1</strong></h2>
+                        <hr>
+                        <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <div class="card-body text-center">
+                        <hr>
+                        <h4 class="card-title"><strong>@Model[0].Title</strong></h4>
+                        <h5>Web developer</h5>
+
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                        </p>
+
+                        <button class="btn btn-default">Add to cart!</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row wow fadeInLeft">
+        <div class="col-6">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>2</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
+
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>3</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
+
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row wow fadeInRight">
+        <div class="col-4">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>4</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
+
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
         </div>
 
 
+        <div class="col-4">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>5</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
 
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>6</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
+
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row wow fadeInUp">
+        <div class="col-3">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>7</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
+
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>8</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
+
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>9</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
+
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card card-cascade p-4">
+                <div class="text-center">
+                    <h2 class="display-3"><strong>10</strong></h2>
+                    <hr>
+                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0624/9780062457714.jpg" class="img-fluid z-depth-2" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <hr>
+                    <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                    <h5>Web developer</h5>
+
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                    </p>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
