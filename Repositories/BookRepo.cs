@@ -142,12 +142,7 @@ namespace BookCave.Repositories
                           where r.BookId == bookId
                           select r).SingleOrDefault();
             
-            if(rating != null)
-            {
-                rating.Rating = newRating;
-                _db.Update(rating);
-            }
-            else
+            if(rating == null)
             {
                 var firstRating = new BookRating
                 {
@@ -155,6 +150,13 @@ namespace BookCave.Repositories
                     Rating = newRating
                 };
                 _db.Add(firstRating);
+            }
+            else
+            {
+                // must remove and add, update doesnt work for rating.
+                _db.Remove(rating);
+                rating.Rating = newRating;                
+                _db.Add(rating);
             }
             _db.SaveChanges();
         }
