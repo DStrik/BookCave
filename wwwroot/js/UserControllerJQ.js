@@ -343,7 +343,7 @@ $(document).ready(function () {
                       
         $("#ViewDetailsModal").modal("show");
 
-        $.get("/User/OrderDetails/" + id, function(data, status){
+        $.get("/User/OrderDetails/" + id , function(data, status){
             document.location.href="/User/OrderDetails/" + id;
             $('#printer').click(function(){
                 var divToPrint=document.getElementById('printMe');
