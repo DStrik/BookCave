@@ -135,11 +135,26 @@ $(document).ready(function () {
             $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
             $("#BillingCity").val($("#ShippingCity").val());
             $("#BillingZipCode").val($("#ShippingZipCode").val());
-            $("#BillingCountry").val($("#ShippingCountry").val());
+            $('#BillingCountry').prop('disabled', true);
+            $('#BillingCountry').html($('#ShippingCountry')).material_select();
+
         }
     
         if(!$("input.check-for-bill").is(":checked")) {
             $(".billing-information").prop("readonly", false);
+            $('#BillingCountry').removeAttr('disabled');
+            $.get("https://restcountries.eu/rest/v2", function (data, success) { 
+                var markupCountry = '';
+                for(i = 0; i < data.length; i++) {
+                    markupCountry +='<option value="' + data[i].name + '">' + data[i].name + '</option>'; 
+                }
+                $('#BillingCountry').append(markupCountry)
+                $('#BillingCountry').material_select();
+                //$('.ShippingCountry-stuff').material_select();
+                
+            }).fail(function(err){
+                alert("Error has occured");
+            });
         }
     });
 
@@ -185,9 +200,11 @@ $(document).ready(function () {
         }
     });
 
-    $("#ShippingCountry").keyup(function () {
+    $("#ShippingCountry").change(function () {
         if($("input.check-for-bill").is(":checked")) {
-            $("#BillingCountry").val($("#ShippingCountry").val());
+            $('#BillingCountry').prop('disabled', true);
+            $('#BillingCountry').html($('#ShippingCountry')).material_select();
+            $('#BillingCountry').val($('#ShippingCountry').val());
         }
     });
 
@@ -348,6 +365,21 @@ $(document).ready(function () {
         });
     });
 
-    
+//This is for country list
+
+    $.get("https://restcountries.eu/rest/v2", function (data, success) { 
+        var markupCountry = '';
+        for(i = 0; i < data.length; i++) {
+            markupCountry +='<option value="' + data[i].name + '">' + data[i].name + '</option>'; 
+        }
+        $('#ShippingCountry').append(markupCountry)
+        $('#BillingCountry').append(markupCountry)
+        $('#ShippingCountry').material_select();
+        $('#BillingCountry').material_select();
+        //$('.ShippingCountry-stuff').material_select();
+        
+    }).fail(function(err){
+        alert("Error has occured");
+    });
 
 });

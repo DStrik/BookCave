@@ -118,7 +118,10 @@ $(document).ready(function () {
             $('#pay').prop('disabled', true);
             var bla = $("#checkOutForm").serialize();
             $('#processingModal').modal('show');
-            $('#BillingCountry').val($('#ShippingCountry').val());
+            if(!$("input.check-for-bill").is(":checked")) {
+                
+                $('#BillingCountry').val($('#ShippingCountry').val());
+            }
 
             $.post('/CheckOut/Pay', bla, function(data, status) {
                 $(".form-group").removeClass("has-error");
@@ -203,7 +206,18 @@ $(document).ready(function () {
         if(!$("input.check-for-bill").is(":checked")) {
             $(".billing-information").prop("readonly", false);
             $('#BillingCountry').removeAttr('disabled');
-            console.log("Need Enable");
+            $.get("https://restcountries.eu/rest/v2", function (data, success) { 
+                var markupCountry = '';
+                for(i = 0; i < data.length; i++) {
+                    markupCountry +='<option value="' + data[i].name + '">' + data[i].name + '</option>'; 
+                }
+                $('#BillingCountry').append(markupCountry)
+                $('#BillingCountry').material_select();
+                //$('.ShippingCountry-stuff').material_select();
+                
+            }).fail(function(err){
+                alert("Error has occured");
+            });
         }
     });
 
@@ -253,6 +267,7 @@ $(document).ready(function () {
         if($("input.check-for-bill").is(":checked")) {
             $('#BillingCountry').prop('disabled', true);
             $('#BillingCountry').html($('#ShippingCountry')).material_select();
+            $('#BillingCountry').val($('#ShippingCountry').val());
         }
     });
 
