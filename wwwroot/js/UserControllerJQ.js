@@ -46,7 +46,6 @@ $(document).ready(function () {
     $("#ViewFavBook").click(function (e) { 
         e.preventDefault();
         $("#errorImage").hide();
-        $("#FavoriteBookImg").html("");
         $(".un-center").addClass("text-center");
         var loading = '<div class="preloader-wrapper big active m-5 loading-thing">'
                       + '<div class="spinner-layer spinner-blue-only">'
@@ -99,9 +98,11 @@ $(document).ready(function () {
             console.log(data);
             // Error handling for the user if the book isn't receivable
         }).fail(function(err) {
+            
             $(".loading-thing").hide();
             $("#errorImage").show();
             $("#FavoriteBookInfo").html("<br><br><br><br><p>There was an error in retrieving your book</p><p>Please try again later...</p>");
+            
         });
     });
 
