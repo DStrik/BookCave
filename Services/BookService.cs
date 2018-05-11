@@ -44,8 +44,10 @@ namespace BookCave.Services
             {
                 _bookRepo.UpdateReview(reviewEntity);
             }
-
-            _bookRepo.AddReview(reviewEntity);
+            else
+            {
+                _bookRepo.AddReview(reviewEntity);
+            }
         }
 
         public List<BookViewModel> GetNewReleases()
