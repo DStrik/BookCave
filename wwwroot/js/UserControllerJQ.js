@@ -69,7 +69,8 @@ $(document).ready(function () {
         // The image is taken in as a byte array and then converted to a jpg
         $.get("FavoriteBook", function(data, status){
             console.log("status: " + status);
-            var content = '<a href="/book/details/' + data.bookId + '" <img class="img-fluid" src="data:image/jpg;base64,' + data.coverImage + '"></a>';
+            var content = '<img class="img-fluid mt-5 ml-3" src="data:image/jpg;base64,' + data.coverImage + '">';
+            //var content = '<a href="/book/details/' + data.bookId + '" <img class="img-fluid" src="data:image/jpg;base64,' + data.coverImage + '"></a>';
             $("#FavoriteBookImg").html(content);
 
             var authorMarkup = "";
