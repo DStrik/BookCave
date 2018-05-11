@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BookCave.Data.EntityModels;
+using System.Net;
 using BookCave.Models;
-using BookCave.Models.ViewModels;
 using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -49,16 +46,20 @@ namespace BookCave.Controllers
             _cartService.ClearCart(userId);
         }
 
+        [AllowAnonymous]
         public IActionResult AddToCart(int id)
         {
             var userId = _userManager.GetUserId(HttpContext.User);
-            if(userId == null)
+            if(userId != null)
             {
-                RedirectToAction("Login", "User");
+                _cartService.AddToCart(userId, id);
+                return Ok();
             } 
-            _cartService.AddToCart(userId, id);
-
-            return Ok();
+            else
+            {
+                 Response.StatusCode = (int) HttpStatusCode.BadRequest;
+                 return Json("Login");
+            }
         }
     }
 }

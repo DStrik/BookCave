@@ -3,8 +3,8 @@
     
      <script type="text/javascript" src="~/js/rater.js"></script>
 }
-    <div class="col-lg-8 col-md-12 offset-lg-2 animated fadeIn mb-5 container body-container">
-        <h4 class="display-3 text-center my-1 "><strong>Search results</strong></h4>
+    <div class="animated fadeIn container body-container card">
+        <h1 class="display-3 text-center my-1 "><strong>Search results</strong></h1>
         <div class="row mb-4 d-flex justify-content-between">
             <div class="col">
                 <a asp-controller="Search" asp-action="Index" class="btn btn-primary">
@@ -38,41 +38,49 @@
             </div>
 
         </div>
-        <div class="row carditems-container">
-            @foreach(var book in Model) 
-            {
-            <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch thecarditem">
-                <div class="card">
-                    <div class="view overlay justify-content-center">
-                        <img class="card-img-top thumb" src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) ">
-                        <a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">
-                            <div class="mask rgba-whitei-slght"></div>
-                        </a>
-                        </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <h6 class="col-12 card-title mb-2">@book.Title</h6>
-                                <p class="col-12 card-text mb-1">
-                                    @foreach(var author in book.Author) 
-                                    { 
-                                        if(author != book.Author.Last())
-                                        {
-                                            <span>@author.Name, </span>
-                                        }
-                                        else
-                                        {
-                                            <span>@author.Name</span>
-                                        }
-                                    }    
-                                </p>
-                                <p class="col-12 card-text mb-1">@book.Type</p>
-                                <div class="rate orange-text rate-off mb-1 ml-3" data-rate-value=@book.Rating></div>
-                                <h4 class="col-12 mb-0">$ <span class="pricetag">@book.Price</span></h4>
-                                <button type="button" class="btn btn-default add-to-cart" data-id="@book.BookId"><i class="fa fa-cart-plus">&nbsp;&nbsp;</i>Add to cart!</button>
+        @if(Model.Any())
+        {
+            <div class="row carditems-container">
+                @foreach(var book in Model) 
+                {
+                <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch thecarditem">
+                    <div class="card">
+                        <div class="view overlay justify-content-center">
+                            <img class="card-img-top thumb" src="data:image/jpg;base64, @Convert.ToBase64String(book.CoverImage) ">
+                            <a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">
+                                <div class="mask rgba-whitei-slght"></div>
+                            </a>
+                            </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <h6 class="col-12 card-title mb-2">@book.Title</h6>
+                                    <p class="col-12 card-text mb-1">
+                                        @foreach(var author in book.Author) 
+                                        { 
+                                            if(author != book.Author.Last())
+                                            {
+                                                <span>@author.Name, </span>
+                                            }
+                                            else
+                                            {
+                                                <span>@author.Name</span>
+                                            }
+                                        }    
+                                    </p>
+                                    <p class="col-12 card-text mb-1">@book.Type</p>
+                                    <div class="rate orange-text rate-off mb-1 ml-3" data-rate-value=@book.Rating></div>
+                                    <h4 class="col-12 mb-0">$ <span class="pricetag">@book.Price</span></h4>
+                                    <button type="button" class="btn btn-default add-to-cart mx-auto" data-id="@book.BookId"><i class="fa fa-cart-plus">&nbsp;&nbsp;</i>Add to cart!</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                }
             </div>
-            }
-        </div>
+        }
+        else
+        {
+            <h2 class="display-2 text-center my-5 "><strong>No results</strong></h2>
+        }
+        
     </div>

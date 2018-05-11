@@ -11,9 +11,10 @@
   
 
 @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    var nameClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <div class="container body-container">
@@ -34,9 +35,18 @@
                     </div>
 
                     <div class="col-12">
-                        <p class="mb-0"><strong>Author(s): </strong> @foreach (var author in Model.Author) { if(author != Model.Author.Last()) {
-                            <span>@author.Name, </span> } else {
-                            <span>@author.Name</span> } }
+                        <p class="mb-0"><strong>Author(s): </strong> 
+                        @foreach (var author in Model.Author) 
+                        { 
+                            if (author != Model.Author.Last()) 
+                            {
+                            <span>@author.Name, </span> 
+                            } 
+                            else 
+                            {
+                            <span>@author.Name</span>
+                            } 
+                        }
                         </p>
                     </div>
                     <div class="col-12">
@@ -57,7 +67,7 @@
                     </div>
 
                     <div class="col-12 btn-group p-5">
-                        <button type="button" class="btn btn-default btn-lg btn-block mr-2"><i class="fa fa-cart-plus fa-5x"></i> <br> Add to cart!</button>
+                        <button type="button" class="btn btn-default btn-lg btn-block mr-2 add-to-cart"><i class="fa fa-cart-plus fa-5x"></i> <br> Add to cart!</button>
                         <button id="setFavorite"type="button" class="btn btn-pink btn-lg btn-block"><i class="fa fa-heart fa-5x"></i> <br> Set as favorite book!</button>
                     </div>
                 </div>
@@ -143,10 +153,10 @@
                     <form class="media" method="POST" id="reviewForm">
                         <div class="media-body">
                             <div class="media mt-3 shadow-textarea">
-                                <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="Generic placeholder image" width="100em" height="100em">
+                                <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="data:image/jpg;base64, @Convert.ToBase64String(@Model.UserImage)" alt="Generic placeholder image" width="100em" height="100em">
                                 <div class="media-body">
-                                    <h4 class="my-0 font-weight-bold blue-text pb-0">@nameClaim</h4>
-                                    <div id="userRating" class="rate h1 orange-text" data-rate-value=null ></div>
+                                    <h4 class="my-0 font-weight-bold blue-text pb-0">@user.FirstName @user.LastName</h4>
+                                    <div id="userRating" class="rate h1 orange-text" data-rate-value=0 ></div>
                                     <div class="form-group basic-textarea rounded-corners">
                                         <textarea class="form-control z-depth-1" id="reviewText" rows="6" placeholder="Write your comment..."></textarea>
                                     </div>
@@ -169,3 +179,5 @@
     </div>
 
 </div>
+
+

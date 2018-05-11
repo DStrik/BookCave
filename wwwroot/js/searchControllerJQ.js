@@ -50,24 +50,48 @@ $(document).ready(function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
       }
-    }).fail(function(){
-      Command: toastr["error"]("Please try again later", "Book was not added to cart")
-      toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": true,
-        "progressBar": false,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "showDuration": 300,
-        "hideDuration": 1000,
-        "timeOut": 5000,
-        "extendedTimeOut": 1000,
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
+    }).fail(function(data, status){
+      if(data.responseJSON == "Login")
+      {
+        Command: toastr["warning"]("Click here to log in", "Must be logged in to add to cart")
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": true,
+          "progressBar": false,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "showDuration": 300,
+          "hideDuration": 1000,
+          "timeOut": 5000,
+          "extendedTimeOut": 1000,
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
       }
+      else
+      {
+        Command: toastr["error"]("Please try again later", "Book was not added to cart")
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": true,
+          "progressBar": false,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "showDuration": 300,
+          "hideDuration": 1000,
+          "timeOut": 5000,
+          "extendedTimeOut": 1000,
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+      }
+      
     });
   });
 

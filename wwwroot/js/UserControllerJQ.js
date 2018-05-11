@@ -340,7 +340,7 @@ $(document).ready(function () {
                 newWin.document.close();
     
                 setTimeout(function(){newWin.close();},10);
-            });
+            }); 
         }).fail(function(err) {
             $(".loading-thing").hide();
             $("#errorImage").show();

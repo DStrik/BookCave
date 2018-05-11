@@ -190,3 +190,11 @@ header,
 .front-page-carousel a {
     color: white;
 }
+
+.avatar {
+    object-fit: cover;
+}
+
+.card img {
+    object-fit: cover;
+}
