@@ -14,11 +14,14 @@ namespace BookCave.Controllers
     {
         private BookService _bookService;
         private readonly UserManager<ApplicationUser> _userManager;
+        
+        private UserService _userService;
 
         public BookController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             _bookService = new BookService();
+            _userService = new UserService();
         }
 
         public IActionResult Top10()
@@ -38,9 +41,19 @@ namespace BookCave.Controllers
             }
             return BadRequest();
         }
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             var book = _bookService.GetBookDetails(id);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null) 
+            {
+                book.UserImage = null;
+            } 
+            else 
+            {
+                var userView = _userService.GetUserImage(user.Id);
+                book.UserImage = userView.Image;
+            }
             return View(book);
         }
 

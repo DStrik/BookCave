@@ -1,5 +1,8 @@
 @model List<BookCave.Models.ViewModels.BookViewModel>
-
+@section scripts {
+     <script type="text/javascript" src="~/js/rater.js"></script>
+     <script type="text/javascript" src="~/js/BookDetailsJS.js"></script>
+}
 <div class="container body-container card pb-5">
     <div class="row animated fadeIn">
         <div class="col-12">
@@ -13,16 +16,15 @@
             <div class="col-6 offset-lg-3">
                 <div class="card card-cascade p-4">
                     <div class="text-center">
-                        <h2 class="display-3"><strong>1</strong></h2>
-                        <hr>
-                        <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[0].CoverImage)" class="img-fluid z-depth-2" alt="">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[0].BookId">
+                            <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[0].CoverImage)" class="img-fluid z-depth-2" alt="">          
                         </a>
                     </div>
-                    <div class="card-body text-center">
-                        <hr>
+                    <div class="card-body text-center mt-0 pt-0">
+                        <hr class="mb-0">
+                        <h2 class="display-3"><strong>1</strong></h2>
                         <h4 class="card-title"><strong>@Model[0].Title</strong></h4>
+
                         <h5>
                             @foreach (var author in @Model[0].Author)
                             {
@@ -35,13 +37,17 @@
                                 <span>@author.Name</span>
                             }
                         }
-
                         </h5>
 
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                        </p>
-
-                        <button class="btn btn-default">Add to cart!</button>
+                        <p class="card-text my-0 py-0">$@Model[0].Price</p>
+                        <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[0].Rating" ></div>
+                            
+                        <div class="row">
+                            <div class="col-12 btn-group">
+                                <button class="btn btn-default w-50" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                                <a class="btn btn-danger w-50" asp-action="Details" asp-route-id="@Model[0].BookId" asp-controller="Book" data-id="@Model[0].BookId">View book details</a>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -62,7 +68,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[1].Title</strong></h4>
                     <h5>
@@ -79,8 +85,12 @@
                         }
                     </h5>
 
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[1].Rating" ></div>
+
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
+
+                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>
 
                 </div>
             </div>
@@ -95,7 +105,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[2].Title</strong></h4>
                     <h5>
@@ -112,8 +122,12 @@
                         }
                     </h5>
 
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[2].Rating" ></div>
+
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
+
+                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>
 
                 </div>
             </div>
@@ -133,7 +147,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[3].Title</strong></h4>
                     <h5>
@@ -150,8 +164,12 @@
                         }
                     </h5>
 
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[3].Rating" ></div>
+
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
+
+                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>                    
 
                 </div>
             </div>
@@ -168,7 +186,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[4].Title</strong></h4>
                     <h5>
@@ -185,8 +203,13 @@
                         }
                     </h5>
 
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[4].Rating" ></div>
+
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
+
+                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>
+                    
 
                 </div>
             </div>
@@ -201,7 +224,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[5].Title</strong></h4>
                     <h5>
@@ -218,8 +241,15 @@
                         }
                     </h5>
 
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[6].Rating" ></div>
+
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
+
+                    <div class="align-text-bottom">
+                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>
+                        
+                    </div>
 
                 </div>
             </div>
@@ -239,7 +269,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[6].Title</strong></h4>
                     <h5>
@@ -255,6 +285,8 @@
                             }
                         }
                     </h5>
+
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[6].Rating" ></div>
 
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
@@ -272,7 +304,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[7].Title</strong></h4>
                     <h5>                        
@@ -288,6 +320,8 @@
                             }
                         }
                         </h5>
+
+                        <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[7].Rating" ></div>
 
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
@@ -305,7 +339,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[8].Title</strong></h4>
                     <h5>                        
@@ -321,6 +355,7 @@
                             }
                         }
                         </h5>
+                        <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[8].Rating" ></div>
 
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
@@ -338,7 +373,7 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center mt-0 pt-0">
                     <hr>
                     <h4 class="card-title"><strong>@Model[9].Title</strong></h4>
                     <h5>                   
@@ -354,6 +389,7 @@
                             }
                         }
                         </h5>
+                        <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[9].Rating" ></div>
 
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>

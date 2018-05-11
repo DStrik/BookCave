@@ -3,10 +3,10 @@
 @using BookCave.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    var nameClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
-    var userClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "User")?.Value;
+    var user = await UserManager.GetUserAsync(User);
 }
  
  <!-- SideNav slide-out button -->
@@ -20,7 +20,7 @@
       <ul class="custom-scrollbar list-unstyled">              
             @if (SignInManager.IsSignedIn(User))
             {
-                <p class="pl-3 pt-3">Logged in as: @nameClaim </p>
+                <p class="pl-3 pt-3">Logged in as: @user.FirstName @user.LastName </p>
             }
             else
             {

@@ -5,9 +5,10 @@
 @using BookCave.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    var nameClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <div class="container body-container">
@@ -35,7 +36,7 @@
                     {
                         <div class="card-body ">
                             <!-- Name -->
-                            <h4 id="UserName" class="card-title mb-0">@nameClaim</h4>
+                            <h4 id="UserName" class="card-title mb-0">@user.FirstName @user.LastName</h4>
                             <form id="ChangeNameInput">
                                 <input type="text" id="UserFirstNameInput" class="form-control" placeholder="New First Name" required>
                                 <input type="text" id="UserLastNameInput" class="form-control" placeholder="New Last Name" required>

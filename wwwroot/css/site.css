@@ -187,3 +187,10 @@ header,
     margin-right:0;
 }
 
+.avatar {
+    object-fit: cover;
+}
+
+.card img {
+    object-fit: cover;
+}

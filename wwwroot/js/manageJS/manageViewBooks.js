@@ -3,6 +3,7 @@
 var deleteRow;
 $(document).ready(function () {
 
+
     var table = $('#viewBooksTable').DataTable({
         "processing": true,
         "serverSide": false,
@@ -11,7 +12,17 @@ $(document).ready(function () {
         "autoHeight": true,
         "columns": [
             { "data": "bookId" },
-            { "data": "title" },
+            {
+                "className": '',
+                "data": null,
+                "sortable": false,
+                "searchable": false,
+                "autoSize": true,
+                "render": function (data, type, row, meta) {
+                    var markup = '<a href="/Book/Details/' + data.bookId + '" target="_blank">' + data.title + '</a>';
+                    return (markup);
+                }
+            },
             { "data": "type" },
             { "data": "publishingYear" },
             { "data": "isbn" },
@@ -24,7 +35,7 @@ $(document).ready(function () {
                 "render": function (data, type, row, meta) {
                     var markup =
                         '<div><button type="button" class="btn btn-sm btn-danger px-2 mr-2" data-toggle="modal" data-target="#confirmDelete" '
-                        + 'data-code="'+ data.bookId + '" data-name="' + data.title + '">Delete</button>'
+                        + 'data-code="' + data.bookId + '" data-name="' + data.title + '">Delete</button>'
                         + '<a class="btn btn-sm btn-warning px-2" href="/Manage/ModifyBookById/' + data.bookId + '">Modify</a> </div>';
                     return (markup);
                 }
@@ -45,14 +56,13 @@ $(document).ready(function () {
     $('.mdb-select').removeClass('form-control form-control-sm');
     $('.dataTables_filter').find('label').remove();
 
-    
-    deleteRow = function(deletionRow) {
-        table.row(deletionRow).remove().draw( false );
+    deleteRow = function (deletionRow) {
+        table.row(deletionRow).remove().draw(false);
     }
 });
 
 
-$("#viewBooksTable").on("click", "button", function() {
+$("#viewBooksTable").on("click", "button", function () {
     var parentTr = $(this).closest("tr");
     var title = $(this).attr("data-name");
     var id = $(this).attr("data-code");

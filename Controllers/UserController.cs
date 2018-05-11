@@ -87,7 +87,7 @@ namespace BookCave.Controllers
                 user.LastName = model.LastName;
                 await _signInManager.SignInAsync(user, false);
 
-                _userService.addDefaultImage(user.Id);
+                _userService.AddDefaultImage(user.Id);
                 var updateResult = await _userManager.UpdateAsync(user);
                 if(updateResult.Succeeded)
                 {
@@ -234,6 +234,7 @@ namespace BookCave.Controllers
             }
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            var claim = await _userManager.GetClaimsAsync(user);
 
             var result = await _userManager.ReplaceClaimAsync(user, ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name"), new Claim("Name", $"{Name.FirstName} {Name.LastName}"));
 
