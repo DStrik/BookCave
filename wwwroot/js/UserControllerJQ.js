@@ -261,6 +261,7 @@ $(document).ready(function () {
 
             $("#ChangeNameInput").hide();
             $("#UserName").empty().text(newFirstName + " " + newLastName).show();
+            $("#VerySpecificIdBecauseThisIsOnAllPages").html(newFirstName + " " + newLastName);
             $("#processingModal").modal("hide");
             
         }).fail(function (err) {

@@ -3,9 +3,10 @@
 @using BookCave.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    var nameClaim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
+    var user = await UserManager.GetUserAsync(User);
 }
    
     <div class="container">
@@ -106,7 +107,7 @@
                         <i class="icon fa fa-user"></i>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <span>@nameClaim</span>
+                                <span id="VerySpecificIdBecauseThisIsOnAllPages">@user.FirstName @user.LastName</span>
                             }
                             <span class="caret"></span>
                         </a>

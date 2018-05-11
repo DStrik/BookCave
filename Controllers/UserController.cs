@@ -234,6 +234,7 @@ namespace BookCave.Controllers
             }
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            var claim = await _userManager.GetClaimsAsync(user);
 
             var result = await _userManager.ReplaceClaimAsync(user, ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name"), new Claim("Name", $"{Name.FirstName} {Name.LastName}"));
 
