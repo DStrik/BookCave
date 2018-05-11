@@ -7,19 +7,19 @@
         </div>
         <div class="card-body ">
 
-            <form asp-action="AddPublisher" asp-controller="Manage" method="POST">
+            <form id="addPublisherForm" asp-action="AddPublisher" asp-controller="Manage" method="POST">
                 
                 <span class="mr-5 font-weight-light text-danger" asp-validation-for="Name"></span>
                 <div class="form-group row d-flex">
-                    <p class="label col-md-4 pt-2">Publisher Name</p>
+                    <p class="label col-md-4 pt-2 form-control-lg">Publisher Name</p>
                     <div class="col-md-8">
-                        <input asp-for="Name" class="form-control pt-0" id="Title" type="text">
+                        <input asp-for="Name" class="form-control pt-0 form-control-lg" id="Title" type="text">
                     </div>
                 </div>
 
                 <div class="text-right">
-                    <a asp-action="Index" asp-controller="Manage" class="btn btn-danger waves-light">Cancel</a>
-                    <input type="submit" class="btn success-color-dark waves-light" value="Add publisher!">
+                    <a onclick="window.top.close()" class="btn btn-danger waves-light">Cancel</a>
+                    <input id="addPublisher" type="button" class="btn success-color-dark waves-light" value="Add publisher!">
                 </div>
 
             </form>

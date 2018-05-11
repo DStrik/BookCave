@@ -26,15 +26,18 @@
             <!-- Left -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home
-                    </a>
+                    <a asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
                 </li>
 
-            <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" asp-controller="Book" asp-action="Top10">Top 10 Books</a>
-            </li>
+                </li>
 
-        </ul>
+                <li class="nav-item">
+                    <a asp-controller="Search" asp-action="Results" class="nav-link">View all books</a>
+                </li>
+
+            </ul>
 
             <!-- Right -->
             <ul class="navbar-nav">

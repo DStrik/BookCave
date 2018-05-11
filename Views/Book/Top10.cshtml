@@ -7,9 +7,11 @@
     <div class="row animated fadeIn">
         <div class="col-12">
             <h1 class="display-2 text-center my-5"><strong>Top 10 Books</strong></h1>
-            <h5 class="display-5 text-center my-5"><strong>By Rating</strong></h1>
+            <h5 class="display-5 text-center my-5"><strong>By Rating</strong></h5>
         </div>
     </div>
+
+<!-- /////////////////////////////////////////////////////// ONE ////////////////////////////////////////////// -->
 
     <div class="row animated fadeInDown">
         <div class="col-12">
@@ -44,7 +46,7 @@
                             
                         <div class="row">
                             <div class="col-12 btn-group">
-                                <button class="btn btn-default w-50" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                                <button class="btn btn-default w-50 add-to-cart" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
                                 <a class="btn btn-danger w-50" asp-action="Details" asp-route-id="@Model[0].BookId" asp-controller="Book" data-id="@Model[0].BookId">View book details</a>
                             </div>
                         </div>
@@ -57,77 +59,84 @@
 
     <hr>
 
+<!-- /////////////////////////////////////////////////////// TWO ////////////////////////////////////////////// -->
     <div class="row wow fadeInLeft">
         <div class="col-6 d-flex align-items-stretch">
             <div class="card card-cascade p-4">
                 <div class="text-center">
-                    <h2 class="display-3"><strong>2</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[1].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
+                    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[1].BookId">
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[1].CoverImage)" class="img-fluid z-depth-2" alt="">          
                     </a>
                 </div>
                 <div class="card-body text-center mt-0 pt-0">
-                    <hr>
+                    <hr class="mb-0">
+                    <h2 class="display-3"><strong>1</strong></h2>
                     <h4 class="card-title"><strong>@Model[1].Title</strong></h4>
+
                     <h5>
                         @foreach (var author in @Model[1].Author)
                         {
-                            if (author != @Model[1].Author.Last())
-                            {
-                                <span>@author.Name, </span>
-                            }
-                            else
-                            {
-                                <span>@author.Name</span>
-                            }
+                        if (author != @Model[1].Author.Last())
+                        {
+                            <span>@author.Name, </span>
                         }
+                        else
+                        {
+                            <span>@author.Name</span>
+                        }
+                    }
                     </h5>
 
+                    <p class="card-text my-0 py-0">$@Model[1].Price</p>
                     <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[1].Rating" ></div>
-
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
-
-                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>
+                        
+                    <div class="row">
+                        <div class="col-12 btn-group">
+                            <button class="btn btn-default w-50 add-to-cart" data-id="@Model[1].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                            <a class="btn btn-danger w-50" asp-action="Details" asp-route-id="@Model[1].BookId" asp-controller="Book" data-id="@Model[1].BookId">View book details</a>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         </div>
+
+        <!-- /////////////////////////////////////////////////////// THREE ////////////////////////////////////////////// -->
         <div class="col-6 d-flex align-items-stretch">
             <div class="card card-cascade p-4">
                 <div class="text-center">
-                    <h2 class="display-3"><strong>3</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[2].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
+                    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[2].BookId">
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[2].CoverImage)" class="img-fluid z-depth-2" alt="">          
                     </a>
                 </div>
                 <div class="card-body text-center mt-0 pt-0">
-                    <hr>
+                    <hr class="mb-0">
+                    <h2 class="display-3"><strong>1</strong></h2>
                     <h4 class="card-title"><strong>@Model[2].Title</strong></h4>
+
                     <h5>
                         @foreach (var author in @Model[2].Author)
                         {
-                            if (author != @Model[2].Author.Last())
-                            {
-                                <span>@author.Name, </span>
-                            }
-                            else
-                            {
-                                <span>@author.Name</span>
-                            }
+                        if (author != @Model[2].Author.Last())
+                        {
+                            <span>@author.Name, </span>
                         }
+                        else
+                        {
+                            <span>@author.Name</span>
+                        }
+                    }
                     </h5>
 
+                    <p class="card-text my-0 py-0">$@Model[2].Price</p>
                     <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[2].Rating" ></div>
-
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
-
-                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>
+                        
+                    <div class="row">
+                        <div class="col-12 btn-group">
+                            <button class="btn btn-default w-50 add-to-cart" data-id="@Model[2].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                            <a class="btn btn-danger w-50" asp-action="Details" asp-route-id="@Model[2].BookId" asp-controller="Book" data-id="@Model[2].BookId">View book details</a>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -135,24 +144,23 @@
     </div>
 
     <hr>
-
+<!-- /////////////////////////////////////////////////////// FOUR ////////////////////////////////////////////// -->
     <div class="row wow fadeInRight">
         <div class="col-4 d-flex align-items-stretch">
-            <div class="card card-cascade p-4">
-                <div class="text-center">
-                    <h2 class="display-3"><strong>4</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[3].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <div class="card-body text-center mt-0 pt-0">
-                    <hr>
-                    <h4 class="card-title"><strong>@Model[3].Title</strong></h4>
-                    <h5>
-                        @foreach (var author in @Model[3].Author)
-                        {
+                <div class="card card-cascade p-4">
+                    <div class="text-center">
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[3].BookId">
+                            <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[3].CoverImage)" class="img-fluid z-depth-2" alt="">          
+                        </a>
+                    </div>
+                    <div class="card-body text-center mt-0 pt-0">
+                        <hr class="mb-0">
+                        <h2 class="display-3"><strong>1</strong></h2>
+                        <h4 class="card-title"><strong>@Model[3].Title</strong></h4>
+
+                        <h5>
+                            @foreach (var author in @Model[3].Author)
+                            {
                             if (author != @Model[3].Author.Last())
                             {
                                 <span>@author.Name, </span>
@@ -162,237 +170,251 @@
                                 <span>@author.Name</span>
                             }
                         }
-                    </h5>
+                        </h5>
 
-                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[3].Rating" ></div>
+                        <p class="card-text my-0 py-0">$@Model[3].Price</p>
+                        <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[3].Rating" ></div>
+                            
+                        <div class="row">
+                                <button class="btn btn-default add-to-cart mx-auto" data-id="@Model[3].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                                <a class="btn btn-danger mx-auto" asp-action="Details" asp-route-id="@Model[3].BookId" asp-controller="Book" data-id="@Model[3].BookId">View book details</a>
+                        </div>
 
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
-
-                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>                    
-
+                    </div>
                 </div>
-            </div>
         </div>
 
-
+<!-- /////////////////////////////////////////////////////// FIVE ////////////////////////////////////////////// -->
         <div class="col-4 d-flex align-items-stretch">
             <div class="card card-cascade p-4">
                 <div class="text-center">
-                    <h2 class="display-3"><strong>5</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[4].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
+                    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[4].BookId">
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[4].CoverImage)" class="img-fluid z-depth-2" alt="">          
                     </a>
                 </div>
                 <div class="card-body text-center mt-0 pt-0">
-                    <hr>
+                    <hr class="mb-0">
+                    <h2 class="display-3"><strong>1</strong></h2>
                     <h4 class="card-title"><strong>@Model[4].Title</strong></h4>
+
                     <h5>
                         @foreach (var author in @Model[4].Author)
                         {
-                            if (author != @Model[4].Author.Last())
-                            {
-                                <span>@author.Name, </span>
-                            }
-                            else
-                            {
-                                <span>@author.Name</span>
-                            }
-                        }
-                    </h5>
-
-                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[4].Rating" ></div>
-
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
-
-                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>
-                    
-
-                </div>
-            </div>
-        </div>
-        <div class="col-4 d-flex align-items-stretch">
-            <div class="card card-cascade p-4">
-                <div class="text-center">
-                    <h2 class="display-3"><strong>6</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[5].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <div class="card-body text-center mt-0 pt-0">
-                    <hr>
-                    <h4 class="card-title"><strong>@Model[5].Title</strong></h4>
-                    <h5>
-                        @foreach (var author in @Model[5].Author)
+                        if (author != @Model[4].Author.Last())
                         {
-                            if (author != @Model[5].Author.Last())
-                            {
-                                <span>@author.Name, </span>
-                            }
-                            else
-                            {
-                                <span>@author.Name</span>
-                            }
+                            <span>@author.Name, </span>
                         }
+                        else
+                        {
+                            <span>@author.Name</span>
+                        }
+                    }
                     </h5>
 
-                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[6].Rating" ></div>
-
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
-
-                    <div class="align-text-bottom">
-                    <button class="btn btn-default btn-lg" data-id="@Model[0].BookId"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart!</button>
+                    <p class="card-text my-0 py-0">$@Model[4].Price</p>
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[4].Rating" ></div>
                         
+                    <div class="row">
+                            <button class="btn btn-default add-to-cart mx-auto" data-id="@Model[4].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                            <a class="btn btn-danger mx-auto" asp-action="Details" asp-route-id="@Model[4].BookId" asp-controller="Book" data-id="@Model[4].BookId">View book details</a>
                     </div>
 
                 </div>
             </div>
         </div>
+
+        <!-- /////////////////////////////////////////////////////// SIX ////////////////////////////////////////////// -->
+        <div class="col-4 d-flex align-items-stretch">
+        <div class="card card-cascade p-4">
+            <div class="text-center">
+                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[5].BookId">
+                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[5].CoverImage)" class="img-fluid z-depth-2" alt="">          
+                </a>
+            </div>
+            <div class="card-body text-center mt-0 pt-0">
+                <hr class="mb-0">
+                <h2 class="display-3"><strong>1</strong></h2>
+                <h4 class="card-title"><strong>@Model[5].Title</strong></h4>
+
+                <h5>
+                    @foreach (var author in @Model[5].Author)
+                    {
+                    if (author != @Model[5].Author.Last())
+                    {
+                        <span>@author.Name, </span>
+                    }
+                    else
+                    {
+                        <span>@author.Name</span>
+                    }
+                }
+                </h5>
+
+                <p class="card-text my-0 py-0">$@Model[5].Price</p>
+                <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[5].Rating" ></div>
+                    
+                    <div class="row">
+                            <button class="btn btn-default add-to-cart mx-auto" data-id="@Model[5].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                            <a class="btn btn-danger mx-auto" asp-action="Details" asp-route-id="@Model[5].BookId" asp-controller="Book" data-id="@Model[5].BookId">View book details</a>
+                    </div>
+
+            </div>
+        </div>
+        </div>
     </div>
 
     <hr>
-
+<!-- /////////////////////////////////////////////////////// SEVEN ////////////////////////////////////////////// -->
     <div class="row wow fadeInUp">
         <div class="col-3 d-flex align-items-stretch">
             <div class="card card-cascade p-4">
                 <div class="text-center">
-                    <h2 class="display-3"><strong>7</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[6].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
+                    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[6].BookId">
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[6].CoverImage)" class="img-fluid z-depth-2" alt="">          
                     </a>
                 </div>
                 <div class="card-body text-center mt-0 pt-0">
-                    <hr>
+                    <hr class="mb-0">
+                    <h2 class="display-3"><strong>1</strong></h2>
                     <h4 class="card-title"><strong>@Model[6].Title</strong></h4>
+
                     <h5>
                         @foreach (var author in @Model[6].Author)
                         {
-                            if (author != @Model[6].Author.Last())
-                            {
-                                <span>@author.Name, </span>
-                            }
-                            else
-                            {
-                                <span>@author.Name</span>
-                            }
+                        if (author != @Model[6].Author.Last())
+                        {
+                            <span>@author.Name, </span>
                         }
+                        else
+                        {
+                            <span>@author.Name</span>
+                        }
+                    }
                     </h5>
 
+                    <p class="card-text my-0 py-0">$@Model[6].Price</p>
                     <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[6].Rating" ></div>
-
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
+                        
+                    <div class="row">
+                            <button class="btn btn-default add-to-cart mx-auto" data-id="@Model[6].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                            <a class="btn btn-danger mx-auto" asp-action="Details" asp-route-id="@Model[6].BookId" asp-controller="Book" data-id="@Model[6].BookId">View book details</a>
+                    </div>
 
                 </div>
             </div>
         </div>
+<!-- /////////////////////////////////////////////////////// EIGHT ////////////////////////////////////////////// -->
         <div class="col-3 d-flex align-items-stretch">
             <div class="card card-cascade p-4">
                 <div class="text-center">
-                    <h2 class="display-3"><strong>8</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[7].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
+                    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[7].BookId">
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[7].CoverImage)" class="img-fluid z-depth-2" alt="">          
                     </a>
                 </div>
                 <div class="card-body text-center mt-0 pt-0">
-                    <hr>
+                    <hr class="mb-0">
+                    <h2 class="display-3"><strong>1</strong></h2>
                     <h4 class="card-title"><strong>@Model[7].Title</strong></h4>
-                    <h5>                        
+
+                    <h5>
                         @foreach (var author in @Model[7].Author)
                         {
-                            if (author != @Model[7].Author.Last())
-                            {
-                                <span>@author.Name, </span>
-                            }
-                            else
-                            {
-                                <span>@author.Name</span>
-                            }
+                        if (author != @Model[7].Author.Last())
+                        {
+                            <span>@author.Name, </span>
                         }
-                        </h5>
+                        else
+                        {
+                            <span>@author.Name</span>
+                        }
+                    }
+                    </h5>
 
-                        <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[7].Rating" ></div>
-
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
+                    <p class="card-text my-0 py-0">$@Model[7].Price</p>
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[7].Rating" ></div>
+                        
+                    <div class="row">
+                            <button class="btn btn-default add-to-cart mx-auto" data-id="@Model[7].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                            <a class="btn btn-danger mx-auto" asp-action="Details" asp-route-id="@Model[7].BookId" asp-controller="Book" data-id="@Model[7].BookId">View book details</a>
+                    </div>
 
                 </div>
             </div>
         </div>
+
+<!-- /////////////////////////////////////////////////////// NINE ////////////////////////////////////////////// -->
         <div class="col-3 d-flex align-items-stretch">
             <div class="card card-cascade p-4">
                 <div class="text-center">
-                    <h2 class="display-3"><strong>9</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[8].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
+                    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[8].BookId">
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[8].CoverImage)" class="img-fluid z-depth-2" alt="">          
                     </a>
                 </div>
                 <div class="card-body text-center mt-0 pt-0">
-                    <hr>
+                    <hr class="mb-0">
+                    <h2 class="display-3"><strong>1</strong></h2>
                     <h4 class="card-title"><strong>@Model[8].Title</strong></h4>
-                    <h5>                        
+
+                    <h5>
                         @foreach (var author in @Model[8].Author)
                         {
-                            if (author != @Model[8].Author.Last())
-                            {
-                                <span>@author.Name, </span>
-                            }
-                            else
-                            {
-                                <span>@author.Name</span>
-                            }
+                        if (author != @Model[8].Author.Last())
+                        {
+                            <span>@author.Name, </span>
                         }
-                        </h5>
-                        <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[8].Rating" ></div>
+                        else
+                        {
+                            <span>@author.Name</span>
+                        }
+                    }
+                    </h5>
 
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
+                    <p class="card-text my-0 py-0">$@Model[8].Price</p>
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[8].Rating" ></div>
+                        
+                    <div class="row">
+                            <button class="btn btn-default add-to-cart mx-auto" data-id="@Model[8].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                            <a class="btn btn-danger mx-auto" asp-action="Details" asp-route-id="@Model[8].BookId" asp-controller="Book" data-id="@Model[8].BookId">View book details</a>
+                    </div>
 
                 </div>
             </div>
         </div>
+
+        <!-- /////////////////////////////////////////////////////// TEN ////////////////////////////////////////////// -->
         <div class="col-3 d-flex align-items-stretch">
             <div class="card card-cascade p-4">
                 <div class="text-center">
-                    <h2 class="display-3"><strong>10</strong></h2>
-                    <hr>
-                    <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[9].CoverImage)" class="img-fluid z-depth-2" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
+                    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model[9].BookId">
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(@Model[9].CoverImage)" class="img-fluid z-depth-2" alt="">          
                     </a>
                 </div>
                 <div class="card-body text-center mt-0 pt-0">
-                    <hr>
+                    <hr class="mb-0">
+                    <h2 class="display-3"><strong>1</strong></h2>
                     <h4 class="card-title"><strong>@Model[9].Title</strong></h4>
-                    <h5>                   
+
+                    <h5>
                         @foreach (var author in @Model[9].Author)
                         {
-                            if (author != @Model[9].Author.Last())
-                            {
-                                <span>@author.Name, </span>
-                            }
-                            else
-                            {
-                                <span>and @author.Name</span>
-                            }
+                        if (author != @Model[9].Author.Last())
+                        {
+                            <span>@author.Name, </span>
                         }
-                        </h5>
-                        <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[9].Rating" ></div>
+                        else
+                        {
+                            <span>@author.Name</span>
+                        }
+                    }
+                    </h5>
 
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                    </p>
+                    <p class="card-text my-0 py-0">$@Model[9].Price</p>
+                    <div id="userRating" class="rate h1 orange-text rate-off ml-auto mr-auto" data-rate-value="@Model[9].Rating" ></div>
+                        
+                    <div class="row">
+                            <button class="btn btn-default add-to-cart mx-auto" data-id="@Model[9].BookId"><i class="fa fa-cart-plus" aria-hidden="true"> </i> Add to cart!</button>
+                            <a class="btn btn-danger mx-auto" asp-action="Details" asp-route-id="@Model[9].BookId" asp-controller="Book" data-id="@Model[9].BookId">View book details</a>
+                    </div>
 
                 </div>
             </div>

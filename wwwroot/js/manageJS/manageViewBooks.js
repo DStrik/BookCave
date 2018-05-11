@@ -15,8 +15,8 @@ $(document).ready(function () {
             {
                 "className": '',
                 "data": null,
-                "sortable": false,
-                "searchable": false,
+                "sortable": true,
+                "searchable": true,
                 "autoSize": true,
                 "render": function (data, type, row, meta) {
                     var markup = '<a href="/Book/Details/' + data.bookId + '" target="_blank">' + data.title + '</a>';
