@@ -4,6 +4,7 @@ namespace BookCave.Models.ViewModels
 {
     public class BookDetailViewModel
     {
+        public int BookId { get; set; }
         public string Title { get; set; }
 
         public string Isbn { get; set; }
@@ -18,6 +19,8 @@ namespace BookCave.Models.ViewModels
         public int PageCount { get; set; }
         public int Length { get; set; }
         public List<ReviewViewModel> Review { get; set; }
+
+        public double Rating { get; set; }
         public byte[] CoverImage { get; set; }
         
     }

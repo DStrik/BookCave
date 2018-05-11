@@ -35,8 +35,8 @@ namespace BookCave.Services
             {
                 Reviewer = reviewer,
                 UserId = userId,
-                BookId = review.BookId,
-                Rating = review.Rating,
+                BookId = review.BookId ?? default(int),
+                Rating = review.Rating ?? default(double),
                 Review = review.Review
             };
 
