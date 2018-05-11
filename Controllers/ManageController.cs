@@ -209,13 +209,6 @@ namespace BookCave.Controllers
             return View();
         }
 
-
-        [HttpGet]
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
@@ -292,6 +285,32 @@ namespace BookCave.Controllers
             {
                 return Ok();
             }
+
+            return BadRequest();
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(UserChangePasswordInputModel data)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var result = await _userManager.ChangePasswordAsync(user, data.OldPassword, data.NewPassword);
+            
+            if(result.Succeeded)
+            {
+                return Ok();
+            }  
 
             return BadRequest();
         }
