@@ -71,14 +71,14 @@ $(document).ready(function () {
                 $("#BillingHouseNumber1").val($("#BillingHouseNumber").val());
                 $("#BillingCity1").val($("#BillingCity").val());
                 $("#BillingZipCode1").val($("#BillingZipCode").val());
-               // $("#BillingCountry1").val($('.BillingCountrySelect option:selected').val());
+                $("#BillingCountry1").val($('#BillingCountrySelect option:selected').val());
                 $("#ShippingFirstName1").val($("#ShippingFirstName").val());
                 $("#ShippingLastName1").val($("#ShippingLastName").val());
                 $("#ShippingStreetName1").val($("#ShippingStreetName").val());
                 $("#ShippingHouseNumber1").val($("#ShippingHouseNumber").val());
                 $("#ShippingCity1").val($("#ShippingCity").val());
                 $("#ShippingZipCode1").val($("#ShippingZipCode").val());
-               // $("#ShippingCountry1").val($('.BillingCountrySelect option:selected').val());
+                $("#ShippingCountry1").val($('#ShippingCountry option:selected').val());
                 $("#FullName1").val($("#FullName").val());
                 $("#CardNumber1").val($("#CardNumber").val());
                 $("#ExpirationMonth1").val($("#ExpirationMonth").val());
@@ -197,12 +197,7 @@ $(document).ready(function () {
             $('#BillingCountry').prop('disabled', true);
             $('#BillingCountry').html($('#ShippingCountry')).material_select();
 
-           /* var test = 
-            '<select class="mdb-select colorful-select dropdown-primary validate BillingCountrySelect" asp-for="BillingCountry"  id="BillingCountry" searchable="Search here.." disabled>'
-            + '<option value="' + $("#ShippingCountry").val() +'">' + $("#ShippingCountry").val() + '</select>';
-            $("#BillingCountry").parent().html(test);
-            $("#BillingCountry").material_select();
-        */} 
+        } 
     
         if(!$("input.check-for-bill").is(":checked")) {
             $(".billing-information").prop("readonly", false);
