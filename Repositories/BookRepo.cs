@@ -106,6 +106,7 @@ namespace BookCave.Repositories
             _db.SaveChanges();
             UpdateRating(review.BookId);
         }
+
         private void UpdateRating(int bookId)
         {
             var newRating = (from r in _db.BookReviews
@@ -118,7 +119,8 @@ namespace BookCave.Repositories
             
             if(rating != null)
             {
-                rating.Rating = newRating;
+
+                rating.Rating = newRating;                
                 _db.Update(rating);
             }
             else
@@ -130,6 +132,7 @@ namespace BookCave.Repositories
                 };
                 _db.Add(firstRating);
             }
+            
             _db.SaveChanges();
         }
 
@@ -386,8 +389,8 @@ namespace BookCave.Repositories
             }
 
             var rating = (from r in _db.BookRatings
-                              where r.BookId == bookId
-                              select r).SingleOrDefault();
+                          where r.BookId == bookId
+                          select r).SingleOrDefault();
             _db.BookRatings.Remove(rating);
 
             var img = (from i in _db.CoverImages

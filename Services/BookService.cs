@@ -11,13 +11,11 @@ namespace BookCave.Services
     {
         private BookRepo _bookRepo;
         private UserService _userService;
-        private CartService _cartService;
 
         public BookService()
         {
             _bookRepo = new BookRepo();
             _userService = new UserService();
-            _cartService = new CartService();
         }
         
         public List<BookViewModel> GetTop10()
@@ -249,7 +247,6 @@ namespace BookCave.Services
 
         public void RemoveBookById(int id) 
         {
-            _cartService.RemoveBookFromCarts(id);
             _bookRepo.DeleteBook(id);
         }
         public BookCartViewModel GetCartBookById(CartItem item)

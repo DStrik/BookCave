@@ -21,10 +21,13 @@ namespace BookCave.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        BookService _bookService = new BookService();
+        BookService _bookService;
+        CartService _cartService;
 
         public ManageController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
+            _bookService = new BookService();
+            _cartService = new CartService();
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -158,6 +161,7 @@ namespace BookCave.Controllers
         [HttpPost]
         public void RemoveBookById(int id)
         {
+            _cartService.RemoveBookFromCarts(id);
             _bookService.RemoveBookById(id);
         }
 
