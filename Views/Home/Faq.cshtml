@@ -1,0 +1,31 @@
+<div class="container body-container wow fadeIn">
+
+    <div class="card container">
+        <h1>F.A.Q.</h1>
+        <h4>Frequently asked questions</h4>
+
+        <ol>
+            <li>
+                <p class="font-weight-bold">How do I buy a book?</p>
+                <p>You can go to <a class="text-success font-weight-bold" asp-controller="Search" asp-action="Index">search</a>, <a class="text-success font-weight-bold" asp-controller="Book" asp-action="Top10">top10</a> or <a class="text-success font-weight-bold" asp-controller="Search" asp-action="Results">view all books</a> from our front page. You will then see lists of books where you can add to cart via the add to cart button.</p>
+                <p>Note that you will need to be <a class="text-success font-weight-bold" asp-controller="User" asp-action="Login">signed in</a> to add a book to your basket, if you do not have an account you can <a class="text-success font-weight-bold" asp-controller="User" asp-action="SignUp">sign up</a> to our website.</p>
+                <p>After adding desired books to your cart you can go to your cart to see all your items, next you go to checkout and follow the instructions to finish your transaction.</p>
+            </li>
+
+            <li>
+                <p class="font-weight-bold">Can I add a profile picture?</p>
+                <p>Yes! After you are logged in you can go to your account and press the avatar image there, you will then be promted to upload a new image that we save in our database.</p>
+            </li>
+
+            <li>
+                <p class="font-weight-bold">Can I change my user name?</p>
+                <p>Yes you can! After logging in you can go to account information where yo can edit your name and it will be saved.</p>
+                <p>Note that the e-mail that you provided in the <a class="text-success font-weight-bold" asp-controller="User" asp-action="SignUp">signup</a> phase is not changable as of yet, this feature will be implemented soon!</p>
+            </li>
+        </ol>
+        
+
+        <a asp-controller="Home" asp-action="Index" type="button" class="btn btn-default btn-lg btn-block mt-1 mb-1">Go to home page</a>
+    </div>
+
+</div>

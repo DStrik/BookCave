@@ -51,5 +51,25 @@ namespace BookCave.Controllers
             var top10 = _bookService.GetTop10();
             return View(top10);
         }
+
+        public IActionResult Faq()
+        {
+            return View();
+        }
+
+        public IActionResult Help()
+        {
+            return View();
+        }
+
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
     }
 }
