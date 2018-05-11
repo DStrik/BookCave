@@ -104,10 +104,35 @@ namespace BookCave.Repositories
         {
             _db.Add(review);
             _db.SaveChanges();
-            RedoRating(review.BookId);
+            UpdateRating(review.BookId);
         }
 
-        private void RedoRating(int bookId)
+        public bool ContainsReview(int bookId, string userId)
+        {
+            var review = (from r in _db.BookReviews
+                          where r.BookId == bookId && r.UserId == userId
+                          select r).SingleOrDefault();
+
+            if(review == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public void UpdateReview(BookReview review)
+        {
+            var reviewId = (from r in _db.BookReviews
+                            where r.UserId == review.UserId && r.BookId == review.BookId
+                            select r.Id).SingleOrDefault();
+            review.Id = reviewId;
+            _db.Update(review);
+            _db.SaveChanges();
+        }
+        private void UpdateRating(int bookId)
         {
             var newRating = (from r in _db.BookReviews
                              where r.BookId == bookId
@@ -116,12 +141,22 @@ namespace BookCave.Repositories
             var rating = (from r in _db.BookRatings
                           where r.BookId == bookId
                           select r).SingleOrDefault();
+            
             if(rating != null)
             {
                 rating.Rating = newRating;
                 _db.Update(rating);
-                _db.SaveChanges();
             }
+            else
+            {
+                var firstRating = new BookRating
+                {
+                    BookId = bookId,
+                    Rating = newRating
+                };
+                _db.Add(firstRating);
+            }
+            _db.SaveChanges();
         }
 
         public List<BookListViewModel> GetBookList()
@@ -290,9 +325,11 @@ namespace BookCave.Repositories
             var details = GetDetails(bookId);
             var reviews = GetReviews(bookId);
             var coverImage = GetCoverImageAsync(bookId);
+            var rating = GetRating(bookId);
             
             var bookDetails = new BookDetailViewModel
             {
+                BookId = book.Id,
                 Title = book.Title,
                 Isbn = book.Isbn,
                 Author = authors,
@@ -306,6 +343,7 @@ namespace BookCave.Repositories
                 PageCount = details.PageCount,
                 Length = details.Length,
                 Review = reviews,
+                Rating = rating,
                 CoverImage = coverImage
             };
 

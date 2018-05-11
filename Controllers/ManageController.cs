@@ -11,6 +11,7 @@ using BookCave.Data;
 using BookCave.Services;
 using BookCave.Data.EntityModels;
 using System.Security.Claims;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Controllers
 {
@@ -199,14 +200,12 @@ namespace BookCave.Controllers
                 await _userManager.AddToRoleAsync(user, model.UserType);
                 //Það þarf að laga AddEmployee.cshtml
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                var updateResult = await _userManager.UpdateAsync(user);
+                
                 return RedirectToAction("AddEmployee");
             }
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult ViewEmployeesList()
-        {
             return View();
         }
 
@@ -220,6 +219,81 @@ namespace BookCave.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult ViewEmployeesList()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("User");
+            var employees = await _userManager.GetUsersInRoleAsync("Employee");
+            var admins = await _userManager.GetUsersInRoleAsync("Admin");
+
+            var allUsersList = new List<AllUsersViewModel>();
+
+            foreach(var us in users)
+            {
+                allUsersList.Add(new AllUsersViewModel() {
+                    FirstName = us.FirstName,
+                    LastName = us.LastName,
+                    UserId = us.Id,
+                    Role = "User",
+                });
+            }
+
+            foreach(var us in employees)
+            {
+                allUsersList.Add(new AllUsersViewModel() {
+                    FirstName = us.FirstName,
+                    LastName = us.LastName,
+                    UserId = us.Id,
+                    Role = "Employee",
+                });
+            }
+
+            foreach(var us in admins)
+            {
+                allUsersList.Add(new AllUsersViewModel() {
+                    FirstName = us.FirstName,
+                    LastName = us.LastName,
+                    UserId = us.Id,
+                    Role = "Admin",
+                });
+            }
+
+            return Json(allUsersList);
+        }
+
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            var result = await _userManager.DeleteAsync(user);
+
+            if(result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        public async Task<IActionResult> ChangeUsersRole(ModifyUserInputModel input)
+        {
+            var user = await _userManager.FindByIdAsync(input.UserId);
+            await _userManager.RemoveFromRoleAsync(user, input.OldRole);
+            var result = await _userManager.AddToRoleAsync(user, input.NewRole);
+
+            if(result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }

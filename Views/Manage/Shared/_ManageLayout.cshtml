@@ -10,14 +10,9 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/lib/mdb/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="~/lib/mdb/css/mdb.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/manageCSS/manage.css" /> 
-    @{ 
-        var action = ViewContext.RouteData.Values["action"].ToString().ToLower(); 
-        if (action == "viewbooks") {
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
-            <link rel="stylesheet" type="text/css" href="~/css/manageCSS/manageAddBook.css" />
-        }
-    }
+    <link rel="stylesheet" type="text/css" href="~/css/manageCSS/manage.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/manageCSS/manageTables.css" />
 
 </head>
 
@@ -54,6 +49,8 @@
     <script type="text/javascript" src="~/js/manageJS/manageViewEmployeesList.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    } else if (action == "addemployee") {
+        <script type="text/javascript" src="~/js/manageJS/manageAddEmployee.js"></script>
     }}
 
 </body>

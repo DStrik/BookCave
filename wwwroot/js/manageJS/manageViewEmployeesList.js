@@ -1,18 +1,20 @@
 // Material Select Initialization
-// Initialize select list
+// Initialize and fill out the table.
+var deleteRow;
 $(document).ready(function () {
+    console.log("Manage View EmployeeList up and running");
 
     var table = $('#viewEmployeesTable').DataTable({
         "processing": true,
         "serverSide": false,
-        "ajax": { "url": "getEmployeesList", "dataSrc": "" },
-        "scrollX": "100%",
+        "ajax": { "url": "getAllUsers", "dataSrc": "" },
+        "autoWidth": false,
+        "autoHeight": true,
         "columns": [
-            { "data": "bookId" },
-            { "data": "title" },
-            { "data": "type" },
-            { "data": "publishingYear" },
-            { "data": "isbn" },
+            { "data": "firstName" },
+            { "data": "lastName" },
+            { "data": "userId" },
+            { "data": "role", "className": "userRoleSpace" },
             {
                 "className": '',
                 "data": null,
@@ -20,7 +22,11 @@ $(document).ready(function () {
                 "searchable": false,
                 "autoSize": true,
                 "render": function (data, type, row, meta) {
-                    return '<div class="text-center"><button class="btn btn-sm btn-danger" onclick="giveModalBookData(\'' + data.title + '\', ' + data.bookId + ')" data-toggle="modal" data-target="#confirmDelete" value="' + data.bookId + '">Delete</button><button class="btn btn-sm btn-warning" href="' + data + '">Modify</button> </div>';
+                    var markup =
+                        '<button data-toggle="modal" data-target="#ModifyEmployee" data-userId="' + data.userId 
+                        + '" data-username="' + data.firstName + '"data-oldRole="' + data.role 
+                        + '"class="btn btn-warning btn-sm removeUser">Modify/Remove</button>';
+                    return (markup);
                 }
             }
         ]
@@ -38,19 +44,67 @@ $(document).ready(function () {
     $('.mdb-select').material_select();
     $('.mdb-select').removeClass('form-control form-control-sm');
     $('.dataTables_filter').find('label').remove();
-});
 
-function giveModalBookData(title, id) {
-    $("#modalText span").text(title);
+    
+    deleteRow = function(deletionRow) {
+        table.row(deletionRow).remove().draw( false );
+    }
 
-    $("#yesDelete").click(function () {
-        alert(id);
-        $.post("RemoveBookById", { "id": id }, function (id) {
-            {
-                alert("deleted " + title + '!');
+
+
+    $("#viewEmployeesTable").on("click", "button", function() {
+        var parentTr = $(this).closest("tr");
+        var userId = $(this).attr("data-userId");
+        var userName = $(this).attr("data-username");
+        var oldRole = $(this).attr("data-oldRole");
+        $(".modalEmployeeName").text(userName);
+        $(".curr-role").text(oldRole);
+
+        $("#yesDelete").one("click", (function () {
+            $("#ModifyEmployee").modal("hide");
+            $("#waitingModal").modal("show");
+            $.post("DeleteUser", { "userId": userId }, function (id) {
+                {
+                    $("#waitingModal").modal("hide");
+                    $("#successModal").modal("show");
+                    deleteRow(parentTr);
+                }
+            }).fail(function () {
+                $("#waitingModal").modal('hide');
+                $("#errorModal").modal('show');
+
+            });
+        }));
+
+        $("#modifyRole").click(function (e) { 
+            e.preventDefault();
+            $("#ModifyEmployee").modal("hide");
+            $("#waitingModal").modal("show");
+
+            var newRole = $(".roles option:selected").val();
+    
+            var changeValue = {
+                "OldRole" : oldRole,
+                "NewRole" : newRole,
+                "UserId" : userId
             }
-        }).fail(function () {
-            alert("error lol");
+
+            $.post("ChangeUsersRole", changeValue, function(data, status) {
+                parentTr.find(".userRoleSpace").text(newRole);
+                $("#successModal").modal("show");
+                $("#waitingModal").modal("hide");
+            }).fail(function(err) {
+                setTimeout(function() {
+                    $("#modifyFail").modal('show');
+                    $("#waitingModal").modal('hide');
+                }, 500);
+            });
         });
     });
-}
+
+   /* $("#refreshPage").click(function (e) { 
+        e.preventDefault();
+        location.reload();
+    });*/
+
+});

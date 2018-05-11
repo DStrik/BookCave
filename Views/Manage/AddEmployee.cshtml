@@ -12,7 +12,7 @@
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2 form-control-lg">Email</p>
                     <div class="col-md-8">
-                        <input class="form-control pt-0 form-lg form-control-lg" id="Title" type="text" asp-for="Email">
+                        <input class="form-control pt-0 form-lg form-control-lg" type="email" asp-for="Email">
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@
                 <div class="form-group row d-flex">
                     <p class="label col-md-4 pt-2 form-control-lg">Password</p>
                     <div class="col-md-8">
-                        <input class="form-control pt-0 form-control-lg" id="Title" type="password" asp-for="Password">
+                        <input class="form-control pt-0 form-control-lg" type="password" asp-for="Password">
                     </div>
                 </div>
 
@@ -59,8 +59,8 @@
                 </div>
 
                 <div class="text-right mb-5 pb-5">
-                    <button class="btn btn-danger waves-light">Cancel</button>
-                    <button class="btn success-color-dark waves-light" type="submit">Create employee</button>
+                    <button type="button" id="cancel" class="btn btn-danger waves-light">Cancel</button>
+                    <button id="submit" class="btn success-color-dark waves-light" type="submit">Create employee</button>
                 </div>
 
             </form>
@@ -68,3 +68,35 @@
         </div>
     </div>
 </div>
+
+<!-- Modal while waiting for confirmation -->
+<div class="modal fade" id="waitingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead text-center">Waiting for response...</p>
+            </div>
+
+            <div class="text-center m-5 p-5">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- End of waiting modal -->

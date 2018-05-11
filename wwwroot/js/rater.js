@@ -559,8 +559,7 @@ $(document).ready(function(){
     }
     $(".rate").rate(options);
 
-    alert('off!');
-    $('.rate-off').off(function() {
-        alert("off!");
+    $(document).ready( function(){
+        $('.rate-off').unbind();
     });
 });

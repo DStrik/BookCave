@@ -35,10 +35,15 @@ namespace BookCave.Services
             {
                 Reviewer = reviewer,
                 UserId = userId,
-                BookId = review.BookId,
-                Rating = review.Rating,
+                BookId = review.BookId ?? default(int),
+                Rating = review.Rating ?? default(double),
                 Review = review.Review
             };
+
+            if(_bookRepo.ContainsReview(review.BookId ?? default(int), userId))
+            {
+                _bookRepo.UpdateReview(reviewEntity);
+            }
 
             _bookRepo.AddReview(reviewEntity);
         }
