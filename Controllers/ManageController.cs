@@ -12,9 +12,11 @@ using BookCave.Services;
 using BookCave.Data.EntityModels;
 using System.Security.Claims;
 using BookCave.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookCave.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class ManageController : Controller
     {
 
@@ -160,15 +162,19 @@ namespace BookCave.Controllers
         [HttpPost]
         public void RemoveBookById(int id)
         {
+            //skoða eitthvað að
             _cartService.RemoveBookFromCarts(id);
             _bookService.RemoveBookById(id);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AddEmployee()
         {
             return View();
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddEmployee(EmployeeRegisterInputModel model)
@@ -199,12 +205,14 @@ namespace BookCave.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult ViewEmployeesList()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -247,6 +255,7 @@ namespace BookCave.Controllers
             return Json(allUsersList);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -260,6 +269,7 @@ namespace BookCave.Controllers
             return BadRequest();
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ChangeUsersRole(ModifyUserInputModel input)
         {
             var user = await _userManager.FindByIdAsync(input.UserId);
