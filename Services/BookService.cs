@@ -11,12 +11,15 @@ namespace BookCave.Services
     {
         private BookRepo _bookRepo;
         private UserService _userService;
+        private CartService _cartService;
 
         public BookService()
         {
             _bookRepo = new BookRepo();
             _userService = new UserService();
+            _cartService = new CartService();
         }
+        
         public List<BookViewModel> GetTop10()
         {
             var top10BookIds = _bookRepo.GetTop10();
@@ -40,14 +43,7 @@ namespace BookCave.Services
                 Review = review.Review
             };
 
-            if(_bookRepo.ContainsReview(review.BookId ?? default(int), userId))
-            {
-                _bookRepo.UpdateReview(reviewEntity);
-            }
-            else
-            {
-                _bookRepo.AddReview(reviewEntity);
-            }
+            _bookRepo.AddReview(reviewEntity);
         }
 
         public List<BookViewModel> GetNewReleases()
@@ -253,6 +249,7 @@ namespace BookCave.Services
 
         public void RemoveBookById(int id) 
         {
+            _cartService.RemoveBookFromCarts(id);
             _bookRepo.DeleteBook(id);
         }
         public BookCartViewModel GetCartBookById(CartItem item)
