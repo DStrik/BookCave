@@ -104,10 +104,10 @@ namespace BookCave.Repositories
         {
             _db.Add(review);
             _db.SaveChanges();
-            RedoRating(review.BookId);
+            UpdateRating(review.BookId);
         }
 
-        private void RedoRating(int bookId)
+        private void UpdateRating(int bookId)
         {
             var newRating = (from r in _db.BookReviews
                              where r.BookId == bookId
@@ -116,14 +116,19 @@ namespace BookCave.Repositories
             var rating = (from r in _db.BookRatings
                           where r.BookId == bookId
                           select r).SingleOrDefault();
+            
             if(rating != null)
             {
-                rating.Rating = newRating;
                 _db.Update(rating);
             }
             else
             {
-                _db.Add(rating);
+                var firstRating = new BookRating
+                {
+                    BookId = bookId,
+                    Rating = newRating
+                };
+                _db.Add(firstRating);
             }
             _db.SaveChanges();
         }
