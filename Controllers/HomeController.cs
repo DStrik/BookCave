@@ -29,22 +29,17 @@ namespace BookCave.Controllers
 
             if(user == null)
             {
-                return View(); // Should go to error page here
+                return View();
             }
 
             var model = _userService.GetUserImage(user.Id);
 
             if(model == null)
             {
-                return View(); // Should go to error page here
+                return View();
             }
 
             return View(model);
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public IActionResult Faq()
@@ -63,6 +58,11 @@ namespace BookCave.Controllers
         }
 
         public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        public IActionResult Error()
         {
             return View();
         }

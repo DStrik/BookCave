@@ -115,14 +115,14 @@ namespace BookCave.Controllers
 
             if(user == null)
             {
-                return View(); // Should go to error page here
+                return RedirectToAction("Error", "Home");
             }
 
             var model = _userService.GetUserImage(user.Id);
 
             if(model == null)
             {
-                return View(); // Should go to error page here
+                return RedirectToAction("Error", "Home");                
             }
 
             return View(model);
@@ -142,7 +142,7 @@ namespace BookCave.Controllers
 
             if(!success)
             {
-                return RedirectToAction("AccountInformation", "User"); // should go to error page
+                return RedirectToAction("Error", "Home");                
             }
 
             return RedirectToAction("AccountInformation", "User");

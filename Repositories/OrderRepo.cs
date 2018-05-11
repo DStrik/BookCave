@@ -13,21 +13,6 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-        public List<OrderViewModel> GetAllOrders()
-        {
-            var orders = new List<OrderViewModel>();
-            foreach(Order o in _db.Orders)
-            {
-                var order = new OrderViewModel
-                {
-                    Id = o.Id,
-                    DateOfPurchase = o.DateOfPurchase
-
-                };
-                orders.Add(order);
-            }
-            return orders;
-        }
 
         public List<OrderViewModel> GetOrderHistory(string userId)
         {   

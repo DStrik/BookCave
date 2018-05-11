@@ -44,10 +44,6 @@ namespace BookCave.Services
             _bookRepo.AddReview(reviewEntity);
         }
 
-        public List<BookViewModel> GetNewReleases()
-        {
-            return _bookRepo.GetNewReleases();
-        }
         public BookDetailViewModel GetBookDetails(int bookId)
         {
             return _bookRepo.GetBookDetails(bookId);

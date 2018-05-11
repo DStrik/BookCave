@@ -4,12 +4,14 @@ using BookCave.Models;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
 
 {
+    [Authorize]
     public class CheckOutController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -39,14 +41,7 @@ namespace BookCave.Controllers
         {
             return View();
         }
-        public IActionResult Review()
-        {
-            return View();
-        }
-        public IActionResult Transaction()
-        {
-            return View();
-        }
+        
         [HttpGet]
         public IActionResult GetCart()
         {

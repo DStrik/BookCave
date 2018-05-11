@@ -398,33 +398,6 @@ namespace BookCave.Repositories
             }
         }
 
-        public List<BookViewModel> GetNewReleases()
-        {
-            var newReleases = (from b in _db.Books
-                               orderby b.PublishingYear ascending
-                               select b).Take(20);
-            
-            var books = new List<BookViewModel>();
-            foreach(var b in newReleases)
-            {
-                var authors = GetAuthors(b.Id);
-                var rating = GetRating(b.Id);
-
-                var book = new BookViewModel
-                {
-                    Title = b.Title,
-                    Type = b.Type,
-                    Price = b.Price,
-                    Author = authors,
-                    Rating = rating
-                };
-
-                books.Add(book);
-            }
-
-            return books; 
-        }
-
         public List<BookViewModel> GetSearchResults(SearchInputModel search)
         {
              var books = (from b in _db.Books

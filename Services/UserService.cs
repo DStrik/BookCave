@@ -81,10 +81,6 @@ namespace BookCave.Services
 
             return inputmodel;
         }
-        public void ChangePaymentInfo(PaymentInputModel PayInfo)
-        {
-            //geyma
-        }
 
         public void AddDefaultImage(string id)
         {

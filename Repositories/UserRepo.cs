@@ -111,21 +111,6 @@ namespace BookCave.Repositories
             return retVal;
         }
 
-        public List<BookViewModel> GetWishlist(int UserId)
-        {
-            return new List<BookViewModel>();
-        }
-
-        public void AddToWishlist(int BookTypeId, int UserId)
-        {
-
-        }
-
-        public void RemoveFromWishlist(int BookTypeId, int UserId)
-        {
-
-        }
-
         public ShippingBillingViewModel GetShippingBilling (string id)
         {
             var result = (from sb in _db.ShippingBillingInfo

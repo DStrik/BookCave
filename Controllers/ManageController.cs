@@ -33,6 +33,7 @@ namespace BookCave.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -189,7 +190,7 @@ namespace BookCave.Controllers
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, model.UserType);
-                //Það þarf að laga AddEmployee.cshtml
+                
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
@@ -198,11 +199,6 @@ namespace BookCave.Controllers
                 return RedirectToAction("AddEmployee");
             }
             return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         [Authorize(Roles = "Admin")]
