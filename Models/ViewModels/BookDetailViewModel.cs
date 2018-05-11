@@ -19,9 +19,9 @@ namespace BookCave.Models.ViewModels
         public int PageCount { get; set; }
         public int Length { get; set; }
         public List<ReviewViewModel> Review { get; set; }
-
         public double Rating { get; set; }
         public byte[] CoverImage { get; set; }
+        public byte[] UserImage { get; set; }
         
     }
 }
