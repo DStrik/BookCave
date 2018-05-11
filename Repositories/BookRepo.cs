@@ -107,6 +107,31 @@ namespace BookCave.Repositories
             UpdateRating(review.BookId);
         }
 
+        public bool ContainsReview(int bookId, string userId)
+        {
+            var review = (from r in _db.BookReviews
+                          where r.BookId == bookId && r.UserId == userId
+                          select r).SingleOrDefault();
+
+            if(review == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public void UpdateReview(BookReview review)
+        {
+            var reviewId = (from r in _db.BookReviews
+                            where r.UserId == review.UserId && r.BookId == review.BookId
+                            select r.Id).SingleOrDefault();
+            review.Id = reviewId;
+            _db.Update(review);
+            _db.SaveChanges();
+        }
         private void UpdateRating(int bookId)
         {
             var newRating = (from r in _db.BookReviews

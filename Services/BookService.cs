@@ -40,6 +40,11 @@ namespace BookCave.Services
                 Review = review.Review
             };
 
+            if(_bookRepo.ContainsReview(review.BookId ?? default(int), userId))
+            {
+                _bookRepo.UpdateReview(reviewEntity);
+            }
+
             _bookRepo.AddReview(reviewEntity);
         }
 
