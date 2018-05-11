@@ -54,7 +54,7 @@ namespace BookCave.Models.InputModels
         [Required(ErrorMessage = "Valid Cart number is required")]
         public string CardNumber { get; set; }
 
-        [RegularExpression(@"^(0[1-9]|[1-9])|1[0-2]")]
+        [RegularExpression(@"^0[1-9]|1[0-2]")]
         [Required(ErrorMessage = "Month is required")]
         public string ExpirationMonth { get; set; }
 
