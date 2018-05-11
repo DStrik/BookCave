@@ -121,6 +121,7 @@ $(document).ready(function () {
         $("#editShippingBilling").modal("hide")
     });
 
+<<<<<<< HEAD
     // Changes the status of the input boxes in billing so that if checked
     // the input is disabled and information from shipping is copied to
     // billing in real time
@@ -216,6 +217,9 @@ $(document).ready(function () {
             $('#BillingCountry > option:selected').removeAttr('disabled');
             console.log($('#BillingCountry > option:selected').val());
         }
+=======
+    $("#submitShipBill").click(function (e) { 
+>>>>>>> a9d9a4adbb8610f285291401fc0e0a76b96492f2
         $("#processingModal").modal("show");
         $("#editShippingBilling").modal("hide");
     });

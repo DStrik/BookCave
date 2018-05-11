@@ -107,7 +107,6 @@ $(document).ready(function () {
             });
 
         });
-        $('#processingModal').modal('hide');
         
         $('#pay').one('click', function (){
             var curStep = $(this).closest(".setup-content-2"),
@@ -119,10 +118,6 @@ $(document).ready(function () {
             $('#pay').prop('disabled', true);
             var bla = $("#checkOutForm").serialize();
             $('#processingModal').modal('show');
-            if(!$("input.check-for-bill").is(":checked")) {
-                
-                $('#BillingCountry').val($('#ShippingCountry').val());
-            }
 
             $.post('/CheckOut/Pay', bla, function(data, status) {
                 $(".form-group").removeClass("has-error");
@@ -178,97 +173,5 @@ $(document).ready(function () {
     }).fail(function(err){
         alert("Error has occured");
     });
-    
 
-    // Changes the status of the input boxes in billing so that if checked
-    // the input is disabled and information from shipping is copied to
-    // billing in real time
-    $("#checkbox1").change(function (e) { 
-        e.preventDefault();
-        var select = "";
-        if($("input.check-for-bill").is(":checked")) {
-            $(".billing-information").prop("readonly", true);
-            $("#BillingFirstName").val($("#ShippingFirstName").val());
-            $("#BillingLastName").val($("#ShippingLastName").val());
-            $("#BillingStreetName").val($("#ShippingStreetName").val());
-            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
-            $("#BillingCity").val($("#ShippingCity").val());
-            $("#BillingZipCode").val($("#ShippingZipCode").val());
-            $('#BillingCountry').prop('disabled', true);
-            $('#BillingCountry').html($('#ShippingCountry')).material_select();
-
-        } 
-    
-        if(!$("input.check-for-bill").is(":checked")) {
-            $(".billing-information").prop("readonly", false);
-            $('#BillingCountry').removeAttr('disabled');
-            $.get("https://restcountries.eu/rest/v2", function (data, success) { 
-                var markupCountry = '';
-                for(i = 0; i < data.length; i++) {
-                    markupCountry +='<option value="' + data[i].name + '">' + data[i].name + '</option>'; 
-                }
-                $('#BillingCountry').append(markupCountry)
-                $('#BillingCountry').material_select();
-                //$('.ShippingCountry-stuff').material_select();
-                
-            }).fail(function(err){
-                alert("Error has occured");
-            });
-        }
-    });
-
-    $("#ShippingFirstName").keyup(function () {
-        if($("input.check-for-bill").is(":checked")) {
-            $("#BillingFirstName").val($("#ShippingFirstName").val());
-        }
-    });
-
-    $("#ShippingLastName").keyup(function () {
-        if($("input.check-for-bill").is(":checked")) {
-            $("#BillingLastName").val($("#ShippingLastName").val());
-        }
-    });
-
-    $("#ShippingStreetName").keyup(function () {
-        if($("input.check-for-bill").is(":checked")) {
-            $("#BillingStreetName").val($("#ShippingStreetName").val());
-        }
-    });
-
-    $("#ShippingHouseNumber").keyup(function () {
-        if($("input.check-for-bill").is(":checked")) {
-            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
-        }
-    });
-
-    $("#ShippingHouseNumber").change(function () {
-        if($("input.check-for-bill").is(":checked")) {
-            $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
-        }
-    });
-
-    $("#ShippingCity").keyup(function () {
-        if($("input.check-for-bill").is(":checked")) {
-            $("#BillingCity").val($("#ShippingCity").val());
-        }
-    });
-
-    $("#ShippingZipCode").keyup(function () {
-        if($("input.check-for-bill").is(":checked")) {
-            $("#BillingZipCode").val($("#ShippingZipCode").val());
-        }
-    });
-
-    $("#ShippingCountry").change(function () {
-        if($("input.check-for-bill").is(":checked")) {
-            $('#BillingCountry').prop('disabled', true);
-            $('#BillingCountry').html($('#ShippingCountry')).material_select();
-            $('#BillingCountry').val($('#ShippingCountry').val());
-        }
-    });
-
-    $("#submitShipBill").click(function (e) { 
-        $("#processingModal").modal("show");
-        $("#editShippingBilling").modal("hide");
-    });
 });
