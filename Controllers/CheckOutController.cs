@@ -54,6 +54,7 @@ namespace BookCave.Controllers
             List<BookCartViewModel> cart = _checkOutService.GetCart(user);
             return Json(cart);
         }
+
         [HttpGet]
         public IActionResult Verify(CheckOutInputModel info)
         {
@@ -63,6 +64,7 @@ namespace BookCave.Controllers
             }
             return BadRequest();
         }
+
         [HttpPost]
         public IActionResult Pay(CheckOutInputModel info)
         {

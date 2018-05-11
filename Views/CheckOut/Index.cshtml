@@ -27,6 +27,7 @@
                     <input type="checkbox" class="form-check-input" id="checkbox96847">
                     <label class="form-check-label" for="checkbox96847">Check if same as shipping address</label>
                 </div>
+
                 <div class="form-group">
                     <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingFirstName"></span>
                     <label for="ShippingFirstName" data-error="wrong" data-success="right">First Name</label>
@@ -66,8 +67,8 @@
                 <div class="form-group mt-2">
                     <span class="mr-5 font-weight-light text-danger" asp-validation-for="ShippingCountry"></span>
                     <label for="ShippingCountry" data-error="wrong" data-success="right">Country</label>
-                    <select class="mdb-select colorful-select dropdown-primary validate ShippingCountrySelect" asp-for="ShippingCountry"  id="ShippingCountry" searchable="Search here..">
-                        
+                    <select class="mdb-select colorful-select dropdown-primary validate" asp-for="ShippingCountry"  id="ShippingCountry" searchable="Search here..">
+                        <option id="ShippingCountrySelect" value="" disabled selected>Choose your country</option>
                     </select>
                 </div>
                 
@@ -122,8 +123,8 @@
                 <div class="form-group mt-2">
                     <span class="mr-5 font-weight-light text-danger" asp-validation-for="BillingCountry"></span>
                     <label for="BillingCountry" data-error="wrong" data-success="right">Country</label>
-                    <select class="mdb-select colorful-select dropdown-primary validate BillingCountrySelect" asp-for="BillingCountry"  id="BillingCountry" searchable="Search here..">
-                        
+                    <select class="mdb-select colorful-select dropdown-primary validate" asp-for="BillingCountry"  id="BillingCountry" searchable="Search here..">
+                       <option id="BillingCountrySelect" value="" disabled selected>Choose your country</option> 
                     </select>
                 </div>
             </div>
@@ -359,7 +360,7 @@
     <div class="row setup-content-2" id="step-3">
         <div class="col-md-12">
             <!-- Card -->
-            <div class="card card-image mb-3" style="background-image: url(https://www.kameronhurley.com/wp-content/uploads/2016/09/books.jpg);">
+            <div class="card card-image mb-3 mt-3" style="background-image: url(https://www.kameronhurley.com/wp-content/uploads/2016/09/books.jpg);">
 
             <!-- Content -->
                 <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">

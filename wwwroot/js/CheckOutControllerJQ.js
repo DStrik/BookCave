@@ -48,7 +48,7 @@ $(document).ready(function () {
     
     });
 
-    allNextBtn.click(function () {
+    $('#verifyStep').click(function () {
 
         var curStep = $(this).closest(".setup-content-2"),
             curStepBtn = curStep.attr("id"),
@@ -56,23 +56,13 @@ $(document).ready(function () {
             curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
 
-        $(".form-group").removeClass("has-error");
-        for (var i = 0; i < curInputs.length; i++) {
-            if (!curInputs[i].validity.valid) {
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
 
-        if('form-group'.hasClass("has-error"))
-
-        if (isValid){
         //verifies input in step on before going to next step
         //also fills in the input feild in step 2 as a read only
-        if($(this).attr('id') == "verifyStep"){
 
-            //$('#processingModal').modal('show');
+            $('#processingModal').modal('show');
             var bla = $("#checkOutForm").serialize();
+            console.log(bla);
             $.get('/CheckOut/Verify', bla, function(data, status) {
 
                 $("#BillingFirstName1").val($("#BillingFirstName").val());
@@ -95,6 +85,15 @@ $(document).ready(function () {
                 $("#ExpirationYear1").val($("#ExpirationYear").val());
                 $("#Cvc1").val($("#Cvc").val());
 
+                $(".form-group").removeClass("has-error");
+                console.log("bla")
+                for (var i = 0; i < curInputs.length; i++) {
+                    if (!curInputs[i].validity.valid) {
+                        isValid = false;
+                        $(curInputs[i]).closest(".form-group").addClass("has-error");
+                    }
+                }
+
                 if (isValid){
 
                     nextStepSteps.removeClass('disabled').trigger('click');
@@ -104,15 +103,22 @@ $(document).ready(function () {
 
             }).fail(function(err) {
                 $('#processingModal').modal('hide');
-                alert("something wrong!")
+                alert("This is wrong")
             });
-        };
 
-        if($(this).attr('id') == "pay") {
-            
+        });
+        
+        $('#pay').one('click', function (){
+            var curStep = $(this).closest(".setup-content-2"),
+            curStepBtn = curStep.attr("id"),
+            nextStepSteps = $('div.setup-panel-2 div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+
             $('#pay').prop('disabled', true);
             var bla = $("#checkOutForm").serialize();
             $('#processingModal').modal('show');
+            $('#BillingCountry').val($('#ShippingCountry').val());
 
             $.post('/CheckOut/Pay', bla, function(data, status) {
                 $(".form-group").removeClass("has-error");
@@ -134,9 +140,7 @@ $(document).ready(function () {
                 $('#processingModal').modal('hide');
                 alert("Error has occured!");
             });
-        }
-        }
-    });
+        });        
 
 
     $('div.setup-panel-2 div a.btn-amber').trigger('click');
@@ -157,16 +161,16 @@ $(document).ready(function () {
     });
 
     $.get("https://restcountries.eu/rest/v2", function (data, success) { 
-        var markupCountry = '<option value="" disabled selected>Choose your country</option>';
+        var markupCountry = '';
         for(i = 0; i < data.length; i++) {
-            markupCountry +='<option value="' + data[i].name + '">' + data[i].name + '</option>';
-            console.log(data[i].name); 
+            markupCountry +='<option value="' + data[i].name + '">' + data[i].name + '</option>'; 
         }
-        $('#ShippingCountry').html(markupCountry).material_select();
-        $('#BillingCountry').html(markupCountry).material_select();
+        $('#ShippingCountry').append(markupCountry)
+        $('#BillingCountry').append(markupCountry)
+        $('#ShippingCountry').material_select();
+        $('#BillingCountry').material_select();
         //$('.ShippingCountry-stuff').material_select();
         
-        console.log(markupCountry);
     }).fail(function(err){
         alert("Error has occured");
     });
@@ -177,7 +181,7 @@ $(document).ready(function () {
     // billing in real time
     $("#checkbox1").change(function (e) { 
         e.preventDefault();
-
+        var select = "";
         if($("input.check-for-bill").is(":checked")) {
             $(".billing-information").prop("readonly", true);
             $("#BillingFirstName").val($("#ShippingFirstName").val());
@@ -186,13 +190,20 @@ $(document).ready(function () {
             $("#BillingHouseNumber").val($("#ShippingHouseNumber").val());
             $("#BillingCity").val($("#ShippingCity").val());
             $("#BillingZipCode").val($("#ShippingZipCode").val());
-            //$('.BillingCountrySelect option:selected').val($('.ShippingCountrySelect option:selected').val());
-           // $('#BillingCountry').val($('.ShippingCountrySelect option:active selected').val());
-            //$('#BillingCountry').val($('#ShippingCountry').val());
-        }
+            $('#BillingCountry').prop('disabled', true);
+            $('#BillingCountry').html($('#ShippingCountry')).material_select();
+
+           /* var test = 
+            '<select class="mdb-select colorful-select dropdown-primary validate BillingCountrySelect" asp-for="BillingCountry"  id="BillingCountry" searchable="Search here.." disabled>'
+            + '<option value="' + $("#ShippingCountry").val() +'">' + $("#ShippingCountry").val() + '</select>';
+            $("#BillingCountry").parent().html(test);
+            $("#BillingCountry").material_select();
+        */} 
     
         if(!$("input.check-for-bill").is(":checked")) {
             $(".billing-information").prop("readonly", false);
+            $('#BillingCountry').removeAttr('disabled');
+            console.log("Need Enable");
         }
     });
 
@@ -238,9 +249,10 @@ $(document).ready(function () {
         }
     });
 
-    $("#ShippingCountry").keyup(function () {
+    $("#ShippingCountry").change(function () {
         if($("input.check-for-bill").is(":checked")) {
-            $("#BillingCountry").val($("#ShippingCountry").val());
+            $('#BillingCountry').prop('disabled', true);
+            $('#BillingCountry').html($('#ShippingCountry')).material_select();
         }
     });
 
